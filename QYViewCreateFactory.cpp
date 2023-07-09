@@ -6,19 +6,17 @@
 //
 
 #include "QYViewCreateFactory.h"
-#include "ui/views/controls/label.h"
-#include "ui/views/controls/image_view.h"
-#include "ui/views/controls/button/label_button.h"
+#include "QYBaseCustomView.h"
+#include "QYBaseCustomImageView.h"
+#include "QYBaseCustomTextView.h"
 QYBaseView *createViewWithNodeInfo(QYBaseNodeInfo *info) {
     QYBaseView *view = new QYBaseView;
     if (info->name.compare("text")) {
-        view->mView = new views::Label();
+        view->mView = new QYBaseCustomImageView();
     } else if(info->name.compare("image")) {
-        view->mView = new views::ImageView();
-    } else if(info->name.compare("button")) {
-        view->mView = new views::LabelButton();
+        view->mView = new QYBaseCustomImageView();
     } else {//view
-        view->mView = new views::View();
+        view->mView = new QYBaseCustomView();
     }
     return view;
 }
