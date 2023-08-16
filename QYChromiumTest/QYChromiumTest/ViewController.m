@@ -11,7 +11,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSView *view = (__bridge_transfer NSView *) parseHTML("/Users/yinquan/Documents/library/MyTest/ChromiumMacOS/HTML/qy.html");
+    
+    NSView *view = (__bridge_transfer NSView *) parseHTML([[NSBundle mainBundle] pathForResource:@"test" ofType:@"html"].UTF8String);
     [self.view addSubview:view];
 }
 
