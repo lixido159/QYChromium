@@ -91,3 +91,8 @@ void QYBaseDomNode::performApplyWidgetViewTreeProperties() {
 }
 
 
+void *QYBaseDomNode::nativeView() {
+    return mWidget->mView->mView;
+}
+
+
