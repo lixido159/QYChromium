@@ -471,6 +471,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
+					"@loader_path/.",
 				);
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../libs\"";
 				MACH_O_TYPE = mh_dylib;
@@ -511,6 +512,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
+					"@loader_path/.",
 				);
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../libs\"";
 				MACH_O_TYPE = mh_dylib;
