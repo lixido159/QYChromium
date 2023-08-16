@@ -23,6 +23,9 @@ public:
     void performExpandWidgetViewTree();
     //对view赋值属性
     void performApplyWidgetViewTreeProperties();
+    
+    void *nativeView();
+    
 };
 
 #endif /* QYBaseDomNode_hpp */

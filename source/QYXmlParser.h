@@ -10,5 +10,5 @@
 
 
 #import "QYBaseDomNode.h"
-QYBaseDomNode * parse(char *file);
+QYBaseDomNode * parse(const char *file);
 #endif /* a_hpp */

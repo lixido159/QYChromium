@@ -50,7 +50,7 @@ QYBaseNodeInfo *toNodeInfo(xmlNodePtr xmlNode) {
 }
 
 
-QYBaseDomNode *parse(char *file) {
+QYBaseDomNode *parse(const char *file) {
     xmlDocPtr xmlPtr = xmlReadFile(file, "UTF-8", XML_PARSE_RECOVER);
     if (!xmlPtr) {
         printf("%s 文件打开失败\n", file);
