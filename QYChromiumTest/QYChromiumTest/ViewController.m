@@ -6,15 +6,13 @@
 //
 
 #import "ViewController.h"
-#import <QYView/QYXmlParser.h>
+#import <QYView/QYEntry.h>
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    QYBaseDomNode *node = parse([[NSBundle mainBundle] pathForResource:@"test" ofType:@"html"].UTF8String);
-//    no->nativeView();
-    // Do any additional setup after loading the view.
+    NSView *view = (__bridge_transfer NSView *) parseHTML("/Users/yinquan/Documents/library/MyTest/ChromiumMacOS/HTML/qy.html");
+    [self.view addSubview:view];
 }
 
 
