@@ -7,32 +7,49 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		271B91F22A8CF515003A9D0A /* QYTest.h in Headers */ = {isa = PBXBuildFile; fileRef = 271B91D32A8CF515003A9D0A /* QYTest.h */; };
+		271B91F32A8CF515003A9D0A /* QYBaseWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 271B91D42A8CF515003A9D0A /* QYBaseWidget.cpp */; };
+		271B91F42A8CF515003A9D0A /* QYTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 271B91D52A8CF515003A9D0A /* QYTest.cpp */; };
+		271B91F52A8CF515003A9D0A /* QYBaseView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 271B91D62A8CF515003A9D0A /* QYBaseView.cpp */; };
+		271B91F62A8CF515003A9D0A /* QYBaseDomNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 271B91D72A8CF515003A9D0A /* QYBaseDomNode.h */; };
+		271B91F72A8CF515003A9D0A /* QYBaseNodeInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 271B91D82A8CF515003A9D0A /* QYBaseNodeInfo.h */; };
+		271B91F82A8CF515003A9D0A /* QYBaseWidget.h in Headers */ = {isa = PBXBuildFile; fileRef = 271B91D92A8CF515003A9D0A /* QYBaseWidget.h */; };
+		271B91F92A8CF515003A9D0A /* QYViewCreateFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 271B91DA2A8CF515003A9D0A /* QYViewCreateFactory.cpp */; };
+		271B91FA2A8CF515003A9D0A /* QYXmlParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 271B91DB2A8CF515003A9D0A /* QYXmlParser.h */; };
+		271B91FB2A8CF515003A9D0A /* QYXmlParser.mm in Sources */ = {isa = PBXBuildFile; fileRef = 271B91DC2A8CF515003A9D0A /* QYXmlParser.mm */; };
+		271B91FC2A8CF515003A9D0A /* QYBaseCustomView.h in Headers */ = {isa = PBXBuildFile; fileRef = 271B91DE2A8CF515003A9D0A /* QYBaseCustomView.h */; };
+		271B91FD2A8CF515003A9D0A /* QYBaseCustomTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 271B91DF2A8CF515003A9D0A /* QYBaseCustomTextView.h */; };
+		271B91FE2A8CF515003A9D0A /* QYBaseCustomImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 271B91E02A8CF515003A9D0A /* QYBaseCustomImageView.h */; };
+		271B91FF2A8CF515003A9D0A /* QYBaseCustomBaseView.h in Headers */ = {isa = PBXBuildFile; fileRef = 271B91E12A8CF515003A9D0A /* QYBaseCustomBaseView.h */; };
+		271B92002A8CF515003A9D0A /* QYBaseCustomTextView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 271B91E22A8CF515003A9D0A /* QYBaseCustomTextView.mm */; };
+		271B92012A8CF515003A9D0A /* QYBaseCustomView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 271B91E32A8CF515003A9D0A /* QYBaseCustomView.mm */; };
+		271B92022A8CF515003A9D0A /* QYBaseCustomImageView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 271B91E42A8CF515003A9D0A /* QYBaseCustomImageView.mm */; };
+		271B92032A8CF515003A9D0A /* QYBaseDomNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 271B91E52A8CF515003A9D0A /* QYBaseDomNode.cpp */; };
+		271B92042A8CF515003A9D0A /* QYViewCreateFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 271B91E62A8CF515003A9D0A /* QYViewCreateFactory.h */; };
+		271B92052A8CF515003A9D0A /* QYBaseView.h in Headers */ = {isa = PBXBuildFile; fileRef = 271B91E72A8CF515003A9D0A /* QYBaseView.h */; };
+		271B92062A8CF515003A9D0A /* QYBaseNodeInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 271B91E82A8CF515003A9D0A /* QYBaseNodeInfo.cpp */; };
+		271B92072A8CF515003A9D0A /* CommonHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 271B91E92A8CF515003A9D0A /* CommonHeader.h */; };
+		271B92082A8CF515003A9D0A /* libv8_libplatform.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 271B91EB2A8CF515003A9D0A /* libv8_libplatform.dylib */; };
+		271B92092A8CF515003A9D0A /* libchrome_zlib.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 271B91EC2A8CF515003A9D0A /* libchrome_zlib.dylib */; };
+		271B920A2A8CF515003A9D0A /* libv8_libbase.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 271B91ED2A8CF515003A9D0A /* libv8_libbase.dylib */; };
+		271B920B2A8CF515003A9D0A /* libthird_party_icu_icui18n.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 271B91EE2A8CF515003A9D0A /* libthird_party_icu_icui18n.dylib */; };
+		271B920C2A8CF515003A9D0A /* libv8.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 271B91EF2A8CF515003A9D0A /* libv8.dylib */; };
+		271B920D2A8CF515003A9D0A /* snapshot_blob.bin in Resources */ = {isa = PBXBuildFile; fileRef = 271B91F02A8CF515003A9D0A /* snapshot_blob.bin */; };
+		271B920E2A8CF515003A9D0A /* libicuuc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 271B91F12A8CF515003A9D0A /* libicuuc.dylib */; };
+		271B920F2A8CF52E003A9D0A /* libv8_libplatform.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 271B91EB2A8CF515003A9D0A /* libv8_libplatform.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		271B92102A8CF52E003A9D0A /* libchrome_zlib.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 271B91EC2A8CF515003A9D0A /* libchrome_zlib.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		271B92112A8CF52E003A9D0A /* libv8_libbase.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 271B91ED2A8CF515003A9D0A /* libv8_libbase.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		271B92122A8CF52E003A9D0A /* libthird_party_icu_icui18n.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 271B91EE2A8CF515003A9D0A /* libthird_party_icu_icui18n.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		271B92132A8CF52E003A9D0A /* libv8.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 271B91EF2A8CF515003A9D0A /* libv8.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		271B92142A8CF52E003A9D0A /* libicuuc.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 271B91F12A8CF515003A9D0A /* libicuuc.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		271B93052A8CF798003A9D0A /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 271B93042A8CF798003A9D0A /* libxml2.tbd */; };
+		271B93072A8CF800003A9D0A /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 271B93062A8CF800003A9D0A /* AppKit.framework */; };
+		271B93092A8CF826003A9D0A /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 271B93082A8CF826003A9D0A /* libc++.tbd */; };
+		271B93122A8CF8CF003A9D0A /* QYEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 271B93102A8CF8CF003A9D0A /* QYEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		271B93132A8CF8CF003A9D0A /* QYEntry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 271B93112A8CF8CF003A9D0A /* QYEntry.cpp */; };
 		C604EED52A8C92FA008DAC8E /* QYView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C604EECF2A8C92FA008DAC8E /* QYView.framework */; };
 		C604EED72A8C92FA008DAC8E /* QYView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C604EECF2A8C92FA008DAC8E /* QYView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C604EEF32A8C931E008DAC8E /* QYTest.h in Headers */ = {isa = PBXBuildFile; fileRef = C604EEDC2A8C931E008DAC8E /* QYTest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C604EEF42A8C931E008DAC8E /* QYBaseWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C604EEDD2A8C931E008DAC8E /* QYBaseWidget.cpp */; };
-		C604EEF52A8C931E008DAC8E /* QYTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C604EEDE2A8C931E008DAC8E /* QYTest.cpp */; };
-		C604EEF62A8C931E008DAC8E /* QYBaseView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C604EEDF2A8C931E008DAC8E /* QYBaseView.cpp */; };
-		C604EEF72A8C931E008DAC8E /* QYBaseDomNode.h in Headers */ = {isa = PBXBuildFile; fileRef = C604EEE02A8C931E008DAC8E /* QYBaseDomNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C604EEF82A8C931E008DAC8E /* QYBaseNodeInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = C604EEE12A8C931E008DAC8E /* QYBaseNodeInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C604EEF92A8C931E008DAC8E /* QYBaseWidget.h in Headers */ = {isa = PBXBuildFile; fileRef = C604EEE22A8C931E008DAC8E /* QYBaseWidget.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C604EEFA2A8C931E008DAC8E /* QYViewCreateFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C604EEE32A8C931E008DAC8E /* QYViewCreateFactory.cpp */; };
-		C604EEFB2A8C931E008DAC8E /* QYXmlParser.h in Headers */ = {isa = PBXBuildFile; fileRef = C604EEE42A8C931E008DAC8E /* QYXmlParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C604EEFC2A8C931E008DAC8E /* QYXmlParser.mm in Sources */ = {isa = PBXBuildFile; fileRef = C604EEE52A8C931E008DAC8E /* QYXmlParser.mm */; };
-		C604EEFD2A8C931E008DAC8E /* QYBaseCustomView.h in Headers */ = {isa = PBXBuildFile; fileRef = C604EEE72A8C931E008DAC8E /* QYBaseCustomView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C604EEFE2A8C931E008DAC8E /* QYBaseCustomTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = C604EEE82A8C931E008DAC8E /* QYBaseCustomTextView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C604EEFF2A8C931E008DAC8E /* QYBaseCustomImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = C604EEE92A8C931E008DAC8E /* QYBaseCustomImageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C604EF002A8C931E008DAC8E /* QYBaseCustomBaseView.h in Headers */ = {isa = PBXBuildFile; fileRef = C604EEEA2A8C931E008DAC8E /* QYBaseCustomBaseView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C604EF012A8C931E008DAC8E /* QYBaseCustomTextView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C604EEEB2A8C931E008DAC8E /* QYBaseCustomTextView.mm */; };
-		C604EF022A8C931E008DAC8E /* QYBaseCustomView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C604EEEC2A8C931E008DAC8E /* QYBaseCustomView.mm */; };
-		C604EF032A8C931E008DAC8E /* QYBaseCustomImageView.mm in Sources */ = {isa = PBXBuildFile; fileRef = C604EEED2A8C931E008DAC8E /* QYBaseCustomImageView.mm */; };
-		C604EF042A8C931E008DAC8E /* QYBaseDomNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C604EEEE2A8C931E008DAC8E /* QYBaseDomNode.cpp */; };
-		C604EF052A8C931E008DAC8E /* QYViewCreateFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = C604EEEF2A8C931E008DAC8E /* QYViewCreateFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C604EF062A8C931E008DAC8E /* QYBaseView.h in Headers */ = {isa = PBXBuildFile; fileRef = C604EEF02A8C931E008DAC8E /* QYBaseView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C604EF072A8C931E008DAC8E /* QYBaseNodeInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C604EEF12A8C931E008DAC8E /* QYBaseNodeInfo.cpp */; };
-		C604EF082A8C931E008DAC8E /* CommonHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = C604EEF22A8C931E008DAC8E /* CommonHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C604EF0A2A8C9452008DAC8E /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = C604EF092A8C9452008DAC8E /* test.html */; };
-		C604EF0B2A8C9468008DAC8E /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = C604EF092A8C9452008DAC8E /* test.html */; };
 		C64160CF2A8C8FDB0089E110 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C64160CE2A8C8FDB0089E110 /* AppDelegate.m */; };
 		C64160D22A8C8FDB0089E110 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C64160D12A8C8FDB0089E110 /* ViewController.m */; };
 		C64160D42A8C8FDC0089E110 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C64160D32A8C8FDC0089E110 /* Assets.xcassets */; };
@@ -51,6 +68,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		271B91C42A8CF360003A9D0A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				271B920F2A8CF52E003A9D0A /* libv8_libplatform.dylib in CopyFiles */,
+				271B92102A8CF52E003A9D0A /* libchrome_zlib.dylib in CopyFiles */,
+				271B92112A8CF52E003A9D0A /* libv8_libbase.dylib in CopyFiles */,
+				271B92122A8CF52E003A9D0A /* libthird_party_icu_icui18n.dylib in CopyFiles */,
+				271B92132A8CF52E003A9D0A /* libv8.dylib in CopyFiles */,
+				271B92142A8CF52E003A9D0A /* libicuuc.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C604EED62A8C92FA008DAC8E /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -65,29 +97,42 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		271B91D32A8CF515003A9D0A /* QYTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYTest.h; sourceTree = "<group>"; };
+		271B91D42A8CF515003A9D0A /* QYBaseWidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = QYBaseWidget.cpp; sourceTree = "<group>"; };
+		271B91D52A8CF515003A9D0A /* QYTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = QYTest.cpp; sourceTree = "<group>"; };
+		271B91D62A8CF515003A9D0A /* QYBaseView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = QYBaseView.cpp; sourceTree = "<group>"; };
+		271B91D72A8CF515003A9D0A /* QYBaseDomNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYBaseDomNode.h; sourceTree = "<group>"; };
+		271B91D82A8CF515003A9D0A /* QYBaseNodeInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYBaseNodeInfo.h; sourceTree = "<group>"; };
+		271B91D92A8CF515003A9D0A /* QYBaseWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYBaseWidget.h; sourceTree = "<group>"; };
+		271B91DA2A8CF515003A9D0A /* QYViewCreateFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = QYViewCreateFactory.cpp; sourceTree = "<group>"; };
+		271B91DB2A8CF515003A9D0A /* QYXmlParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYXmlParser.h; sourceTree = "<group>"; };
+		271B91DC2A8CF515003A9D0A /* QYXmlParser.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = QYXmlParser.mm; sourceTree = "<group>"; };
+		271B91DE2A8CF515003A9D0A /* QYBaseCustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYBaseCustomView.h; sourceTree = "<group>"; };
+		271B91DF2A8CF515003A9D0A /* QYBaseCustomTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYBaseCustomTextView.h; sourceTree = "<group>"; };
+		271B91E02A8CF515003A9D0A /* QYBaseCustomImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYBaseCustomImageView.h; sourceTree = "<group>"; };
+		271B91E12A8CF515003A9D0A /* QYBaseCustomBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYBaseCustomBaseView.h; sourceTree = "<group>"; };
+		271B91E22A8CF515003A9D0A /* QYBaseCustomTextView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = QYBaseCustomTextView.mm; sourceTree = "<group>"; };
+		271B91E32A8CF515003A9D0A /* QYBaseCustomView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = QYBaseCustomView.mm; sourceTree = "<group>"; };
+		271B91E42A8CF515003A9D0A /* QYBaseCustomImageView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = QYBaseCustomImageView.mm; sourceTree = "<group>"; };
+		271B91E52A8CF515003A9D0A /* QYBaseDomNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = QYBaseDomNode.cpp; sourceTree = "<group>"; };
+		271B91E62A8CF515003A9D0A /* QYViewCreateFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYViewCreateFactory.h; sourceTree = "<group>"; };
+		271B91E72A8CF515003A9D0A /* QYBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYBaseView.h; sourceTree = "<group>"; };
+		271B91E82A8CF515003A9D0A /* QYBaseNodeInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = QYBaseNodeInfo.cpp; sourceTree = "<group>"; };
+		271B91E92A8CF515003A9D0A /* CommonHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonHeader.h; sourceTree = "<group>"; };
+		271B91EB2A8CF515003A9D0A /* libv8_libplatform.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libv8_libplatform.dylib; sourceTree = "<group>"; };
+		271B91EC2A8CF515003A9D0A /* libchrome_zlib.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libchrome_zlib.dylib; sourceTree = "<group>"; };
+		271B91ED2A8CF515003A9D0A /* libv8_libbase.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libv8_libbase.dylib; sourceTree = "<group>"; };
+		271B91EE2A8CF515003A9D0A /* libthird_party_icu_icui18n.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libthird_party_icu_icui18n.dylib; sourceTree = "<group>"; };
+		271B91EF2A8CF515003A9D0A /* libv8.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libv8.dylib; sourceTree = "<group>"; };
+		271B91F02A8CF515003A9D0A /* snapshot_blob.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = snapshot_blob.bin; sourceTree = "<group>"; };
+		271B91F12A8CF515003A9D0A /* libicuuc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libicuuc.dylib; sourceTree = "<group>"; };
+		271B92152A8CF549003A9D0A /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		271B93042A8CF798003A9D0A /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		271B93062A8CF800003A9D0A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		271B93082A8CF826003A9D0A /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		271B93102A8CF8CF003A9D0A /* QYEntry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYEntry.h; sourceTree = "<group>"; };
+		271B93112A8CF8CF003A9D0A /* QYEntry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = QYEntry.cpp; sourceTree = "<group>"; };
 		C604EECF2A8C92FA008DAC8E /* QYView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QYView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C604EEDC2A8C931E008DAC8E /* QYTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYTest.h; sourceTree = "<group>"; };
-		C604EEDD2A8C931E008DAC8E /* QYBaseWidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = QYBaseWidget.cpp; sourceTree = "<group>"; };
-		C604EEDE2A8C931E008DAC8E /* QYTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = QYTest.cpp; sourceTree = "<group>"; };
-		C604EEDF2A8C931E008DAC8E /* QYBaseView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = QYBaseView.cpp; sourceTree = "<group>"; };
-		C604EEE02A8C931E008DAC8E /* QYBaseDomNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYBaseDomNode.h; sourceTree = "<group>"; };
-		C604EEE12A8C931E008DAC8E /* QYBaseNodeInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYBaseNodeInfo.h; sourceTree = "<group>"; };
-		C604EEE22A8C931E008DAC8E /* QYBaseWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYBaseWidget.h; sourceTree = "<group>"; };
-		C604EEE32A8C931E008DAC8E /* QYViewCreateFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = QYViewCreateFactory.cpp; sourceTree = "<group>"; };
-		C604EEE42A8C931E008DAC8E /* QYXmlParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYXmlParser.h; sourceTree = "<group>"; };
-		C604EEE52A8C931E008DAC8E /* QYXmlParser.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = QYXmlParser.mm; sourceTree = "<group>"; };
-		C604EEE72A8C931E008DAC8E /* QYBaseCustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYBaseCustomView.h; sourceTree = "<group>"; };
-		C604EEE82A8C931E008DAC8E /* QYBaseCustomTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYBaseCustomTextView.h; sourceTree = "<group>"; };
-		C604EEE92A8C931E008DAC8E /* QYBaseCustomImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYBaseCustomImageView.h; sourceTree = "<group>"; };
-		C604EEEA2A8C931E008DAC8E /* QYBaseCustomBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYBaseCustomBaseView.h; sourceTree = "<group>"; };
-		C604EEEB2A8C931E008DAC8E /* QYBaseCustomTextView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = QYBaseCustomTextView.mm; sourceTree = "<group>"; };
-		C604EEEC2A8C931E008DAC8E /* QYBaseCustomView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = QYBaseCustomView.mm; sourceTree = "<group>"; };
-		C604EEED2A8C931E008DAC8E /* QYBaseCustomImageView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = QYBaseCustomImageView.mm; sourceTree = "<group>"; };
-		C604EEEE2A8C931E008DAC8E /* QYBaseDomNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = QYBaseDomNode.cpp; sourceTree = "<group>"; };
-		C604EEEF2A8C931E008DAC8E /* QYViewCreateFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYViewCreateFactory.h; sourceTree = "<group>"; };
-		C604EEF02A8C931E008DAC8E /* QYBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYBaseView.h; sourceTree = "<group>"; };
-		C604EEF12A8C931E008DAC8E /* QYBaseNodeInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = QYBaseNodeInfo.cpp; sourceTree = "<group>"; };
-		C604EEF22A8C931E008DAC8E /* CommonHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonHeader.h; sourceTree = "<group>"; };
 		C604EF092A8C9452008DAC8E /* test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test.html; sourceTree = SOURCE_ROOT; };
 		C64160CA2A8C8FDB0089E110 /* QYChromiumTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QYChromiumTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C64160CD2A8C8FDB0089E110 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -105,6 +150,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				271B93092A8CF826003A9D0A /* libc++.tbd in Frameworks */,
+				271B93072A8CF800003A9D0A /* AppKit.framework in Frameworks */,
+				271B93052A8CF798003A9D0A /* libxml2.tbd in Frameworks */,
+				271B92082A8CF515003A9D0A /* libv8_libplatform.dylib in Frameworks */,
+				271B92092A8CF515003A9D0A /* libchrome_zlib.dylib in Frameworks */,
+				271B920E2A8CF515003A9D0A /* libicuuc.dylib in Frameworks */,
+				271B920B2A8CF515003A9D0A /* libthird_party_icu_icui18n.dylib in Frameworks */,
+				271B920C2A8CF515003A9D0A /* libv8.dylib in Frameworks */,
+				271B920A2A8CF515003A9D0A /* libv8_libbase.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,58 +173,80 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C604EED02A8C92FA008DAC8E /* QYView */ = {
+		271B91D22A8CF515003A9D0A /* source */ = {
 			isa = PBXGroup;
 			children = (
-				C604EEDB2A8C931E008DAC8E /* source */,
-			);
-			path = QYView;
-			sourceTree = "<group>";
-		};
-		C604EEDB2A8C931E008DAC8E /* source */ = {
-			isa = PBXGroup;
-			children = (
-				C604EEF22A8C931E008DAC8E /* CommonHeader.h */,
-				C604EEEE2A8C931E008DAC8E /* QYBaseDomNode.cpp */,
-				C604EEE02A8C931E008DAC8E /* QYBaseDomNode.h */,
-				C604EEF12A8C931E008DAC8E /* QYBaseNodeInfo.cpp */,
-				C604EEE12A8C931E008DAC8E /* QYBaseNodeInfo.h */,
-				C604EEDF2A8C931E008DAC8E /* QYBaseView.cpp */,
-				C604EEF02A8C931E008DAC8E /* QYBaseView.h */,
-				C604EEDD2A8C931E008DAC8E /* QYBaseWidget.cpp */,
-				C604EEE22A8C931E008DAC8E /* QYBaseWidget.h */,
-				C604EEDE2A8C931E008DAC8E /* QYTest.cpp */,
-				C604EEDC2A8C931E008DAC8E /* QYTest.h */,
-				C604EEE32A8C931E008DAC8E /* QYViewCreateFactory.cpp */,
-				C604EEEF2A8C931E008DAC8E /* QYViewCreateFactory.h */,
-				C604EEE42A8C931E008DAC8E /* QYXmlParser.h */,
-				C604EEE52A8C931E008DAC8E /* QYXmlParser.mm */,
-				C604EEE62A8C931E008DAC8E /* View */,
+				271B91E92A8CF515003A9D0A /* CommonHeader.h */,
+				271B91E52A8CF515003A9D0A /* QYBaseDomNode.cpp */,
+				271B91D72A8CF515003A9D0A /* QYBaseDomNode.h */,
+				271B91E82A8CF515003A9D0A /* QYBaseNodeInfo.cpp */,
+				271B91D82A8CF515003A9D0A /* QYBaseNodeInfo.h */,
+				271B91D62A8CF515003A9D0A /* QYBaseView.cpp */,
+				271B91E72A8CF515003A9D0A /* QYBaseView.h */,
+				271B91D42A8CF515003A9D0A /* QYBaseWidget.cpp */,
+				271B91D92A8CF515003A9D0A /* QYBaseWidget.h */,
+				271B91D52A8CF515003A9D0A /* QYTest.cpp */,
+				271B91D32A8CF515003A9D0A /* QYTest.h */,
+				271B91DA2A8CF515003A9D0A /* QYViewCreateFactory.cpp */,
+				271B91E62A8CF515003A9D0A /* QYViewCreateFactory.h */,
+				271B91DB2A8CF515003A9D0A /* QYXmlParser.h */,
+				271B91DC2A8CF515003A9D0A /* QYXmlParser.mm */,
+				271B91DD2A8CF515003A9D0A /* View */,
+				271B93102A8CF8CF003A9D0A /* QYEntry.h */,
+				271B93112A8CF8CF003A9D0A /* QYEntry.cpp */,
 			);
 			name = source;
-			path = ../../source;
+			path = ../source;
 			sourceTree = "<group>";
 		};
-		C604EEE62A8C931E008DAC8E /* View */ = {
+		271B91DD2A8CF515003A9D0A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C604EEEA2A8C931E008DAC8E /* QYBaseCustomBaseView.h */,
-				C604EEE92A8C931E008DAC8E /* QYBaseCustomImageView.h */,
-				C604EEED2A8C931E008DAC8E /* QYBaseCustomImageView.mm */,
-				C604EEE82A8C931E008DAC8E /* QYBaseCustomTextView.h */,
-				C604EEEB2A8C931E008DAC8E /* QYBaseCustomTextView.mm */,
-				C604EEE72A8C931E008DAC8E /* QYBaseCustomView.h */,
-				C604EEEC2A8C931E008DAC8E /* QYBaseCustomView.mm */,
+				271B91E12A8CF515003A9D0A /* QYBaseCustomBaseView.h */,
+				271B91E02A8CF515003A9D0A /* QYBaseCustomImageView.h */,
+				271B91E42A8CF515003A9D0A /* QYBaseCustomImageView.mm */,
+				271B91DF2A8CF515003A9D0A /* QYBaseCustomTextView.h */,
+				271B91E22A8CF515003A9D0A /* QYBaseCustomTextView.mm */,
+				271B91DE2A8CF515003A9D0A /* QYBaseCustomView.h */,
+				271B91E32A8CF515003A9D0A /* QYBaseCustomView.mm */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		271B91EA2A8CF515003A9D0A /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				271B91EB2A8CF515003A9D0A /* libv8_libplatform.dylib */,
+				271B91EC2A8CF515003A9D0A /* libchrome_zlib.dylib */,
+				271B91ED2A8CF515003A9D0A /* libv8_libbase.dylib */,
+				271B91EE2A8CF515003A9D0A /* libthird_party_icu_icui18n.dylib */,
+				271B91EF2A8CF515003A9D0A /* libv8.dylib */,
+				271B91F02A8CF515003A9D0A /* snapshot_blob.bin */,
+				271B91F12A8CF515003A9D0A /* libicuuc.dylib */,
+			);
+			name = libs;
+			path = ../libs;
+			sourceTree = "<group>";
+		};
+		271B93032A8CF798003A9D0A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				271B93082A8CF826003A9D0A /* libc++.tbd */,
+				271B93062A8CF800003A9D0A /* AppKit.framework */,
+				271B93042A8CF798003A9D0A /* libxml2.tbd */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		C64160C12A8C8FDB0089E110 = {
 			isa = PBXGroup;
 			children = (
+				271B92152A8CF549003A9D0A /* Config.xcconfig */,
+				271B91EA2A8CF515003A9D0A /* libs */,
+				271B91D22A8CF515003A9D0A /* source */,
 				C64160CC2A8C8FDB0089E110 /* QYChromiumTest */,
-				C604EED02A8C92FA008DAC8E /* QYView */,
 				C64160CB2A8C8FDB0089E110 /* Products */,
+				271B93032A8CF798003A9D0A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -206,18 +282,19 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C604EEF72A8C931E008DAC8E /* QYBaseDomNode.h in Headers */,
-				C604EEFD2A8C931E008DAC8E /* QYBaseCustomView.h in Headers */,
-				C604EF062A8C931E008DAC8E /* QYBaseView.h in Headers */,
-				C604EF002A8C931E008DAC8E /* QYBaseCustomBaseView.h in Headers */,
-				C604EEF92A8C931E008DAC8E /* QYBaseWidget.h in Headers */,
-				C604EEFF2A8C931E008DAC8E /* QYBaseCustomImageView.h in Headers */,
-				C604EEF82A8C931E008DAC8E /* QYBaseNodeInfo.h in Headers */,
-				C604EF052A8C931E008DAC8E /* QYViewCreateFactory.h in Headers */,
-				C604EEFE2A8C931E008DAC8E /* QYBaseCustomTextView.h in Headers */,
-				C604EEFB2A8C931E008DAC8E /* QYXmlParser.h in Headers */,
-				C604EF082A8C931E008DAC8E /* CommonHeader.h in Headers */,
-				C604EEF32A8C931E008DAC8E /* QYTest.h in Headers */,
+				271B93122A8CF8CF003A9D0A /* QYEntry.h in Headers */,
+				271B91F62A8CF515003A9D0A /* QYBaseDomNode.h in Headers */,
+				271B91FC2A8CF515003A9D0A /* QYBaseCustomView.h in Headers */,
+				271B92052A8CF515003A9D0A /* QYBaseView.h in Headers */,
+				271B91FF2A8CF515003A9D0A /* QYBaseCustomBaseView.h in Headers */,
+				271B91F82A8CF515003A9D0A /* QYBaseWidget.h in Headers */,
+				271B91FE2A8CF515003A9D0A /* QYBaseCustomImageView.h in Headers */,
+				271B91F72A8CF515003A9D0A /* QYBaseNodeInfo.h in Headers */,
+				271B92042A8CF515003A9D0A /* QYViewCreateFactory.h in Headers */,
+				271B91FD2A8CF515003A9D0A /* QYBaseCustomTextView.h in Headers */,
+				271B91FA2A8CF515003A9D0A /* QYXmlParser.h in Headers */,
+				271B92072A8CF515003A9D0A /* CommonHeader.h in Headers */,
+				271B91F22A8CF515003A9D0A /* QYTest.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,6 +309,7 @@
 				C604EECB2A8C92FA008DAC8E /* Sources */,
 				C604EECC2A8C92FA008DAC8E /* Frameworks */,
 				C604EECD2A8C92FA008DAC8E /* Resources */,
+				271B91C42A8CF360003A9D0A /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -302,7 +380,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C604EF0B2A8C9468008DAC8E /* test.html in Resources */,
+				271B920D2A8CF515003A9D0A /* snapshot_blob.bin in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,16 +401,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C604EEF42A8C931E008DAC8E /* QYBaseWidget.cpp in Sources */,
-				C604EF042A8C931E008DAC8E /* QYBaseDomNode.cpp in Sources */,
-				C604EEFA2A8C931E008DAC8E /* QYViewCreateFactory.cpp in Sources */,
-				C604EEF52A8C931E008DAC8E /* QYTest.cpp in Sources */,
-				C604EF072A8C931E008DAC8E /* QYBaseNodeInfo.cpp in Sources */,
-				C604EF012A8C931E008DAC8E /* QYBaseCustomTextView.mm in Sources */,
-				C604EEF62A8C931E008DAC8E /* QYBaseView.cpp in Sources */,
-				C604EEFC2A8C931E008DAC8E /* QYXmlParser.mm in Sources */,
-				C604EF032A8C931E008DAC8E /* QYBaseCustomImageView.mm in Sources */,
-				C604EF022A8C931E008DAC8E /* QYBaseCustomView.mm in Sources */,
+				271B91F32A8CF515003A9D0A /* QYBaseWidget.cpp in Sources */,
+				271B92032A8CF515003A9D0A /* QYBaseDomNode.cpp in Sources */,
+				271B91F92A8CF515003A9D0A /* QYViewCreateFactory.cpp in Sources */,
+				271B91F42A8CF515003A9D0A /* QYTest.cpp in Sources */,
+				271B92062A8CF515003A9D0A /* QYBaseNodeInfo.cpp in Sources */,
+				271B92002A8CF515003A9D0A /* QYBaseCustomTextView.mm in Sources */,
+				271B91F52A8CF515003A9D0A /* QYBaseView.cpp in Sources */,
+				271B91FB2A8CF515003A9D0A /* QYXmlParser.mm in Sources */,
+				271B92022A8CF515003A9D0A /* QYBaseCustomImageView.mm in Sources */,
+				271B92012A8CF515003A9D0A /* QYBaseCustomView.mm in Sources */,
+				271B93132A8CF8CF003A9D0A /* QYEntry.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,6 +460,11 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_MODULE_VERIFIER = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					/Users/yinquan/Documents/library/Work/QYChromium/v8,
+					/Users/yinquan/Documents/library/Work/QYChromium/v8/src,
+					/Users/yinquan/Documents/library/Work/QYChromium/v8/include,
+				);
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -388,7 +472,9 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../libs\"";
+				MACH_O_TYPE = mh_dylib;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
@@ -414,6 +500,11 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_MODULE_VERIFIER = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					/Users/yinquan/Documents/library/Work/QYChromium/v8,
+					/Users/yinquan/Documents/library/Work/QYChromium/v8/src,
+					/Users/yinquan/Documents/library/Work/QYChromium/v8/include,
+				);
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -421,7 +512,9 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../libs\"";
+				MACH_O_TYPE = mh_dylib;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
@@ -562,7 +655,9 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = qy.QYChromiumTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -588,7 +683,9 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = qy.QYChromiumTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

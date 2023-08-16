@@ -1,0 +1,11 @@
+//
+//  Config.xcconfig
+//  QYView
+//
+//  Created by 全寅 on 2023/8/16.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+//OTHER_LDFLAGS = $(inherited)  -filelist "/Users/yinquan/Documents/library/node/v8.txt,/Users/yinquan/Downloads/depot_tools/v8/out/x64.release"
