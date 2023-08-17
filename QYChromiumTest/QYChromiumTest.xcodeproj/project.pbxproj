@@ -47,6 +47,8 @@
 		271B93092A8CF826003A9D0A /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 271B93082A8CF826003A9D0A /* libc++.tbd */; };
 		271B93122A8CF8CF003A9D0A /* QYEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 271B93102A8CF8CF003A9D0A /* QYEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		271B93132A8CF8CF003A9D0A /* QYEntry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 271B93112A8CF8CF003A9D0A /* QYEntry.cpp */; };
+		271B93162A8E662F003A9D0A /* QYPage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 271B93142A8E662F003A9D0A /* QYPage.cpp */; };
+		271B93172A8E662F003A9D0A /* QYPage.h in Headers */ = {isa = PBXBuildFile; fileRef = 271B93152A8E662F003A9D0A /* QYPage.h */; };
 		C604EED52A8C92FA008DAC8E /* QYView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C604EECF2A8C92FA008DAC8E /* QYView.framework */; };
 		C604EED72A8C92FA008DAC8E /* QYView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C604EECF2A8C92FA008DAC8E /* QYView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C604EF0A2A8C9452008DAC8E /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = C604EF092A8C9452008DAC8E /* test.html */; };
@@ -132,6 +134,8 @@
 		271B93082A8CF826003A9D0A /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		271B93102A8CF8CF003A9D0A /* QYEntry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYEntry.h; sourceTree = "<group>"; };
 		271B93112A8CF8CF003A9D0A /* QYEntry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = QYEntry.cpp; sourceTree = "<group>"; };
+		271B93142A8E662F003A9D0A /* QYPage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = QYPage.cpp; sourceTree = "<group>"; };
+		271B93152A8E662F003A9D0A /* QYPage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYPage.h; sourceTree = "<group>"; };
 		C604EECF2A8C92FA008DAC8E /* QYView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QYView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C604EF092A8C9452008DAC8E /* test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test.html; sourceTree = SOURCE_ROOT; };
 		C64160CA2A8C8FDB0089E110 /* QYChromiumTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QYChromiumTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -194,6 +198,8 @@
 				271B91DD2A8CF515003A9D0A /* View */,
 				271B93102A8CF8CF003A9D0A /* QYEntry.h */,
 				271B93112A8CF8CF003A9D0A /* QYEntry.cpp */,
+				271B93142A8E662F003A9D0A /* QYPage.cpp */,
+				271B93152A8E662F003A9D0A /* QYPage.h */,
 			);
 			name = source;
 			path = ../source;
@@ -293,6 +299,7 @@
 				271B92042A8CF515003A9D0A /* QYViewCreateFactory.h in Headers */,
 				271B91FD2A8CF515003A9D0A /* QYBaseCustomTextView.h in Headers */,
 				271B91FA2A8CF515003A9D0A /* QYXmlParser.h in Headers */,
+				271B93172A8E662F003A9D0A /* QYPage.h in Headers */,
 				271B92072A8CF515003A9D0A /* CommonHeader.h in Headers */,
 				271B91F22A8CF515003A9D0A /* QYTest.h in Headers */,
 			);
@@ -407,6 +414,7 @@
 				271B91F42A8CF515003A9D0A /* QYTest.cpp in Sources */,
 				271B92062A8CF515003A9D0A /* QYBaseNodeInfo.cpp in Sources */,
 				271B92002A8CF515003A9D0A /* QYBaseCustomTextView.mm in Sources */,
+				271B93162A8E662F003A9D0A /* QYPage.cpp in Sources */,
 				271B91F52A8CF515003A9D0A /* QYBaseView.cpp in Sources */,
 				271B91FB2A8CF515003A9D0A /* QYXmlParser.mm in Sources */,
 				271B92022A8CF515003A9D0A /* QYBaseCustomImageView.mm in Sources */,

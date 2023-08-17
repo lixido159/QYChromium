@@ -24,7 +24,7 @@ public:
     //对view赋值属性
     void performApplyWidgetViewTreeProperties();
     
-    void *nativeView();
+    void *getNativeView();
     
 };
 
