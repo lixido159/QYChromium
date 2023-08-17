@@ -10,6 +10,7 @@
 #import <libxml/parser.h>
 
 #import "QYBaseNodeInfo.h"
+#import "QYPage.h"
 #define TOCHAR (char *)
 
 //
@@ -50,7 +51,7 @@ QYBaseNodeInfo *toNodeInfo(xmlNodePtr xmlNode) {
 }
 
 
-QYBaseDomNode *parse(const char *file) {
+void* parse(const char *file) {
     xmlDocPtr xmlPtr = xmlReadFile(file, "UTF-8", XML_PARSE_RECOVER);
     if (!xmlPtr) {
         printf("%s 文件打开失败\n", file);
@@ -58,13 +59,11 @@ QYBaseDomNode *parse(const char *file) {
     }
     xmlNodePtr xmlRoot = xmlDocGetRootElement (xmlPtr);
     QYBaseNodeInfo *info = toNodeInfo(xmlRoot);
-    QYBaseDomNode *node = new QYBaseDomNode(info);
-    node->performExpandNodeTree();
-    node->performExpandWidgetTree();
-    node->performExpandWidgetViewTree();
-    node->performApplyWidgetViewTreeProperties();
-    printNodeInfoTree(info);
+    QYBaseDomNode *rootNode = new QYBaseDomNode(info);
+    QYPage *page = new QYPage(rootNode);
+    page->init();
+//    printNodeInfoTree(info);
     xmlFreeDoc(xmlPtr);
     xmlCleanupParser();
-    return node;
+    return page->getRootNode()->getNativeView();
 }
