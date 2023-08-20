@@ -14,6 +14,7 @@ public:
     QYPage(QYBaseDomNode *rootNode);
     void init();
     QYBaseDomNode *getRootNode() { return mRootNode; }
+    
 private:
     QYBaseDomNode *mRootNode;
     

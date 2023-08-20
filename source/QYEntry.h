@@ -11,7 +11,7 @@
 //void initializeEVO(int argc, const char * argv[]);
 //void initialize(int argc, const char * argv[]);
 void *parseHTML(char *html);
-
+void initJS(const char * snapshotDir);
 
 #endif
 

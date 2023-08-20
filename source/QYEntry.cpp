@@ -9,9 +9,14 @@
 #include "QYBaseWidget.h"
 //#include "src/common/globals.h"
 #include "QYTest.h"
+#include "QYJSRuntime.h"
 extern "C" {
 #import "QYEntry.h"
 }
 void *parseHTML(char *html) {
     return parse(html);
+}
+
+void initJS(const char * snapshotDir) {
+    initJSRuntime(snapshotDir);
 }
