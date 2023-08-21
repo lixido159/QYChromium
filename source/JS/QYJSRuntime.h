@@ -2,7 +2,7 @@
 //  QYJSRuntime.hpp
 //  QYView
 //
-//  Created by 全寅 on 2023/8/19.
+//  Created by yinquan on 2023/8/19.
 //
 
 #ifndef QYJSRuntime_hpp
@@ -11,14 +11,16 @@
 
 #include <stdio.h>
 
-#define ExecuteJS_RetValue(contextLocal)\
+#define ExecuteJS_RetValue(context)\
+v8::Local<v8::Context> contextLocal = context;\
 v8::Isolate *isolate = getIsolate();\
 v8::Isolate::Scope isolateScope(isolate);\
 v8::EscapableHandleScope escapeHandleScope(isolate);\
 v8::Context::Scope contextScope(contextLocal);\
 
 
-#define ExecuteJS(contextLocal)\
+#define ExecuteJS(context)\
+v8::Local<v8::Context> contextLocal = context;\
 v8::Isolate *isolate = getIsolate();\
 v8::Isolate::Scope isolateScope(isolate);\
 v8::HandleScope handleScope(isolate);\
