@@ -2,7 +2,7 @@
 //  QYJSRuntime.cpp
 //  QYView
 //
-//  Created by 全寅 on 2023/8/19.
+//  Created by yinquan on 2023/8/19.
 //
 
 #include "QYJSRuntime.h"
@@ -33,12 +33,6 @@ void initJSRuntime(const char * snapshotDir) {
     //先创建一个Isolate，负责堆内存的分配
     mIsolate = v8::Isolate::New(create_params);
 }
-
-void registerDefaultInterface(QYJSContext *jsContext) {
-    ExecuteJS(jsContext->getContext());
-    
-}
-
 
 v8::Isolate *getIsolate() {
     return mIsolate;

@@ -17,11 +17,19 @@
 class QYJSContext {
     QYJSContext();
 public:
+    v8::Local<v8::Context> ToLocal();
+    void setGlobalJSValue(QYJSValue *value, const char *name);
+    QYJSValue *newObject();
+    
+private:
+#pragma mark - 注册全局对象：console等
     //注册一个全局对象，js环境中可以直接调用
     void registerContextGlobalObject();
-    v8::Local<v8::Context> getContext();
+    QYJSValue *createGlobalConsoleObject();
 private:
     v8::Persistent<v8::Context> mContext;
+    
+    
 };
 
 #endif /* QYJSContext_hpp */

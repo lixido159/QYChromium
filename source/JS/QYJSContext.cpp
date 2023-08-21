@@ -16,7 +16,7 @@ QYJSContext::QYJSContext() {
 }
 
 
-v8::Local<v8::Context> QYJSContext::getContext(){
+v8::Local<v8::Context> QYJSContext::ToLocal(){
     v8::Isolate *isolate = getIsolate();
     v8::Isolate::Scope isolateScope(isolate);
     v8::EscapableHandleScope escapeHandleScope(isolate);
@@ -25,6 +25,25 @@ v8::Local<v8::Context> QYJSContext::getContext(){
     return escapeHandleScope.Escape(contextLocal);
 }
 
+void QYJSContext::setGlobalJSValue(QYJSValue *value, const char *name) {
+    ExecuteJS(ToLocal());
+    v8::Local<v8::Object> global = contextLocal->Global();
+    global->Set(contextLocal, v8::String::NewFromUtf8(isolate, name).ToLocalChecked(), value->ToLocal());
+}
+
+
+QYJSValue *QYJSContext::newObject() {
+    ExecuteJS(ToLocal());
+    return new QYJSValue(getIsolate(), v8::Object::New(getIsolate()));
+}
+
 void QYJSContext::registerContextGlobalObject() {
-    
+    ExecuteJS(ToLocal());
+    QYJSValue *consoleObj = createGlobalConsoleObject();
+    setGlobalJSValue(consoleObj, "console");
+}
+
+QYJSValue *QYJSContext::createGlobalConsoleObject() {
+    QYJSValue *jsValue = newObject();
+    jsValue->
 }
