@@ -34,7 +34,6 @@
 		271B920A2A8CF515003A9D0A /* libv8_libbase.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 271B91ED2A8CF515003A9D0A /* libv8_libbase.dylib */; };
 		271B920B2A8CF515003A9D0A /* libthird_party_icu_icui18n.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 271B91EE2A8CF515003A9D0A /* libthird_party_icu_icui18n.dylib */; };
 		271B920C2A8CF515003A9D0A /* libv8.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 271B91EF2A8CF515003A9D0A /* libv8.dylib */; };
-		271B920D2A8CF515003A9D0A /* snapshot_blob.bin in Resources */ = {isa = PBXBuildFile; fileRef = 271B91F02A8CF515003A9D0A /* snapshot_blob.bin */; };
 		271B920E2A8CF515003A9D0A /* libicuuc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 271B91F12A8CF515003A9D0A /* libicuuc.dylib */; };
 		271B920F2A8CF52E003A9D0A /* libv8_libplatform.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 271B91EB2A8CF515003A9D0A /* libv8_libplatform.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		271B92102A8CF52E003A9D0A /* libchrome_zlib.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 271B91EC2A8CF515003A9D0A /* libchrome_zlib.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -55,6 +54,7 @@
 		271B93222A8E7B84003A9D0A /* QYJSValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 271B93202A8E7B84003A9D0A /* QYJSValue.h */; };
 		271B93272A90EE5A003A9D0A /* QYJSRuntime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 271B93252A90EE59003A9D0A /* QYJSRuntime.cpp */; };
 		271B93282A90EE5A003A9D0A /* QYJSRuntime.h in Headers */ = {isa = PBXBuildFile; fileRef = 271B93262A90EE59003A9D0A /* QYJSRuntime.h */; };
+		271B932A2A939FB6003A9D0A /* snapshot_blob.bin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 271B91F02A8CF515003A9D0A /* snapshot_blob.bin */; };
 		C604EED52A8C92FA008DAC8E /* QYView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C604EECF2A8C92FA008DAC8E /* QYView.framework */; };
 		C604EED72A8C92FA008DAC8E /* QYView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C604EECF2A8C92FA008DAC8E /* QYView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C604EF0A2A8C9452008DAC8E /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = C604EF092A8C9452008DAC8E /* test.html */; };
@@ -88,6 +88,16 @@
 				271B92122A8CF52E003A9D0A /* libthird_party_icu_icui18n.dylib in CopyFiles */,
 				271B92132A8CF52E003A9D0A /* libv8.dylib in CopyFiles */,
 				271B92142A8CF52E003A9D0A /* libicuuc.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		271B93292A939F9C003A9D0A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 1;
+			files = (
+				271B932A2A939FB6003A9D0A /* snapshot_blob.bin in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,6 +356,7 @@
 				C604EECC2A8C92FA008DAC8E /* Frameworks */,
 				C604EECD2A8C92FA008DAC8E /* Resources */,
 				271B91C42A8CF360003A9D0A /* CopyFiles */,
+				271B93292A939F9C003A9D0A /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -416,7 +427,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				271B920D2A8CF515003A9D0A /* snapshot_blob.bin in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
