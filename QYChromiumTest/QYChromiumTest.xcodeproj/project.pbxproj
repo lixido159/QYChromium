@@ -515,9 +515,9 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = (
-					/Users/yinquan/Documents/library/Work/QYChromium/v8,
-					/Users/yinquan/Documents/library/Work/QYChromium/v8/src,
-					/Users/yinquan/Documents/library/Work/QYChromium/v8/include,
+					"\"$(SRCROOT)/../v8\"",
+					"\"$(SRCROOT)/../v8/include\"",
+					"\"$(SRCROOT)/../v8/src\"",
 				);
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -556,9 +556,9 @@
 				ENABLE_MODULE_VERIFIER = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = (
-					/Users/yinquan/Documents/library/Work/QYChromium/v8,
-					/Users/yinquan/Documents/library/Work/QYChromium/v8/src,
-					/Users/yinquan/Documents/library/Work/QYChromium/v8/include,
+					"\"$(SRCROOT)/../v8\"",
+					"\"$(SRCROOT)/../v8/include\"",
+					"\"$(SRCROOT)/../v8/src\"",
 				);
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
