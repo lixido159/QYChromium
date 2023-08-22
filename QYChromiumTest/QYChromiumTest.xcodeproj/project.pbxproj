@@ -55,6 +55,7 @@
 		271B93272A90EE5A003A9D0A /* QYJSRuntime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 271B93252A90EE59003A9D0A /* QYJSRuntime.cpp */; };
 		271B93282A90EE5A003A9D0A /* QYJSRuntime.h in Headers */ = {isa = PBXBuildFile; fileRef = 271B93262A90EE59003A9D0A /* QYJSRuntime.h */; };
 		271B932A2A939FB6003A9D0A /* snapshot_blob.bin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 271B91F02A8CF515003A9D0A /* snapshot_blob.bin */; };
+		271B93302A95142E003A9D0A /* QYFunction.h in Headers */ = {isa = PBXBuildFile; fileRef = 271B932F2A95142E003A9D0A /* QYFunction.h */; };
 		C604EED52A8C92FA008DAC8E /* QYView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C604EECF2A8C92FA008DAC8E /* QYView.framework */; };
 		C604EED72A8C92FA008DAC8E /* QYView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C604EECF2A8C92FA008DAC8E /* QYView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C604EF0A2A8C9452008DAC8E /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = C604EF092A8C9452008DAC8E /* test.html */; };
@@ -158,6 +159,7 @@
 		271B93202A8E7B84003A9D0A /* QYJSValue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYJSValue.h; sourceTree = "<group>"; };
 		271B93252A90EE59003A9D0A /* QYJSRuntime.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = QYJSRuntime.cpp; sourceTree = "<group>"; };
 		271B93262A90EE59003A9D0A /* QYJSRuntime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYJSRuntime.h; sourceTree = "<group>"; };
+		271B932F2A95142E003A9D0A /* QYFunction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYFunction.h; sourceTree = "<group>"; };
 		C604EECF2A8C92FA008DAC8E /* QYView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QYView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C604EF092A8C9452008DAC8E /* test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test.html; sourceTree = SOURCE_ROOT; };
 		C64160CA2A8C8FDB0089E110 /* QYChromiumTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QYChromiumTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -276,6 +278,7 @@
 				271B93262A90EE59003A9D0A /* QYJSRuntime.h */,
 				271B931F2A8E7B83003A9D0A /* QYJSValue.cpp */,
 				271B93202A8E7B84003A9D0A /* QYJSValue.h */,
+				271B932F2A95142E003A9D0A /* QYFunction.h */,
 			);
 			path = JS;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 				271B93282A90EE5A003A9D0A /* QYJSRuntime.h in Headers */,
 				271B93172A8E662F003A9D0A /* QYPage.h in Headers */,
 				271B92072A8CF515003A9D0A /* CommonHeader.h in Headers */,
+				271B93302A95142E003A9D0A /* QYFunction.h in Headers */,
 				271B91F22A8CF515003A9D0A /* QYTest.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -17,7 +17,7 @@
 class QYJSContext;
 class QYJSValue {
 public:
-    QYJSValue(v8::Isolate *isolate, v8::Local<v8::Object> jsValue);
+    QYJSValue(v8::Isolate *isolate, QYJSContext *jsContext, v8::Local<v8::Value> jsValue);
     v8::Local<v8::Value> ToLocal();
     v8::Local<v8::Object> ToLocalObject();
     
@@ -28,11 +28,6 @@ private:
     QYJSContext *mJsContext  = nullptr;
 };
 
-class QYFunctionWrapper {
-public:
-    QYFunctionWrapper(){};
-    std::function<QYJSValue *(QYJSContext *, QYJSValue*)>& handler;
-};
 
 
 

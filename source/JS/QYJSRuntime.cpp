@@ -32,6 +32,9 @@ void initJSRuntime(const char * snapshotDir) {
     v8::ArrayBuffer::Allocator::NewDefaultAllocator();
     //先创建一个Isolate，负责堆内存的分配
     mIsolate = v8::Isolate::New(create_params);
+//    Just For Test !
+//    QYJSContext *context = new QYJSContext();
+//    context->executeJS("console.log(123)");
 }
 
 v8::Isolate *getIsolate() {
