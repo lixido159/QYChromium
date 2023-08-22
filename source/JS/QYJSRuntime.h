@@ -12,18 +12,18 @@
 #include <stdio.h>
 
 #define ExecuteJS_RetValue(context)\
-v8::Local<v8::Context> contextLocal = context;\
 v8::Isolate *isolate = getIsolate();\
 v8::Isolate::Scope isolateScope(isolate);\
 v8::EscapableHandleScope escapeHandleScope(isolate);\
+v8::Local<v8::Context> contextLocal = context;\
 v8::Context::Scope contextScope(contextLocal);\
 
 
 #define ExecuteJS(context)\
-v8::Local<v8::Context> contextLocal = context;\
 v8::Isolate *isolate = getIsolate();\
 v8::Isolate::Scope isolateScope(isolate);\
 v8::HandleScope handleScope(isolate);\
+v8::Local<v8::Context> contextLocal = context;\
 v8::Context::Scope contextScope(contextLocal);\
 
 
