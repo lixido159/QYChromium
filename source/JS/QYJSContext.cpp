@@ -45,5 +45,8 @@ void QYJSContext::registerContextGlobalObject() {
 
 QYJSValue *QYJSContext::createGlobalConsoleObject() {
     QYJSValue *jsValue = newObject();
-    jsValue->
+    jsValue->setFunction("log", [](QYJSContext *, QYJSValue *)->QYJSValue *{
+        return nullptr;
+    });
+    return jsValue;
 }
