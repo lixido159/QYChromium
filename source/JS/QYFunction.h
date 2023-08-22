@@ -14,5 +14,6 @@ using QYFunctionType = std::function<QYJSValue *(QYJSContext *, QYJSValue*)>;
 
 struct QYFunction {
     QYFunctionType func;
+    QYJSContext *jsContext;
 };
 #endif /* QYFunction_h */

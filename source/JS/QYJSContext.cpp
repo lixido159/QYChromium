@@ -46,7 +46,9 @@ void QYJSContext::registerContextGlobalObject() {
 
 QYJSValue *QYJSContext::createGlobalConsoleObject() {
     QYJSValue *jsValue = newObject();
-    jsValue->setFunction("log", [](QYJSContext *, QYJSValue *)->QYJSValue *{
+    jsValue->setFunction("log", [](QYJSContext *context, QYJSValue *paramsValue)->QYJSValue *{
+        ExecuteJS(context->ToLocal());
+        printf("yinquan %s\n", paramsValue->getValueAt(0)->toString());
         return nullptr;
     });
     return jsValue;

@@ -20,11 +20,37 @@ public:
     QYJSValue(v8::Isolate *isolate, QYJSContext *jsContext, v8::Local<v8::Value> jsValue);
     v8::Local<v8::Value> ToLocal();
     v8::Local<v8::Object> ToLocalObject();
+public:
+    int length();
+    QYJSValue *getValueAt(int index);
     
+    char *toString();
+    double toNumber();
+    int32_t toInt32();
+    uint32_t toUint32();
+    bool toBoolean();
+public:
+    bool isNull();
+    bool isUndefined();
+    bool isNullOrUndefined();
+    bool isTrue();
+    bool isFalse();
+    bool isString();
+    bool isFunction();
+    bool isArray();
+    bool isObject();
+    bool isBigInt();
+    bool isBoolean();
+    bool isNumber();
+    bool isInt32();
+    bool isUint32();
+    //TODO: Value里的判断太多了，就先加这些吧
+public:
     void setFunction(const char *name, const std::function<QYJSValue *(QYJSContext *, QYJSValue*)>& handler);
 private:
     ~QYJSValue();
     v8::Persistent<v8::Value> mJsValue;
+    v8::Isolate *mIsolate;
     QYJSContext *mJsContext  = nullptr;
 };
 
