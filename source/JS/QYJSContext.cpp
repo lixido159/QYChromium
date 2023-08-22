@@ -13,6 +13,7 @@ QYJSContext::QYJSContext() {
     v8::HandleScope handleScope(getIsolate());
     v8::Local<v8::Context> context = v8::Context::New(getIsolate());
     mContext.Reset(getIsolate() ,v8::Persistent<v8::Context>(getIsolate(), context));
+    registerContextGlobalObject();
 }
 
 
@@ -34,7 +35,7 @@ void QYJSContext::setGlobalJSValue(QYJSValue *value, const char *name) {
 
 QYJSValue *QYJSContext::newObject() {
     ExecuteJS(ToLocal());
-    return new QYJSValue(getIsolate(), v8::Object::New(getIsolate()));
+    return new QYJSValue(getIsolate(), this, v8::Object::New(getIsolate()));
 }
 
 void QYJSContext::registerContextGlobalObject() {
@@ -50,3 +51,11 @@ QYJSValue *QYJSContext::createGlobalConsoleObject() {
     });
     return jsValue;
 }
+QYJSValue *QYJSContext::executeJS(const char *js) {
+    ExecuteJS(ToLocal());
+    v8::Local<v8::String> source = v8::String::NewFromUtf8(getIsolate(), js).ToLocalChecked();
+    v8::Local<v8::Script> script = v8::Script::Compile(contextLocal, source).ToLocalChecked();
+    v8::Local<v8::Value> result = script->Run(contextLocal).ToLocalChecked();
+    return nullptr;
+}
+
