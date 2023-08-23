@@ -61,7 +61,6 @@ unsigned int strToColor(std::string str) {
 }
 
 void setProperty(std::string key, std::string value, QYBaseView *view) {
-    printf("设置属性 %s %s\n", key.c_str(), value.c_str());
     if (key == "width") {
         view->mView->setWidth(std::stoi(value));
     } else if (key == "height") {
