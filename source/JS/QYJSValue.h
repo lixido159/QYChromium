@@ -22,6 +22,8 @@ public:
     v8::Local<v8::Object> ToLocalObject();
 public:
     int length();
+    bool has(const char *key);
+    bool has(int index);
     QYJSValue *getValue(int index);
     QYJSValue *getValue(const char *key);
     void setValue(const char *key, QYJSValue *value);
