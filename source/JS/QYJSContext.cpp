@@ -35,7 +35,7 @@ void QYJSContext::setGlobalJSValue(QYJSValue *value, const char *name) {
 
 QYJSValue *QYJSContext::newObject() {
     ExecuteJS(ToLocal());
-    return new QYJSValue(getIsolate(), this, v8::Object::New(getIsolate()));
+    return new QYJSValue(this, v8::Object::New(getIsolate()));
 }
 
 void QYJSContext::registerContextGlobalObject() {
@@ -48,7 +48,8 @@ QYJSValue *QYJSContext::createGlobalConsoleObject() {
     QYJSValue *jsValue = newObject();
     jsValue->setFunction("log", [](QYJSContext *context, QYJSValue *paramsValue)->QYJSValue *{
         ExecuteJS(context->ToLocal());
-        printf("yinquan %s\n", paramsValue->getValueAt(0)->toString());
+        std::string s = paramsValue->getValue(0)->toString();
+        printf("打印日志 %s\n", s.c_str());
         return nullptr;
     });
     return jsValue;

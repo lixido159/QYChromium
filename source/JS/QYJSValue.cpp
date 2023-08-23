@@ -15,7 +15,10 @@ void commonFunction(const v8::FunctionCallbackInfo<v8::Value>& info) {
     v8::Local<v8::Value> functionData = info.Data();
     v8::Local<v8::External> externalData = v8::Local<v8::External>::Cast(functionData);
     QYFunction *function = (QYFunction *)(externalData->Value());
-    QYJSValue *paramValue = new QYJSValue(info.GetIsolate(), function->jsContext, info.This());
+    QYJSValue *paramValue = new QYJSValue(function->jsContext);
+    for (int i = 0; i<info.Length(); i++) {
+        paramValue->setValue(i, info[i]);
+    }
     QYJSValue *retVal = function->func(function->jsContext, paramValue);
     if (retVal == nullptr) {
         info.GetReturnValue().SetUndefined();
@@ -26,12 +29,16 @@ void commonFunction(const v8::FunctionCallbackInfo<v8::Value>& info) {
 
 }
 
-QYJSValue::QYJSValue(v8::Isolate *isolate, QYJSContext *jsContext, v8::Local<v8::Value> jsValue) {
-    v8::Isolate::Scope isolateScope(isolate);
-    v8::HandleScope handleScope(isolate);
+QYJSValue::QYJSValue(QYJSContext *jsContext, v8::Local<v8::Value> jsValue) {
+    ExecuteJS(jsContext->ToLocal());
     mJsContext = jsContext;
-    mJsValue.Reset(isolate, jsValue);
-    mIsolate = isolate;
+    mJsValue.Reset(getIsolate(), jsValue);
+}
+
+QYJSValue::QYJSValue(QYJSContext *jsContext) {
+    ExecuteJS(jsContext->ToLocal());
+    mJsContext = jsContext;
+    mJsValue.Reset(getIsolate(), v8::Object::New(getIsolate()));
 }
 
 QYJSValue::~QYJSValue() {
@@ -67,25 +74,70 @@ int QYJSValue::length() {
     return 0;
 }
 
-QYJSValue* QYJSValue::getValueAt(int index) {
+QYJSValue* QYJSValue::getValue(int index) {
     ExecuteJS(mJsContext->ToLocal());
     if (!isObject()) {
         return nullptr;
     }
     v8::Local<v8::Object> object = ToLocalObject();
-    v8::Local<v8::Value> indexValue = object->Get(contextLocal, index).ToLocalChecked();
-    if (indexValue.IsEmpty()) {
+    v8::Local<v8::Value> retVal = object->Get(contextLocal, index).ToLocalChecked();
+    if (retVal.IsEmpty()) {
         return nullptr;
     }
-    return new QYJSValue(mIsolate, mJsContext, indexValue);
+    return new QYJSValue(mJsContext, retVal);
 }
+
+QYJSValue* QYJSValue::getValue(const char *key) {
+    ExecuteJS(mJsContext->ToLocal());
+    if (!isObject()) {
+        return nullptr;
+    }
+    v8::Local<v8::Object> object = ToLocalObject();
+    v8::Local<v8::Value> retVal = object->Get(contextLocal, v8::String::NewFromUtf8(isolate, key).ToLocalChecked()).ToLocalChecked();
+    if (retVal.IsEmpty()) {
+        return nullptr;
+    }
+    return new QYJSValue(mJsContext, retVal);
+
+}
+
+void QYJSValue::setValue(const char *key, QYJSValue *value) {
+    ExecuteJS(mJsContext->ToLocal());
+    setValue(key, value->ToLocal());
+    
+}
+void QYJSValue::setValue(const char *key, v8::Local<v8::Value> value) {
+    ExecuteJS(mJsContext->ToLocal());
+    if (!isObject()) {
+        return;
+    }
+    v8::Local<v8::Object> object = ToLocalObject();
+    v8::Local<v8::Value> keyLocal = v8::String::NewFromUtf8(isolate, key).ToLocalChecked();
+    object->Set(contextLocal, keyLocal, value);
+
+}
+void QYJSValue::setValue(int index, QYJSValue *value) {
+    ExecuteJS(mJsContext->ToLocal());
+    setValue(index, value->ToLocal());
+
+}
+void QYJSValue::setValue(int index, v8::Local<v8::Value> value) {
+    ExecuteJS(mJsContext->ToLocal());
+    if (!isObject()) {
+        return;
+    }
+    v8::Local<v8::Object> object = ToLocalObject();
+    object->Set(contextLocal, index, value);
+}
+
 
 #pragma mark - Do Something
 
-char* QYJSValue::toString() {
+//这里如果直接返回char *，Utf8Value被释放后 char *也会被释放
+std::string QYJSValue::toString() {
     ExecuteJS(mJsContext->ToLocal());
     v8::MaybeLocal<v8::String> strLocal = ToLocal()->ToString(mJsContext->ToLocal());
-    v8::String::Utf8Value retVal(mIsolate, strLocal.ToLocalChecked());
+    v8::String::Utf8Value retVal(getIsolate(), strLocal.ToLocalChecked());
     return *retVal;
 }
 double QYJSValue::toNumber() {
@@ -105,7 +157,7 @@ uint32_t QYJSValue::toUint32() {
 }
 bool QYJSValue::toBoolean() {
     ExecuteJS(mJsContext->ToLocal());
-    v8::Local<v8::Boolean> retValLocal = ToLocal()->ToBoolean(mIsolate);
+    v8::Local<v8::Boolean> retValLocal = ToLocal()->ToBoolean(getIsolate());
     return retValLocal->Value();
 }
 #pragma mark - Is Something
