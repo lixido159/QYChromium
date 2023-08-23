@@ -8,8 +8,6 @@
 #ifndef QYJSValue_hpp
 #define QYJSValue_hpp
 #include "v8.h"
-#include "include/v8-persistent-handle.h"
-#include "include/v8-isolate.h"
 #include <stdio.h>
 #include "QYJSRuntime.h"
 
@@ -17,14 +15,21 @@
 class QYJSContext;
 class QYJSValue {
 public:
-    QYJSValue(v8::Isolate *isolate, QYJSContext *jsContext, v8::Local<v8::Value> jsValue);
+    QYJSValue(QYJSContext *jsContext, v8::Local<v8::Value> jsValue);
+    QYJSValue(QYJSContext *jsContext);
+
     v8::Local<v8::Value> ToLocal();
     v8::Local<v8::Object> ToLocalObject();
 public:
     int length();
-    QYJSValue *getValueAt(int index);
+    QYJSValue *getValue(int index);
+    QYJSValue *getValue(const char *key);
+    void setValue(const char *key, QYJSValue *value);
+    void setValue(const char *key, v8::Local<v8::Value> value);
+    void setValue(int index, QYJSValue *value);
+    void setValue(int index, v8::Local<v8::Value> value);
     
-    char *toString();
+    std::string toString();
     double toNumber();
     int32_t toInt32();
     uint32_t toUint32();
