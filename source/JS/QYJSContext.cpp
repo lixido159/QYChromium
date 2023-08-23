@@ -38,6 +38,11 @@ QYJSValue *QYJSContext::newObject() {
     return new QYJSValue(this, v8::Object::New(getIsolate()));
 }
 
+QYJSValue* QYJSContext::getGlobal() {
+    ExecuteJS(ToLocal());
+    return new QYJSValue(this, contextLocal->Global());
+}
+
 void QYJSContext::registerContextGlobalObject() {
     ExecuteJS(ToLocal());
     QYJSValue *consoleObj = createGlobalConsoleObject();

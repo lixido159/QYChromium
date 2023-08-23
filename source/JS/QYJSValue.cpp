@@ -74,6 +74,25 @@ int QYJSValue::length() {
     return 0;
 }
 
+bool QYJSValue::has(const char *key) {
+    ExecuteJS(mJsContext->ToLocal());
+    if (!isObject()) {
+        return false;
+    }
+    v8::Local<v8::Object> object = ToLocalObject();
+    return object->Has(contextLocal, v8::String::NewFromUtf8(isolate, key).ToLocalChecked()).ToChecked();
+}
+
+bool QYJSValue::has(int index) {
+    ExecuteJS(mJsContext->ToLocal());
+    if (!isObject()) {
+        return false;
+    }
+    v8::Local<v8::Object> object = ToLocalObject();
+    return object->Has(contextLocal, index).ToChecked();
+}
+
+
 QYJSValue* QYJSValue::getValue(int index) {
     ExecuteJS(mJsContext->ToLocal());
     if (!isObject()) {

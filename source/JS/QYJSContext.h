@@ -21,6 +21,7 @@ public:
     v8::Local<v8::Context> ToLocal();
     void setGlobalJSValue(QYJSValue *value, const char *name);
     QYJSValue *newObject();
+    QYJSValue *getGlobal();
     QYJSValue *executeJS(const char *js);
 private:
 #pragma mark - 注册全局对象：console等
