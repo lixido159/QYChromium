@@ -7,7 +7,9 @@
 
 #include "QYJSContext.h"
 #include "include/v8-context.h"
-
+#include <iostream>
+#include <fstream>
+#include <string>
 QYJSContext::QYJSContext() {
     v8::Isolate::Scope isolateScope(getIsolate());
     v8::HandleScope handleScope(getIsolate());
@@ -66,4 +68,22 @@ QYJSValue *QYJSContext::executeJS(const char *js) {
     v8::Local<v8::Value> result = script->Run(contextLocal).ToLocalChecked();
     return nullptr;
 }
+
+std::string readFile(const char *fileName) {
+    std::ifstream file(fileName);
+    if (file.is_open()) {
+        std::string content((std::istreambuf_iterator<char>(file)),
+                            (std::istreambuf_iterator<char>()));
+        file.close();
+        return content;
+    } else {
+        std::cout << "Unable to open file" << std::endl;
+        return "";
+    }
+}
+
+QYJSValue *QYJSContext::executeJSFile(const char *name) {
+    return executeJS(readFile(name).c_str());
+}
+
 

@@ -23,6 +23,7 @@ public:
     QYJSValue *newObject();
     QYJSValue *getGlobal();
     QYJSValue *executeJS(const char *js);
+    QYJSValue *executeJSFile(const char *name);
 private:
 #pragma mark - 注册全局对象：console等
     //注册一个全局对象，js环境中可以直接调用
