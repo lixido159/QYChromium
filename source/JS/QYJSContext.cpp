@@ -6,16 +6,18 @@
 //
 
 #include "QYJSContext.h"
-#include "include/v8-context.h"
-#include <iostream>
-#include <fstream>
-#include <string>
+#include "QYModuleLoader.h"
+
 QYJSContext::QYJSContext() {
     v8::Isolate::Scope isolateScope(getIsolate());
     v8::HandleScope handleScope(getIsolate());
     v8::Local<v8::Context> context = v8::Context::New(getIsolate());
     mContext.Reset(getIsolate() ,v8::Persistent<v8::Context>(getIsolate(), context));
     registerContextGlobalObject();
+}
+
+QYJSContext::~QYJSContext() {
+    mContext.Reset();
 }
 
 
@@ -61,29 +63,19 @@ QYJSValue *QYJSContext::createGlobalConsoleObject() {
     });
     return jsValue;
 }
-QYJSValue *QYJSContext::executeJS(const char *js) {
+
+
+QYJSValue *QYJSContext::executeJS(const char *js, const char *fileName) {
     ExecuteJS(ToLocal());
-    v8::Local<v8::String> source = v8::String::NewFromUtf8(getIsolate(), js).ToLocalChecked();
-    v8::Local<v8::Script> script = v8::Script::Compile(contextLocal, source).ToLocalChecked();
-    v8::Local<v8::Value> result = script->Run(contextLocal).ToLocalChecked();
-    return nullptr;
+    v8::Local<v8::Module> mod = loadModule(contextLocal, js, fileName).ToLocalChecked();
+    v8::Local<v8::Value> retValue = executeModule(contextLocal, mod);
+    return new QYJSValue(this, retValue);
 }
 
-std::string readFile(const char *fileName) {
-    std::ifstream file(fileName);
-    if (file.is_open()) {
-        std::string content((std::istreambuf_iterator<char>(file)),
-                            (std::istreambuf_iterator<char>()));
-        file.close();
-        return content;
-    } else {
-        std::cout << "Unable to open file" << std::endl;
-        return "";
-    }
-}
+
 
 QYJSValue *QYJSContext::executeJSFile(const char *name) {
-    return executeJS(readFile(name).c_str());
+    return executeJS(readFile(name).c_str(), name);
 }
 
 

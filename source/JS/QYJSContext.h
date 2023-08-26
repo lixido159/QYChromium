@@ -17,13 +17,15 @@
 class QYJSContext {
 public:
     QYJSContext();
+    ~QYJSContext();
 public:
     v8::Local<v8::Context> ToLocal();
     void setGlobalJSValue(QYJSValue *value, const char *name);
     QYJSValue *newObject();
     QYJSValue *getGlobal();
-    QYJSValue *executeJS(const char *js);
+    QYJSValue *executeJS(const char *js, const char *fileName="tmp");
     QYJSValue *executeJSFile(const char *name);
+private:
 private:
 #pragma mark - 注册全局对象：console等
     //注册一个全局对象，js环境中可以直接调用
