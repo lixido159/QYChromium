@@ -1,2 +1,5 @@
 QYChromiumTest/QYChromiumTest.xcodeproj/xcshareddata/xcschemes/QYChromiumTest.xcscheme
 QYChromiumTest/QYChromiumTest.xcodeproj/xcuserdata/yinquan.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
+js/build/**
+js/node_modules/**
+
