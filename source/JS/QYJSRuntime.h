@@ -26,6 +26,8 @@ v8::HandleScope handleScope(isolate);\
 v8::Local<v8::Context> contextLocal = context;\
 v8::Context::Scope contextScope(contextLocal);\
 
+#define strToV8(str)\
+v8::String::NewFromUtf8(isolate, str).ToLocalChecked()\
 
 void initJSRuntime(const char * snapshotDir);
 v8::Isolate *getIsolate();
