@@ -56,6 +56,8 @@
 		271B93282A90EE5A003A9D0A /* QYJSRuntime.h in Headers */ = {isa = PBXBuildFile; fileRef = 271B93262A90EE59003A9D0A /* QYJSRuntime.h */; };
 		271B932A2A939FB6003A9D0A /* snapshot_blob.bin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 271B91F02A8CF515003A9D0A /* snapshot_blob.bin */; };
 		271B93302A95142E003A9D0A /* QYFunction.h in Headers */ = {isa = PBXBuildFile; fileRef = 271B932F2A95142E003A9D0A /* QYFunction.h */; };
+		271B93332A9A1534003A9D0A /* QYModuleLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 271B93312A9A1534003A9D0A /* QYModuleLoader.cpp */; };
+		271B93342A9A1534003A9D0A /* QYModuleLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 271B93322A9A1534003A9D0A /* QYModuleLoader.h */; };
 		C604EED52A8C92FA008DAC8E /* QYView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C604EECF2A8C92FA008DAC8E /* QYView.framework */; };
 		C604EED72A8C92FA008DAC8E /* QYView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C604EECF2A8C92FA008DAC8E /* QYView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C604EF0A2A8C9452008DAC8E /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = C604EF092A8C9452008DAC8E /* test.html */; };
@@ -160,6 +162,8 @@
 		271B93252A90EE59003A9D0A /* QYJSRuntime.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = QYJSRuntime.cpp; sourceTree = "<group>"; };
 		271B93262A90EE59003A9D0A /* QYJSRuntime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYJSRuntime.h; sourceTree = "<group>"; };
 		271B932F2A95142E003A9D0A /* QYFunction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYFunction.h; sourceTree = "<group>"; };
+		271B93312A9A1534003A9D0A /* QYModuleLoader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = QYModuleLoader.cpp; sourceTree = "<group>"; };
+		271B93322A9A1534003A9D0A /* QYModuleLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYModuleLoader.h; sourceTree = "<group>"; };
 		C604EECF2A8C92FA008DAC8E /* QYView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QYView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C604EF092A8C9452008DAC8E /* test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test.html; sourceTree = SOURCE_ROOT; };
 		C64160CA2A8C8FDB0089E110 /* QYChromiumTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QYChromiumTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -279,6 +283,8 @@
 				271B931F2A8E7B83003A9D0A /* QYJSValue.cpp */,
 				271B93202A8E7B84003A9D0A /* QYJSValue.h */,
 				271B932F2A95142E003A9D0A /* QYFunction.h */,
+				271B93312A9A1534003A9D0A /* QYModuleLoader.cpp */,
+				271B93322A9A1534003A9D0A /* QYModuleLoader.h */,
 			);
 			path = JS;
 			sourceTree = "<group>";
@@ -330,6 +336,7 @@
 				271B931C2A8E7661003A9D0A /* QYJSContext.h in Headers */,
 				271B93122A8CF8CF003A9D0A /* QYEntry.h in Headers */,
 				271B91F62A8CF515003A9D0A /* QYBaseDomNode.h in Headers */,
+				271B93342A9A1534003A9D0A /* QYModuleLoader.h in Headers */,
 				271B91FC2A8CF515003A9D0A /* QYBaseCustomView.h in Headers */,
 				271B92052A8CF515003A9D0A /* QYBaseView.h in Headers */,
 				271B91FF2A8CF515003A9D0A /* QYBaseCustomBaseView.h in Headers */,
@@ -461,6 +468,7 @@
 				271B931B2A8E7660003A9D0A /* QYJSContext.cpp in Sources */,
 				271B93162A8E662F003A9D0A /* QYPage.cpp in Sources */,
 				271B93212A8E7B84003A9D0A /* QYJSValue.cpp in Sources */,
+				271B93332A9A1534003A9D0A /* QYModuleLoader.cpp in Sources */,
 				271B91F52A8CF515003A9D0A /* QYBaseView.cpp in Sources */,
 				271B91FB2A8CF515003A9D0A /* QYXmlParser.mm in Sources */,
 				271B92022A8CF515003A9D0A /* QYBaseCustomImageView.mm in Sources */,
