@@ -51,6 +51,8 @@ void QYJSContext::registerContextGlobalObject() {
     ExecuteJS(ToLocal());
     QYJSValue *consoleObj = createGlobalConsoleObject();
     setGlobalJSValue(consoleObj, "console");
+    //注册qy全局对象，后面一些方法都设置到这上面
+    setGlobalJSValue(new QYJSValue(this), "qy");
 }
 
 QYJSValue *QYJSContext::createGlobalConsoleObject() {
@@ -63,6 +65,8 @@ QYJSValue *QYJSContext::createGlobalConsoleObject() {
     });
     return jsValue;
 }
+
+
 
 
 QYJSValue *QYJSContext::executeJS(const char *js, const char *fileName) {
