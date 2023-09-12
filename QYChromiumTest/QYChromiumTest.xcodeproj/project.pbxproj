@@ -58,6 +58,8 @@
 		271B93302A95142E003A9D0A /* QYFunction.h in Headers */ = {isa = PBXBuildFile; fileRef = 271B932F2A95142E003A9D0A /* QYFunction.h */; };
 		271B93332A9A1534003A9D0A /* QYModuleLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 271B93312A9A1534003A9D0A /* QYModuleLoader.cpp */; };
 		271B93342A9A1534003A9D0A /* QYModuleLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 271B93322A9A1534003A9D0A /* QYModuleLoader.h */; };
+		27744E762AB0AF84000B3B29 /* fileUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27744E742AB0AF84000B3B29 /* fileUtil.cpp */; };
+		27744E772AB0AF84000B3B29 /* fileUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 27744E752AB0AF84000B3B29 /* fileUtil.h */; };
 		C604EED52A8C92FA008DAC8E /* QYView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C604EECF2A8C92FA008DAC8E /* QYView.framework */; };
 		C604EED72A8C92FA008DAC8E /* QYView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C604EECF2A8C92FA008DAC8E /* QYView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C604EF0A2A8C9452008DAC8E /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = C604EF092A8C9452008DAC8E /* test.html */; };
@@ -164,6 +166,8 @@
 		271B932F2A95142E003A9D0A /* QYFunction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYFunction.h; sourceTree = "<group>"; };
 		271B93312A9A1534003A9D0A /* QYModuleLoader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = QYModuleLoader.cpp; sourceTree = "<group>"; };
 		271B93322A9A1534003A9D0A /* QYModuleLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYModuleLoader.h; sourceTree = "<group>"; };
+		27744E742AB0AF84000B3B29 /* fileUtil.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fileUtil.cpp; sourceTree = "<group>"; };
+		27744E752AB0AF84000B3B29 /* fileUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fileUtil.h; sourceTree = "<group>"; };
 		C604EECF2A8C92FA008DAC8E /* QYView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QYView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C604EF092A8C9452008DAC8E /* test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test.html; sourceTree = SOURCE_ROOT; };
 		C64160CA2A8C8FDB0089E110 /* QYChromiumTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QYChromiumTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -208,6 +212,7 @@
 		271B91D22A8CF515003A9D0A /* source */ = {
 			isa = PBXGroup;
 			children = (
+				27744E732AB0AF5D000B3B29 /* util */,
 				271B93182A8E7645003A9D0A /* JS */,
 				271B91E92A8CF515003A9D0A /* CommonHeader.h */,
 				271B91E52A8CF515003A9D0A /* QYBaseDomNode.cpp */,
@@ -289,6 +294,15 @@
 			path = JS;
 			sourceTree = "<group>";
 		};
+		27744E732AB0AF5D000B3B29 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				27744E742AB0AF84000B3B29 /* fileUtil.cpp */,
+				27744E752AB0AF84000B3B29 /* fileUtil.h */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
 		C64160C12A8C8FDB0089E110 = {
 			isa = PBXGroup;
 			children = (
@@ -345,6 +359,7 @@
 				271B91FE2A8CF515003A9D0A /* QYBaseCustomImageView.h in Headers */,
 				271B91F72A8CF515003A9D0A /* QYBaseNodeInfo.h in Headers */,
 				271B92042A8CF515003A9D0A /* QYViewCreateFactory.h in Headers */,
+				27744E772AB0AF84000B3B29 /* fileUtil.h in Headers */,
 				271B91FD2A8CF515003A9D0A /* QYBaseCustomTextView.h in Headers */,
 				271B91FA2A8CF515003A9D0A /* QYXmlParser.h in Headers */,
 				271B93282A90EE5A003A9D0A /* QYJSRuntime.h in Headers */,
@@ -474,6 +489,7 @@
 				271B92022A8CF515003A9D0A /* QYBaseCustomImageView.mm in Sources */,
 				271B92012A8CF515003A9D0A /* QYBaseCustomView.mm in Sources */,
 				271B93132A8CF8CF003A9D0A /* QYEntry.cpp in Sources */,
+				27744E762AB0AF84000B3B29 /* fileUtil.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

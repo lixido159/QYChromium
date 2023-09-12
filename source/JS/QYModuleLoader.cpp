@@ -9,21 +9,7 @@
 //参考自：https://gist.github.com/surusek/4c05e4dcac6b82d18a1a28e6742fc23e
 #include "QYModuleLoader.h"
 #include "QYJSRuntime.h"
-#include <iostream>
-#include <fstream>
-#include <string>
-std::string readFile(const char *fileName) {
-    std::ifstream file(fileName);
-    if (file.is_open()) {
-        std::string content((std::istreambuf_iterator<char>(file)),
-                            (std::istreambuf_iterator<char>()));
-        file.close();
-        return content;
-    } else {
-        std::cout << "Unable to open file" << std::endl;
-        return "";
-    }
-}
+#include "fileUtil.h"
 
 
 v8::MaybeLocal<v8::Module> loadModule(v8::Local<v8::Context> context, const char *js, const char *fileName) {

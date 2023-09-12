@@ -9,5 +9,5 @@
 
 
 
-void* parse(const char *file);
+void* parse(const char *htmlFile, const char *jsFile);
 #endif /* a_hpp */
