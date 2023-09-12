@@ -13,8 +13,8 @@
 extern "C" {
 #import "QYEntry.h"
 }
-void *parseHTML(char *html) {
-    return parse(html);
+void *parseHTML(const char *htmlFile, const char *jsFile) {
+    return parse(htmlFile, jsFile);
 }
 
 void initJS(const char * snapshotDir) {

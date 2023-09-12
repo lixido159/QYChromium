@@ -6,8 +6,11 @@
 //
 
 #include "QYPage.h"
+QYPage::QYPage(QYBaseDomNode *rootNode, std::string jsStr):mRootNode(rootNode), mJSStr(jsStr) {
+    mJSContext = new QYJSContext();
+}
 
-QYPage::QYPage(QYBaseDomNode *rootNode):mRootNode(rootNode) {
+QYPage::~QYPage() {
     
 }
 
@@ -16,5 +19,19 @@ void QYPage::init() {
     mRootNode->performExpandWidgetTree();
     mRootNode->performExpandWidgetViewTree();
     mRootNode->performApplyWidgetViewTreeProperties();
+    beforeExecuteJS();
+    executeJS();
+    afterExecuteJS();
+}
 
+void QYPage::beforeExecuteJS() {
+    
+}
+
+void QYPage::executeJS() {
+    mJSContext->executeJS(mJSStr.c_str());
+}
+
+void QYPage::afterExecuteJS() {
+    
 }

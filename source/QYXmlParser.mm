@@ -11,6 +11,7 @@
 
 #import "QYBaseNodeInfo.h"
 #import "QYPage.h"
+#import "fileUtil.h"
 #define TOCHAR (char *)
 
 //
@@ -51,16 +52,18 @@ QYBaseNodeInfo *toNodeInfo(xmlNodePtr xmlNode) {
 }
 
 
-void* parse(const char *file) {
-    xmlDocPtr xmlPtr = xmlReadFile(file, "UTF-8", XML_PARSE_RECOVER);
+void* parse(const char *htmlFile, const char *jsFile) {
+    xmlDocPtr xmlPtr = xmlReadFile(htmlFile, "UTF-8", XML_PARSE_RECOVER);
     if (!xmlPtr) {
-        printf("%s 文件打开失败\n", file);
+        printf("%s 文件打开失败\n", htmlFile);
         return nullptr;
     }
+    
+    std::string jsStr = readFile(jsFile);
     xmlNodePtr xmlRoot = xmlDocGetRootElement (xmlPtr);
     QYBaseNodeInfo *info = toNodeInfo(xmlRoot);
     QYBaseDomNode *rootNode = new QYBaseDomNode(info);
-    QYPage *page = new QYPage(rootNode);
+    QYPage *page = new QYPage(rootNode, jsStr);
     page->init();
 //    printNodeInfoTree(info);
     xmlFreeDoc(xmlPtr);

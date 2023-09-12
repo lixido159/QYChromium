@@ -10,7 +10,7 @@
 
 //void initializeEVO(int argc, const char * argv[]);
 //void initialize(int argc, const char * argv[]);
-void *parseHTML(char *html);
+void *parseHTML(const char *htmlFile, const char *jsFile);
 void initJS(const char * snapshotDir);
 
 #endif

@@ -7,8 +7,11 @@
 
 #include "QYJSContext.h"
 #include "QYModuleLoader.h"
-
+#include "fileUtil.h"
+#include "src/init/v8.h"
 QYJSContext::QYJSContext() {
+    v8::Platform *p = v8::internal::V8::GetCurrentPlatform();
+    p->GetTracingController();
     v8::Isolate::Scope isolateScope(getIsolate());
     v8::HandleScope handleScope(getIsolate());
     v8::Local<v8::Context> context = v8::Context::New(getIsolate());
