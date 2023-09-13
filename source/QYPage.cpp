@@ -30,6 +30,9 @@ void QYPage::beforeExecuteJS() {
 
 void QYPage::executeJS() {
     mJSContext->executeJS(mJSStr.c_str());
+    QYJSValue *global = mJSContext->getGlobal();
+    QYJSValue *qyValue = global->getValue("qy");
+    qyValue->getValue("entry")->call(nullptr);
 }
 
 void QYPage::afterExecuteJS() {

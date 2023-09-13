@@ -57,6 +57,26 @@ v8::Local<v8::Object> QYJSValue::ToLocalObject() {
     return escapeHandleScope.Escape(value->ToObject(contextLocal).ToLocalChecked());
 }
 
+QYJSContext * QYJSValue::getContext() {
+    return mJsContext;
+}
+
+QYJSValue *QYJSValue::call(QYJSValue *args) {
+    ExecuteJS(mJsContext->ToLocal());
+    v8::Local<v8::Value> value = ToLocal();
+    if (!value->IsFunction()) {
+        return nullptr;
+    }
+    v8::Local<v8::Object> obj = value->ToObject(contextLocal).ToLocalChecked();
+    v8::Local<v8::Value> argv[args->length()];
+    for (int i=0 ;i<args->length(); i++) {
+        argv[i] = args->getValue(i)->ToLocal();
+    }
+    v8::Local<v8::Value> retValue = obj->CallAsFunction(contextLocal, contextLocal->Global(), args->length(), argv).ToLocalChecked();
+    return new QYJSValue(mJsContext, retValue);
+    
+}
+
 void QYJSValue::setFunction(const char *name, const std::function<QYJSValue *(QYJSContext *, QYJSValue*)>& handler) {
     ExecuteJS(mJsContext->ToLocal());
     QYFunction *function = new QYFunction();
