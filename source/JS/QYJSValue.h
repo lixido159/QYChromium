@@ -20,6 +20,9 @@ public:
 
     v8::Local<v8::Value> ToLocal();
     v8::Local<v8::Object> ToLocalObject();
+    QYJSContext * getContext();
+    
+    QYJSValue *call(QYJSValue *args);
 public:
     int length();
     bool has(const char *key);
