@@ -36,7 +36,9 @@ class QYNumberExpression : public QYExpression {
 };
 
 class QYStringExpression : public QYExpression {
-    
+public:
+    QYStringExpression(std::string str): mStr(str) {}
+    std::string mStr;
 };
 
 class QYVariableExpression : public QYExpression {
@@ -45,24 +47,25 @@ class QYVariableExpression : public QYExpression {
 
 class QYCallExpression : public QYExpression{
 public:
-    std::string callee;
+    QYExpression *mCallee;
 };
 
 class QYFunctionCallExpression : public QYCallExpression {
 public:
-    std::string func;
-    std::vector<QYExpression> args;
+    std::string mFunc;
+    std::vector<QYExpression> mArgs;
 };
 
 class QYPropertyCallExpression : public QYCallExpression {
 public:
-    std::string property;
+    QYPropertyCallExpression(QYExpression *callee, std::string property) : mCallee(callee), mProperty(property){};
+    std::string mProperty;
 };
 
 class QYArrayCallExpression : public QYCallExpression {
 public:
-    int index;
-    
+    QYArrayCallExpression(QYExpression *callee, int index): mCallee(callee), mIndex(index){};
+    int mIndex;
 };
 
 
@@ -86,7 +89,7 @@ public:
     }
     
     int currentChar() {
-        return src[curIndex++];
+        return src[curIndex];
     }
     
     QYToken getNextToken() {
@@ -132,51 +135,71 @@ public:
         getNextToken();
         //TODO:返回个值
     }
-    
+
+//    a.b()[3]().c
     //变量或者方法调用
-    void parseIdentifierExp() {
+    QYExpression *parseIdentifierExp(QYExpression *callee) {
         std::string identifier = currentToken.identifier;
         getNextToken();
+        return _parseIdentifierExp(new QYStringExpression(identifier));
+    }
+    
+    QYExpression *_parseIdentifierExp(QYExpression *callee) {
+        QYExpression *expression = nullptr;
         //确定是方法调用了
         if (currentChar() == '(') {
             //TODO:返回个值
-            parseFunctionCallExp(identifier);
+            expression = parseFunctionCallExp(callee);
         }
         //确定是属性访问
         else if (currentChar() == '.') {
             //TODO:返回个值
-            parsePropertyCallExp(identifier);
+            expression = parsePropertyCallExp(callee);
         }
         //确定是数组访问
         else if (currentChar() == '[') {
             //TODO:返回个值
-            parseArrayAccessExp(identifier);
+            expression = parseArrayAccessExp(callee);
         }
         //都不是，那就暂定变量了，后面有其他情况再加
         else {
             //TODO:返回个值
-            
         }
+
+        int curChar = currentChar();
+        if (curChar == '.' || curChar == '[' || curChar == '(' ) {
+            parseIdentifierExp(expression);
+        }
+
     }
+
+    
     
     void parseNumberExp() {
         //确定当前是数字了
+        currentToken.number;
+        
         getNextToken();
         //TODO:返回个值
     }
     
-    QYFunctionCallExpression* parseFunctionCallExp(std::string identifier) {
+    QYFunctionCallExpression* parseFunctionCallExp(QYExpression *callee) {
         //当前是(
         getNextToken();
         //如果有参数
         if(currentChar() != ')') {
+            std::vector<QYExpression> args;
             while(true) {
-                parseExp();
+                QYExpression *arg = parseExp();
+                if (!arg) {
+                    throw "方法参数解析错误";
+                }
+                args.push_back(arg);
                 //调用结束
                 if (currentChar() == ')') {
                     break;
                 }
-                //还有参数，继续循环
+                //还有参数，这里应该是, 不然就报错
                 else if (currentChar() != ',') {
                     throw "方法调用参数错误";
                 }
@@ -184,26 +207,32 @@ public:
                 getNextToken();
             }
         }
+        QYFunctionCallExpression *funcExp = new QYFunctionCallExpression()
         //略过)
         getNextToken();
     }
     
-    QYPropertyCallExpression* parsePropertyCallExp(std::string identifier) {
-        //当前是.
-        //a.b = c, a.b()=c(), a.b[1] = c[1]，只需要把a.b换成新的值，就可以无限递归下去
+    QYPropertyCallExpression* parsePropertyCallExp(QYExpression *callee) {
+        //当前是.，获取下一个token
         getNextToken();
         if (currentToken.type != tok_identifier) {
-            throw ".调用错误";
+            throw ".调用错误，不是标识符";
         }
-        
-        //
+        QYPropertyCallExpression *propertyExp = new QYPropertyCallExpression(callee, currentToken.identifier);
+        getNextToken();
+        return propertyExp;
     }
     
-    QYArrayCallExpression* parseArrayAccessExp(std::string identifier) {
+    QYArrayCallExpression* parseArrayAccessExp(QYExpression *callee) {
         //当前是[
         getNextToken();
-        
-        
+        if (currentToken.type != tok_number) {
+            throw "[] 调用错误，不是数字";
+        }
+        //略过数字
+        getNextToken();
+        //略过]
+        getNextToken();
     }
     
     void parseStringExp() {
