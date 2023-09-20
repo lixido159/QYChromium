@@ -43,32 +43,33 @@ public:
     std::string mStr;
 };
 
-class QYVariableExpression : public QYExpression {
-    
+class QYIdentifierExpression : public QYExpression{
+public:
+    QYIdentifierExpression(std::string var): mVar(var) {}
+    std::string mVar;
+
 };
 
-class QYCallExpression : public QYExpression{
+
+class QYFunctionExpression : public QYExpression{
 public:
-    QYCallExpression(QYExpression *callee):mCallee(callee){}
-    QYExpression *mCallee = nullptr;
+    QYFunctionExpression(QYExpression *val, std::vector<QYExpression *> args): mVal(val), mArgs(args){};
+    QYExpression *mVal;
+    std::vector<QYExpression *> mArgs;
 };
 
-class QYFunctionCallExpression : public QYCallExpression {
+class QYPropertyAccessExpression : public QYExpression{
 public:
-    QYFunctionCallExpression(QYExpression *callee, std::string func, std::vector<QYExpression> args): QYCallExpression(callee), mFunc(func), mArgs(args){};
-    std::string mFunc;
-    std::vector<QYExpression> mArgs;
-};
-
-class QYPropertyCallExpression : public QYCallExpression {
-public:
-    QYPropertyCallExpression(QYExpression *callee, std::string property) : QYCallExpression(callee), mProperty(property){};
+    QYPropertyAccessExpression(QYExpression *callee, std::string property) : mCallee(callee), mProperty(property){};
+    QYExpression *mCallee;
     std::string mProperty;
 };
 
-class QYArrayCallExpression : public QYCallExpression {
+class QYCollectionAccessExpression : public QYExpression{
 public:
-    QYArrayCallExpression(QYExpression *callee, QYExpression *): QYCallExpression(callee), mIndex(index){};
+    QYCollectionAccessExpression(QYExpression *callee, QYExpression *index): mCallee(callee), mIndex(index){};
+    QYExpression *mCallee;
+    //数组、字典都有可能
     QYExpression *mIndex;
 };
 
@@ -126,6 +127,44 @@ public:
     QYExpression* parseExp() {
         
     }
+    
+    QYNumberExpression* parseNumberExp() {
+        //确定当前是数字了
+        QYNumberExpression *numExp = new QYNumberExpression(currentToken.number);
+        getNextToken();
+        return numExp;
+    }
+    
+    QYStringExpression* parseStringExp() {
+        //当前是"或'
+        int quote = currentChar();
+        getNextToken();
+        std::string str;
+        //遇到转义字符
+        bool hasEscapeChar = false;
+        while(true) {
+            //上一个是转义字符
+            if (hasEscapeChar) {
+                hasEscapeChar = false;
+                str.push_back(currentChar());
+            }
+            //遇到转义字符
+            else if (currentChar() == '\\') {
+                hasEscapeChar = true;
+            }
+            //结束
+            else if (currentChar() == quote) {
+                getNextToken();
+                break;
+            } else {
+                str.push_back(currentChar());
+            }
+            getNextToken();
+        }
+        QYStringExpression *strExp = new QYStringExpression(str);
+        return strExp;
+    }
+    
     //  ()的情况，当currentChar确定是(时调用
     QYExpression* parseParentExp() {
         //略过(
@@ -145,7 +184,7 @@ public:
     QYExpression *parseIdentifierExp(QYExpression *callee) {
         std::string identifier = currentToken.identifier;
         getNextToken();
-        return _parseIdentifierExp(new QYStringExpression(identifier));
+        return _parseIdentifierExp(new QYIdentifierExpression(identifier));
     }
     
     QYExpression *_parseIdentifierExp(QYExpression *callee) {
@@ -179,20 +218,13 @@ public:
 
     
     
-    QYNumberExpression* parseNumberExp() {
-        //确定当前是数字了
-        currentToken.number;
-        
-        getNextToken();
-        //TODO:返回个值
-    }
     
-    QYFunctionCallExpression* parseFunctionCallExp(QYExpression *callee) {
+    QYFunctionExpression* parseFunctionCallExp(QYExpression *val) {
         //当前是(
         getNextToken();
+        std::vector<QYExpression *> args;
         //如果有参数
         if(currentChar() != ')') {
-            std::vector<QYExpression> args;
             while(true) {
                 QYExpression *arg = parseExp();
                 if (!arg) {
@@ -211,45 +243,33 @@ public:
                 getNextToken();
             }
         }
-        QYFunctionCallExpression *funcExp = new QYFunctionCallExpression()
+        QYFunctionExpression *funcExp = new QYFunctionExpression(val, args);
         //略过)
         getNextToken();
     }
     
-    QYPropertyCallExpression* parsePropertyCallExp(QYExpression *callee) {
+    QYPropertyAccessExpression* parsePropertyCallExp(QYExpression *callee) {
         //当前是.，获取下一个token
         getNextToken();
         if (currentToken.type != tok_identifier) {
             throw ".调用错误，不是标识符";
         }
-        QYPropertyCallExpression *propertyExp = new QYPropertyCallExpression(callee, currentToken.identifier);
+        QYPropertyAccessExpression *propertyExp = new QYPropertyAccessExpression(callee, currentToken.identifier);
         getNextToken();
         return propertyExp;
     }
     
-    QYArrayCallExpression* parseArrayAccessExp(QYExpression *callee) {
-        //当前是[
+    QYCollectionAccessExpression* parseArrayAccessExp(QYExpression *callee) {
+        //当前是[，略过
         getNextToken();
-        if (currentToken.type != tok_number) {
-            throw "[] 调用错误，不是数字";
-        }
-        //略过数字
-        getNextToken();
+        //解析[]中的表达式
         QYExpression *index = parseExp();
-        QYArrayCallExpression *arrayExp = new QYArrayCallExpression(callee, index);
+        QYCollectionAccessExpression *collectionExp = new QYCollectionAccessExpression(callee, index);
         //略过]
         getNextToken();
-        return arrayExp;
+        return collectionExp;
     }
     
-    QYStringExpression* parseStringExp() {
-        
-    }
-
-    
-    QYVariableExpression* parseVariableExp() {
-        
-    }
 };
 
 
