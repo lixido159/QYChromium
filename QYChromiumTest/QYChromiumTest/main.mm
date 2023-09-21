@@ -80,6 +80,7 @@ struct QYToken {
     TOKEN_TYPE type;
     std::string identifier;
     double number;
+    int currentChar;
 };
 
 
@@ -89,8 +90,13 @@ public:
     std::string src;
     int curIndex = -1;
     int currentChar = ' ';
+    //currentToken代表当前解析出来的token：字符串、数字、标识符、其他字符
+    //currentChar代表token的下一个字符
     QYToken currentToken;
     
+    QYTokenParser(std::string str):src(str) {
+        getNextToken();
+    }
     
     int getNextChar() {
         currentChar = src[++curIndex];
@@ -141,7 +147,7 @@ public:
                 }
                 //结束
                 else if (currentChar == quote) {
-                    getNextToken();
+                    getNextChar();
                     break;
                 } else {
                     str.push_back(currentChar);
@@ -149,19 +155,36 @@ public:
             }
             currentToken = {tok_string, "", 0};
         } else if (currentChar == '\0'){
-            currentToken = {tok_eof, "", 0};
+            currentToken = {tok_eof, "", 0, currentChar};
+            getNextChar();
         } else {
-            currentToken = {tok_other, "", 0};
+            currentToken = {tok_other, "", 0, currentChar};
+            getNextChar();
         }
         return currentToken;
     };
     
-    //标识符、括号、数字、字符串
+    //括号、标识符、数字、字符串
+    //这里代表一个新的解析的开始
     QYExpression* parsePrimary() {
+        if (currentChar == '(') {
+            return parseParentExp();
+        }
+        else if (currentToken.type == tok_identifier) {
+            return parseIdentifierExp();
+        }
+        else if (currentToken.type == tok_number) {
+            return parseNumberExp();
+        }
+        else if (currentToken.type == tok_string) {
+            return parseStringExp();
+        }
         return nil;
     }
     
     QYExpression* parseExp() {
+        QYExpression *left = parsePrimary();
+        
         return nil;
     }
     
@@ -173,32 +196,7 @@ public:
     }
     
     QYStringExpression* parseStringExp() {
-        //当前是"或'
-        int quote = currentChar;
-        getNextToken();
-        std::string str;
-        //遇到转义字符
-        bool hasEscapeChar = false;
-        while(true) {
-            //上一个是转义字符
-            if (hasEscapeChar) {
-                hasEscapeChar = false;
-                str.push_back(currentChar);
-            }
-            //遇到转义字符
-            else if (currentChar == '\\') {
-                hasEscapeChar = true;
-            }
-            //结束
-            else if (currentChar == quote) {
-                getNextToken();
-                break;
-            } else {
-                str.push_back(currentChar);
-            }
-            getNextToken();
-        }
-        QYStringExpression *strExp = new QYStringExpression(str);
+        QYStringExpression *strExp = new QYStringExpression(currentToken.identifier);
         return strExp;
     }
     
@@ -217,9 +215,10 @@ public:
         return exp;
     }
 
-//    a.b()[3]().c
     //变量或者方法调用
-    QYExpression *parseIdentifierExp(QYExpression *callee) {
+    //比如 a.b()[3]().c，parseIdentifierExp代表开始解析第一个标识符，因为第一个是调用者，没有其他调用者
+    //_parseIdentifierExp代表已经不是第一个标识符了
+    QYExpression *parseIdentifierExp() {
         std::string identifier = currentToken.identifier;
         getNextToken();
         return _parseIdentifierExp(new QYIdentifierExpression(identifier));
@@ -249,7 +248,7 @@ public:
 
         int curChar = currentChar;
         if (curChar == '.' || curChar == '[' || curChar == '(' ) {
-            parseIdentifierExp(expression);
+            _parseIdentifierExp(expression);
         }
         return expression;
     }
