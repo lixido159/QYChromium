@@ -1,0 +1,305 @@
+//
+//  QYExpressionParser.cpp
+//  QYView
+//
+//  Created by yinquan on 2023/9/25.
+//
+
+#include "QYExpressionParser.h"
+#include "QYNumberExpression.h"
+#include "QYStringExpression.h"
+#include "QYIdentifierExpression.h"
+#include "QYFunctionExpression.h"
+#include "QYPropertyAccessExpression.h"
+#include "QYCollectionAccessExpression.h"
+#include "QYQuestionExpression.h"
+#include "QYBinaryExpression.h"
+
+QYExpressionParser::QYExpressionParser(std::string str):mSrc(str) {
+    getNextToken();
+}
+
+int QYExpressionParser::getNextChar() {
+    mCurrentChar = mSrc[++mCurIndex];
+    return mCurrentChar;
+}
+
+int QYExpressionParser::getCurrentInt() {
+    return mCurrentChar - '0';
+}
+
+int QYExpressionParser::getCurrentChar() {
+    return mLastToken.chr;
+}
+
+
+
+void QYExpressionParser::passSpace() {
+    while(isspace(mCurrentChar)) {
+        getNextChar();
+    }
+}
+
+QYToken QYExpressionParser::getNextIdentifier() {
+    std::string identifier;
+    identifier += mCurrentChar;
+    while(isalnum(getNextChar())) {
+        identifier += mCurrentChar;
+    }
+    return {tok_identifier, identifier, 0};
+}
+
+QYToken QYExpressionParser::getNextNumber() {
+    std::string numberStr = std::to_string(getCurrentInt());
+    while(isnumber(getNextChar()) || mCurrentChar == '.') {
+        numberStr += std::to_string(getCurrentInt());
+    }
+    return {tok_number, "", strtod(numberStr.c_str(), nullptr)};
+}
+
+QYToken QYExpressionParser::getNextString() {
+    //单引号还是双引号
+    int quote = mCurrentChar;
+    std::string str;
+    //遇到转义字符
+    bool hasEscapeChar = false;
+    while(true) {
+        //到下一个字符
+        getNextChar();
+        //上一个是转义字符，这个不管是什么都加上
+        if (hasEscapeChar) {
+            hasEscapeChar = false;
+            str.push_back(mCurrentChar);
+        }
+        //遇到转义字符
+        else if (mCurrentChar == '\\') {
+            hasEscapeChar = true;
+        }
+        //结束
+        else if (mCurrentChar == quote) {
+            getNextChar();
+            break;
+        } else {
+            str.push_back(mCurrentChar);
+        }
+    }
+    return {tok_string, "", 0};
+    
+}
+
+QYToken QYExpressionParser::getNextToken() {
+    passSpace();
+    //字母开头
+    if (isalpha(mCurrentChar)) {
+        mLastToken = getNextIdentifier();
+    }
+    //数字开头
+    else if (isdigit(mCurrentChar)) {
+        mLastToken = getNextNumber();
+    }
+    else if (mCurrentChar == '\'' || mCurrentChar == '"') {
+        mLastToken = getNextString();
+    } else if (mCurrentChar == '\0'){
+        mLastToken = {tok_eof, "", 0, mCurrentChar};
+    }
+    //各种符号 + - * / ()等
+    else {
+        mLastToken = {tok_other, "", 0, mCurrentChar};
+        getNextChar();
+    }
+    passSpace();
+    //        printf("打印 %s %lf %c\n", mLastToken.identifier.c_str(), mLastToken.number, mLastToken.chr);
+    return mLastToken;
+};
+
+//括号、标识符、数字、字符串
+//这里代表一个新的解析的开始
+QYExpression* QYExpressionParser::parsePrimary() {
+    if (mLastToken.chr == '(') {
+        return parseParentExp();
+    }
+    else if (mLastToken.type == tok_identifier) {
+        return parseIdentifierExp();
+    }
+    else if (mLastToken.type == tok_number) {
+        return parseNumberExp();
+    }
+    else if (mLastToken.type == tok_string) {
+        return parseStringExp();
+    }
+    return nullptr;
+}
+
+QYExpression* QYExpressionParser::parseExp() {
+    QYExpression *leftExp = parsePrimary();
+    //三目运算符
+    if (mLastToken.chr == '?') {
+        getNextToken();
+        QYExpression *trueExp = parsePrimary();
+        if (mLastToken.chr != ':') {
+            throw "三目运算符错误";
+        }
+        //略过 :
+        getNextToken();
+        QYExpression *falseExp = parsePrimary();
+        return new QYQuestionExpression(leftExp, trueExp, falseExp);
+    }
+    //加减乘除等
+    else if (getOptPrec(OPERATOR(mLastToken.chr)) != 0){
+        return parseBinaryExpression(leftExp, (OPERATOR)mLastToken.chr);
+    }
+    return leftExp;
+}
+
+/// left + cur * right 左边的运算符小于右边的，递归，把右边 cur * right，作为一个表达式返回
+/// left * cur + right 左边的运算符大于右边的，返回当前表示式
+/// left + cur + right 左边的运算符等于右边的，返回当前表达式
+/// - Parameters:
+///   - leftExp: 左边的运算符，上面例子中的xx
+///   - leftOpt: 左边表达式左边的运算符
+QYExpression* QYExpressionParser::parseBinaryExpression(QYExpression *leftExp, OPERATOR leftOpt) {
+    //进入后当前的是 leftOpt
+    int leftPrec = getOptPrec(leftOpt);
+    //略过左边运算符
+    getNextToken();
+    // curExp
+    QYExpression *curExp = parsePrimary();
+    //rightOpt
+    OPERATOR rightOpt = (OPERATOR)mLastToken.chr;
+    int rightPrec = getOptPrec(rightOpt);
+    
+    //右边没有运算符
+    if (rightPrec <= 0) {
+        return new QYBinaryExpression(leftExp, curExp, leftOpt);
+    }
+    //右边优先级小于左边
+    else if (rightPrec <= leftPrec) {
+        return parseBinaryExpression(new QYBinaryExpression(leftExp, curExp, leftOpt), rightOpt);
+    }
+    
+    //右边优先级大于左边, 把cur [opt] right 作为rightExp返回
+    QYExpression *rightExp = parseBinaryExpression(curExp, rightOpt);
+    return new QYBinaryExpression(leftExp, rightExp, leftOpt);
+}
+
+QYExpression* QYExpressionParser::parseNumberExp() {
+    //确定当前是数字了
+    QYNumberExpression *numExp = new QYNumberExpression(mLastToken.number);
+    getNextToken();
+    return numExp;
+}
+
+QYExpression* QYExpressionParser::parseStringExp() {
+    QYStringExpression *strExp = new QYStringExpression(mLastToken.identifier);
+    getNextToken();
+    return strExp;
+}
+
+//  ()的情况，当lastToken.chr确定是(时调用
+QYExpression* QYExpressionParser::parseParentExp() {
+    //略过(
+    getNextToken();
+    //处理完()内的表达式
+    QYExpression *exp = parseExp();//TODO:返回个值
+    if (mLastToken.chr != ')') {
+        throw "()表达式内错误";
+    }
+    //略过)
+    getNextToken();
+    //TODO:返回个值
+    return exp;
+}
+
+//变量或者方法调用
+//比如 a.b()[3]().c，parseIdentifierExp代表开始解析第一个标识符，因为第一个是调用者，没有其他调用者
+//_parseIdentifierExp代表已经不是第一个标识符了
+QYExpression *QYExpressionParser::parseIdentifierExp() {
+    std::string identifier = mLastToken.identifier;
+    getNextToken();
+    return _parseIdentifierExp(new QYIdentifierExpression(identifier));
+}
+
+QYExpression *QYExpressionParser::_parseIdentifierExp(QYExpression *callee) {
+    QYExpression *expression = nullptr;
+    //确定是方法调用了
+    if (mLastToken.chr == '(') {
+        //TODO:返回个值
+        expression = parseFunctionCallExp(callee);
+    }
+    //确定是属性访问
+    else if (mLastToken.chr == '.') {
+        //TODO:返回个值
+        expression = parsePropertyCallExp(callee);
+    }
+    //确定是数组访问
+    else if (mLastToken.chr == '[') {
+        //TODO:返回个值
+        expression = parseArrayAccessExp(callee);
+    }
+    //都不是，那就暂定变量了，后面有其他情况再加
+    else {
+        //TODO:返回个值
+    }
+    
+    int curChar = mLastToken.chr;
+    if (curChar == '.' || curChar == '[' || curChar == '(' ) {
+        _parseIdentifierExp(expression);
+    }
+    return expression;
+}
+
+
+
+
+QYExpression* QYExpressionParser::parseFunctionCallExp(QYExpression *val) {
+    //当前是(
+    getNextToken();
+    std::vector<QYExpression *> args;
+    //如果有参数
+    if(mLastToken.chr != ')') {
+        while(true) {
+            QYExpression *arg = parseExp();
+            if (!arg) {
+                throw "方法参数解析错误";
+            }
+            args.push_back(arg);
+            //调用结束
+            if (mLastToken.chr == ')') {
+                break;
+            }
+            //还有参数，这里应该是, 不然就报错
+            else if (mLastToken.chr != ',') {
+                throw "方法调用参数错误";
+            }
+            //继续读取参数
+            getNextToken();
+        }
+    }
+    QYFunctionExpression *funcExp = new QYFunctionExpression(val, args);
+    //略过)
+    getNextToken();
+    return funcExp;
+}
+
+QYExpression* QYExpressionParser::parsePropertyCallExp(QYExpression *callee) {
+    //当前是.，获取下一个token
+    getNextToken();
+    if (mLastToken.type != tok_identifier) {
+        throw ".调用错误，不是标识符";
+    }
+    QYPropertyAccessExpression *propertyExp = new QYPropertyAccessExpression(callee, mLastToken.identifier);
+    getNextToken();
+    return propertyExp;
+}
+
+QYExpression* QYExpressionParser::parseArrayAccessExp(QYExpression *callee) {
+    //当前是[，略过
+    getNextToken();
+    //解析[]中的表达式
+    QYExpression *index = parseExp();
+    QYCollectionAccessExpression *collectionExp = new QYCollectionAccessExpression(callee, index);
+    //略过]
+    getNextToken();
+    return collectionExp;
+}
+
