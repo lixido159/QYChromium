@@ -55,7 +55,7 @@ void QYJSContext::registerContextGlobalObject() {
     QYJSValue *consoleObj = createGlobalConsoleObject();
     setGlobalJSValue(consoleObj, "console");
     //注册qy全局对象，后面一些方法都设置到这上面
-    setGlobalJSValue(new QYJSValue(this), "qy");
+    setGlobalJSValue(new QYJSValue(this), JSQYVar);
 }
 
 QYJSValue *QYJSContext::createGlobalConsoleObject() {

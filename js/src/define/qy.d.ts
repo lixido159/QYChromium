@@ -1,5 +1,6 @@
-interface QY {
-    entry(): void;
+//Native实现
+interface QYNative {
+    entry(): QYPage;
 }
 
-var qy: QY;
+var qyNative: QYNative;

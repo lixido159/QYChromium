@@ -1,6 +1,9 @@
-import {shout, repeat} from "./lib"
-qy.entry= () =>{
-    console.log("入口执行");
-    shout("咆哮");
+
+import { QYPage } from "./global/page-comp"
+
+function qyEntry(){
+    console.log("进入入口")
+    const page = new QYPage();
+    return page;
 };
-console.log(`入口 ${shout("咆哮")}`);
+qyNative.entry = qyEntry;
