@@ -14,6 +14,8 @@
 #include "include/v8-context.h"
 #include "include/v8-persistent-handle.h"
 
+#define JSQYVar "qyNative"
+
 class QYJSContext {
 public:
     QYJSContext();

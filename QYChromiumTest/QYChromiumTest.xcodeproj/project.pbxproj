@@ -89,7 +89,7 @@
 		C64160D22A8C8FDB0089E110 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C64160D12A8C8FDB0089E110 /* ViewController.m */; };
 		C64160D42A8C8FDC0089E110 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C64160D32A8C8FDC0089E110 /* Assets.xcassets */; };
 		C64160D72A8C8FDC0089E110 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C64160D52A8C8FDC0089E110 /* Main.storyboard */; };
-		C64160D92A8C8FDC0089E110 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = C64160D82A8C8FDC0089E110 /* main.mm */; };
+		C64160D92A8C8FDC0089E110 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C64160D82A8C8FDC0089E110 /* main.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -221,7 +221,7 @@
 		C64160D12A8C8FDB0089E110 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		C64160D32A8C8FDC0089E110 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C64160D62A8C8FDC0089E110 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		C64160D82A8C8FDC0089E110 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		C64160D82A8C8FDC0089E110 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C64160DA2A8C8FDC0089E110 /* QYChromiumTest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QYChromiumTest.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -415,7 +415,7 @@
 				C64160D12A8C8FDB0089E110 /* ViewController.m */,
 				C64160D32A8C8FDC0089E110 /* Assets.xcassets */,
 				C64160D52A8C8FDC0089E110 /* Main.storyboard */,
-				C64160D82A8C8FDC0089E110 /* main.mm */,
+				C64160D82A8C8FDC0089E110 /* main.m */,
 				C64160DA2A8C8FDC0089E110 /* QYChromiumTest.entitlements */,
 				C604EF092A8C9452008DAC8E /* test.html */,
 			);
@@ -602,7 +602,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C64160D22A8C8FDB0089E110 /* ViewController.m in Sources */,
-				C64160D92A8C8FDC0089E110 /* main.mm in Sources */,
+				C64160D92A8C8FDC0089E110 /* main.m in Sources */,
 				C64160CF2A8C8FDB0089E110 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
