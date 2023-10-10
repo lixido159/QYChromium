@@ -34,6 +34,7 @@ void QYPage::executeJS() {
     QYJSValue *qyValue = global->getValue(JSQYVar);
     QYJSValue *pageJSValue = qyValue->getValue("entry")->call(nullptr);
     pageJSValue->getValue("test")->call(nullptr);
+    mPageObj = pageJSValue;
 }
 
 void QYPage::afterExecuteJS() {
