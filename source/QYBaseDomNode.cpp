@@ -71,10 +71,6 @@ void setProperty(std::string key, std::string value, QYBaseView *view) {
         view->mView->setY(std::stoi(value));
     } else if (key == "background-color") {
         unsigned int color = strToColor(value);
-        int r = QYColorRGBA_R(color);
-        int g = QYColorRGBA_G(color);
-        int b = QYColorRGBA_B(color);
-        int a = QYColorRGBA_A(color);
         view->mView->setBackgroundColor(QYColorRGBA_R(color), QYColorRGBA_G(color), QYColorRGBA_B(color), QYColorRGBA_A(color));
     }
 }

@@ -82,6 +82,8 @@
 		27744EB62AC1E65B000B3B29 /* QYQuestionExpression.h in Headers */ = {isa = PBXBuildFile; fileRef = 27744EB42AC1E65B000B3B29 /* QYQuestionExpression.h */; };
 		27744EB92AC1E666000B3B29 /* QYBinaryExpression.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27744EB72AC1E666000B3B29 /* QYBinaryExpression.cpp */; };
 		27744EBA2AC1E666000B3B29 /* QYBinaryExpression.h in Headers */ = {isa = PBXBuildFile; fileRef = 27744EB82AC1E666000B3B29 /* QYBinaryExpression.h */; };
+		27744F0A2AD6FA8D000B3B29 /* QYPropertyValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27744F082AD6FA8D000B3B29 /* QYPropertyValue.cpp */; };
+		27744F0B2AD6FA8D000B3B29 /* QYPropertyValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 27744F092AD6FA8D000B3B29 /* QYPropertyValue.h */; };
 		C604EED52A8C92FA008DAC8E /* QYView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C604EECF2A8C92FA008DAC8E /* QYView.framework */; };
 		C604EED72A8C92FA008DAC8E /* QYView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C604EECF2A8C92FA008DAC8E /* QYView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C604EF0A2A8C9452008DAC8E /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = C604EF092A8C9452008DAC8E /* test.html */; };
@@ -212,6 +214,8 @@
 		27744EB42AC1E65B000B3B29 /* QYQuestionExpression.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYQuestionExpression.h; sourceTree = "<group>"; };
 		27744EB72AC1E666000B3B29 /* QYBinaryExpression.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = QYBinaryExpression.cpp; sourceTree = "<group>"; };
 		27744EB82AC1E666000B3B29 /* QYBinaryExpression.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYBinaryExpression.h; sourceTree = "<group>"; };
+		27744F082AD6FA8D000B3B29 /* QYPropertyValue.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = QYPropertyValue.cpp; sourceTree = "<group>"; };
+		27744F092AD6FA8D000B3B29 /* QYPropertyValue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYPropertyValue.h; sourceTree = "<group>"; };
 		C604EECF2A8C92FA008DAC8E /* QYView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QYView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C604EF092A8C9452008DAC8E /* test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test.html; sourceTree = SOURCE_ROOT; };
 		C64160CA2A8C8FDB0089E110 /* QYChromiumTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QYChromiumTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -268,6 +272,8 @@
 				271B91E72A8CF515003A9D0A /* QYBaseView.h */,
 				271B91D42A8CF515003A9D0A /* QYBaseWidget.cpp */,
 				271B91D92A8CF515003A9D0A /* QYBaseWidget.h */,
+				27744F082AD6FA8D000B3B29 /* QYPropertyValue.cpp */,
+				27744F092AD6FA8D000B3B29 /* QYPropertyValue.h */,
 				271B93112A8CF8CF003A9D0A /* QYEntry.cpp */,
 				271B93102A8CF8CF003A9D0A /* QYEntry.h */,
 				271B93142A8E662F003A9D0A /* QYPage.cpp */,
@@ -450,6 +456,7 @@
 				27744E772AB0AF84000B3B29 /* fileUtil.h in Headers */,
 				27744E9E2AC1DFE4000B3B29 /* QYNumberExpression.h in Headers */,
 				27744EAA2AC1E5C4000B3B29 /* QYFunctionExpression.h in Headers */,
+				27744F0B2AD6FA8D000B3B29 /* QYPropertyValue.h in Headers */,
 				271B91FD2A8CF515003A9D0A /* QYBaseCustomTextView.h in Headers */,
 				271B91FA2A8CF515003A9D0A /* QYXmlParser.h in Headers */,
 				27744E992AC1DE69000B3B29 /* QYToken.h in Headers */,
@@ -583,6 +590,7 @@
 				271B91FB2A8CF515003A9D0A /* QYXmlParser.mm in Sources */,
 				27744E9D2AC1DFE4000B3B29 /* QYNumberExpression.cpp in Sources */,
 				271B92022A8CF515003A9D0A /* QYBaseCustomImageView.mm in Sources */,
+				27744F0A2AD6FA8D000B3B29 /* QYPropertyValue.cpp in Sources */,
 				27744EB12AC1E648000B3B29 /* QYCollectionAccessExpression.cpp in Sources */,
 				27744EA12AC1E2C1000B3B29 /* QYStringExpression.cpp in Sources */,
 				27744EA92AC1E5C4000B3B29 /* QYFunctionExpression.cpp in Sources */,
