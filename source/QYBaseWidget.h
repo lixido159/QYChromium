@@ -6,13 +6,20 @@
 ///负责事件响应，持有view
 class QYBaseWidget {
 public:
-    QYBaseWidget *mParent = nullptr;
-    std::vector<QYBaseWidget *> mChildWidgets;
-    QYBaseView *mView = nullptr;
-    void addChild(QYBaseWidget *child);
+    void addChildWidget(QYBaseWidget *child);
     void setProperty(std::string key, QYPropertyValue *value);
     QYPropertyValue *getProperty(std::string key);
+    
+    std::map<std::string, QYPropertyValue *> getProptyValueMap();
+    QYBaseWidget *getParentWidget();
+    void setParentWidget(QYBaseWidget *parentWidget);
+    
+    void setView(IQYBaseView *view);
+    IQYBaseView* getView();
 private:
-    std::map<std::string, QYPropertyValue *> mPropertyValueMap;
+    std::map<std::string, QYPropertyValue *> mProptyValueMap;
+    QYBaseWidget *mParentWidget = nullptr;
+    std::vector<QYBaseWidget *> mChildWidgets;
+    IQYBaseView *mView = nullptr;
 };
 #endif

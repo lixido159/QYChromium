@@ -6,17 +6,23 @@
 //
 
 #include "QYViewCreateFactory.h"
+#include "QYBaseView.h"
+#include "QYImageView.h"
+#include "QYTextView.h"
 #include "QYBaseCustomView.h"
 #include "QYBaseCustomImageView.h"
 #include "QYBaseCustomTextView.h"
-QYBaseView *createViewWithNodeInfo(QYBaseNodeInfo *info) {
-    QYBaseView *view = new QYBaseView;
+IQYBaseView *createViewWithNodeInfo(QYBaseNodeInfo *info) {
+    IQYBaseView *view;
     if (info->name.compare("text")) {
-        view->mView = new QYBaseCustomImageView();
+        view = new QYBaseView;
+        view->setCustomView(new QYBaseCustomImageView());
     } else if(info->name.compare("image")) {
-        view->mView = new QYBaseCustomImageView();
+        view = new QYImageView;
+        view->setCustomView(new QYBaseCustomImageView());
     } else {//view
-        view->mView = new QYBaseCustomView();
+        view = new QYTextView;
+        view->setCustomView(new QYBaseCustomView());
     }
     return view;
 }

@@ -13,6 +13,7 @@
 #define nativeView toNativeView(mNativeView)
 
 
+
 QYBaseCustomView::QYBaseCustomView() {
     mNativeView = (__bridge_retained void *)[[NSView alloc] init];
 }
@@ -35,9 +36,9 @@ void QYBaseCustomView::setSize(float width, float height){
 void QYBaseCustomView::setRect(float x, float y, float width, float height){
     [nativeView setFrame:CGRectMake(x, y, width, height)];
 }
-void QYBaseCustomView::setBackgroundColor(int r, int g, int b, int a){
+void QYBaseCustomView::setBackgroundColor(QY_Color color){
     nativeView.wantsLayer = YES;
-    nativeView.layer.backgroundColor = [NSColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a/255.0].CGColor;
+    nativeView.layer.backgroundColor = [NSColor colorWithRed:color.r/255.0 green:color.g/255.0 blue:color.b/255.0 alpha:color.a/255.0].CGColor;
 }
 void QYBaseCustomView::addChildView(IQYBaseCustomBaseView *view){
     [nativeView addSubview:toNativeView(view->getNativeView())];

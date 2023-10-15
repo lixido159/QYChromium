@@ -8,7 +8,7 @@
 #include "QYPropertyValue.h"
 #include <regex>
 #include "QYExpressionParser.h"
-QYPropertyValue::QYPropertyValue(std::string src):mSrc(src) {
+QYPropertyValue::QYPropertyValue(std::string key, std::string src):mKey(key), mSrc(src) {
     mExp = parseSrc(src);
 }
 
@@ -31,4 +31,18 @@ QYExpression *QYPropertyValue::parseSrc(std::string src) {
     }
 }
 
+double QYPropertyValue::getNumberValue() {
+    return mExp->getNumberValue();
+}
 
+std::string QYPropertyValue::getStringValue() {
+    return mExp->getStringValue();
+}
+
+bool QYPropertyValue::getBoolValue() {
+    return mExp->getBoolValue();
+}
+
+std::string QYPropertyValue::getKey() {
+    return mKey;
+}

@@ -18,6 +18,8 @@ public:
     virtual double getNumberValue() = 0;
     virtual std::string getStringValue() = 0;
     virtual bool getBoolValue() = 0;
+    //区分identifierExp是表达式还是固定值 red和{{ red }}
+    bool isMustache = false;
 };
 
 

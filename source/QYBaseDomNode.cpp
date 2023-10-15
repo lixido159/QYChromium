@@ -24,7 +24,7 @@ void QYBaseDomNode::performExpandNodeTree() {
 void QYBaseDomNode::performExpandWidgetTree() {
     mWidget = new QYBaseWidget;
     if (mParent) {
-        mParent->mWidget->addChild(mWidget);
+        mParent->mWidget->addChildWidget(mWidget);
     }
     for(QYBaseDomNode *node : mChildNodeList) {
         node->performExpandWidgetTree();
@@ -32,53 +32,21 @@ void QYBaseDomNode::performExpandWidgetTree() {
 }
 
 void QYBaseDomNode::performExpandWidgetViewTree() {
-    QYBaseView *view = createViewWithNodeInfo(mNodeInfo);
-    mWidget->mView = view;
-    if (mWidget->mParent) {
-        mWidget->mParent->mView->addChild(view);
+    IQYBaseView *view = createViewWithNodeInfo(mNodeInfo);
+    mWidget->setView(view);
+    if (mWidget->getParentWidget()) {
+        mWidget->getParentWidget()->getView()->addChildView(view);
     }
     for(QYBaseDomNode *node : mChildNodeList) {
         node->performExpandWidgetViewTree();
     }
 }
 
-unsigned int strToColor(std::string str) {
-    if (str == "red") {
-        return QYColor(255, 0, 0, 255);
-    } else if (str == "black") {
-        return QYColor(0, 0, 0, 255);
-    } else if (str == "green") {
-        return QYColor(0, 255, 0, 255);
-    } else if (str == "blue") {
-        return QYColor(0, 0, 255, 255);
-    } else if (str == "yellow") {
-        return QYColor(255, 255, 0, 255);
-    } else if (str == "gray") {
-        return QYColor(128, 128, 128, 255);
-    } else {
-        return QYColor(255, 255, 255, 255);
-    }
-}
-
-void setProperty(std::string key, std::string value, QYBaseView *view) {
-    if (key == "width") {
-        view->mView->setWidth(std::stoi(value));
-    } else if (key == "height") {
-        view->mView->setHeight(std::stoi(value));
-    } else if (key == "left") {
-        view->mView->setX(std::stoi(value));
-    } else if (key == "top") {
-        view->mView->setY(std::stoi(value));
-    } else if (key == "background-color") {
-        unsigned int color = strToColor(value);
-        view->mView->setBackgroundColor(QYColorRGBA_R(color), QYColorRGBA_G(color), QYColorRGBA_B(color), QYColorRGBA_A(color));
-    }
-}
-
 void QYBaseDomNode::performApplyWidgetViewTreeProperties() {
     std::map<std::string, std::string>::iterator iter;
     for (iter = mNodeInfo->properties.begin(); iter != mNodeInfo->properties.end(); iter++) {
-        setProperty(iter->first, iter->second, mWidget->mView);
+        QYPropertyValue *proptyValue = new QYPropertyValue(iter->first, iter->second);
+        mWidget->setProperty(iter->first, proptyValue);
     }
     for(QYBaseDomNode *node : mChildNodeList) {
         node->performApplyWidgetViewTreeProperties();
@@ -87,7 +55,7 @@ void QYBaseDomNode::performApplyWidgetViewTreeProperties() {
 
 
 void *QYBaseDomNode::getNativeView() {
-    return mWidget->mView->mView->mNativeView;
+    return mWidget->getView()->getCustomView()->getNativeView();
 }
 
 
