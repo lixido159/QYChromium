@@ -9,6 +9,14 @@
 #define QYBaseCustomBaseView_hpp
 
 #include <stdio.h>
+
+struct QY_Color {
+    int r;
+    int g;
+    int b;
+    int a;
+};
+
 class IQYBaseCustomBaseView {
 public:
     virtual void setX(float x) = 0;
@@ -17,7 +25,7 @@ public:
     virtual void setHeight(float height) = 0;
     virtual void setSize(float width, float height) = 0;
     virtual void setRect(float x, float y, float width, float height) = 0;
-    virtual void setBackgroundColor(int r, int g, int b, int a) = 0;
+    virtual void setBackgroundColor(QY_Color color) = 0;
     virtual void addChildView(IQYBaseCustomBaseView *view) = 0;
     virtual void *getNativeView() = 0;
     

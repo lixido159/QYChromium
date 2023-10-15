@@ -8,8 +8,8 @@
 #ifndef QYViewCreateFactory_hpp
 #define QYViewCreateFactory_hpp
 
-#include "QYBaseView.h"
+#include "IQYBaseView.h"
 #include "QYBaseNodeInfo.h"
-QYBaseView *createViewWithNodeInfo(QYBaseNodeInfo *info);
+IQYBaseView *createViewWithNodeInfo(QYBaseNodeInfo *info);
 
 #endif /* QYViewCreateFactory_hpp */

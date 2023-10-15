@@ -108,7 +108,6 @@ QYToken QYExpressionParser::getNextToken() {
         getNextChar();
     }
     passSpace();
-    //        printf("打印 %s %lf %c\n", mLastToken.identifier.c_str(), mLastToken.number, mLastToken.chr);
     return mLastToken;
 };
 
@@ -238,7 +237,7 @@ QYExpression *QYExpressionParser::_parseIdentifierExp(QYExpression *callee) {
     }
     //都不是，那就暂定变量了，后面有其他情况再加
     else {
-        //TODO:返回个值
+        expression = callee;
     }
     
     int curChar = mLastToken.chr;

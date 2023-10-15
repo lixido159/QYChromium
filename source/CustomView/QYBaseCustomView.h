@@ -9,7 +9,7 @@
 #define QYBaseCustomView_hpp
 
 #include <stdio.h>
-#include "QYBaseCustomBaseView.h"
+#include "IQYBaseCustomBaseView.h"
 
 class QYBaseCustomView : public IQYBaseCustomBaseView{
 public:
@@ -19,7 +19,7 @@ public:
     virtual void setHeight(float height) override;
     virtual void setSize(float width, float height) override;
     virtual void setRect(float x, float y, float width, float height) override;
-    virtual void setBackgroundColor(int r, int g, int b, int a) override;
+    virtual void setBackgroundColor(QY_Color color) override;
     virtual void addChildView(IQYBaseCustomBaseView *view) override;
     virtual void *getNativeView() override;
     QYBaseCustomView();
