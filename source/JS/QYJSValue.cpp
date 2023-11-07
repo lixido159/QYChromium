@@ -62,19 +62,22 @@ QYJSContext * QYJSValue::getContext() {
 }
 
 QYJSValue *QYJSValue::call(QYJSValue *args) {
+    return call(std::vector{args});
+}
+
+QYJSValue *QYJSValue::call(std::vector<QYJSValue *> args) {
     ExecuteJS(mJsContext->ToLocal());
     v8::Local<v8::Value> value = ToLocal();
     if (!value->IsFunction()) {
         return nullptr;
     }
     v8::Local<v8::Object> obj = value->ToObject(contextLocal).ToLocalChecked();
-    v8::Local<v8::Value> argv[args->length()];
-    for (int i=0 ;i<args->length(); i++) {
-        argv[i] = args->getValue(i)->ToLocal();
+    v8::Local<v8::Value> argv[args.size()];
+    for (int i=0 ; i<args.size(); i++) {
+        argv[i] = args[0]->ToLocal();
     }
-    v8::Local<v8::Value> retValue = obj->CallAsFunction(contextLocal, contextLocal->Global(), args->length(), argv).ToLocalChecked();
+    v8::Local<v8::Value> retValue = obj->CallAsFunction(contextLocal, contextLocal->Global(), args.size(), argv).ToLocalChecked();
     return new QYJSValue(mJsContext, retValue);
-    
 }
 
 void QYJSValue::setFunction(const char *name, const std::function<QYJSValue *(QYJSContext *, QYJSValue*)>& handler) {

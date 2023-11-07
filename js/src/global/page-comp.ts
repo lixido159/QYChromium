@@ -9,6 +9,12 @@ abstract class IComponent {
     abstract setData(key: string, value: any);
 }
 
+export class QYData {
+    update(key: string, value: any) {
+
+    }
+}
+
 //页面
 export class QYPage extends IComponent {
     constructor() {

@@ -21,7 +21,7 @@ public:
 private:
     QYBaseDomNode *mRootNode = nullptr;
     QYJSContext *mJSContext = nullptr;
-    QYJSValue *mPageObj = nullptr;
+    QYJSValue *mPageData = nullptr;
     std::string mJSStr;
 };
 

@@ -21,8 +21,9 @@ public:
     v8::Local<v8::Value> ToLocal();
     v8::Local<v8::Object> ToLocalObject();
     QYJSContext * getContext();
-    
+    //args必须是个数组
     QYJSValue *call(QYJSValue *args);
+    QYJSValue *call(std::vector<QYJSValue *> args);
 public:
     int length();
     bool has(const char *key);
@@ -60,7 +61,6 @@ public:
 private:
     ~QYJSValue();
     v8::Persistent<v8::Value> mJsValue;
-    v8::Isolate *mIsolate;
     QYJSContext *mJsContext  = nullptr;
 };
 
