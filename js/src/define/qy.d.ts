@@ -1,6 +1,6 @@
 //Native实现
 interface QYNative {
-    entry(): QYPage;
+    entry(data: QYData): QYPage;
 }
 
 var qyNative: QYNative;

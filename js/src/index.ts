@@ -1,9 +1,8 @@
 
-import { QYPage } from "./global/page-comp"
+import { QYData, QYPage } from "./global/page-comp"
 
-function qyEntry(){
-    console.log("进入入口")
-    const page = new QYPage();
-    return page;
+function qyEntry(data: QYData){
+    console.log("进入入口" + data);
+    data.update("name", "yinquan");
 };
 qyNative.entry = qyEntry;

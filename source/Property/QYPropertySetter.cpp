@@ -46,6 +46,7 @@ void proptyFunc_View_Width(IQYBaseView *view, QYPropertyValue *propValue) {
 };
 
 
+//在这里新增属性方法
 QYPropertySetter::QYPropertySetter() {
     mPropFuncMap.insert(std::pair("background-color", &proptyFunc_View_BackgroundColor));
     mPropFuncMap.insert(std::pair("width", &proptyFunc_View_Width));

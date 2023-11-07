@@ -28,14 +28,23 @@ void QYPage::beforeExecuteJS() {
     
 }
 
+void registerDataInterface(QYJSValue *data) {
+    data->setFunction("update", [](QYJSContext *context, QYJSValue *paramsValue)->QYJSValue * {
+        printf("%s: %s", paramsValue->getValue(0)->toString().c_str(), paramsValue->getValue(1)->toString().c_str());
+        return nullptr;
+    });
+}
+
 void QYPage::executeJS() {
     mJSContext->executeJS(mJSStr.c_str());
     QYJSValue *global = mJSContext->getGlobal();
     QYJSValue *qyValue = global->getValue(JSQYVar);
-    QYJSValue *pageJSValue = qyValue->getValue("entry")->call(nullptr);
-    pageJSValue->getValue("test")->call(nullptr);
-    mPageObj = pageJSValue;
+    mPageData = mJSContext->newObject();
+    registerDataInterface(mPageData);
+    qyValue->getValue("entry")->call(mPageData);
+    
 }
+
 
 void QYPage::afterExecuteJS() {
     
