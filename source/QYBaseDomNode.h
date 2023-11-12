@@ -3,12 +3,14 @@
 #define QYBaseDomNode_hpp
 #import "CommonHeader.h"
 #import "QYBaseNodeInfo.h"
-
+#include "IQYPropertyValueObserver.h"
+#include "QYPageCompContext.h"
 class QYBaseWidget;
 ///抽象的DomTree节点
-class QYBaseDomNode {
+class QYBaseDomNode : public IQYPropertyValueObserver, public std::enable_shared_from_this<QYBaseDomNode>  {
 public:
     QYBaseDomNode(QYBaseNodeInfo *info);
+    QYBaseDomNode(QYBaseNodeInfo *info, std::shared_ptr<QYPageCompContext> context);
     std::vector<QYBaseDomNode *> mChildNodeList;
     QYBaseDomNode *mParent = nullptr;
     QYBaseNodeInfo *mNodeInfo = nullptr;
@@ -25,6 +27,13 @@ public:
     void performApplyWidgetViewTreeProperties();
     
     void *getNativeView();
+
+    void setContext(std::shared_ptr<QYPageCompContext> context);
+    
+public:
+    void onDataUpdate(QYPropertyValue *value) override;
+private:
+    std::shared_ptr<QYPageCompContext> mContext;
     
 };
 

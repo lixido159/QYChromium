@@ -19,6 +19,7 @@ public:
 
 private:
     std::string mSrc;
+    bool mIsMustache = false;
     int mCurIndex = -1;
     //只能在getNextToken时使用
     int mCurrentChar = ' ';

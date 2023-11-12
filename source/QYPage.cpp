@@ -8,6 +8,8 @@
 #include "QYPage.h"
 QYPage::QYPage(QYBaseDomNode *rootNode, std::string jsStr):mRootNode(rootNode), mJSStr(jsStr) {
     mJSContext = new QYJSContext();
+    mPageContext.reset(new QYPageCompContext());
+    rootNode->setContext(mPageContext);
 }
 
 QYPage::~QYPage() {
@@ -28,9 +30,9 @@ void QYPage::beforeExecuteJS() {
     
 }
 
-void registerDataInterface(QYJSValue *data) {
-    data->setFunction("update", [](QYJSContext *context, QYJSValue *paramsValue)->QYJSValue * {
-        printf("%s: %s", paramsValue->getValue(0)->toString().c_str(), paramsValue->getValue(1)->toString().c_str());
+void QYPage::registerDataInterface() {
+    mPageData->setFunction("update", [this](QYJSContext *context, QYJSValue *paramsValue)->QYJSValue * {
+        mPageContext->notifyDataUpdate();
         return nullptr;
     });
 }
@@ -40,9 +42,8 @@ void QYPage::executeJS() {
     QYJSValue *global = mJSContext->getGlobal();
     QYJSValue *qyValue = global->getValue(JSQYVar);
     mPageData = mJSContext->newObject();
-    registerDataInterface(mPageData);
+    registerDataInterface();
     qyValue->getValue("entry")->call(mPageData);
-    
 }
 
 
