@@ -15,7 +15,20 @@
 #include "QYQuestionExpression.h"
 #include "QYBinaryExpression.h"
 
+const std::string MUSTACHE_START = "{{";
+const std::string MUSTACHE_END = "}}";
+
 QYExpressionParser::QYExpressionParser(std::string str):mSrc(str) {
+    size_t startIndex = mSrc.find(MUSTACHE_START);
+    size_t endIndex = mSrc.find(MUSTACHE_END);
+    if (startIndex == std::string::npos || endIndex == std::string::npos) {
+        
+    } else {
+        size_t realStart = startIndex + MUSTACHE_START.length();
+        size_t len = endIndex - realStart;
+        mSrc = mSrc.substr(realStart, len);
+        mIsMustache = true;
+    }
     getNextToken();
 }
 
@@ -131,6 +144,7 @@ QYExpression* QYExpressionParser::parsePrimary() {
 
 QYExpression* QYExpressionParser::parseExp() {
     QYExpression *leftExp = parsePrimary();
+    QYExpression *retExp = leftExp;
     //三目运算符
     if (mLastToken.chr == '?') {
         getNextToken();
@@ -141,13 +155,14 @@ QYExpression* QYExpressionParser::parseExp() {
         //略过 :
         getNextToken();
         QYExpression *falseExp = parsePrimary();
-        return new QYQuestionExpression(leftExp, trueExp, falseExp);
+        retExp = new QYQuestionExpression(leftExp, trueExp, falseExp);
     }
     //加减乘除等
     else if (getOptPrec(OPERATOR(mLastToken.chr)) != 0){
-        return parseBinaryExpression(leftExp, (OPERATOR)mLastToken.chr);
+        retExp = parseBinaryExpression(leftExp, (OPERATOR)mLastToken.chr);
     }
-    return leftExp;
+    retExp->isMustache = mIsMustache;
+    return retExp;
 }
 
 /// left + cur * right 左边的运算符小于右边的，递归，把右边 cur * right，作为一个表达式返回

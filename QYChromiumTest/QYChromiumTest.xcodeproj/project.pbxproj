@@ -58,6 +58,10 @@
 		271B93302A95142E003A9D0A /* QYFunction.h in Headers */ = {isa = PBXBuildFile; fileRef = 271B932F2A95142E003A9D0A /* QYFunction.h */; };
 		271B93332A9A1534003A9D0A /* QYModuleLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 271B93312A9A1534003A9D0A /* QYModuleLoader.cpp */; };
 		271B93342A9A1534003A9D0A /* QYModuleLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 271B93322A9A1534003A9D0A /* QYModuleLoader.h */; };
+		273679682AFBDF2C007067EF /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = 273679672AFBDF2C007067EF /* test.html */; };
+		2736796A2AFBEE13007067EF /* IQYPropertyValueObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 273679692AFBEE13007067EF /* IQYPropertyValueObserver.h */; };
+		2736796D2AFD0529007067EF /* QYPageCompContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2736796B2AFD0529007067EF /* QYPageCompContext.cpp */; };
+		2736796E2AFD0529007067EF /* QYPageCompContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 2736796C2AFD0529007067EF /* QYPageCompContext.h */; };
 		27744E762AB0AF84000B3B29 /* fileUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27744E742AB0AF84000B3B29 /* fileUtil.cpp */; };
 		27744E772AB0AF84000B3B29 /* fileUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 27744E752AB0AF84000B3B29 /* fileUtil.h */; };
 		27744E902AC1DCDD000B3B29 /* QYExpression.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27744E8E2AC1DCDD000B3B29 /* QYExpression.cpp */; };
@@ -97,7 +101,6 @@
 		27744F232ADBEC8C000B3B29 /* IQYBaseView.h in Headers */ = {isa = PBXBuildFile; fileRef = 27744F222ADBEC8C000B3B29 /* IQYBaseView.h */; };
 		C604EED52A8C92FA008DAC8E /* QYView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C604EECF2A8C92FA008DAC8E /* QYView.framework */; };
 		C604EED72A8C92FA008DAC8E /* QYView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C604EECF2A8C92FA008DAC8E /* QYView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C604EF0A2A8C9452008DAC8E /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = C604EF092A8C9452008DAC8E /* test.html */; };
 		C64160CF2A8C8FDB0089E110 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C64160CE2A8C8FDB0089E110 /* AppDelegate.m */; };
 		C64160D22A8C8FDB0089E110 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C64160D12A8C8FDB0089E110 /* ViewController.m */; };
 		C64160D42A8C8FDC0089E110 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C64160D32A8C8FDC0089E110 /* Assets.xcassets */; };
@@ -201,6 +204,10 @@
 		271B932F2A95142E003A9D0A /* QYFunction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYFunction.h; sourceTree = "<group>"; };
 		271B93312A9A1534003A9D0A /* QYModuleLoader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = QYModuleLoader.cpp; sourceTree = "<group>"; };
 		271B93322A9A1534003A9D0A /* QYModuleLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYModuleLoader.h; sourceTree = "<group>"; };
+		273679672AFBDF2C007067EF /* test.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = test.html; path = ../js/src/test.html; sourceTree = "<group>"; };
+		273679692AFBEE13007067EF /* IQYPropertyValueObserver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IQYPropertyValueObserver.h; sourceTree = "<group>"; };
+		2736796B2AFD0529007067EF /* QYPageCompContext.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = QYPageCompContext.cpp; sourceTree = "<group>"; };
+		2736796C2AFD0529007067EF /* QYPageCompContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYPageCompContext.h; sourceTree = "<group>"; };
 		27744E742AB0AF84000B3B29 /* fileUtil.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fileUtil.cpp; sourceTree = "<group>"; };
 		27744E752AB0AF84000B3B29 /* fileUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fileUtil.h; sourceTree = "<group>"; };
 		27744E8E2AC1DCDD000B3B29 /* QYExpression.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = QYExpression.cpp; sourceTree = "<group>"; };
@@ -297,6 +304,8 @@
 				271B93102A8CF8CF003A9D0A /* QYEntry.h */,
 				271B93142A8E662F003A9D0A /* QYPage.cpp */,
 				271B93152A8E662F003A9D0A /* QYPage.h */,
+				2736796B2AFD0529007067EF /* QYPageCompContext.cpp */,
+				2736796C2AFD0529007067EF /* QYPageCompContext.h */,
 				271B91D52A8CF515003A9D0A /* QYTest.cpp */,
 				271B91D32A8CF515003A9D0A /* QYTest.h */,
 				271B91DA2A8CF515003A9D0A /* QYViewCreateFactory.cpp */,
@@ -416,6 +425,7 @@
 			children = (
 				27744F082AD6FA8D000B3B29 /* QYPropertyValue.cpp */,
 				27744F092AD6FA8D000B3B29 /* QYPropertyValue.h */,
+				273679692AFBEE13007067EF /* IQYPropertyValueObserver.h */,
 				27744F0D2AD83C26000B3B29 /* QYPropertySetter.cpp */,
 				27744F0E2AD83C26000B3B29 /* QYPropertySetter.h */,
 				27744F112AD83D0E000B3B29 /* QYImageViewPropertySetter.cpp */,
@@ -443,6 +453,7 @@
 		C64160C12A8C8FDB0089E110 = {
 			isa = PBXGroup;
 			children = (
+				273679672AFBDF2C007067EF /* test.html */,
 				271B92152A8CF549003A9D0A /* Config.xcconfig */,
 				271B91EA2A8CF515003A9D0A /* libs */,
 				271B91D22A8CF515003A9D0A /* source */,
@@ -490,6 +501,7 @@
 				271B91F62A8CF515003A9D0A /* QYBaseDomNode.h in Headers */,
 				27744F232ADBEC8C000B3B29 /* IQYBaseView.h in Headers */,
 				27744EA22AC1E2C1000B3B29 /* QYStringExpression.h in Headers */,
+				2736796E2AFD0529007067EF /* QYPageCompContext.h in Headers */,
 				27744F1D2ADBE9DE000B3B29 /* QYImageView.h in Headers */,
 				27744F142AD83D0E000B3B29 /* QYImageViewPropertySetter.h in Headers */,
 				27744F212ADBEBD2000B3B29 /* QYTextView.h in Headers */,
@@ -499,6 +511,7 @@
 				27744E952AC1DD76000B3B29 /* QYExpressionParser.h in Headers */,
 				271B92052A8CF515003A9D0A /* QYBaseView.h in Headers */,
 				271B91FF2A8CF515003A9D0A /* IQYBaseCustomBaseView.h in Headers */,
+				2736796A2AFBEE13007067EF /* IQYPropertyValueObserver.h in Headers */,
 				27744E912AC1DCDD000B3B29 /* QYExpression.h in Headers */,
 				271B91F82A8CF515003A9D0A /* QYBaseWidget.h in Headers */,
 				27744EB22AC1E648000B3B29 /* QYCollectionAccessExpression.h in Headers */,
@@ -617,7 +630,7 @@
 			files = (
 				C64160D42A8C8FDC0089E110 /* Assets.xcassets in Resources */,
 				C64160D72A8C8FDC0089E110 /* Main.storyboard in Resources */,
-				C604EF0A2A8C9452008DAC8E /* test.html in Resources */,
+				273679682AFBDF2C007067EF /* test.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -644,6 +657,7 @@
 				27744F202ADBEBD2000B3B29 /* QYTextView.cpp in Sources */,
 				271B93212A8E7B84003A9D0A /* QYJSValue.cpp in Sources */,
 				271B93332A9A1534003A9D0A /* QYModuleLoader.cpp in Sources */,
+				2736796D2AFD0529007067EF /* QYPageCompContext.cpp in Sources */,
 				271B91F52A8CF515003A9D0A /* QYBaseView.cpp in Sources */,
 				271B91FB2A8CF515003A9D0A /* QYXmlParser.mm in Sources */,
 				27744E9D2AC1DFE4000B3B29 /* QYNumberExpression.cpp in Sources */,

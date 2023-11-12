@@ -9,6 +9,7 @@
 #define QYPage_hpp
 #include "QYBaseDomNode.h"
 #include "QYJSContext.h"
+#include "QYPageCompContext.h"
 class QYPage {
 public:
     QYPage(QYBaseDomNode *rootNode, std::string jsStr);
@@ -19,6 +20,9 @@ public:
     void executeJS();
     void afterExecuteJS();
 private:
+    void registerDataInterface();
+    
+    std::shared_ptr<QYPageCompContext> mPageContext;
     QYBaseDomNode *mRootNode = nullptr;
     QYJSContext *mJSContext = nullptr;
     QYJSValue *mPageData = nullptr;
