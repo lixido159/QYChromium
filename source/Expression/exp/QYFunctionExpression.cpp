@@ -8,15 +8,15 @@
 #include "QYFunctionExpression.h"
 QYFunctionExpression::QYFunctionExpression(QYExpression *val, std::vector<QYExpression *> args): mVal(val), mArgs(args){};
 
-double QYFunctionExpression::getNumberValue(IQYExpressionContext *expContext) {
+double QYFunctionExpression::getNumberValue(QYExpressionContext *expContext) {
     return 0;
 }
 
-std::string QYFunctionExpression::getStringValue(IQYExpressionContext *expContext) {
+std::string QYFunctionExpression::getStringValue(QYExpressionContext *expContext) {
     return "";
 }
 
-bool QYFunctionExpression::getBoolValue(IQYExpressionContext *expContext) {
+bool QYFunctionExpression::getBoolValue(QYExpressionContext *expContext) {
     return false;
 }
 

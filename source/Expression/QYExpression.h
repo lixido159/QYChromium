@@ -11,13 +11,13 @@
 #include <stdio.h>
 #include <string>
 #include "QYToken.h"
-#include "IQYExpressionContext.h"
+#include "QYExpressionContext.h"
 
 class QYExpression {
 public:
-    virtual double getNumberValue(IQYExpressionContext *expContext) = 0;
-    virtual std::string getStringValue(IQYExpressionContext *expContext) = 0;
-    virtual bool getBoolValue(IQYExpressionContext *expContext) = 0;
+    virtual double getNumberValue(QYExpressionContext *expContext) = 0;
+    virtual std::string getStringValue(QYExpressionContext *expContext) = 0;
+    virtual bool getBoolValue(QYExpressionContext *expContext) = 0;
     //区分identifierExp是表达式还是固定值 red和{{ red }}
     bool isMustache = false;
 };

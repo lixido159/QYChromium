@@ -16,15 +16,15 @@ public:
     QYExpression *mCallee;
     //数组、字典都有可能
     QYExpression *mIndex;
-    virtual double getNumberValue(IQYExpressionContext *expContext) override {
+    virtual double getNumberValue(QYExpressionContext *expContext) override {
         return 0;
     }
     
-    virtual std::string getStringValue(IQYExpressionContext *expContext) override {
+    virtual std::string getStringValue(QYExpressionContext *expContext) override {
         return "";
     }
     
-    virtual bool getBoolValue(IQYExpressionContext *expContext) override {
+    virtual bool getBoolValue(QYExpressionContext *expContext) override {
         return false;
     }
 };

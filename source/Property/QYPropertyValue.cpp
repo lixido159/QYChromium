@@ -8,8 +8,12 @@
 #include "QYPropertyValue.h"
 #include <regex>
 #include "QYExpressionParser.h"
-QYPropertyValue::QYPropertyValue(std::string key, std::string src, std::shared_ptr<IQYExpressionContext> context):mKey(key), mSrc(src), mExpContext(context) {
+QYPropertyValue::QYPropertyValue(std::string key, std::string src, std::shared_ptr<IQYExpDataContext> dataContext):mKey(key), mSrc(src), mDataContext(dataContext) {
     mExp = parseSrc(src);
+}
+
+QYPropertyValue::~QYPropertyValue() {
+    
 }
 
 QYExpression *QYPropertyValue::parseSrc(std::string src) {
@@ -19,24 +23,32 @@ QYExpression *QYPropertyValue::parseSrc(std::string src) {
 }
 
 
-
 double QYPropertyValue::getNumberValue() {
     if (!mFinalValue) {
-        mFinalValue = std::make_unique<QYPropertyFinalValue>(mExp->getNumberValue(mExpContext.get()));
+        std::unique_ptr<QYExpressionContext> expContext = std::make_unique<QYExpressionContext>(mDataContext, [](std::string key)->void {
+            
+        });
+        mFinalValue = std::make_unique<QYPropertyFinalValue>(mExp->getNumberValue(expContext.get()));
     }
     return mFinalValue->getNumberValue();
 }
 
 std::string QYPropertyValue::getStringValue() {
     if (!mFinalValue) {
-        mFinalValue = std::make_unique<QYPropertyFinalValue>(mExp->getStringValue(mExpContext.get()));
+        std::unique_ptr<QYExpressionContext> expContext = std::make_unique<QYExpressionContext>(mDataContext, [](std::string key)->void {
+            
+        });
+        mFinalValue = std::make_unique<QYPropertyFinalValue>(mExp->getStringValue(expContext.get()));
     }
     return mFinalValue->getStringValue();
 }
 
 bool QYPropertyValue::getBoolValue() {
     if (!mFinalValue) {
-        mFinalValue = std::make_unique<QYPropertyFinalValue>(mExp->getBoolValue(mExpContext.get()));
+        std::unique_ptr<QYExpressionContext> expContext = std::make_unique<QYExpressionContext>(mDataContext, [](std::string key)->void {
+            
+        });
+        mFinalValue = std::make_unique<QYPropertyFinalValue>(mExp->getBoolValue(expContext.get()));
     }
     return mFinalValue->getBoolValue();
 }

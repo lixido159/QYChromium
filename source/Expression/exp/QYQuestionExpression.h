@@ -13,15 +13,15 @@
 class QYQuestionExpression : public QYExpression {
 public:
     QYQuestionExpression(QYExpression *questionExp, QYExpression *trueExp, QYExpression *falseExp);
-    virtual double getNumberValue(IQYExpressionContext *expContext) override;
-    virtual std::string getStringValue(IQYExpressionContext *expContext) override;
-    virtual bool getBoolValue(IQYExpressionContext *expContext) override;
+    virtual double getNumberValue(QYExpressionContext *expContext) override;
+    virtual std::string getStringValue(QYExpressionContext *expContext) override;
+    virtual bool getBoolValue(QYExpressionContext *expContext) override;
 
 private:
     QYExpression *mQuestionExp;
     QYExpression *mTrueExp;
     QYExpression *mFalseExp;
-    bool getQuestionBool(IQYExpressionContext *expContext);
+    bool getQuestionBool(QYExpressionContext *expContext);
 };
 
 #endif /* QYQuestionExpression_hpp */

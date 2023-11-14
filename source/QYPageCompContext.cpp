@@ -37,12 +37,21 @@ void QYPageCompContext::registerDataInterface(QYJSValue *dataValue) {
 }
 
 bool QYPageCompContext::getBoolForKey(std::string key) {
-    return mData[key]->toBoolean();
+    if (mData.find(key) != mData.end()) {
+        return mData[key]->toBoolean();
+    }
+    return false;
 }
 std::string QYPageCompContext::getStringForKey(std::string key) {
-    return mData[key]->toString();
+    if (mData.find(key) != mData.end()) {
+        return mData[key]->toString();
+    }
+    return "";
 }
 double QYPageCompContext::getNumberForKey(std::string key) {
-    return mData[key]->toNumber();
+    if (mData.find(key) != mData.end()) {
+        return mData[key]->toNumber();
+    }
+    return 0;
 }
 

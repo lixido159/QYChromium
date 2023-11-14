@@ -10,7 +10,7 @@
 QYBinaryExpression::QYBinaryExpression( QYExpression *leftExp, QYExpression *rightExp, OPERATOR opt):mLeftExp(leftExp), mRightExp(rightExp), mOpt(opt){};
 
 
-double QYBinaryExpression::getNumberValue(IQYExpressionContext *expContext){
+double QYBinaryExpression::getNumberValue(QYExpressionContext *expContext){
     switch(mOpt) {
         case opt_add:
             return mLeftExp->getNumberValue(expContext) + mRightExp->getNumberValue(expContext);
@@ -27,10 +27,10 @@ double QYBinaryExpression::getNumberValue(IQYExpressionContext *expContext){
     return mLeftExp->getNumberValue(expContext);
 }
 
-std::string QYBinaryExpression::getStringValue(IQYExpressionContext *expContext) {
+std::string QYBinaryExpression::getStringValue(QYExpressionContext *expContext) {
     return "";
 }
 
-bool QYBinaryExpression::getBoolValue(IQYExpressionContext *expContext) {
+bool QYBinaryExpression::getBoolValue(QYExpressionContext *expContext) {
     return getNumberValue(expContext) > 0;
 }

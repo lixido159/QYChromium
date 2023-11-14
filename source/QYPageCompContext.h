@@ -10,10 +10,10 @@
 class QYPropertyValue;
 #include <stdio.h>
 #include "CommonHeader.h"
-#include "IQYExpressionContext.h"
+#include "IQYExpDataContext.h"
 #include "QYJSValue.h"
 //让子节点获取Page或Component的属性
-class QYPageCompContext : public IQYExpressionContext{
+class QYPageCompContext : public IQYExpDataContext{
 public:
     void addProptyObserver(std::weak_ptr<QYPropertyValue> observer);
     void notifyDataUpdate();

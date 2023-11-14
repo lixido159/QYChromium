@@ -10,14 +10,14 @@
 QYPropertyAccessExpression::QYPropertyAccessExpression(QYExpression *callee, std::string property) : mCallee(callee), mProperty(property){};
 
 
-double QYPropertyAccessExpression::getNumberValue(IQYExpressionContext *expContext) {
+double QYPropertyAccessExpression::getNumberValue(QYExpressionContext *expContext) {
     return 0;
 }
 
-std::string QYPropertyAccessExpression::getStringValue(IQYExpressionContext *expContext) {
+std::string QYPropertyAccessExpression::getStringValue(QYExpressionContext *expContext) {
     return "";
 }
 
-bool QYPropertyAccessExpression::getBoolValue(IQYExpressionContext *expContext) {
+bool QYPropertyAccessExpression::getBoolValue(QYExpressionContext *expContext) {
     return false;
 }

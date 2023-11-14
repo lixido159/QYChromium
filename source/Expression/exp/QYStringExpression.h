@@ -15,9 +15,9 @@ class QYStringExpression : public QYExpression {
 public:
     QYStringExpression(std::string str);
     
-    virtual double getNumberValue(IQYExpressionContext *expContext) override;
-    virtual std::string getStringValue(IQYExpressionContext *expContext) override;
-    virtual bool getBoolValue(IQYExpressionContext *expContext) override;
+    virtual double getNumberValue(QYExpressionContext *expContext) override;
+    virtual std::string getStringValue(QYExpressionContext *expContext) override;
+    virtual bool getBoolValue(QYExpressionContext *expContext) override;
 private:
     std::string mStr;    
 };
