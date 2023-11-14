@@ -15,13 +15,11 @@
 
 class QYExpression {
 public:
-    virtual double getNumberValue() = 0;
-    virtual std::string getStringValue() = 0;
-    virtual bool getBoolValue() = 0;
-    QYExpression(IQYExpressionContext *context): mExpContext(context) {};
+    virtual double getNumberValue(IQYExpressionContext *expContext) = 0;
+    virtual std::string getStringValue(IQYExpressionContext *expContext) = 0;
+    virtual bool getBoolValue(IQYExpressionContext *expContext) = 0;
     //区分identifierExp是表达式还是固定值 red和{{ red }}
     bool isMustache = false;
-    std::shared_ptr<IQYExpressionContext> *mExpContext;
 };
 
 

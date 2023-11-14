@@ -13,9 +13,9 @@
 class QYPropertyAccessExpression : public QYExpression{
 public:
     QYPropertyAccessExpression(QYExpression *callee, std::string property);
-    virtual double getNumberValue() override;
-    virtual std::string getStringValue() override;
-    virtual bool getBoolValue() override;
+    virtual double getNumberValue(IQYExpressionContext *expContext) override;
+    virtual std::string getStringValue(IQYExpressionContext *expContext) override;
+    virtual bool getBoolValue(IQYExpressionContext *expContext) override;
 
 private:
     QYExpression *mCallee;

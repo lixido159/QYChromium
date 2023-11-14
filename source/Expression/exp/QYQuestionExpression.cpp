@@ -8,30 +8,30 @@
 #include "QYQuestionExpression.h"
 QYQuestionExpression::QYQuestionExpression(QYExpression *questionExp, QYExpression *trueExp, QYExpression *falseExp) : mQuestionExp(questionExp), mTrueExp(trueExp), mFalseExp(falseExp) {};
 
-double QYQuestionExpression::getNumberValue() {
-    if (getQuestionBool()) {
-        return mTrueExp->getNumberValue();
+double QYQuestionExpression::getNumberValue(IQYExpressionContext *expContext) {
+    if (getQuestionBool(expContext)) {
+        return mTrueExp->getNumberValue(expContext);
     } else {
-        return mFalseExp->getNumberValue();
+        return mFalseExp->getNumberValue(expContext);
     }
 }
 
-std::string QYQuestionExpression::getStringValue() {
-    if (getQuestionBool()) {
-        return mTrueExp->getStringValue();
+std::string QYQuestionExpression::getStringValue(IQYExpressionContext *expContext) {
+    if (getQuestionBool(expContext)) {
+        return mTrueExp->getStringValue(expContext);
     } else {
-        return mFalseExp->getStringValue();
+        return mFalseExp->getStringValue(expContext);
     }
 }
 
-bool QYQuestionExpression::getBoolValue() {
-    if (getQuestionBool()) {
-        return mTrueExp->getBoolValue();
+bool QYQuestionExpression::getBoolValue(IQYExpressionContext *expContext) {
+    if (getQuestionBool(expContext)) {
+        return mTrueExp->getBoolValue(expContext);
     } else {
-        return mFalseExp->getBoolValue();
+        return mFalseExp->getBoolValue(expContext);
     }
 }
 
-bool QYQuestionExpression::getQuestionBool() {
-    return mQuestionExp->getBoolValue();
+bool QYQuestionExpression::getQuestionBool(IQYExpressionContext *expContext) {
+    return mQuestionExp->getBoolValue(expContext);
 }

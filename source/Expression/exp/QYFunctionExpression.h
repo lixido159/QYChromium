@@ -13,9 +13,9 @@
 class QYFunctionExpression : public QYExpression{
 public:
     QYFunctionExpression(QYExpression *val, std::vector<QYExpression *> args);
-    virtual double getNumberValue() override;
-    virtual std::string getStringValue() override;
-    virtual bool getBoolValue() override;
+    virtual double getNumberValue(IQYExpressionContext *expContext) override;
+    virtual std::string getStringValue(IQYExpressionContext *expContext) override;
+    virtual bool getBoolValue(IQYExpressionContext *expContext) override;
 
 private:
     QYExpression *mVal;

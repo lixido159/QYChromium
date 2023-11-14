@@ -7,25 +7,25 @@
 
 #include "QYIdentifierExpression.h"
 
-QYIdentifierExpression::QYIdentifierExpression(IQYExpressionContext *context, std::string var):QYExpression(context), mVar(var) {}
+QYIdentifierExpression::QYIdentifierExpression(std::string var): mVar(var) {}
 
-double QYIdentifierExpression::getNumberValue() {
+double QYIdentifierExpression::getNumberValue(IQYExpressionContext *expContext) {
     if (!isMustache) {
         return std::stod(mVar);
     }
-    return mExpContext->getNumberForKey(mVar);
+    return expContext->getNumberForKey(mVar);
 }
 
-std::string QYIdentifierExpression::getStringValue() {
+std::string QYIdentifierExpression::getStringValue(IQYExpressionContext *expContext) {
     if (!isMustache) {
         return mVar;
     }
-    return mExpContext->getStringForKey(mVar);
+    return expContext->getStringForKey(mVar);
 }
 
-bool QYIdentifierExpression::getBoolValue() {
+bool QYIdentifierExpression::getBoolValue(IQYExpressionContext *expContext) {
     if (!isMustache) {
         return mVar.compare("true") == 0;
     }
-    return mExpContext->getBoolForKey(mVar);
+    return expContext->getBoolForKey(mVar);
 }

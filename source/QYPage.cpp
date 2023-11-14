@@ -30,21 +30,13 @@ void QYPage::beforeExecuteJS() {
     
 }
 
-void QYPage::registerDataInterface() {
-    mPageData->setFunction("update", [this](QYJSContext *context, QYJSValue *paramsValue)->QYJSValue * {
-        mPageContext->notifyDataUpdate();
-        return nullptr;
-    });
-}
-
 void QYPage::executeJS() {
     mJSContext->executeJS(mJSStr.c_str());
     QYJSValue *global = mJSContext->getGlobal();
     QYJSValue *qyValue = global->getValue(JSQYVar);
-    mPageData = std::shared_ptr<QYJSValue>(mJSContext->newObject());
-    mPageContext->setDataValue(mPageData);
-    registerDataInterface();
-    qyValue->getValue("entry")->call(mPageData.get());
+    QYJSValue *dataValue = mJSContext->newObject();
+    mPageContext->registerDataInterface(dataValue);
+    qyValue->getValue("entry")->call(dataValue);
 }
 
 

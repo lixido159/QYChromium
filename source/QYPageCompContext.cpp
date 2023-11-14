@@ -27,17 +27,22 @@ void QYPageCompContext::notifyDataUpdate() {
     }
 }
 
-void QYPageCompContext::setDataValue(std::shared_ptr<QYJSValue> dataValue) {
-    mDataValue = dataValue;
+void QYPageCompContext::registerDataInterface(QYJSValue *dataValue) {
+    mDataValue.reset(dataValue);
+    mDataValue->setFunction("update", [this](QYJSContext *context, QYJSValue *paramsValue)->QYJSValue * {
+        mData.insert(std::pair(paramsValue->getValue(0)->toString(), paramsValue->getValue(1)));
+        return nullptr;
+    });
+
 }
 
 bool QYPageCompContext::getBoolForKey(std::string key) {
-    return mDataValue->getValue(key)->toBoolean();
+    return mData[key]->toBoolean();
 }
 std::string QYPageCompContext::getStringForKey(std::string key) {
-    return mDataValue->getValue(key)->toString();
+    return mData[key]->toString();
 }
 double QYPageCompContext::getNumberForKey(std::string key) {
-    return mDataValue->getValue(key)->toNumber();
+    return mData[key]->toNumber();
 }
 
