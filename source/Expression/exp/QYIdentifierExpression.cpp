@@ -9,21 +9,21 @@
 
 QYIdentifierExpression::QYIdentifierExpression(std::string var): mVar(var) {}
 
-double QYIdentifierExpression::getNumberValue(IQYExpressionContext *expContext) {
+double QYIdentifierExpression::getNumberValue(QYExpressionContext *expContext) {
     if (!isMustache) {
         return std::stod(mVar);
     }
     return expContext->getNumberForKey(mVar);
 }
 
-std::string QYIdentifierExpression::getStringValue(IQYExpressionContext *expContext) {
+std::string QYIdentifierExpression::getStringValue(QYExpressionContext *expContext) {
     if (!isMustache) {
         return mVar;
     }
     return expContext->getStringForKey(mVar);
 }
 
-bool QYIdentifierExpression::getBoolValue(IQYExpressionContext *expContext) {
+bool QYIdentifierExpression::getBoolValue(QYExpressionContext *expContext) {
     if (!isMustache) {
         return mVar.compare("true") == 0;
     }

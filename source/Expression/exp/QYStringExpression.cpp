@@ -8,14 +8,14 @@
 #include "QYStringExpression.h"
 QYStringExpression::QYStringExpression(std::string str): mStr(str) {}
 
-double QYStringExpression::getNumberValue(IQYExpressionContext *expContext) {
+double QYStringExpression::getNumberValue(QYExpressionContext *expContext) {
     return std::stod(mStr);
 }
 
-std::string QYStringExpression::getStringValue(IQYExpressionContext *expContext) {
+std::string QYStringExpression::getStringValue(QYExpressionContext *expContext) {
     return mStr;
 }
 
-bool QYStringExpression::getBoolValue(IQYExpressionContext *expContext) {
+bool QYStringExpression::getBoolValue(QYExpressionContext *expContext) {
     return mStr.compare("true") == 0;
 }

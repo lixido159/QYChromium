@@ -9,7 +9,7 @@
 #define QYPropertyValue_hpp
 #include "QYExpression.h"
 #include "IQYPropertyValueObserver.h"
-#include "IQYExpressionContext.h"
+#include "IQYExpDataContext.h"
 #include <stdio.h>
 
 class QYPropertyFinalValue {
@@ -58,7 +58,8 @@ private:
 
 class QYPropertyValue : public std::enable_shared_from_this<QYPropertyValue>{
 public:
-    QYPropertyValue(std::string key, std::string src, std::shared_ptr<IQYExpressionContext> context);
+    QYPropertyValue(std::string key, std::string src, std::shared_ptr<IQYExpDataContext> dataContext);
+    ~QYPropertyValue();
     double getNumberValue();
     std::string getStringValue();
     bool getBoolValue();
@@ -73,7 +74,7 @@ private:
     std::string mSrc = "";
     std::string mKey = "";
     QYExpression *mExp = nullptr;
-    std::shared_ptr<IQYExpressionContext> mExpContext = nullptr;
+    std::shared_ptr<IQYExpDataContext> mDataContext = nullptr;
     std::weak_ptr<IQYPropertyValueObserver> mObserver;
 };
 

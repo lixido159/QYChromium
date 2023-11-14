@@ -13,9 +13,9 @@
 class QYBinaryExpression : public QYExpression {
 public:
     QYBinaryExpression(QYExpression *leftExp, QYExpression *rightExp, OPERATOR opt);
-    virtual double getNumberValue(IQYExpressionContext *expContext) override;
-    virtual std::string getStringValue(IQYExpressionContext *expContext) override;
-    virtual bool getBoolValue(IQYExpressionContext *expContext) override;
+    virtual double getNumberValue(QYExpressionContext *expContext) override;
+    virtual std::string getStringValue(QYExpressionContext *expContext) override;
+    virtual bool getBoolValue(QYExpressionContext *expContext) override;
 
 private:
     QYExpression *mLeftExp;

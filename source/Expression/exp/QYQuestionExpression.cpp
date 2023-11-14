@@ -8,7 +8,7 @@
 #include "QYQuestionExpression.h"
 QYQuestionExpression::QYQuestionExpression(QYExpression *questionExp, QYExpression *trueExp, QYExpression *falseExp) : mQuestionExp(questionExp), mTrueExp(trueExp), mFalseExp(falseExp) {};
 
-double QYQuestionExpression::getNumberValue(IQYExpressionContext *expContext) {
+double QYQuestionExpression::getNumberValue(QYExpressionContext *expContext) {
     if (getQuestionBool(expContext)) {
         return mTrueExp->getNumberValue(expContext);
     } else {
@@ -16,7 +16,7 @@ double QYQuestionExpression::getNumberValue(IQYExpressionContext *expContext) {
     }
 }
 
-std::string QYQuestionExpression::getStringValue(IQYExpressionContext *expContext) {
+std::string QYQuestionExpression::getStringValue(QYExpressionContext *expContext) {
     if (getQuestionBool(expContext)) {
         return mTrueExp->getStringValue(expContext);
     } else {
@@ -24,7 +24,7 @@ std::string QYQuestionExpression::getStringValue(IQYExpressionContext *expContex
     }
 }
 
-bool QYQuestionExpression::getBoolValue(IQYExpressionContext *expContext) {
+bool QYQuestionExpression::getBoolValue(QYExpressionContext *expContext) {
     if (getQuestionBool(expContext)) {
         return mTrueExp->getBoolValue(expContext);
     } else {
@@ -32,6 +32,6 @@ bool QYQuestionExpression::getBoolValue(IQYExpressionContext *expContext) {
     }
 }
 
-bool QYQuestionExpression::getQuestionBool(IQYExpressionContext *expContext) {
+bool QYQuestionExpression::getQuestionBool(QYExpressionContext *expContext) {
     return mQuestionExp->getBoolValue(expContext);
 }
