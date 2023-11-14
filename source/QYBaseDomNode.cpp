@@ -50,7 +50,7 @@ void QYBaseDomNode::performExpandWidgetViewTree() {
 void QYBaseDomNode::performApplyWidgetViewTreeProperties() {
     std::map<std::string, std::string>::iterator iter;
     for (iter = mNodeInfo->properties.begin(); iter != mNodeInfo->properties.end(); iter++) {
-        QYPropertyValue *proptyValue = new QYPropertyValue(iter->first, iter->second);
+        QYPropertyValue *proptyValue = new QYPropertyValue(iter->first, iter->second, mContext);
         mContext->addProptyObserver(proptyValue->weak_from_this());
         proptyValue->setObserver(weak_from_this());
         mWidget->setProperty(iter->first, proptyValue);

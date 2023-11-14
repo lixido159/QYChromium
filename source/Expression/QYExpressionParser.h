@@ -11,10 +11,11 @@
 #include <stdio.h>
 #include "QYExpression.h"
 #include "QYToken.h"
+#include "IQYExpressionContext.h"
 
 class QYExpressionParser {
 public:
-    QYExpressionParser(std::string str);
+    QYExpressionParser(IQYExpressionContext *context, std::string str);
     QYExpression* parseExp();
 
 private:

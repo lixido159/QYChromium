@@ -143,6 +143,10 @@ QYJSValue* QYJSValue::getValue(const char *key) {
 
 }
 
+QYJSValue* QYJSValue::getValue(std::string key) {
+    return getValue(key.c_str());
+}
+
 void QYJSValue::setValue(const char *key, QYJSValue *value) {
     ExecuteJS(mJsContext->ToLocal());
     setValue(key, value->ToLocal());
