@@ -14,9 +14,9 @@
 class QYNumberExpression : public QYExpression {
 public:
     QYNumberExpression(double number);
-    virtual double getNumberValue() override;
-    virtual std::string getStringValue() override;
-    virtual bool getBoolValue() override;
+    virtual double getNumberValue(IQYExpressionContext *expContext) override;
+    virtual std::string getStringValue(IQYExpressionContext *expContext) override;
+    virtual bool getBoolValue(IQYExpressionContext *expContext) override;
 private:
     double mNumber;
 };

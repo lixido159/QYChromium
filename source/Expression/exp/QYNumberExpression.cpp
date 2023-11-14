@@ -10,14 +10,14 @@
 
 QYNumberExpression::QYNumberExpression(double number):mNumber(number){};
 
-double QYNumberExpression::getNumberValue() {
+double QYNumberExpression::getNumberValue(IQYExpressionContext *expContext) {
     return mNumber;
 }
 
-std::string QYNumberExpression::getStringValue() {
+std::string QYNumberExpression::getStringValue(IQYExpressionContext *expContext) {
     return std::to_string(mNumber);
 }
 
-bool QYNumberExpression::getBoolValue() {
+bool QYNumberExpression::getBoolValue(IQYExpressionContext *expContext) {
     return mNumber > 0;
 }

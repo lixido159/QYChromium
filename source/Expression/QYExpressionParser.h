@@ -15,7 +15,7 @@
 
 class QYExpressionParser {
 public:
-    QYExpressionParser(IQYExpressionContext *context, std::string str);
+    QYExpressionParser(std::string str);
     QYExpression* parseExp();
 
 private:

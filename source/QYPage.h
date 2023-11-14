@@ -25,7 +25,6 @@ private:
     std::shared_ptr<QYPageCompContext> mPageContext;
     QYBaseDomNode *mRootNode = nullptr;
     QYJSContext *mJSContext = nullptr;
-    std::shared_ptr<QYJSValue> mPageData = nullptr;
     std::string mJSStr;
 };
 

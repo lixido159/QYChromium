@@ -14,10 +14,10 @@
 
 class QYIdentifierExpression : public QYExpression{
 public:
-    QYIdentifierExpression(IQYExpressionContext *context, std::string var);
-    virtual double getNumberValue() override;
-    virtual std::string getStringValue() override;
-    virtual bool getBoolValue() override;
+    QYIdentifierExpression(std::string var);
+    virtual double getNumberValue(IQYExpressionContext *expContext) override;
+    virtual std::string getStringValue(IQYExpressionContext *expContext) override;
+    virtual bool getBoolValue(IQYExpressionContext *expContext) override;
 
 private:
     std::string mVar;

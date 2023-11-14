@@ -12,10 +12,10 @@
 #include "QYExpression.h"
 class QYBinaryExpression : public QYExpression {
 public:
-    QYBinaryExpression(IQYExpressionContext *context, QYExpression *leftExp, QYExpression *rightExp, OPERATOR opt);
-    virtual double getNumberValue() override;
-    virtual std::string getStringValue() override;
-    virtual bool getBoolValue() override;
+    QYBinaryExpression(QYExpression *leftExp, QYExpression *rightExp, OPERATOR opt);
+    virtual double getNumberValue(IQYExpressionContext *expContext) override;
+    virtual std::string getStringValue(IQYExpressionContext *expContext) override;
+    virtual bool getBoolValue(IQYExpressionContext *expContext) override;
 
 private:
     QYExpression *mLeftExp;

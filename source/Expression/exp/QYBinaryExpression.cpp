@@ -7,30 +7,30 @@
 
 #include "QYBinaryExpression.h"
 
-QYBinaryExpression::QYBinaryExpression(IQYExpressionContext *context, QYExpression *leftExp, QYExpression *rightExp, OPERATOR opt):QYExpression(context), mLeftExp(leftExp), mRightExp(rightExp), mOpt(opt){};
+QYBinaryExpression::QYBinaryExpression( QYExpression *leftExp, QYExpression *rightExp, OPERATOR opt):mLeftExp(leftExp), mRightExp(rightExp), mOpt(opt){};
 
 
-double QYBinaryExpression::getNumberValue(){
+double QYBinaryExpression::getNumberValue(IQYExpressionContext *expContext){
     switch(mOpt) {
         case opt_add:
-            return mLeftExp->getNumberValue() + mRightExp->getNumberValue();
+            return mLeftExp->getNumberValue(expContext) + mRightExp->getNumberValue(expContext);
         case opt_sub:
-            return mLeftExp->getNumberValue() - mRightExp->getNumberValue();
+            return mLeftExp->getNumberValue(expContext) - mRightExp->getNumberValue(expContext);
         case opt_mul:
-            return mLeftExp->getNumberValue() * mRightExp->getNumberValue();
+            return mLeftExp->getNumberValue(expContext) * mRightExp->getNumberValue(expContext);
         case opt_div:
-            return mLeftExp->getNumberValue() / mRightExp->getNumberValue();
+            return mLeftExp->getNumberValue(expContext) / mRightExp->getNumberValue(expContext);
         default:
             throw "错误符号进行计算";
     }
 
-    return mLeftExp->getNumberValue();
+    return mLeftExp->getNumberValue(expContext);
 }
 
-std::string QYBinaryExpression::getStringValue() {
+std::string QYBinaryExpression::getStringValue(IQYExpressionContext *expContext) {
     return "";
 }
 
-bool QYBinaryExpression::getBoolValue() {
-    return getNumberValue() > 0;
+bool QYBinaryExpression::getBoolValue(IQYExpressionContext *expContext) {
+    return getNumberValue(expContext) > 0;
 }

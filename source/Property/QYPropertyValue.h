@@ -58,7 +58,7 @@ private:
 
 class QYPropertyValue : public std::enable_shared_from_this<QYPropertyValue>{
 public:
-    QYPropertyValue(std::string key, std::string src, IQYExpressionContext *context);
+    QYPropertyValue(std::string key, std::string src, std::shared_ptr<IQYExpressionContext> context);
     double getNumberValue();
     std::string getStringValue();
     bool getBoolValue();
@@ -73,7 +73,7 @@ private:
     std::string mSrc = "";
     std::string mKey = "";
     QYExpression *mExp = nullptr;
-    IQYExpressionContext *mExpContext = nullptr;
+    std::shared_ptr<IQYExpressionContext> mExpContext = nullptr;
     std::weak_ptr<IQYPropertyValueObserver> mObserver;
 };
 
