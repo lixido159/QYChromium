@@ -7,8 +7,7 @@
 
 #include "QYBinaryExpression.h"
 
-QYBinaryExpression::QYBinaryExpression(QYExpression *leftExp, QYExpression *rightExp, OPERATOR opt):
-mLeftExp(leftExp), mRightExp(rightExp), mOpt(opt){};
+QYBinaryExpression::QYBinaryExpression(IQYExpressionContext *context, QYExpression *leftExp, QYExpression *rightExp, OPERATOR opt):QYExpression(context), mLeftExp(leftExp), mRightExp(rightExp), mOpt(opt){};
 
 
 double QYBinaryExpression::getNumberValue(){

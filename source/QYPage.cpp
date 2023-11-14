@@ -41,9 +41,10 @@ void QYPage::executeJS() {
     mJSContext->executeJS(mJSStr.c_str());
     QYJSValue *global = mJSContext->getGlobal();
     QYJSValue *qyValue = global->getValue(JSQYVar);
-    mPageData = mJSContext->newObject();
+    mPageData = std::shared_ptr<QYJSValue>(mJSContext->newObject());
+    mPageContext->setDataValue(mPageData);
     registerDataInterface();
-    qyValue->getValue("entry")->call(mPageData);
+    qyValue->getValue("entry")->call(mPageData.get());
 }
 
 

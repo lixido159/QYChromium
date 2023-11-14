@@ -8,7 +8,7 @@
 #include "QYPropertyValue.h"
 #include <regex>
 #include "QYExpressionParser.h"
-QYPropertyValue::QYPropertyValue(std::string key, std::string src):mKey(key), mSrc(src) {
+QYPropertyValue::QYPropertyValue(std::string key, std::string src, IQYExpressionContext *context):mKey(key), mSrc(src), mExpContext(context) {
     mExp = parseSrc(src);
 }
 
@@ -18,16 +18,27 @@ QYExpression *QYPropertyValue::parseSrc(std::string src) {
 
 }
 
+
+
 double QYPropertyValue::getNumberValue() {
-    return mExp->getNumberValue();
+    if (!mFinalValue) {
+        mFinalValue = std::make_unique<QYPropertyFinalValue>(mExp->getNumberValue());
+    }
+    return mFinalValue->getNumberValue();
 }
 
 std::string QYPropertyValue::getStringValue() {
-    return mExp->getStringValue();
+    if (!mFinalValue) {
+        mFinalValue = std::make_unique<QYPropertyFinalValue>(mExp->getStringValue());
+    }
+    return mFinalValue->getStringValue();
 }
 
 bool QYPropertyValue::getBoolValue() {
-    return mExp->getBoolValue();
+    if (!mFinalValue) {
+        mFinalValue = std::make_unique<QYPropertyFinalValue>(mExp->getBoolValue());
+    }
+    return mFinalValue->getBoolValue();
 }
 
 std::string QYPropertyValue::getKey() {
