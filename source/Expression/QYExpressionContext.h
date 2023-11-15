@@ -11,17 +11,22 @@
 #include <stdio.h>
 #include <string>
 #include "IQYExpDataContext.h"
-typedef void (*AccessKeyCallback)(std::string key);
+
+class IQYExpressionContextObserver {
+public:
+    virtual void expContextQueryKey(std::string key) = 0;
+};
+
 class QYExpressionContext {
 public:
-    QYExpressionContext(IQYExpDataContext *dataContext, AccessKeyCallback callback);
+    QYExpressionContext(IQYExpDataContext *dataContext, IQYExpressionContextObserver *observer);
     ~QYExpressionContext();
     bool getBoolForKey(std::string key);
     std::string getStringForKey(std::string key);
     double getNumberForKey(std::string key);
 private:
     IQYExpDataContext *mDataContext;
-    AccessKeyCallback mCallback;
+    IQYExpressionContextObserver *mObserver;
 };
 
 #endif /* QYExpressionContext_hpp */

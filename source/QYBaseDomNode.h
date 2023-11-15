@@ -31,7 +31,7 @@ public:
     void setContext(std::shared_ptr<QYPageCompContext> context);
     
 public:
-    void onDataUpdate(QYPropertyValue *value) override;
+    void onDataUpdate(std::shared_ptr<QYPropertyValue> value) override;
 private:
     std::shared_ptr<QYPageCompContext> mContext;
     

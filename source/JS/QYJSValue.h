@@ -15,6 +15,7 @@
 class QYJSContext;
 class QYJSValue {
 public:
+    
     QYJSValue(QYJSContext *jsContext, v8::Local<v8::Value> jsValue);
     QYJSValue(QYJSContext *jsContext);
     ~QYJSValue();

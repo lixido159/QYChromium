@@ -15,7 +15,7 @@ public:
     QYPage(QYBaseDomNode *rootNode, std::string jsStr);
     ~QYPage();
     void init();
-    QYBaseDomNode *getRootNode() { return mRootNode; }
+    QYBaseDomNode *getRootNode() { return mRootNode.get(); }
     void beforeExecuteJS();
     void executeJS();
     void afterExecuteJS();
@@ -23,7 +23,7 @@ private:
     void registerDataInterface();
     
     std::shared_ptr<QYPageCompContext> mPageContext;
-    QYBaseDomNode *mRootNode = nullptr;
+    std::shared_ptr<QYBaseDomNode> mRootNode = nullptr;
     QYJSContext *mJSContext = nullptr;
     std::string mJSStr;
 };

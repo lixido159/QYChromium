@@ -8,29 +8,32 @@
 #include "QYPageCompContext.h"
 #include "QYPropertyValue.h"
 
-void QYPageCompContext::addProptyObserver(std::weak_ptr<QYPropertyValue> observer) {
-    //防止重复添加
-    if (std::find_if(mObserveProperties.begin(), mObserveProperties.end(), [observer](std::weak_ptr<QYPropertyValue> a) {
-        return a.lock() == observer.lock();
-    }) == mObserveProperties.end()) {
-        mObserveProperties.push_back(observer);
+void QYPageCompContext::addJSKeyObserver(std::string key, std::shared_ptr<QYPropertyValue> observer) {
+    //说明该key还没有属性监听
+    if (mObserveProperties.find(key) == mObserveProperties.end()) {
+        std::vector<std::shared_ptr<QYPropertyValue>> obs = {observer};
+        mObserveProperties.insert(std::pair(key, obs));
+    } else {
+        std::vector<std::shared_ptr<QYPropertyValue>> obs = mObserveProperties[key];
+        obs.push_back(observer);
     }
 }
 
-void QYPageCompContext::notifyDataUpdate() {
-    for (int i = 0; i < mObserveProperties.size(); i++) {
-        std::weak_ptr<QYPropertyValue> proptyValue = mObserveProperties[0];
-        auto value = proptyValue.lock();
-        if (value) {
-            value->onDataUpdate();
-        }
+void QYPageCompContext::notifyDataUpdate(std::string key) {
+    std::vector<std::shared_ptr<QYPropertyValue>> obs = mObserveProperties[key];
+    for (int i = 0; i < obs.size(); i++) {
+        std::shared_ptr<QYPropertyValue> proptyValue = obs[i];
+        proptyValue->onDataUpdate();
+        
     }
 }
 
 void QYPageCompContext::registerDataInterface(QYJSValue *dataValue) {
     mDataValue.reset(dataValue);
     mDataValue->setFunction("update", [this](QYJSContext *context, QYJSValue *paramsValue)->QYJSValue * {
-        mData.insert(std::pair(paramsValue->getValue(0)->toString(), paramsValue->getValue(1)));
+        std::string key = paramsValue->getValue(0)->toString();
+        mData.insert(std::pair(key, paramsValue->getValue(1)));
+        notifyDataUpdate(key);
         return nullptr;
     });
 

@@ -50,10 +50,9 @@ void QYBaseDomNode::performExpandWidgetViewTree() {
 void QYBaseDomNode::performApplyWidgetViewTreeProperties() {
     std::map<std::string, std::string>::iterator iter;
     for (iter = mNodeInfo->properties.begin(); iter != mNodeInfo->properties.end(); iter++) {
-        QYPropertyValue *proptyValue = new QYPropertyValue(iter->first, iter->second, mContext);
-        mContext->addProptyObserver(proptyValue->weak_from_this());
-        proptyValue->setObserver(weak_from_this());
-        mWidget->setProperty(iter->first, proptyValue);
+        std::shared_ptr<QYPropertyValue> proptyValue = std::make_shared<QYPropertyValue>(iter->first, iter->second, mContext);
+        proptyValue->setObserver(this);
+        mWidget->setProperty(proptyValue);
     }
     for(QYBaseDomNode *node : mChildNodeList) {
         node->performApplyWidgetViewTreeProperties();
@@ -70,8 +69,8 @@ void QYBaseDomNode::setContext(std::shared_ptr<QYPageCompContext> context) {
 }
 
 #pragma mark - IQYPropertyValueObserver
-void QYBaseDomNode::onDataUpdate(QYPropertyValue *value) {
-    
+void QYBaseDomNode::onDataUpdate(std::shared_ptr<QYPropertyValue> value) {
+    mWidget->setProperty(value);
 }
 
 

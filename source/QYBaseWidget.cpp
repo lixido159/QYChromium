@@ -5,17 +5,17 @@ void QYBaseWidget::addChildWidget(QYBaseWidget *child) {
     child->setParentWidget(this);
 }
 
-void QYBaseWidget::setProperty(std::string key, QYPropertyValue *value) {
+void QYBaseWidget::setProperty(std::shared_ptr<QYPropertyValue> value) {
     static QYPropertySetter *setter = new QYPropertySetter;
-    mProptyValueMap.insert(std::pair(key, value));
-    setter->setProperty(mView, value);
+    mProptyValueMap.insert(std::pair(value->getKey(), value));
+    setter->setProperty(mView, value.get());
 }
 
 QYPropertyValue* QYBaseWidget::getProperty(std::string key) {
-    return mProptyValueMap[key];
+    return mProptyValueMap[key].get();
 }
 
-std::map<std::string, QYPropertyValue *> QYBaseWidget::getProptyValueMap() {
+std::map<std::string, std::shared_ptr<QYPropertyValue>> QYBaseWidget::getProptyValueMap() {
     return mProptyValueMap;
 }
 

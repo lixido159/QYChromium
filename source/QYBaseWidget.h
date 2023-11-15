@@ -7,17 +7,17 @@
 class QYBaseWidget {
 public:
     void addChildWidget(QYBaseWidget *child);
-    void setProperty(std::string key, QYPropertyValue *value);
+    void setProperty(std::shared_ptr<QYPropertyValue> value);
     QYPropertyValue *getProperty(std::string key);
     
-    std::map<std::string, QYPropertyValue *> getProptyValueMap();
+    std::map<std::string, std::shared_ptr<QYPropertyValue> > getProptyValueMap();
     QYBaseWidget *getParentWidget();
     void setParentWidget(QYBaseWidget *parentWidget);
     
     void setView(IQYBaseView *view);
     IQYBaseView* getView();
 private:
-    std::map<std::string, QYPropertyValue *> mProptyValueMap;
+    std::map<std::string, std::shared_ptr<QYPropertyValue>> mProptyValueMap;
     QYBaseWidget *mParentWidget = nullptr;
     std::vector<QYBaseWidget *> mChildWidgets;
     IQYBaseView *mView = nullptr;

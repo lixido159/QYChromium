@@ -7,29 +7,23 @@
 
 #include "QYExpressionContext.h"
 
-QYExpressionContext::QYExpressionContext(IQYExpDataContext *dataContext, AccessKeyCallback callback): mDataContext(dataContext), mCallback(callback) {}
+QYExpressionContext::QYExpressionContext(IQYExpDataContext *dataContext, IQYExpressionContextObserver *observer): mDataContext(dataContext), mObserver(observer){}
 
 QYExpressionContext::~QYExpressionContext() {
     
 }
 
 bool QYExpressionContext::getBoolForKey(std::string key) {
-    if (mCallback) {
-        mCallback(key);
-    }
+    mObserver->expContextQueryKey(key);
     return mDataContext->getBoolForKey(key);
 }
 
 std::string QYExpressionContext::getStringForKey(std::string key) {
-    if (mCallback) {
-        mCallback(key);
-    }
+    mObserver->expContextQueryKey(key);
     return mDataContext->getStringForKey(key);
 }
 
 double QYExpressionContext::getNumberForKey(std::string key) {
-    if (mCallback) {
-        mCallback(key);
-    }
+    mObserver->expContextQueryKey(key);
     return mDataContext->getNumberForKey(key);
 }
