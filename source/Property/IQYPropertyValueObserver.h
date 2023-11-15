@@ -11,7 +11,7 @@ class QYPropertyValue;
 
 class IQYPropertyValueObserver {
 public:
-    virtual void onDataUpdate(QYPropertyValue *value) = 0;
+    virtual void onDataUpdate(std::shared_ptr<QYPropertyValue> value) = 0;
 };
 
 
