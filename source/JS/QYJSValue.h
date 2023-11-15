@@ -16,8 +16,9 @@ class QYJSContext;
 class QYJSValue {
 public:
     
-    QYJSValue(QYJSContext *jsContext, v8::Local<v8::Value> jsValue);
     QYJSValue(QYJSContext *jsContext);
+    QYJSValue(QYJSContext *jsContext, v8::Local<v8::Value> jsValue);
+    QYJSValue(QYJSContext *jsContext, const std::function<QYJSValue *(QYJSContext *, QYJSValue*)>& handler);
     ~QYJSValue();
     v8::Local<v8::Value> ToLocal();
     v8::Local<v8::Object> ToLocalObject();
