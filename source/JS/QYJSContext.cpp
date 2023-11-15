@@ -42,7 +42,7 @@ void QYJSContext::setGlobalJSValue(QYJSValue *value, const char *name) {
 
 QYJSValue *QYJSContext::newObject() {
     ExecuteJS(ToLocal());
-    return new QYJSValue(this, v8::Object::New(getIsolate()));
+    return new QYJSValue(this);
 }
 
 QYJSValue* QYJSContext::getGlobal() {
@@ -69,16 +69,6 @@ QYJSValue *QYJSContext::createGlobalConsoleObject() {
     return jsValue;
 }
 
-QYJSValue *QYJSContext::createTimeOutFunction() {
-    QYJSValue *jsValue = newObject();
-    jsValue->setFunction("log", [](QYJSContext *context, QYJSValue *paramsValue)->QYJSValue *{
-        ExecuteJS(context->ToLocal());
-        std::string s = paramsValue->getValue(0)->toString();
-        printf("打印日志 %s\n", s.c_str());
-        return nullptr;
-    });
-    return jsValue;
-}
 
 
 

@@ -25,8 +25,22 @@ void commonFunction(const v8::FunctionCallbackInfo<v8::Value>& info) {
     } else {
         info.GetReturnValue().Set(retVal->ToLocal());
     }
-    
+}
 
+v8::Local<v8::Function> createFunction(QYJSContext *context, const std::function<QYJSValue *(QYJSContext *, QYJSValue*)>& handler) {
+    ExecuteJS_RetValue(context->ToLocal());
+    QYFunction *function = new QYFunction();
+    function->func = handler;
+    function->jsContext = context;
+    v8::Local<v8::External> external = v8::External::New(isolate, (void *)(function));
+    v8::Local<v8::Function> v8Func = v8::Function::New(contextLocal, commonFunction, external).ToLocalChecked();
+    return escapeHandleScope.Escape(v8Func);
+}
+
+QYJSValue::QYJSValue(QYJSContext *jsContext) {
+    ExecuteJS(jsContext->ToLocal());
+    mJsContext = jsContext;
+    mJsValue.Reset(getIsolate(), v8::Object::New(getIsolate()));
 }
 
 QYJSValue::QYJSValue(QYJSContext *jsContext, v8::Local<v8::Value> jsValue) {
@@ -35,11 +49,12 @@ QYJSValue::QYJSValue(QYJSContext *jsContext, v8::Local<v8::Value> jsValue) {
     mJsValue.Reset(getIsolate(), jsValue);
 }
 
-QYJSValue::QYJSValue(QYJSContext *jsContext) {
+QYJSValue::QYJSValue(QYJSContext *jsContext, const std::function<QYJSValue *(QYJSContext *, QYJSValue*)>& handler) {
     ExecuteJS(jsContext->ToLocal());
     mJsContext = jsContext;
-    mJsValue.Reset(getIsolate(), v8::Object::New(getIsolate()));
+    mJsValue.Reset(getIsolate(), createFunction(jsContext, handler));
 }
+
 
 QYJSValue::~QYJSValue() {
     mJsValue.Reset();
@@ -80,15 +95,12 @@ QYJSValue *QYJSValue::call(std::vector<QYJSValue *> args) {
     return new QYJSValue(mJsContext, retValue);
 }
 
+
 void QYJSValue::setFunction(const char *name, const std::function<QYJSValue *(QYJSContext *, QYJSValue*)>& handler) {
     ExecuteJS(mJsContext->ToLocal());
-    QYFunction *function = new QYFunction();
-    function->func = handler;
-    function->jsContext = mJsContext;
     
     v8::Local<v8::Object> object = ToLocalObject();
-    v8::Local<v8::External> external = v8::External::New(isolate, (void *)(function));
-    object->Set(contextLocal, v8::String::NewFromUtf8(getIsolate(), name).ToLocalChecked(), v8::Function::New(contextLocal, commonFunction, external).ToLocalChecked());
+    object->Set(contextLocal, v8::String::NewFromUtf8(getIsolate(), name).ToLocalChecked(), createFunction(mJsContext, handler));
 }
 
 
