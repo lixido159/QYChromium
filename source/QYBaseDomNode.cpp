@@ -61,7 +61,7 @@ void QYBaseDomNode::performApplyWidgetViewTreeProperties() {
 
 
 void *QYBaseDomNode::getNativeView() {
-    return mWidget->getView()->getCustomView()->getNativeView();
+    return mWidget->getView()->getNativeView();
 }
 
 void QYBaseDomNode::setContext(std::shared_ptr<QYPageCompContext> context) {

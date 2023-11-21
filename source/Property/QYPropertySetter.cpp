@@ -26,23 +26,23 @@ QY_Color strToColor(std::string str) {
 }
 
 void proptyFunc_View_BackgroundColor(IQYBaseView *view, QYPropertyValue *propValue) {
-    view->getCustomView()->setBackgroundColor(strToColor(propValue->getStringValue().c_str()));
+    view->setBackgroundColor(strToColor(propValue->getStringValue().c_str()));
 };
 
 void proptyFunc_View_Left(IQYBaseView *view, QYPropertyValue *propValue) {
-    view->getCustomView()->setX(propValue->getNumberValue());
+    view->setX(propValue->getNumberValue());
 };
 
 void proptyFunc_View_Top(IQYBaseView *view, QYPropertyValue *propValue) {
-    view->getCustomView()->setY(propValue->getNumberValue());
+    view->setY(propValue->getNumberValue());
 };
 
 void proptyFunc_View_Height(IQYBaseView *view, QYPropertyValue *propValue) {
-    view->getCustomView()->setHeight(propValue->getNumberValue());
+    view->setHeight(propValue->getNumberValue());
 };
 
 void proptyFunc_View_Width(IQYBaseView *view, QYPropertyValue *propValue) {
-    view->getCustomView()->setWidth(propValue->getNumberValue());
+    view->setWidth(propValue->getNumberValue());
 };
 
 
