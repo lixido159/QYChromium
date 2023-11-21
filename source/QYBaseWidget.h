@@ -4,7 +4,7 @@
 #import "QYBaseDomNode.h"
 #import "QYPropertyValue.h"
 ///负责事件响应，持有view
-class QYBaseWidget {
+class QYBaseWidget : public IQYMouseEventObserver {
 public:
     void addChildWidget(QYBaseWidget *child);
     void setProperty(std::shared_ptr<QYPropertyValue> value);
@@ -13,9 +13,13 @@ public:
     std::map<std::string, std::shared_ptr<QYPropertyValue> > getProptyValueMap();
     QYBaseWidget *getParentWidget();
     void setParentWidget(QYBaseWidget *parentWidget);
-    
     void setView(IQYBaseView *view);
     IQYBaseView* getView();
+    //IQYMouseEventObserver
+    virtual void onMouseUp() override;
+    virtual void onMouseDown() override;
+    virtual void onMouseMoved() override;
+
 private:
     std::map<std::string, std::shared_ptr<QYPropertyValue>> mProptyValueMap;
     QYBaseWidget *mParentWidget = nullptr;

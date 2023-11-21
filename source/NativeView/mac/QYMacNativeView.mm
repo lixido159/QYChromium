@@ -10,15 +10,27 @@
 @implementation QYMacNativeView
 
 - (void)mouseUp:(NSEvent *)event {
-    observer->onMouseUp();
+    if (observer) {
+        observer->onMouseUp();
+    } else {
+        [super mouseUp:event];
+    }
 }
 
 - (void)mouseDown:(NSEvent *)event {
-    
+    if (observer) {
+        observer->onMouseDown();
+    } else {
+        [super mouseDown:event];
+    }
 }
 
 - (void)mouseMoved:(NSEvent *)event {
-    
+    if (observer) {
+        observer->onMouseMoved();
+    } else {
+        [super mouseMoved:event];
+    }
 }
 
 @end

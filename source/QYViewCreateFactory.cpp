@@ -16,13 +16,10 @@ IQYBaseView *createViewWithNodeInfo(QYBaseNodeInfo *info) {
     IQYBaseView *view;
     if (info->name.compare("text")) {
         view = new QYBaseView;
-        view->setCustomView(new QYBaseCustomImageView());
     } else if(info->name.compare("image")) {
         view = new QYImageView;
-        view->setCustomView(new QYBaseCustomImageView());
     } else {//view
         view = new QYTextView;
-        view->setCustomView(new QYBaseCustomView());
     }
     return view;
 }

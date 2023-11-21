@@ -110,8 +110,6 @@
 		277C22BB2B0646D7004DBA26 /* QYMacNativeTextView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 277C22B92B0646D7004DBA26 /* QYMacNativeTextView.mm */; };
 		277C22BE2B0646E6004DBA26 /* QYMacNativeImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 277C22BC2B0646E6004DBA26 /* QYMacNativeImageView.h */; };
 		277C22BF2B0646E6004DBA26 /* QYMacNativeImageView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 277C22BD2B0646E6004DBA26 /* QYMacNativeImageView.mm */; };
-		277C22C22B0648DD004DBA26 /* NSView+MouseEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 277C22C02B0648DD004DBA26 /* NSView+MouseEvent.h */; };
-		277C22C32B0648DD004DBA26 /* NSView+MouseEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 277C22C12B0648DD004DBA26 /* NSView+MouseEvent.m */; };
 		277C23192B0649A0004DBA26 /* QYRuntime.h in Headers */ = {isa = PBXBuildFile; fileRef = 277C23172B0649A0004DBA26 /* QYRuntime.h */; };
 		277C231A2B0649A0004DBA26 /* QYRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 277C23182B0649A0004DBA26 /* QYRuntime.m */; };
 		277C231C2B067FEE004DBA26 /* IQYMouseEventObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 277C231B2B067FEE004DBA26 /* IQYMouseEventObserver.h */; };
@@ -272,8 +270,6 @@
 		277C22B92B0646D7004DBA26 /* QYMacNativeTextView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = QYMacNativeTextView.mm; sourceTree = "<group>"; };
 		277C22BC2B0646E6004DBA26 /* QYMacNativeImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYMacNativeImageView.h; sourceTree = "<group>"; };
 		277C22BD2B0646E6004DBA26 /* QYMacNativeImageView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = QYMacNativeImageView.mm; sourceTree = "<group>"; };
-		277C22C02B0648DD004DBA26 /* NSView+MouseEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSView+MouseEvent.h"; sourceTree = "<group>"; };
-		277C22C12B0648DD004DBA26 /* NSView+MouseEvent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSView+MouseEvent.m"; sourceTree = "<group>"; };
 		277C23172B0649A0004DBA26 /* QYRuntime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYRuntime.h; sourceTree = "<group>"; };
 		277C23182B0649A0004DBA26 /* QYRuntime.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYRuntime.m; sourceTree = "<group>"; };
 		277C231B2B067FEE004DBA26 /* IQYMouseEventObserver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IQYMouseEventObserver.h; sourceTree = "<group>"; };
@@ -345,9 +341,9 @@
 				27744E8D2AC1DCC3000B3B29 /* Expression */,
 				27744E732AB0AF5D000B3B29 /* util */,
 				271B93182A8E7645003A9D0A /* JS */,
-				277C22B22B06468E004DBA26 /* NativeView */,
 				27744F192ADBE9BE000B3B29 /* View */,
 				271B91DD2A8CF515003A9D0A /* CustomView */,
+				277C22B22B06468E004DBA26 /* NativeView */,
 			);
 			name = source;
 			path = ../source;
@@ -507,8 +503,6 @@
 				277C22B92B0646D7004DBA26 /* QYMacNativeTextView.mm */,
 				277C22BC2B0646E6004DBA26 /* QYMacNativeImageView.h */,
 				277C22BD2B0646E6004DBA26 /* QYMacNativeImageView.mm */,
-				277C22C02B0648DD004DBA26 /* NSView+MouseEvent.h */,
-				277C22C12B0648DD004DBA26 /* NSView+MouseEvent.m */,
 			);
 			path = mac;
 			sourceTree = "<group>";
@@ -585,7 +579,6 @@
 				27744F182AD83D1B000B3B29 /* QYTextViewPropertySetter.h in Headers */,
 				271B91FC2A8CF515003A9D0A /* QYBaseCustomView.h in Headers */,
 				27744E952AC1DD76000B3B29 /* QYExpressionParser.h in Headers */,
-				277C22C22B0648DD004DBA26 /* NSView+MouseEvent.h in Headers */,
 				271B92052A8CF515003A9D0A /* QYBaseView.h in Headers */,
 				271B91FF2A8CF515003A9D0A /* IQYBaseCustomBaseView.h in Headers */,
 				2736796A2AFBEE13007067EF /* IQYPropertyValueObserver.h in Headers */,
@@ -748,7 +741,6 @@
 				271B92022A8CF515003A9D0A /* QYBaseCustomImageView.mm in Sources */,
 				27744F0A2AD6FA8D000B3B29 /* QYPropertyValue.cpp in Sources */,
 				27744F172AD83D1B000B3B29 /* QYTextViewPropertySetter.cpp in Sources */,
-				277C22C32B0648DD004DBA26 /* NSView+MouseEvent.m in Sources */,
 				273679752B03D9E7007067EF /* QYExpressionContext.cpp in Sources */,
 				27744EB12AC1E648000B3B29 /* QYCollectionAccessExpression.cpp in Sources */,
 				27744EA12AC1E2C1000B3B29 /* QYStringExpression.cpp in Sources */,

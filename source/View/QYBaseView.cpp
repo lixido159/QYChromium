@@ -1,4 +1,8 @@
 #include "QYBaseView.h"
+#include "QYBaseCustomView.h"
+QYBaseView::QYBaseView() {
+    mCustomView = new QYBaseCustomView;
+}
 
 IQYBaseView* QYBaseView::getParentView(){
     return mParentView;
@@ -9,9 +13,6 @@ void QYBaseView::setParentView(IQYBaseView *parentView){
 
 IQYBaseCustomBaseView* QYBaseView::getCustomView(){
     return mCustomView;
-}
-void QYBaseView::setCustomView(IQYBaseCustomBaseView *customView){
-    mCustomView = customView;
 }
 
 void QYBaseView::addChildView(IQYBaseView *child) {
@@ -41,12 +42,5 @@ void QYBaseView::setRect(float x, float y, float width, float height){
 }
 void QYBaseView::setBackgroundColor(QY_Color color){
     mCustomView->setBackgroundColor(color);
-}
-void QYBaseView::addChildView(IQYBaseCustomBaseView *view){
-    mCustomView->addChildView(view);
-}
-
-void *QYBaseView::getNativeView(){
-    return mCustomView->getNativeView();
 }
 

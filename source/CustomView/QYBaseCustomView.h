@@ -20,8 +20,10 @@ public:
     virtual void setSize(float width, float height) override;
     virtual void setRect(float x, float y, float width, float height) override;
     virtual void setBackgroundColor(QY_Color color) override;
+    
     virtual void addChildView(IQYBaseCustomBaseView *view) override;
     virtual void *getNativeView() override;
+    virtual void setMouseEventObserver(IQYMouseEventObserver *observer) override;
     QYBaseCustomView();
 };
 
