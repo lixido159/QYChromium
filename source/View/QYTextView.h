@@ -11,7 +11,8 @@
 #include <stdio.h>
 
 class QYTextView : public QYBaseView {
-    
+public:
+    QYTextView();
 };
 
 #endif /* QYTextView_hpp */

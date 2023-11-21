@@ -28,8 +28,20 @@ void QYBaseWidget::setParentWidget(QYBaseWidget *parentWidget) {
 
 void QYBaseWidget::setView(IQYBaseView *view) {
     mView = view;
+    mView->getCustomView()->setMouseEventObserver(this);
 }
 
 IQYBaseView* QYBaseWidget::getView() {
     return mView;
 }
+
+void QYBaseWidget::onMouseUp() {
+    
+}
+void QYBaseWidget::onMouseDown() {
+    
+}
+void QYBaseWidget::onMouseMoved() {
+    
+}
+

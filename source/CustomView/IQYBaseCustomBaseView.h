@@ -9,7 +9,7 @@
 #define QYBaseCustomBaseView_hpp
 
 #include <stdio.h>
-
+#include "IQYMouseEventObserver.h"
 struct QY_Color {
     int r;
     int g;
@@ -28,7 +28,7 @@ public:
     virtual void setBackgroundColor(QY_Color color) = 0;
     virtual void addChildView(IQYBaseCustomBaseView *view) = 0;
     virtual void *getNativeView() = 0;
-    
+    virtual void setMouseEventObserver(IQYMouseEventObserver *observer) = 0;
     void *mNativeView;
 };
 

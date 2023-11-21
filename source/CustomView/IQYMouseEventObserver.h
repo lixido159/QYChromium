@@ -10,6 +10,9 @@
 class IQYMouseEventObserver {
 public:
     virtual void onMouseUp() = 0;
+    virtual void onMouseDown() = 0;
+    virtual void onMouseMoved() = 0;
+
 };
 
 #endif /* IQYMouseEventObserver_h */

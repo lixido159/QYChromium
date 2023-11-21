@@ -13,7 +13,8 @@
 #include <stdio.h>
 
 class QYImageView : public QYBaseView{
-
+public:
+    QYImageView();
 };
 
 #endif /* QYImageView_hpp */

@@ -6,3 +6,7 @@
 //
 
 #include "QYImageView.h"
+#include "QYBaseCustomImageView.h"
+QYImageView::QYImageView() {
+    mCustomView = new QYBaseCustomImageView;
+}

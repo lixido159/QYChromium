@@ -2,8 +2,8 @@
 import { QYData, QYPage } from "./global/page-comp"
 
 function qyEntry(data: QYData){
-    console.log("进入入口" + setTimeout);
-    data.update("color", "red");
+    console.log("进入入口" );
+    data.update("color", "green");
     // setTimeout(()=> {
     //     data.update("color", "green");
     // }, 4000);

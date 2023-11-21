@@ -9,13 +9,14 @@
 #include "AppKit/AppKit.h"
 #include "QYMacNativeView.h"
 
-#define toNativeView(view) ((__bridge NSView *)view)
+#define toNativeView(view) ((__bridge QYMacNativeView *)view)
 #define nativeView toNativeView(mNativeView)
 
 
 
 QYBaseCustomView::QYBaseCustomView() {
-    mNativeView = (__bridge_retained void *)[[QYMacNativeView alloc] init];
+    QYMacNativeView *view = [[QYMacNativeView alloc] init];
+    mNativeView = (__bridge_retained void *)view;
 }
 
 void QYBaseCustomView::setX(float x){
@@ -46,4 +47,8 @@ void QYBaseCustomView::addChildView(IQYBaseCustomBaseView *view){
 
 void *QYBaseCustomView::getNativeView(){
     return mNativeView;
+}
+
+void QYBaseCustomView::setMouseEventObserver(IQYMouseEventObserver *observer) {
+    nativeView->observer = observer;
 }
