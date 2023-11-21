@@ -7,7 +7,7 @@
 
 #include "QYBaseCustomView.h"
 #include "AppKit/AppKit.h"
-
+#include "QYMacNativeView.h"
 
 #define toNativeView(view) ((__bridge NSView *)view)
 #define nativeView toNativeView(mNativeView)
@@ -15,7 +15,7 @@
 
 
 QYBaseCustomView::QYBaseCustomView() {
-    mNativeView = (__bridge_retained void *)[[NSView alloc] init];
+    mNativeView = (__bridge_retained void *)[[QYMacNativeView alloc] init];
 }
 
 void QYBaseCustomView::setX(float x){

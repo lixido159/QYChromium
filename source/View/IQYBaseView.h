@@ -11,7 +11,7 @@
 #include "IQYBaseCustomBaseView.h"
 #include <vector>
 
-class IQYBaseView {
+class IQYBaseView : public IQYBaseCustomBaseView{
 public:
     virtual void addChildView(IQYBaseView *child) = 0;
     
