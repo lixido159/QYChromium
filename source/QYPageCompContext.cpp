@@ -36,7 +36,10 @@ void QYPageCompContext::registerDataInterface(QYJSValue *dataValue) {
         notifyDataUpdate(key);
         return nullptr;
     });
+}
 
+void QYPageCompContext::setPageCompValue(QYJSValue *value) {
+    mPageCompJSValue.reset(value);
 }
 
 bool QYPageCompContext::getBoolForKey(std::string key) {

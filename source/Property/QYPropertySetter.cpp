@@ -57,6 +57,8 @@ QYPropertySetter::QYPropertySetter() {
 
 
 void QYPropertySetter::setProperty(IQYBaseView *view, QYPropertyValue *proptyValue) {
-    mPropFuncMap[proptyValue->getKey()](view, proptyValue);
+    if (mPropFuncMap.find(proptyValue->getKey()) != mPropFuncMap.end()) {
+        mPropFuncMap[proptyValue->getKey()](view, proptyValue);
+    }
 }
 

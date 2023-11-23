@@ -18,12 +18,15 @@ public:
     void addJSKeyObserver(std::string key, std::shared_ptr<QYPropertyValue> observer);
     void notifyDataUpdate(std::string key);
     void registerDataInterface(QYJSValue *dataValue);
+    void setPageCompValue(QYJSValue *value);
 public://IQYExpressionContext
     virtual bool getBoolForKey(std::string key) override;
     virtual std::string getStringForKey(std::string key) override;
     virtual double getNumberForKey(std::string key) override;
 private:
     std::map<std::string, std::vector<std::shared_ptr<QYPropertyValue>>> mObserveProperties;
+    
+    std::unique_ptr<QYJSValue> mPageCompJSValue;
     std::unique_ptr<QYJSValue> mDataValue;
     std::map<std::string, QYJSValue *> mData;
 };

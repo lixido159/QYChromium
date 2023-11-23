@@ -2,10 +2,12 @@
 import { QYData, QYPage } from "./global/page-comp"
 
 function qyEntry(data: QYData){
+    const page = new QYPage(data);
     console.log("进入入口" );
-    data.update("color", "green");
-    // setTimeout(()=> {
-    //     data.update("color", "green");
-    // }, 4000);
+    page.setData("color", "green");
+    page.on("qymouseup", ()=> {
+
+    });
+    return page;
 };
 qyNative.entry = qyEntry;
