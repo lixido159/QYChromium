@@ -53,7 +53,7 @@ void QYBaseWidget::onMouseUp() {
     std::string funcName = value->getStringValue();
     QYJSValue *pageCompValue = mPageCompContext->getPageCompValue();
     std::shared_ptr<QYJSContext> jsContext = mPageCompContext->getJSContext();
-    pageCompValue->getValue("call")->call({new QYJSValue(jsContext, funcName)});
+    pageCompValue->call("call", {new QYJSValue(jsContext, funcName)});
 }
 void QYBaseWidget::onMouseDown() {
     

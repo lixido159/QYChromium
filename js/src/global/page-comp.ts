@@ -14,9 +14,7 @@ abstract class IComponent {
     }
 
     on(key:string, func:any) {
-        if (typeof func === 'function') {
-            this.callbacks.set(key, func);
-        }
+        this.callbacks.set(key, func);
     }
 
     call(key:string, ...args: any) {
@@ -24,7 +22,6 @@ abstract class IComponent {
         if (func) {
             func(args);
         }
-        
     }
 
 
