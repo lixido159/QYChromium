@@ -2,7 +2,7 @@
 #include "QYPropertySetter.h"
 
 
-QYBaseWidget::QYBaseWidget(std::shared_ptr<QYPageCompContext> context):mContext(context) {
+QYBaseWidget::QYBaseWidget(std::shared_ptr<QYPageCompContext> context):mPageCompContext(context) {
     
 }
 
@@ -51,7 +51,9 @@ void QYBaseWidget::onMouseUp() {
         return;
     }
     std::string funcName = value->getStringValue();
-    mContext->call();
+    QYJSValue *pageCompValue = mPageCompContext->getPageCompValue();
+    std::shared_ptr<QYJSContext> jsContext = mPageCompContext->getJSContext();
+    pageCompValue->getValue("call")->call({new QYJSValue(jsContext, funcName)});
 }
 void QYBaseWidget::onMouseDown() {
     

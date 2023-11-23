@@ -26,7 +26,7 @@ private:
     QYBaseWidget *mParentWidget = nullptr;
     std::vector<QYBaseWidget *> mChildWidgets;
     IQYBaseView *mView = nullptr;
-    std::shared_ptr<QYPageCompContext> mContext;
+    std::shared_ptr<QYPageCompContext> mPageCompContext;
 
 };
 #endif

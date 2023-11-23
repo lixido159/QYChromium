@@ -16,13 +16,18 @@ class QYJSContext;
 class QYJSValue {
 public:
     
-    QYJSValue(QYJSContext *jsContext);
-    QYJSValue(QYJSContext *jsContext, v8::Local<v8::Value> jsValue);
-    QYJSValue(QYJSContext *jsContext, const std::function<QYJSValue *(QYJSContext *, QYJSValue*)>& handler);
+    QYJSValue(std::shared_ptr<QYJSContext> jsContext);
+    QYJSValue(std::shared_ptr<QYJSContext> jsContext, v8::Local<v8::Value> jsValue);
+    QYJSValue(std::shared_ptr<QYJSContext> jsContext, const std::function<QYJSValue *(QYJSContext *, QYJSValue*)>& handler);
+    
+    QYJSValue(std::shared_ptr<QYJSContext> jsContext, bool value);
+    QYJSValue(std::shared_ptr<QYJSContext> jsContext, std::string value);
+    QYJSValue(std::shared_ptr<QYJSContext> jsContext, double value);
+    
     ~QYJSValue();
     v8::Local<v8::Value> ToLocal();
     v8::Local<v8::Object> ToLocalObject();
-    QYJSContext * getContext();
+    std::shared_ptr<QYJSContext> getContext();
     //args必须是个数组
     QYJSValue *call(QYJSValue *args);
     QYJSValue *call(std::vector<QYJSValue *> args);
@@ -62,8 +67,8 @@ public:
 public:
     void setFunction(const char *name, const std::function<QYJSValue *(QYJSContext *, QYJSValue*)>& handler);
 private:
-    v8::Persistent<v8::Value> mJsValue;
-    QYJSContext *mJsContext  = nullptr;
+    v8::Global<v8::Value> mJsValue;
+    std::shared_ptr<QYJSContext> mJsContext;
 };
 
 

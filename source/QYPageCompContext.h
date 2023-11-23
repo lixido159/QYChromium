@@ -15,10 +15,13 @@ class QYPropertyValue;
 //让子节点获取Page或Component的属性
 class QYPageCompContext : public IQYExpDataContext{
 public:
+    QYPageCompContext(std::shared_ptr<QYJSContext> jsContext);
     void addJSKeyObserver(std::string key, std::shared_ptr<QYPropertyValue> observer);
     void notifyDataUpdate(std::string key);
     void registerDataInterface(QYJSValue *dataValue);
     void setPageCompValue(QYJSValue *value);
+    QYJSValue* getPageCompValue();
+    std::shared_ptr<QYJSContext> getJSContext();
 public://IQYExpressionContext
     virtual bool getBoolForKey(std::string key) override;
     virtual std::string getStringForKey(std::string key) override;
@@ -28,6 +31,7 @@ private:
     
     std::unique_ptr<QYJSValue> mPageCompJSValue;
     std::unique_ptr<QYJSValue> mDataValue;
+    std::shared_ptr<QYJSContext> mJSContext;
     std::map<std::string, QYJSValue *> mData;
 };
 

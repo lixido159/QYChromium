@@ -16,7 +16,7 @@
 
 #define JSQYVar "qyNative"
 
-class QYJSContext {
+class QYJSContext : public std::enable_shared_from_this<QYJSContext>{
 public:
     QYJSContext();
     ~QYJSContext();
@@ -27,11 +27,12 @@ public:
     QYJSValue *getGlobal();
     QYJSValue *executeJS(const char *js, const char *fileName="tmp");
     QYJSValue *executeJSFile(const char *name);
+    void registerContextGlobalObject();
+
 private:
 private:
 #pragma mark - 注册全局对象：console等
     //注册一个全局对象，js环境中可以直接调用
-    void registerContextGlobalObject();
     QYJSValue *createGlobalConsoleObject();
     
 private:
