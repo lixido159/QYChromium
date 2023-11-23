@@ -29,9 +29,11 @@ public:
     v8::Local<v8::Object> ToLocalObject();
     std::shared_ptr<QYJSContext> getContext();
     //args必须是个数组
+    //value是一个方法，如果是一个对象的方法，用下面的
     QYJSValue *call(QYJSValue *args);
     QYJSValue *call(std::vector<QYJSValue *> args);
     
+    //value是一个对象，调用它的方法
     QYJSValue *call(std::string funcName, QYJSValue *args);
     QYJSValue *call(std::string funcName, std::vector<QYJSValue *> args);
 
