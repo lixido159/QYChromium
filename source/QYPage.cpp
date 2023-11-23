@@ -7,8 +7,9 @@
 
 #include "QYPage.h"
 QYPage::QYPage(QYBaseDomNode *rootNode, std::string jsStr):mRootNode(rootNode), mJSStr(jsStr) {
-    mJSContext = new QYJSContext();
-    mPageContext.reset(new QYPageCompContext());
+    mJSContext = std::make_shared<QYJSContext>();
+    mJSContext->registerContextGlobalObject();
+    mPageContext.reset(new QYPageCompContext(mJSContext));
     rootNode->setContext(mPageContext);
 }
 

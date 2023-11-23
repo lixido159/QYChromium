@@ -16,7 +16,6 @@ QYJSContext::QYJSContext() {
     v8::HandleScope handleScope(getIsolate());
     v8::Local<v8::Context> context = v8::Context::New(getIsolate());
     mContext.Reset(getIsolate() ,v8::Persistent<v8::Context>(getIsolate(), context));
-    registerContextGlobalObject();
 }
 
 QYJSContext::~QYJSContext() {
@@ -42,12 +41,12 @@ void QYJSContext::setGlobalJSValue(QYJSValue *value, const char *name) {
 
 QYJSValue *QYJSContext::newObject() {
     ExecuteJS(ToLocal());
-    return new QYJSValue(this);
+    return new QYJSValue(shared_from_this());
 }
 
 QYJSValue* QYJSContext::getGlobal() {
     ExecuteJS(ToLocal());
-    return new QYJSValue(this, contextLocal->Global());
+    return new QYJSValue(shared_from_this(), contextLocal->Global());
 }
 
 void QYJSContext::registerContextGlobalObject() {
@@ -55,7 +54,7 @@ void QYJSContext::registerContextGlobalObject() {
     QYJSValue *consoleObj = createGlobalConsoleObject();
     setGlobalJSValue(consoleObj, "console");
     //注册qy全局对象，后面一些方法都设置到这上面
-    setGlobalJSValue(new QYJSValue(this), JSQYVar);
+    setGlobalJSValue(new QYJSValue(shared_from_this()), JSQYVar);
 }
 
 QYJSValue *QYJSContext::createGlobalConsoleObject() {
@@ -77,7 +76,7 @@ QYJSValue *QYJSContext::executeJS(const char *js, const char *fileName) {
     ExecuteJS(ToLocal());
     v8::Local<v8::Module> mod = loadModule(contextLocal, js, fileName).ToLocalChecked();
     v8::Local<v8::Value> retValue = executeModule(contextLocal, mod);
-    return new QYJSValue(this, retValue);
+    return new QYJSValue(shared_from_this(), retValue);
 }
 
 

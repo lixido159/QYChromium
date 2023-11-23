@@ -19,7 +19,7 @@ void commonFunction(const v8::FunctionCallbackInfo<v8::Value>& info) {
     for (int i = 0; i<info.Length(); i++) {
         paramValue->setValue(i, info[i]);
     }
-    QYJSValue *retVal = function->func(function->jsContext, paramValue);
+    QYJSValue *retVal = function->func(function->jsContext.get(), paramValue);
     if (retVal == nullptr) {
         info.GetReturnValue().SetUndefined();
     } else {
@@ -27,33 +27,50 @@ void commonFunction(const v8::FunctionCallbackInfo<v8::Value>& info) {
     }
 }
 
-v8::Local<v8::Function> createFunction(QYJSContext *context, const std::function<QYJSValue *(QYJSContext *, QYJSValue*)>& handler) {
-    ExecuteJS_RetValue(context->ToLocal());
+v8::Local<v8::Function> createFunction(std::shared_ptr<QYJSContext> jsContext, const std::function<QYJSValue *(QYJSContext *, QYJSValue*)>& handler) {
+    ExecuteJS_RetValue(jsContext->ToLocal());
     QYFunction *function = new QYFunction();
     function->func = handler;
-    function->jsContext = context;
+    function->jsContext = jsContext;
     v8::Local<v8::External> external = v8::External::New(isolate, (void *)(function));
     v8::Local<v8::Function> v8Func = v8::Function::New(contextLocal, commonFunction, external).ToLocalChecked();
     return escapeHandleScope.Escape(v8Func);
 }
 
-QYJSValue::QYJSValue(QYJSContext *jsContext) {
+QYJSValue::QYJSValue(std::shared_ptr<QYJSContext> jsContext) {
     ExecuteJS(jsContext->ToLocal());
     mJsContext = jsContext;
-    mJsValue.Reset(getIsolate(), v8::Object::New(getIsolate()));
+    mJsValue.Reset(isolate, v8::Object::New(isolate));
 }
 
-QYJSValue::QYJSValue(QYJSContext *jsContext, v8::Local<v8::Value> jsValue) {
+QYJSValue::QYJSValue(std::shared_ptr<QYJSContext> jsContext, v8::Local<v8::Value> jsValue) {
     ExecuteJS(jsContext->ToLocal());
     mJsContext = jsContext;
-    mJsValue.Reset(getIsolate(), jsValue);
+    mJsValue.Reset(isolate, jsValue);
 }
 
-QYJSValue::QYJSValue(QYJSContext *jsContext, const std::function<QYJSValue *(QYJSContext *, QYJSValue*)>& handler) {
+QYJSValue::QYJSValue(std::shared_ptr<QYJSContext> jsContext, const std::function<QYJSValue *(QYJSContext *, QYJSValue*)>& handler) {
     ExecuteJS(jsContext->ToLocal());
     mJsContext = jsContext;
-    mJsValue.Reset(getIsolate(), createFunction(jsContext, handler));
+    mJsValue.Reset(isolate, createFunction(jsContext, handler));
 }
+
+QYJSValue::QYJSValue(std::shared_ptr<QYJSContext> jsContext, bool value) {
+    ExecuteJS(jsContext->ToLocal());
+    mJsContext = jsContext;
+    mJsValue.Reset(isolate, v8::Boolean::New(isolate, value));
+}
+QYJSValue::QYJSValue(std::shared_ptr<QYJSContext> jsContext, std::string value) {
+    ExecuteJS(jsContext->ToLocal());
+    mJsContext = jsContext;
+    mJsValue.Reset(isolate, v8::String::NewFromUtf8(isolate, value.c_str()).ToLocalChecked());
+}
+QYJSValue::QYJSValue(std::shared_ptr<QYJSContext> jsContext, double value) {
+    ExecuteJS(jsContext->ToLocal());
+    mJsContext = jsContext;
+    mJsValue.Reset(isolate, v8::Number::New(isolate, value));
+}
+
 
 
 QYJSValue::~QYJSValue() {
@@ -72,11 +89,15 @@ v8::Local<v8::Object> QYJSValue::ToLocalObject() {
     return escapeHandleScope.Escape(value->ToObject(contextLocal).ToLocalChecked());
 }
 
-QYJSContext * QYJSValue::getContext() {
+std::shared_ptr<QYJSContext> QYJSValue::getContext() {
     return mJsContext;
 }
 
 QYJSValue *QYJSValue::call(QYJSValue *args) {
+    if (!args) {
+        std::vector<QYJSValue *> vec;
+        return call(vec);
+    }
     return call(std::vector{args});
 }
 
@@ -88,10 +109,18 @@ QYJSValue *QYJSValue::call(std::vector<QYJSValue *> args) {
     }
     v8::Local<v8::Object> obj = value->ToObject(contextLocal).ToLocalChecked();
     v8::Local<v8::Value> argv[args.size()];
-    for (int i=0 ; i<args.size(); i++) {
-        argv[i] = args[0]->ToLocal();
+    for (int i = 0 ; i<args.size(); i++) {
+        QYJSValue *val = args[i];
+        argv[i] = val->ToLocal();
     }
-    v8::Local<v8::Value> retValue = obj->CallAsFunction(contextLocal, contextLocal->Global(), args.size(), argv).ToLocalChecked();
+    v8::MaybeLocal<v8::Value> mayRetValue = obj->CallAsFunction(contextLocal, contextLocal->Global(), args.size(), argv);
+    v8::Local<v8::Value> retValue;
+    if (mayRetValue.IsEmpty()) {
+        retValue = v8::Undefined(isolate);
+    } else {
+        retValue = mayRetValue.ToLocalChecked();
+    }
+    
     return new QYJSValue(mJsContext, retValue);
 }
 
