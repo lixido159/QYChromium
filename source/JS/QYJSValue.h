@@ -31,6 +31,10 @@ public:
     //args必须是个数组
     QYJSValue *call(QYJSValue *args);
     QYJSValue *call(std::vector<QYJSValue *> args);
+    
+    QYJSValue *call(std::string funcName, QYJSValue *args);
+    QYJSValue *call(std::string funcName, std::vector<QYJSValue *> args);
+
 public:
     int length();
     bool has(const char *key);
