@@ -36,7 +36,9 @@ void QYPage::executeJS() {
     QYJSValue *qyValue = global->getValue(JSQYVar);
     QYJSValue *dataValue = mJSContext->newObject();
     mPageContext->registerDataInterface(dataValue);
-    qyValue->getValue("entry")->call(dataValue);
+    QYJSValue *pageValue = qyValue->getValue("entry")->call(dataValue);
+    mPageContext->setPageCompValue(pageValue);
+    
 }
 
 

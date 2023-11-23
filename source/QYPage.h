@@ -23,7 +23,7 @@ private:
     void registerDataInterface();
     
     std::shared_ptr<QYPageCompContext> mPageContext;
-    std::shared_ptr<QYBaseDomNode> mRootNode = nullptr;
+    std::shared_ptr<QYBaseDomNode> mRootNode;
     QYJSContext *mJSContext = nullptr;
     std::string mJSStr;
 };

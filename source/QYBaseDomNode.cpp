@@ -27,7 +27,7 @@ void QYBaseDomNode::performExpandNodeTree() {
 }
 
 void QYBaseDomNode::performExpandWidgetTree() {
-    mWidget = new QYBaseWidget;
+    mWidget = new QYBaseWidget(mContext);
     if (mParent) {
         mParent->mWidget->addChildWidget(mWidget);
     }

@@ -1,5 +1,11 @@
 #include "QYBaseWidget.h"
 #include "QYPropertySetter.h"
+
+
+QYBaseWidget::QYBaseWidget(std::shared_ptr<QYPageCompContext> context):mContext(context) {
+    
+}
+
 void QYBaseWidget::addChildWidget(QYBaseWidget *child) {
     mChildWidgets.push_back(child);
     child->setParentWidget(this);
@@ -12,7 +18,11 @@ void QYBaseWidget::setProperty(std::shared_ptr<QYPropertyValue> value) {
 }
 
 QYPropertyValue* QYBaseWidget::getProperty(std::string key) {
+    if (mProptyValueMap.find(key) == mProptyValueMap.end()) {
+        return nullptr;
+    }
     return mProptyValueMap[key].get();
+
 }
 
 std::map<std::string, std::shared_ptr<QYPropertyValue>> QYBaseWidget::getProptyValueMap() {
@@ -36,7 +46,12 @@ IQYBaseView* QYBaseWidget::getView() {
 }
 
 void QYBaseWidget::onMouseUp() {
-    
+    QYPropertyValue *value = getProperty("bindmouseup");
+    if (!value) {
+        return;
+    }
+    std::string funcName = value->getStringValue();
+    mContext->call();
 }
 void QYBaseWidget::onMouseDown() {
     

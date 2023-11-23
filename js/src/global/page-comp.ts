@@ -1,37 +1,48 @@
 
 abstract class IComponent {
-    constructor() {
+    constructor(data: QYData) {
+        this.data = data;
     }
+    data: QYData;
     isPage: boolean;
+    callbacks: Map<string, any> = new Map;
     test() {
         console.log("测试方法成功");
     }
-    abstract setData(key: string, value: any);
+    setData(key: string, value: any) {
+        this.data.update(key, value);
+    }
+
+    on(key:string, func:any) {
+        if (typeof func === 'function') {
+            this.callbacks.set(key, func);
+        }
+    }
+
+    call(key:string, ...args: any) {
+        const func = this.callbacks.get(key);
+        if (func) {
+            func(args);
+        }
+        
+    }
+
+
 }
 
-export class QYData {
-    update(key: string, value: any) {
+export interface QYData {
+    update(key: string, value: any);
 
-    }
 }
 
 //页面
 export class QYPage extends IComponent {
-    constructor() {
-        super();
+    constructor(data: QYData) {
+        super(data);
         this.isPage = true;
-    }
-    setData(key: string, value: any) {
-
     }
 }
 
 //组件
 export class QYComponent extends IComponent {
-    constructor() {
-        super();
-    }
-    setData(key: string, value: any) {
-
-    }
 }
