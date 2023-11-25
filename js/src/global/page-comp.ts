@@ -20,7 +20,7 @@ abstract class IComponent {
     call(key:string, ...args: any) {
         const func = this.callbacks.get(key);
         if (func) {
-            func(args);
+            func.apply(null, args);
         }
     }
 

@@ -17,9 +17,9 @@ public:
     void setView(IQYBaseView *view);
     IQYBaseView* getView();
     //IQYMouseEventObserver
-    virtual void onMouseUp() override;
-    virtual void onMouseDown() override;
-    virtual void onMouseMoved() override;
+    virtual void onMouseUp(const QYMouseEvent& mouseEvent) override;
+    virtual void onMouseDown(const QYMouseEvent& mouseEvent) override;
+    virtual void onMouseMoved(const QYMouseEvent& mouseEvent) override;
 
 private:
     std::map<std::string, std::shared_ptr<QYPropertyValue>> mProptyValueMap;
@@ -28,5 +28,6 @@ private:
     IQYBaseView *mView = nullptr;
     std::shared_ptr<QYPageCompContext> mPageCompContext;
 
+    void callMouseEvent(std::string event, const QYMouseEvent& mouseEvent);
 };
 #endif

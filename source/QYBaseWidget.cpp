@@ -45,20 +45,32 @@ IQYBaseView* QYBaseWidget::getView() {
     return mView;
 }
 
-void QYBaseWidget::onMouseUp() {
-    QYPropertyValue *value = getProperty("bindmouseup");
+QYJSValue * mouseEventToJSValue(std::shared_ptr<QYJSContext> jsContext, const QYMouseEvent& mouseEvent) {
+    QYJSValue *obj = new QYJSValue(jsContext);
+    obj->setValue("x", new QYJSValue(jsContext, mouseEvent.x));
+    obj->setValue("y", new QYJSValue(jsContext, mouseEvent.y));
+    obj->setValue("type", new QYJSValue(jsContext, static_cast<double>(mouseEvent.type)));
+    return obj;
+}
+
+void QYBaseWidget::callMouseEvent(std::string event, const QYMouseEvent& mouseEvent) {
+    QYPropertyValue *value = getProperty(event);
     if (!value) {
         return;
     }
     std::string funcName = value->getStringValue();
     QYJSValue *pageCompValue = mPageCompContext->getPageCompValue();
     std::shared_ptr<QYJSContext> jsContext = mPageCompContext->getJSContext();
-    pageCompValue->call("call", {new QYJSValue(jsContext, funcName)});
+    pageCompValue->call("call", {new QYJSValue(jsContext, funcName), mouseEventToJSValue(jsContext, mouseEvent)});
 }
-void QYBaseWidget::onMouseDown() {
-    
+
+void QYBaseWidget::onMouseUp(const QYMouseEvent& mouseEvent) {
+    callMouseEvent("bindmouseup", mouseEvent);
 }
-void QYBaseWidget::onMouseMoved() {
-    
+void QYBaseWidget::onMouseDown(const QYMouseEvent& mouseEvent) {
+    callMouseEvent("bindmousedown", mouseEvent);
+}
+void QYBaseWidget::onMouseMoved(const QYMouseEvent& mouseEvent) {
+    callMouseEvent("bindmousemove", mouseEvent);
 }
 

@@ -28,8 +28,8 @@ QYExpressionParser::QYExpressionParser(std::string str):mSrc(str) {
         size_t len = endIndex - realStart;
         mSrc = mSrc.substr(realStart, len);
         mIsMustache = true;
+        getNextToken();
     }
-    getNextToken();
 }
 
 int QYExpressionParser::getNextChar() {
@@ -143,6 +143,10 @@ QYExpression* QYExpressionParser::parsePrimary() {
 }
 
 QYExpression* QYExpressionParser::parseExp() {
+    //不是胡子语法，整个就是字符串
+    if (!mIsMustache) {
+        return new QYStringExpression(mSrc);
+    }
     QYExpression *leftExp = parsePrimary();
     QYExpression *retExp = leftExp;
     //三目运算符

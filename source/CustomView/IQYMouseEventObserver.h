@@ -7,11 +7,12 @@
 
 #ifndef IQYMouseEventObserver_h
 #define IQYMouseEventObserver_h
+#include "QYMouseEvent.h"
 class IQYMouseEventObserver {
 public:
-    virtual void onMouseUp() = 0;
-    virtual void onMouseDown() = 0;
-    virtual void onMouseMoved() = 0;
+    virtual void onMouseUp(const QYMouseEvent& mouseEvent) = 0;
+    virtual void onMouseDown(const QYMouseEvent& mouseEvent) = 0;
+    virtual void onMouseMoved(const QYMouseEvent& mouseEvent) = 0;
 
 };
 
