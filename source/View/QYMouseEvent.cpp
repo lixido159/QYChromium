@@ -7,7 +7,7 @@
 
 #include "QYMouseEvent.h"
 
-QYMouseEvent::QYMouseEvent(QYMouseEventType mouseType, int locationX, int locationY) {
+QYMouseEvent::QYMouseEvent(QYMouseEventType mouseType, double locationX, double locationY) {
     type = mouseType;
     x = locationX;
     y = locationY;

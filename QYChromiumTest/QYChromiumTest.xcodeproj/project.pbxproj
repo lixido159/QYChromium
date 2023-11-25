@@ -359,8 +359,6 @@
 				271B91E22A8CF515003A9D0A /* QYBaseCustomTextView.mm */,
 				271B91DE2A8CF515003A9D0A /* QYBaseCustomView.h */,
 				271B91E32A8CF515003A9D0A /* QYBaseCustomView.mm */,
-				2727E2E02B0529E600AD9584 /* QYMouseEvent.cpp */,
-				2727E2E12B0529E600AD9584 /* QYMouseEvent.h */,
 				277C231B2B067FEE004DBA26 /* IQYMouseEventObserver.h */,
 			);
 			path = CustomView;
@@ -482,6 +480,8 @@
 				27744F1B2ADBE9DE000B3B29 /* QYImageView.h */,
 				27744F1E2ADBEBD2000B3B29 /* QYTextView.cpp */,
 				27744F1F2ADBEBD2000B3B29 /* QYTextView.h */,
+				2727E2E02B0529E600AD9584 /* QYMouseEvent.cpp */,
+				2727E2E12B0529E600AD9584 /* QYMouseEvent.h */,
 			);
 			path = View;
 			sourceTree = "<group>";

@@ -55,6 +55,7 @@ void QYPropertyValue::setObserver(IQYPropertyValueObserver *observer) {
     mObserver = observer;
 }
 
+//当属性更新时
 void QYPropertyValue::clear() {
     mFinalValue = nullptr;
 }

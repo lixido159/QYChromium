@@ -11,16 +11,18 @@
 #include <stdio.h>
 enum class QYMouseEventType {
     MOUSE_UNKNOWN = 0,
-    MOUSE_UP,
-    MOUSE_DOWN,
+    MOUSE_LEFT_DOWN,
+    MOUSE_LEFT_UP,
+    MOUSE_RIGHT_DOWN,
+    MOUSE_RIGHT_UP,
     MOUSE_MOVE
 };
 
 class QYMouseEvent {
 public:
-    QYMouseEvent(QYMouseEventType mouseType, int locationX, int locationY);
-    int x;
-    int y;
+    QYMouseEvent(QYMouseEventType mouseType, double locationX, double locationY);
+    double x;
+    double y;
     QYMouseEventType type;
 };
 

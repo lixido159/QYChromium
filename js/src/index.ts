@@ -4,7 +4,8 @@ function qyEntry(data: QYData){
     const page = new QYPage(data);
     const colors = ["red", "green", "black", "white"];
     let index = 0;
-    page.on("qymouseup", ()=> {
+    page.on("qymouse", (event: QYMouseEvent)=> {
+        console.log(`测试 ${event.x}  ${event.y}   ${event.type}`);
         if (index >= colors.length)
                 index = 0;
         page.setData("color",  colors[index++]);
