@@ -24,8 +24,14 @@ abstract class IComponent {
         }
     }
 
+    render(name:string, id:string) {
+        qyNative.compLoader[name];
+    }
+
 
 }
+
+
 
 export interface QYData {
     update(key: string, value: any);

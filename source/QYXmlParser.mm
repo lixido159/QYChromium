@@ -51,22 +51,27 @@ QYBaseNodeInfo *toNodeInfo(xmlNodePtr xmlNode) {
     
 }
 
-
-void* parse(const char *htmlFile, const char *jsFile) {
+QYBaseNodeInfo * parseFileToNodeInfo(const char *htmlFile) {
     xmlDocPtr xmlPtr = xmlReadFile(htmlFile, "UTF-8", XML_PARSE_RECOVER);
     if (!xmlPtr) {
         printf("%s 文件打开失败\n", htmlFile);
         return nullptr;
     }
     
-    std::string jsStr = readFile(jsFile);
     xmlNodePtr xmlRoot = xmlDocGetRootElement (xmlPtr);
     QYBaseNodeInfo *info = toNodeInfo(xmlRoot);
+    xmlFreeDoc(xmlPtr);
+    xmlCleanupParser();
+    return info;
+}
+
+void* parse(const char *htmlFile, const char *jsFile) {
+    std::string jsStr = readFile(jsFile);
+    QYBaseNodeInfo *info = parseFileToNodeInfo(htmlFile);
     QYBaseDomNode *rootNode = new QYBaseDomNode(info);
     QYPage *page = new QYPage(rootNode, jsStr);
     page->init();
 //    printNodeInfoTree(info);
-    xmlFreeDoc(xmlPtr);
-    xmlCleanupParser();
+
     return page->getRootNode()->getNativeView();
 }

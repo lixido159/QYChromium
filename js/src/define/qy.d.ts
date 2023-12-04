@@ -3,6 +3,7 @@ declare global {
     //Native实现
     interface QYNative {
         entry(data: QYData): QYPage;
+        compLoader: Object;
     }
 
     enum QYMouseEventType {

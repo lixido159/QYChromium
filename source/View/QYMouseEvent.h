@@ -2,7 +2,7 @@
 //  QYMouseEvent.hpp
 //  QYView
 //
-//  Created by 全寅 on 2023/11/16.
+//  Created by yinquan on 2023/11/16.
 //
 
 #ifndef QYMouseEvent_hpp
