@@ -1,5 +1,5 @@
 import { QYData, QYPage } from "./global/page-comp"
-
+import comp1 from "./qycomp/test"
 function qyEntry(data: QYData){
     const page = new QYPage(data);
     const colors = ["red", "green", "black", "white"];
@@ -9,8 +9,12 @@ function qyEntry(data: QYData){
         if (index >= colors.length)
                 index = 0;
         page.setData("color",  colors[index++]);
+        
+
     });
     return page;
 };
-
 qyNative.entry = qyEntry;
+qyNative.compLoader =  {
+    'qycomp-test': comp1
+};

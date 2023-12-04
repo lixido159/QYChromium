@@ -30,8 +30,10 @@ private:
     std::map<std::string, std::vector<std::shared_ptr<QYPropertyValue>>> mObserveProperties;
     
     std::unique_ptr<QYJSValue> mPageCompJSValue;
-    std::unique_ptr<QYJSValue> mDataValue;
     std::shared_ptr<QYJSContext> mJSContext;
+    //data对象，支持html胡子语法
+    std::unique_ptr<QYJSValue> mDataValue;
+    //data设置的value
     std::map<std::string, QYJSValue *> mData;
 };
 

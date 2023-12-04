@@ -26,6 +26,7 @@ private:
     std::shared_ptr<QYBaseDomNode> mRootNode;
     std::shared_ptr<QYJSContext> mJSContext;
     std::string mJSStr;
+//    std::map<std::string, QYBaseNodeInfo> mCompNodeInfoMap;
 };
 
 

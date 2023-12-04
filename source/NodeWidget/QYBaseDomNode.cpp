@@ -2,8 +2,7 @@
 
 #include "QYBaseDomNode.h"
 #include "QYBaseWidget.h"
-#include "QYViewCreateFactory.h"
-
+#include "QYFactory.h"
 
 QYBaseDomNode::QYBaseDomNode(QYBaseNodeInfo *info): mNodeInfo(info) {
     
@@ -20,14 +19,14 @@ void QYBaseDomNode::addChild(QYBaseDomNode * child) {
 
 void QYBaseDomNode::performExpandNodeTree() {
     for(QYBaseNodeInfo *childInfo : mNodeInfo->childNodeInfoList) {
-        QYBaseDomNode *node = new QYBaseDomNode(childInfo, mContext);
+        QYBaseDomNode *node = createDomNodeWithNodeInfo(childInfo, mContext);
         addChild(node);
         node->performExpandNodeTree();
     }
 }
 
 void QYBaseDomNode::performExpandWidgetTree() {
-    mWidget = new QYBaseWidget(mContext);
+    mWidget = new QYBaseWidget(mContext, mNodeInfo->name);
     if (mParent) {
         mParent->mWidget->addChildWidget(mWidget);
     }
@@ -37,14 +36,7 @@ void QYBaseDomNode::performExpandWidgetTree() {
 }
 
 void QYBaseDomNode::performExpandWidgetViewTree() {
-    IQYBaseView *view = createViewWithNodeInfo(mNodeInfo);
-    mWidget->setView(view);
-    if (mWidget->getParentWidget()) {
-        mWidget->getParentWidget()->getView()->addChildView(view);
-    }
-    for(QYBaseDomNode *node : mChildNodeList) {
-        node->performExpandWidgetViewTree();
-    }
+    mWidget->performExpandViewTree();
 }
 
 void QYBaseDomNode::performApplyWidgetViewTreeProperties() {

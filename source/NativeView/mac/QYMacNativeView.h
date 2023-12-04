@@ -2,7 +2,7 @@
 //  QYMacNativeView.h
 //  QYView
 //
-//  Created by 全寅 on 2023/11/16.
+//  Created by yinquan on 2023/11/16.
 //
 
 #import <Cocoa/Cocoa.h>

@@ -1,8 +1,8 @@
 #include "QYBaseWidget.h"
 #include "QYPropertySetter.h"
+#include "QYFactory.h"
 
-
-QYBaseWidget::QYBaseWidget(std::shared_ptr<QYPageCompContext> context):mPageCompContext(context) {
+QYBaseWidget::QYBaseWidget(std::shared_ptr<QYPageCompContext> context, std::string type):mPageCompContext(context), mType(type) {
     
 }
 
@@ -62,6 +62,18 @@ void QYBaseWidget::callMouseEvent(std::string event, const QYMouseEvent& mouseEv
     QYJSValue *pageCompValue = mPageCompContext->getPageCompValue();
     std::shared_ptr<QYJSContext> jsContext = mPageCompContext->getJSContext();
     pageCompValue->call("call", {new QYJSValue(jsContext, funcName), mouseEventToJSValue(jsContext, mouseEvent)});
+}
+
+void QYBaseWidget::performExpandViewTree() {
+    IQYBaseView *view = createViewWithType(mType);
+    setView(view);
+    if (getParentWidget()) {
+        getParentWidget()->getView()->addChildView(view);
+    }
+    for(QYBaseWidget *widget : mChildWidgets) {
+        widget->performExpandViewTree();
+    }
+
 }
 
 void QYBaseWidget::onMouseUp(const QYMouseEvent& mouseEvent) {
