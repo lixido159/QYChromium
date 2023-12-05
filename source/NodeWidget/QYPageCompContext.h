@@ -12,29 +12,29 @@ class QYPropertyValue;
 #include "CommonHeader.h"
 #include "IQYExpDataContext.h"
 #include "QYJSValue.h"
+#include "QYContextJSValue.h"
 //让子节点获取Page或Component的属性
-class QYPageCompContext : public IQYExpDataContext{
+class QYPageCompContext : public IQYExpDataContext, public std::enable_shared_from_this<QYPageCompContext>{
 public:
     QYPageCompContext(std::shared_ptr<QYJSContext> jsContext);
+    void init();
     void addJSKeyObserver(std::string key, std::shared_ptr<QYPropertyValue> observer);
     void notifyDataUpdate(std::string key);
-    void registerDataInterface(QYJSValue *dataValue);
     void setPageCompValue(QYJSValue *value);
     QYJSValue* getPageCompValue();
     std::shared_ptr<QYJSContext> getJSContext();
+    std::shared_ptr<QYContextJSValue> getContextJSValue();
 public://IQYExpressionContext
     virtual bool getBoolForKey(std::string key) override;
     virtual std::string getStringForKey(std::string key) override;
     virtual double getNumberForKey(std::string key) override;
 private:
     std::map<std::string, std::vector<std::shared_ptr<QYPropertyValue>>> mObserveProperties;
-    
+    //qyNative.entry返回的js对象
     std::unique_ptr<QYJSValue> mPageCompJSValue;
     std::shared_ptr<QYJSContext> mJSContext;
-    //data对象，支持html胡子语法
-    std::unique_ptr<QYJSValue> mDataValue;
-    //data设置的value
-    std::map<std::string, QYJSValue *> mData;
+    //JS里的context对象
+    std::shared_ptr<QYContextJSValue> mContextJSValue;
 };
 
 #endif /* QYPageCompContext_hpp */

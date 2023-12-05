@@ -1,8 +1,8 @@
-import {QYData, QYPage} from "../global/page-comp"
+import {QYComponent, QYContext, QYData, QYPage} from "../global/page-comp"
 declare global {
     //Native实现
     interface QYNative {
-        entry(data: QYData): QYPage;
+        entry(context: QYContext): QYPage;
         compLoader: Object;
     }
 

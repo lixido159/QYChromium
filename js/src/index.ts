@@ -1,20 +1,17 @@
-import { QYData, QYPage } from "./global/page-comp"
+import { QYContext, QYPage, componentFunction, pageFunction } from "./global/page-comp"
 import comp1 from "./qycomp/test"
-function qyEntry(data: QYData){
-    const page = new QYPage(data);
+
+function qyEntry(page: QYPage){
     const colors = ["red", "green", "black", "white"];
     let index = 0;
     page.on("qymouse", (event: QYMouseEvent)=> {
-        console.log(`测试 ${event.x}  ${event.y}   ${event.type}`);
         if (index >= colors.length)
                 index = 0;
         page.setData("color",  colors[index++]);
-        
-
+        page.render
     });
-    return page;
 };
-qyNative.entry = qyEntry;
+qyNative.entry = pageFunction(qyEntry);
 qyNative.compLoader =  {
-    'qycomp-test': comp1
+    'qycomp-test': componentFunction(comp1)
 };

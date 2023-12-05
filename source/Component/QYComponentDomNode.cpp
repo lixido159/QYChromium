@@ -8,8 +8,19 @@
 #include "QYComponentDomNode.h"
 #include "QYFactory.h"
 #include "QYBaseWidget.h"
-QYComponentDomNode::QYComponentDomNode(QYBaseNodeInfo *info): QYBaseDomNode(info) {
-//    mContext.reset(new QYPageCompContext(mJSContext));
+#include "QYJSContext.h"
+#include "QYJSValue.h"
+QYComponentDomNode::QYComponentDomNode(QYBaseNodeInfo *info, std::shared_ptr<QYPageCompContext> context): QYBaseDomNode(info) {
+    std::shared_ptr<QYJSContext> jsContext = context->getJSContext();
+    mContext.reset(new QYPageCompContext(jsContext));
+    mContext->init();
+    QYJSValue *global = jsContext->getGlobal();
+    QYJSValue *qyValue = global->getValue(JSQYVar);
+    QYJSValue *loaderValue = qyValue->getValue("compLoader");
+    QYJSValue *compFuncValue = loaderValue->getValue(info->name);
+    QYJSValue *compValue = compFuncValue->call(mContext->getContextJSValue()->getValue());
+    mContext->setPageCompValue(compValue);
+
 }
 
 void QYComponentDomNode::performExpandNodeTree() {

@@ -115,6 +115,8 @@
 		27B9C7072B14E56100B00C7E /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 27B9C7062B14E56100B00C7E /* index.html */; };
 		27FDB3652B18EC1300040AFF /* QYComponentDomNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27FDB3632B18EC1300040AFF /* QYComponentDomNode.cpp */; };
 		27FDB3662B18EC1300040AFF /* QYComponentDomNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 27FDB3642B18EC1300040AFF /* QYComponentDomNode.h */; };
+		27FDB3C12B1E260700040AFF /* QYContextJSValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27FDB3BF2B1E260700040AFF /* QYContextJSValue.cpp */; };
+		27FDB3C22B1E260700040AFF /* QYContextJSValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 27FDB3C02B1E260700040AFF /* QYContextJSValue.h */; };
 		C604EED52A8C92FA008DAC8E /* QYView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C604EECF2A8C92FA008DAC8E /* QYView.framework */; };
 		C604EED72A8C92FA008DAC8E /* QYView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C604EECF2A8C92FA008DAC8E /* QYView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C64160CF2A8C8FDB0089E110 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C64160CE2A8C8FDB0089E110 /* AppDelegate.m */; };
@@ -277,6 +279,8 @@
 		27B9C7062B14E56100B00C7E /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = index.html; path = ../js/src/index.html; sourceTree = "<group>"; };
 		27FDB3632B18EC1300040AFF /* QYComponentDomNode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = QYComponentDomNode.cpp; sourceTree = "<group>"; };
 		27FDB3642B18EC1300040AFF /* QYComponentDomNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYComponentDomNode.h; sourceTree = "<group>"; };
+		27FDB3BF2B1E260700040AFF /* QYContextJSValue.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = QYContextJSValue.cpp; sourceTree = "<group>"; };
+		27FDB3C02B1E260700040AFF /* QYContextJSValue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYContextJSValue.h; sourceTree = "<group>"; };
 		C604EECF2A8C92FA008DAC8E /* QYView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QYView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C64160CA2A8C8FDB0089E110 /* QYChromiumTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QYChromiumTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C64160CD2A8C8FDB0089E110 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -532,6 +536,8 @@
 				271B91D92A8CF515003A9D0A /* QYBaseWidget.h */,
 				2736796B2AFD0529007067EF /* QYPageCompContext.cpp */,
 				2736796C2AFD0529007067EF /* QYPageCompContext.h */,
+				27FDB3BF2B1E260700040AFF /* QYContextJSValue.cpp */,
+				27FDB3C02B1E260700040AFF /* QYContextJSValue.h */,
 			);
 			path = NodeWidget;
 			sourceTree = "<group>";
@@ -616,6 +622,7 @@
 				27744F102AD83C26000B3B29 /* QYPropertySetter.h in Headers */,
 				271B93222A8E7B84003A9D0A /* QYJSValue.h in Headers */,
 				271B91FE2A8CF515003A9D0A /* QYBaseCustomImageView.h in Headers */,
+				27FDB3C22B1E260700040AFF /* QYContextJSValue.h in Headers */,
 				271B91F72A8CF515003A9D0A /* QYBaseNodeInfo.h in Headers */,
 				271B92042A8CF515003A9D0A /* QYFactory.h in Headers */,
 				27744EA62AC1E342000B3B29 /* QYIdentifierExpression.h in Headers */,
@@ -776,6 +783,7 @@
 				27744EA12AC1E2C1000B3B29 /* QYStringExpression.cpp in Sources */,
 				27744EA92AC1E5C4000B3B29 /* QYFunctionExpression.cpp in Sources */,
 				27744F0F2AD83C26000B3B29 /* QYPropertySetter.cpp in Sources */,
+				27FDB3C12B1E260700040AFF /* QYContextJSValue.cpp in Sources */,
 				27744EA52AC1E342000B3B29 /* QYIdentifierExpression.cpp in Sources */,
 				27744E982AC1DE69000B3B29 /* QYToken.cpp in Sources */,
 				27744EB92AC1E666000B3B29 /* QYBinaryExpression.cpp in Sources */,

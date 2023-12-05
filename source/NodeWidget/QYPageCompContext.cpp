@@ -8,8 +8,11 @@
 #include "QYPageCompContext.h"
 #include "QYPropertyValue.h"
 
-QYPageCompContext::QYPageCompContext(std::shared_ptr<QYJSContext> jsContext) {
-    mJSContext = jsContext;
+QYPageCompContext::QYPageCompContext(std::shared_ptr<QYJSContext> jsContext):mJSContext(jsContext) {
+}
+
+void QYPageCompContext::init() {
+    mContextJSValue = std::make_shared<QYContextJSValue>(weak_from_this());
 }
 
 void QYPageCompContext::addJSKeyObserver(std::string key, std::shared_ptr<QYPropertyValue> observer) {
@@ -32,20 +35,6 @@ void QYPageCompContext::notifyDataUpdate(std::string key) {
     }
 }
 
-void QYPageCompContext::registerDataInterface(QYJSValue *dataValue) {
-    mDataValue.reset(dataValue);
-    mDataValue->setFunction("update", [this](QYJSContext *context, QYJSValue *paramsValue)->QYJSValue * {
-        std::string key = paramsValue->getValue(0)->toString();
-        auto iter = mData.find(key);
-        if (iter != mData.end()) {
-            mData.erase(iter);
-        }
-        mData.insert(std::pair(key, paramsValue->getValue(1)));
-        notifyDataUpdate(key);
-        return nullptr;
-    });
-}
-
 void QYPageCompContext::setPageCompValue(QYJSValue *value) {
     mPageCompJSValue.reset(value);
 }
@@ -58,22 +47,26 @@ std::shared_ptr<QYJSContext> QYPageCompContext::getJSContext() {
     return mJSContext;
 }
 
+std::shared_ptr<QYContextJSValue> QYPageCompContext::getContextJSValue() {
+    return mContextJSValue;
+}
+
 bool QYPageCompContext::getBoolForKey(std::string key) {
-    if (mData.find(key) != mData.end()) {
-        return mData[key]->toBoolean();
+    if (!mContextJSValue) {
+        return false;
     }
-    return false;
+    return mContextJSValue->getBoolForKey(key);
 }
 std::string QYPageCompContext::getStringForKey(std::string key) {
-    if (mData.find(key) != mData.end()) {
-        return mData[key]->toString();
+    if (!mContextJSValue) {
+        return "";
     }
-    return "";
+    return mContextJSValue->getStringForKey(key);
 }
 double QYPageCompContext::getNumberForKey(std::string key) {
-    if (mData.find(key) != mData.end()) {
-        return mData[key]->toNumber();
+    if (!mContextJSValue) {
+        return 0;
     }
-    return 0;
+    return mContextJSValue->getNumberForKey(key);
 }
 
