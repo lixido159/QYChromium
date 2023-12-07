@@ -32,9 +32,9 @@ void QYComponentDomNode::performExpandNodeTree() {
 }
 
 void QYComponentDomNode::performExpandWidgetTree() {
-    mWidget = new QYBaseWidget(mContext, mNodeInfo->name);
+    mWidget = std::make_shared<QYBaseWidget>(mContext, mNodeInfo->name);
     if (mParent) {
-        mParent->mWidget->addChildWidget(mWidget);
+        mParent->mWidget->addChildWidget(mWidget.get());
     }
     for(QYBaseDomNode *node : mChildNodeList) {
         node->performExpandWidgetTree();

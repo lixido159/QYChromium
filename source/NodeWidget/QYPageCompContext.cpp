@@ -37,6 +37,11 @@ void QYPageCompContext::notifyDataUpdate(std::string key) {
 
 void QYPageCompContext::setPageCompValue(QYJSValue *value) {
     mPageCompJSValue.reset(value);
+    mPageCompJSValue->setFunction("getElementById", [this](QYJSContext *context, QYJSValue *paramsValue)->QYJSValue * {
+            QYBaseWidget *widget = getChildWidgetById(paramsValue->getValue(0)->toString());
+            return nullptr;
+    });
+
 }
 
 QYJSValue* QYPageCompContext::getPageCompValue() {

@@ -14,7 +14,7 @@ public:
     std::vector<QYBaseDomNode *> mChildNodeList;
     QYBaseDomNode *mParent = nullptr;
     QYBaseNodeInfo *mNodeInfo = nullptr;
-    QYBaseWidget *mWidget = nullptr;
+    std::shared_ptr<QYBaseWidget> mWidget;
     void addChild(QYBaseDomNode * child);
     //对view赋值属性
     void performApplyWidgetViewTreeProperties();
