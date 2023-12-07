@@ -11,10 +11,15 @@ abstract class IComponent {
     test() {
         console.log("测试方法成功");
     }
+
     setData(key: string, value: any) {
         this.context.data.update(key, value);
     }
+
     render(id: string, props:{}) {
+        const element = this.context.getElementById(id);
+        const comp = element.getComponent();
+        comp.call("render", props);
     }
 
     on(key:string, func:any) {
@@ -28,16 +33,23 @@ abstract class IComponent {
         }
     }
 
-
 }
+
+
 
 export interface QYContext {
     data: QYData;
+    render(id:string, pros:any): void;
+    getElementById(id:string): QYElement;
 }
 
+//
 export interface QYData {
     update(key: string, value: any);
+}
 
+export interface QYElement {
+    getComponent(): IComponent;
 }
 
 //页面
