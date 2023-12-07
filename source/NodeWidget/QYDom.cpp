@@ -6,8 +6,29 @@
 //
 
 #include "QYDom.h"
-QYDom::QYDom(QYBaseWidget *widget):mWidget(widget) {
+#include "QYJSContext.h"
+#include "QYBaseWidget.h"
+#include "QYJSValue.h"
+
+QYDom::QYDom(std::shared_ptr<QYBaseWidget> widget):mWidget(widget) {
     
 }
+
+QYJSValue *QYDom::getValue() {
+    if (mJSValue == nullptr) {
+        QYJSValue *dom = mWidget->getPageCompContext()->getJSContext()->newObject();
+        mJSValue.reset(dom);
+        registerDomValueInterface();
+    }
+    return mJSValue.get();
+}
+
+void QYDom::registerDomValueInterface() {
+    mJSValue->setFunction("getElementById", [this](QYJSContext *context, QYJSValue *paramsValue)->QYJSValue *{
+        QYBaseWidget *widget = mWidget->getChildWidgetById(paramsValue->getValue(0)->toString());
+        return widget->getElementValue();
+    });
+}
+
 
 

@@ -10,12 +10,14 @@
 
 #include <stdio.h>
 #include "QYBaseDomNode.h"
+#include "QYDom.h"
 class QYComponentDomNode : public QYBaseDomNode{
 public:
     QYComponentDomNode(QYBaseNodeInfo *info, std::shared_ptr<QYPageCompContext> context);
 
     virtual void performExpandNodeTree() override;
     virtual void performExpandWidgetTree() override;
-
+private:
+    std::unique_ptr<QYDom> mDom;
 };
 #endif /* QYComponentDomNode_hpp */

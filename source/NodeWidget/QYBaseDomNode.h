@@ -11,10 +11,6 @@ class QYBaseDomNode : public IQYPropertyValueObserver, public std::enable_shared
 public:
     QYBaseDomNode(QYBaseNodeInfo *info);
     QYBaseDomNode(QYBaseNodeInfo *info, std::shared_ptr<QYPageCompContext> context);
-    std::vector<QYBaseDomNode *> mChildNodeList;
-    QYBaseDomNode *mParent = nullptr;
-    QYBaseNodeInfo *mNodeInfo = nullptr;
-    std::shared_ptr<QYBaseWidget> mWidget;
     void addChild(QYBaseDomNode * child);
     //对view赋值属性
     void performApplyWidgetViewTreeProperties();
@@ -23,6 +19,7 @@ public:
 
     void setContext(std::shared_ptr<QYPageCompContext> context);
     
+    std::shared_ptr<QYBaseWidget> getWidget();
 public:
     //从上往下展开nodeTree，根据info->childNodeInfoList创建子QYBaseDomNode，添加到childNodeList
     //并且让其继续调用performExpandNodeTree，
@@ -34,7 +31,12 @@ public:
 public:
     void onDataUpdate(std::shared_ptr<QYPropertyValue> value) override;
 protected:
-    std::shared_ptr<QYPageCompContext> mContext;
+    std::shared_ptr<QYPageCompContext> mPageCompContext;
+    std::vector<QYBaseDomNode *> mChildNodeList;
+    QYBaseDomNode *mParent = nullptr;
+    QYBaseNodeInfo *mNodeInfo = nullptr;
+    std::shared_ptr<QYBaseWidget> mWidget;
+
     
 };
 
