@@ -21,8 +21,11 @@ public:
     void addJSKeyObserver(std::string key, std::shared_ptr<QYPropertyValue> observer);
     void notifyDataUpdate(std::string key);
     void setPageCompValue(QYJSValue *value);
+    //js的comp、page对象
     QYJSValue* getPageCompValue();
+    //js上下文环境
     std::shared_ptr<QYJSContext> getJSContext();
+    //里面持有js里的context对象
     std::shared_ptr<QYContextJSValue> getContextJSValue();
 public://IQYExpressionContext
     virtual bool getBoolForKey(std::string key) override;

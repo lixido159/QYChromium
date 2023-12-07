@@ -17,7 +17,7 @@ abstract class IComponent {
     }
 
     render(id: string, props:{}) {
-        const element = this.context.getElementById(id);
+        const element = this.context.dom.getElementById(id);
         const comp = element.getComponent();
         comp.call("render", props);
     }
@@ -39,8 +39,9 @@ abstract class IComponent {
 
 export interface QYContext {
     data: QYData;
+    dom: QYDom;
     render(id:string, pros:any): void;
-    getElementById(id:string): QYElement;
+    
 }
 
 //
@@ -48,6 +49,12 @@ export interface QYData {
     update(key: string, value: any);
 }
 
+//Dom代表page和component的widget
+export interface QYDom {
+    getElementById(id:string): QYElement;
+}
+
+//QYElement代表每一个wideget
 export interface QYElement {
     getComponent(): IComponent;
 }

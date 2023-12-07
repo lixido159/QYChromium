@@ -10,12 +10,17 @@
 
 #include <stdio.h>
 #include "QYBaseWidget.h"
-
+#include "QYJSValue.h"
 //Dom
 class QYDom {
-    QYDom(QYBaseWidget *widget);
+public:
+    QYDom(std::shared_ptr<QYBaseWidget> widget);
+    QYJSValue *getValue();
 private:
-    QYBaseWidget *mWidget;
+    void registerDomValueInterface();
+    std::shared_ptr<QYBaseWidget> mWidget;
+    //dom jsvalue
+    std::unique_ptr<QYJSValue> mJSValue;
 };
 
 

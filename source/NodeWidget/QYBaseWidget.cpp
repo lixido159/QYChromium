@@ -1,6 +1,7 @@
 #include "QYBaseWidget.h"
 #include "QYPropertySetter.h"
 #include "QYFactory.h"
+#include "QYJSContext.h"
 
 QYBaseWidget::QYBaseWidget(std::shared_ptr<QYPageCompContext> context, std::string type):mPageCompContext(context), mType(type) {
 
@@ -49,9 +50,10 @@ IQYBaseView* QYBaseWidget::getView() {
 
 
 QYBaseWidget *QYBaseWidget::getChildWidgetById(std::string childId) {
-    for (std::vector<QYBaseWidget *>::iterator iter; iter !=mChildWidgets.end(); iter++) {
+    for (std::vector<QYBaseWidget *>::iterator iter = mChildWidgets.begin(); iter !=mChildWidgets.end(); iter++) {
         QYBaseWidget *childWidget = *iter;
-        if (childId.compare(childWidget->getProperty("id")->getStringValue()) == 0) {
+        QYPropertyValue *propty = childWidget->getProperty("id");
+        if (propty &&  childId.compare(propty->getStringValue()) == 0) {
             return childWidget;
         }
         QYBaseWidget *result = childWidget->getChildWidgetById(childId);
@@ -62,6 +64,17 @@ QYBaseWidget *QYBaseWidget::getChildWidgetById(std::string childId) {
     return nullptr;
 }
 
+std::shared_ptr<QYPageCompContext> QYBaseWidget::getPageCompContext() {
+    return mPageCompContext;
+}
+
+QYJSValue *QYBaseWidget::getElementValue() {
+    if (mElementValue == nullptr) {
+        mElementValue.reset(mPageCompContext->getJSContext()->newObject());
+        registerElementInterface();
+    }
+    return mElementValue.get();
+}
 
 void QYBaseWidget::performExpandViewTree() {
     IQYBaseView *view = createViewWithType(mType);
@@ -73,6 +86,12 @@ void QYBaseWidget::performExpandViewTree() {
         widget->performExpandViewTree();
     }
 
+}
+
+void QYBaseWidget::registerElementInterface() {
+    mElementValue->setFunction("getComponent", [this](QYJSContext *context, QYJSValue *paramsValue)->QYJSValue * {
+        return mPageCompContext->getPageCompValue();
+    });
 }
 
 QYJSValue * mouseEventToJSValue(std::shared_ptr<QYJSContext> jsContext, const QYMouseEvent& mouseEvent) {
