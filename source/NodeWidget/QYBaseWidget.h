@@ -16,7 +16,7 @@ public:
     void setParentWidget(QYBaseWidget *parentWidget);
     void setView(IQYBaseView *view);
     IQYBaseView* getView();
-    
+    QYBaseWidget *getChildWidgetById(std::string childId);
     void performExpandViewTree();
 
     //IQYMouseEventObserver
@@ -32,5 +32,6 @@ private:
     std::shared_ptr<QYPageCompContext> mPageCompContext;
     std::string mType = "";
     void callMouseEvent(std::string event, const QYMouseEvent& mouseEvent);
+    QYJSValue *mDomValue;
 };
 #endif

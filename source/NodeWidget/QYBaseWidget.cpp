@@ -3,7 +3,7 @@
 #include "QYFactory.h"
 
 QYBaseWidget::QYBaseWidget(std::shared_ptr<QYPageCompContext> context, std::string type):mPageCompContext(context), mType(type) {
-    
+
 }
 
 void QYBaseWidget::addChildWidget(QYBaseWidget *child) {
@@ -45,6 +45,36 @@ IQYBaseView* QYBaseWidget::getView() {
     return mView;
 }
 
+
+
+
+QYBaseWidget *QYBaseWidget::getChildWidgetById(std::string childId) {
+    for (std::vector<QYBaseWidget *>::iterator iter; iter !=mChildWidgets.end(); iter++) {
+        QYBaseWidget *childWidget = *iter;
+        if (childId.compare(childWidget->getProperty("id")->getStringValue()) == 0) {
+            return childWidget;
+        }
+        QYBaseWidget *result = childWidget->getChildWidgetById(childId);
+        if (result) {
+            return result;
+        }
+    }
+    return nullptr;
+}
+
+
+void QYBaseWidget::performExpandViewTree() {
+    IQYBaseView *view = createViewWithType(mType);
+    setView(view);
+    if (getParentWidget()) {
+        getParentWidget()->getView()->addChildView(view);
+    }
+    for(QYBaseWidget *widget : mChildWidgets) {
+        widget->performExpandViewTree();
+    }
+
+}
+
 QYJSValue * mouseEventToJSValue(std::shared_ptr<QYJSContext> jsContext, const QYMouseEvent& mouseEvent) {
     QYJSValue *obj = new QYJSValue(jsContext);
     obj->setValue("x", new QYJSValue(jsContext, mouseEvent.x));
@@ -64,17 +94,6 @@ void QYBaseWidget::callMouseEvent(std::string event, const QYMouseEvent& mouseEv
     pageCompValue->call("call", {new QYJSValue(jsContext, funcName), mouseEventToJSValue(jsContext, mouseEvent)});
 }
 
-void QYBaseWidget::performExpandViewTree() {
-    IQYBaseView *view = createViewWithType(mType);
-    setView(view);
-    if (getParentWidget()) {
-        getParentWidget()->getView()->addChildView(view);
-    }
-    for(QYBaseWidget *widget : mChildWidgets) {
-        widget->performExpandViewTree();
-    }
-
-}
 
 void QYBaseWidget::onMouseUp(const QYMouseEvent& mouseEvent) {
     callMouseEvent("bindmouseup", mouseEvent);
