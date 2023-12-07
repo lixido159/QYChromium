@@ -8,7 +8,7 @@ function qyEntry(page: QYPage){
         if (index >= colors.length)
                 index = 0;
         page.setData("color",  colors[index++]);
-        page.render
+        page.render("qy", "name");
     });
 };
 qyNative.entry = pageFunction(qyEntry);
