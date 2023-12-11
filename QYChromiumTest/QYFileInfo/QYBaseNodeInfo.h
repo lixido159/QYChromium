@@ -2,7 +2,6 @@
 #ifndef QYBaseNodeInfo_hpp
 #define QYBaseNodeInfo_hpp
 
-#include "CommonHeader.h"
 
 ///XML信息
 class QYBaseNodeInfo {

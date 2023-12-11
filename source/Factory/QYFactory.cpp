@@ -37,7 +37,7 @@ QYBaseDomNode *createDomNodeWithNodeInfo(QYBaseNodeInfo *info, std::shared_ptr<Q
         info->name.compare("text") == 0) {
         domNode = new QYBaseDomNode(info, context);
     } else {
-        QYBaseNodeInfo *compInfo = parseFileToNodeInfo("/Users/quanyin/Documents/Work/QYChromium/js/src/qycomp/test.html");
+        QYBaseNodeInfo *compInfo = parseFileToNodeInfo("/Users/yinquan/Documents/library/Work/QYChromium/js/src/qycomp/test.html");
         info->addChildNodeInfo(compInfo);
         domNode = new QYComponentDomNode(info, context);
     }
