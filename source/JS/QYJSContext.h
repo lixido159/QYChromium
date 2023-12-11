@@ -26,7 +26,6 @@ public:
     QYJSValue *newObject();
     QYJSValue *getGlobal();
     QYJSValue *executeJS(const char *js, const char *fileName="tmp");
-    QYJSValue *executeJSFile(const char *name);
     void registerContextGlobalObject();
 
 private:

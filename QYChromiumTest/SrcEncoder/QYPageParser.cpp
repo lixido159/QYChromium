@@ -5,34 +5,38 @@
 //  Created by yinquan on 2023/6/11.
 //
 
-#import "QYXmlParser.h"
+#import "QYPageParser.h"
 #import <libxml/tree.h>
 #import <libxml/parser.h>
 
 #import "QYBaseNodeInfo.h"
 #import "fileUtil.h"
+#include <cereal/types/unordered_map.hpp>
+#include <cereal/types/memory.hpp>
+#include <cereal/archives/binary.hpp>
+
 #define TOCHAR (char *)
 
 //
-void printProperties(QYBaseNodeInfo *info) {
+void printProperties(std::shared_ptr<QYBaseNodeInfo> info) {
     std::map<std::string, std::string>::iterator iter;
     for (iter = info->properties.begin(); iter != info->properties.end(); iter++) {
         printf("节点名：%s  属性名：%s 属性值：%s\n", info->name.c_str(), iter->first.c_str(), iter->second.c_str());
     }
 }
 
-void printNodeInfoTree(QYBaseNodeInfo *info) {
+void printNodeInfoTree(std::shared_ptr<QYBaseNodeInfo> info) {
     if (info) {
         printProperties(info);
-        for (QYBaseNodeInfo *child : info->childNodeInfoList )  {
+        for (std::shared_ptr<QYBaseNodeInfo> child : info->childNodeInfoList )  {
             printNodeInfoTree(child);
         }
     }
 }
 
 //xmlNode转化为QYBaseNodeInfo
-QYBaseNodeInfo *toNodeInfo(xmlNodePtr xmlNode) {
-    QYBaseNodeInfo *info = new QYBaseNodeInfo();
+std::shared_ptr<QYBaseNodeInfo> toNodeInfo(xmlNodePtr xmlNode) {
+    std::shared_ptr<QYBaseNodeInfo> info = std::make_shared<QYBaseNodeInfo>();
     info->name = TOCHAR xmlNode->name;
     xmlAttr *attr = xmlNode->properties;
     while(attr) {
@@ -50,7 +54,7 @@ QYBaseNodeInfo *toNodeInfo(xmlNodePtr xmlNode) {
     
 }
 
-QYBaseNodeInfo * parseFileToNodeInfo(const char *htmlFile) {
+std::shared_ptr<QYBaseNodeInfo> parseFileToNodeInfo(const char *htmlFile) {
     xmlDocPtr xmlPtr = xmlReadFile(htmlFile, "UTF-8", XML_PARSE_RECOVER);
     if (!xmlPtr) {
         printf("%s 文件打开失败\n", htmlFile);
@@ -58,18 +62,24 @@ QYBaseNodeInfo * parseFileToNodeInfo(const char *htmlFile) {
     }
     
     xmlNodePtr xmlRoot = xmlDocGetRootElement (xmlPtr);
-    QYBaseNodeInfo *info = toNodeInfo(xmlRoot);
+    std::shared_ptr<QYBaseNodeInfo> info = toNodeInfo(xmlRoot);
     xmlFreeDoc(xmlPtr);
     xmlCleanupParser();
     return info;
 }
 
-void* parse(const char *htmlFile, const char *jsFile) {
-    std::string jsStr = readFile(jsFile);
-    QYBaseNodeInfo *info = parseFileToNodeInfo(htmlFile);
-//    QYBaseDomNode *rootNode = new QYBaseDomNode(info);
-//    QYPage *page = new QYPage(rootNode, jsStr);
-//    page->init();
-//    printNodeInfoTree(info);
-//    return page->getRootNode()->getNativeView();
+//template <class Archive>
+//void serialize(Archive& archive, QYPageInfo& page) {
+//    archive(cereal::make_nvp("jsStr", page.jsStr), cereal::make_nvp("componentsMap", page.componentsMap));
+//}
+
+std::shared_ptr<QYPageInfo> parsePageInfo(std::string dir) {
+    std::shared_ptr<QYPageInfo> pageInfo = std::make_shared<QYPageInfo>();
+    pageInfo->jsStr = readFile(dir + "/index.ts");
+    std::vector<std::string> files;
+    traverseDir(dir, ".html", files);
+    for (std::vector<std::string>::iterator iter= files.begin(); iter != files.end(); iter++) {
+        pageInfo->componentsMap.insert(std::pair(filePathToCompName(*iter), parseFileToNodeInfo((*iter).c_str())));
+    }
+    return pageInfo;
 }

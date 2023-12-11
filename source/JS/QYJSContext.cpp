@@ -81,8 +81,4 @@ QYJSValue *QYJSContext::executeJS(const char *js, const char *fileName) {
 
 
 
-QYJSValue *QYJSContext::executeJSFile(const char *name) {
-    return executeJS(readFile(name).c_str(), name);
-}
-
 

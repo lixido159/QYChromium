@@ -24,7 +24,7 @@ QYComponentDomNode::QYComponentDomNode(QYBaseNodeInfo *info, std::shared_ptr<QYP
 }
 
 void QYComponentDomNode::performExpandNodeTree() {
-    for(QYBaseNodeInfo *childInfo : mNodeInfo->childNodeInfoList) {
+    for(std::shared_ptr<QYBaseNodeInfo> childInfo : mNodeInfo->childNodeInfoList) {
         QYBaseDomNode *node = createDomNodeWithNodeInfo(childInfo, mPageCompContext);
         addChild(node);
         node->performExpandNodeTree();

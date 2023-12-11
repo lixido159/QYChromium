@@ -1,7 +1,7 @@
 
 
 #include "QYBaseNodeInfo.h"
-void QYBaseNodeInfo::addChildNodeInfo(QYBaseNodeInfo *child) {
+void QYBaseNodeInfo::addChildNodeInfo(std::shared_ptr<QYBaseNodeInfo> child) {
     this->childNodeInfoList.push_back(child);
-    child->parent = this;
+    child->parent = weak_from_this();
 }

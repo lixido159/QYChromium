@@ -18,7 +18,7 @@ void QYBaseDomNode::addChild(QYBaseDomNode * child) {
 }
 
 void QYBaseDomNode::performExpandNodeTree() {
-    for(QYBaseNodeInfo *childInfo : mNodeInfo->childNodeInfoList) {
+    for(std::shared_ptr<QYBaseNodeInfo> childInfo : mNodeInfo->childNodeInfoList) {
         QYBaseDomNode *node = createDomNodeWithNodeInfo(childInfo, mPageCompContext);
         addChild(node);
         node->performExpandNodeTree();
