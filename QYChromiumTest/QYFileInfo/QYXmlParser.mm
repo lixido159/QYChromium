@@ -10,7 +10,6 @@
 #import <libxml/parser.h>
 
 #import "QYBaseNodeInfo.h"
-#import "QYPage.h"
 #import "fileUtil.h"
 #define TOCHAR (char *)
 
@@ -68,10 +67,9 @@ QYBaseNodeInfo * parseFileToNodeInfo(const char *htmlFile) {
 void* parse(const char *htmlFile, const char *jsFile) {
     std::string jsStr = readFile(jsFile);
     QYBaseNodeInfo *info = parseFileToNodeInfo(htmlFile);
-    QYBaseDomNode *rootNode = new QYBaseDomNode(info);
-    QYPage *page = new QYPage(rootNode, jsStr);
-    page->init();
+//    QYBaseDomNode *rootNode = new QYBaseDomNode(info);
+//    QYPage *page = new QYPage(rootNode, jsStr);
+//    page->init();
 //    printNodeInfoTree(info);
-
-    return page->getRootNode()->getNativeView();
+//    return page->getRootNode()->getNativeView();
 }
