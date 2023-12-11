@@ -6,8 +6,9 @@
 //
 #ifndef qyxml_h
 #define qyxml_h
+#import <QYFileInfo/QYPageInfo.h>
 
 
 
-void* parse(const char *htmlFile, const char *jsFile);
+std::shared_ptr<QYPageInfo> parsePageInfo(std::string dir);
 #endif /* a_hpp */

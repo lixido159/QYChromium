@@ -30,7 +30,7 @@ IQYBaseView *createViewWithType(std::string type) {
 }
 
 
-QYBaseDomNode *createDomNodeWithNodeInfo(QYBaseNodeInfo *info, std::shared_ptr<QYPageCompContext> context) {
+QYBaseDomNode *createDomNodeWithNodeInfo(std::shared_ptr<QYBaseNodeInfo>, std::shared_ptr<QYPageCompContext> context) {
     QYBaseDomNode *domNode;
     if (info->name.compare("view") == 0 ||
         info->name.compare("image") == 0 ||
