@@ -3,6 +3,7 @@
 #import "QYBaseView.h"
 #import "QYBaseDomNode.h"
 #import "QYPropertyValue.h"
+
 ///负责事件响应，持有view
 class QYBaseWidget : public IQYMouseEventObserver {
 public:

@@ -10,6 +10,7 @@
 ///XML信息
 class QYBaseNodeInfo : public std::enable_shared_from_this<QYBaseNodeInfo>{
 public:
+    QYBaseNodeInfo();
     //类型名，比如<view>，这里就是view
     std::string name = "";
     //属性名

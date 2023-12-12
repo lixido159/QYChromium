@@ -11,23 +11,25 @@
 #include "QYJSContext.h"
 #include "QYPageCompContext.h"
 #include "QYDom.h"
+#include <QYFileInfo/QYPageInfo.h>
 class QYPage {
 public:
-    QYPage(QYBaseDomNode *rootNode, std::string jsStr);
+    QYPage(std::shared_ptr<QYPageInfo> pageInfo);
     ~QYPage();
     void init();
     QYBaseDomNode *getRootNode() { return mRootNode.get(); }
     void beforeExecuteJS();
     void executeJS();
     void afterExecuteJS();
+    void *getNativeView();
 private:
     void registerDataInterface();
     std::shared_ptr<QYPageCompContext> mPageContext;
     std::shared_ptr<QYBaseDomNode> mRootNode;
     std::shared_ptr<QYJSContext> mJSContext;
+    std::shared_ptr<QYPageInfo> mPageInfo;
     std::unique_ptr<QYDom> mDom;
     std::string mJSStr;
-//    std::map<std::string, QYBaseNodeInfo> mCompNodeInfoMap;
 };
 
 

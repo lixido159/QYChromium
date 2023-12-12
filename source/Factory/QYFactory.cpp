@@ -30,16 +30,16 @@ IQYBaseView *createViewWithType(std::string type) {
 }
 
 
-QYBaseDomNode *createDomNodeWithNodeInfo(std::shared_ptr<QYBaseNodeInfo>, std::shared_ptr<QYPageCompContext> context) {
+QYBaseDomNode *createDomNode(std::shared_ptr<QYPageInfo> pageInfo, std::shared_ptr<QYBaseNodeInfo> info, std::shared_ptr<QYPageCompContext> context) {
     QYBaseDomNode *domNode;
     if (info->name.compare("view") == 0 ||
         info->name.compare("image") == 0 ||
         info->name.compare("text") == 0) {
-        domNode = new QYBaseDomNode(info, context);
+        domNode = new QYBaseDomNode(pageInfo, info, context);
     } else {
-        QYBaseNodeInfo *compInfo = parseFileToNodeInfo("/Users/yinquan/Documents/library/Work/QYChromium/js/src/qycomp/test.html");
+        std::shared_ptr<QYBaseNodeInfo> compInfo = pageInfo->componentsMap[info->name];
         info->addChildNodeInfo(compInfo);
-        domNode = new QYComponentDomNode(info, context);
+        domNode = new QYComponentDomNode(pageInfo, info, context);
     }
     return domNode;
 };

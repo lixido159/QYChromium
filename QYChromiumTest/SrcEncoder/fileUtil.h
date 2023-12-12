@@ -17,5 +17,5 @@
 void traverseDir(std::string name, std::string extension, std::vector<std::string> &fileNames);
 void createOutputDirIfNeed(std::string name);
 std::string readFile(std::string fileName);
-std::string filePathToCompName(std::string path);
+std::string filePathToCompName(std::string path, std::string prefix);
 #endif /* fileUtil_hpp */
