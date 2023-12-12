@@ -8,12 +8,14 @@
 #include "QYPage.h"
 #include "QYContextJSValue.h"
 
-QYPage::QYPage(QYBaseDomNode *rootNode, std::string jsStr):mRootNode(rootNode), mJSStr(jsStr) {
+QYPage::QYPage(std::shared_ptr<QYPageInfo> pageInfo):mPageInfo(pageInfo) {
+    mRootNode = std::make_shared<QYBaseDomNode>(pageInfo, pageInfo->componentsMap["index"]);
+    mJSStr = pageInfo->jsStr;
     mJSContext = std::make_shared<QYJSContext>();
     mJSContext->registerContextGlobalObject();
     mPageContext.reset(new QYPageCompContext(mJSContext));
     mPageContext->init();
-    rootNode->setContext(mPageContext);
+    mRootNode->setContext(mPageContext);
 }
 
 QYPage::~QYPage() {
@@ -48,4 +50,8 @@ void QYPage::executeJS() {
 
 void QYPage::afterExecuteJS() {
     
+}
+
+void *QYPage::getNativeView() {
+    return mRootNode->getNativeView();
 }

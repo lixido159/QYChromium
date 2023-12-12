@@ -1,4 +1,4 @@
-import { QYContext, QYPage, componentFunction, pageFunction } from "./global/page-comp"
+import { QYContext, QYPage, componentFunction, pageFunction } from "../../global/page-comp"
 import comp1 from "./qycomp/test"
 
 function qyEntry(page: QYPage){

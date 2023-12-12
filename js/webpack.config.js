@@ -1,9 +1,9 @@
 const path = require("path")
 module.exports = {
-  entry: "./src/index.ts", // 打包的文件入口
+  entry: "./src/pages/qytest/index.ts", // 打包的文件入口
   output: { 
     path: path.resolve(__dirname, './build'), // 打包后输出的文件目录
-    filename: 'bundle.js' // 打包后输出的文件名称
+    filename: 'index.js' // 打包后输出的文件名称
   },
   module: {
     // 指定要加载的规则

@@ -1,4 +1,4 @@
-import { QYComponent, QYContext } from "../global/page-comp";
+import { QYComponent, QYContext } from "../../../global/page-comp";
 
 
 export default function(comp: QYComponent) {

@@ -10,7 +10,20 @@
 #include "QYModuleLoader.h"
 #include "QYJSRuntime.h"
 #include "fileUtil.h"
+#include <fstream>
 
+std::string readFile(std::string fileName) {
+    std::ifstream file(fileName);
+    if (file.is_open()) {
+        std::string content((std::istreambuf_iterator<char>(file)),
+                            (std::istreambuf_iterator<char>()));
+        file.close();
+        return content;
+    } else {
+        std::cout << "Unable to open file" << std::endl;
+        return "";
+    }
+}
 
 v8::MaybeLocal<v8::Module> loadModule(v8::Local<v8::Context> context, const char *js, const char *fileName) {
     ExecuteJS_RetValue(context);

@@ -2,19 +2,17 @@
 //  QYPageInfo.hpp
 //  QYFileInfo
 //
-//  Created by 全寅 on 2023/12/9.
+//  Created by yinquan on 2023/12/9.
 //
 
 #ifndef QYPageInfo_hpp
 #define QYPageInfo_hpp
 
-#include <stdio.h>
-#include <map>
-#include <string>
 #include "QYBaseNodeInfo.h"
 
 class QYPageInfo : public std::enable_shared_from_this<QYPageInfo>{
 public:
+    QYPageInfo();
     //js
     std::string jsStr;
     //每个组件对应的html，入口的是key:index

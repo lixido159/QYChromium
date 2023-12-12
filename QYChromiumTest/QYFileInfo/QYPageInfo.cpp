@@ -8,3 +8,6 @@
 #include "QYPageInfo.h"
 #include <iostream>
 #include <fstream>
+QYPageInfo::QYPageInfo() {
+    
+}

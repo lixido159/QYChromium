@@ -21,7 +21,12 @@
 #include "QYJSContext.h"
 static v8::Isolate *mIsolate;
 static std::unique_ptr<v8::Platform> mPlatform;
+static bool mInited;
 void initJSRuntime(const char * snapshotDir) {
+    if (mInited) {
+        return;
+    }
+    mInited = true;
     v8::V8::InitializeExternalStartupData(snapshotDir);
     std::unique_ptr<v8::Platform> platform = v8::platform::NewDefaultPlatform();
     mPlatform = std::move(platform);

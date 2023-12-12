@@ -5,15 +5,11 @@
 //  Created by yinquan on 2023/6/11.
 //
 
-#import "QYPageParser.h"
-#import <libxml/tree.h>
-#import <libxml/parser.h>
-
-#import "QYBaseNodeInfo.h"
-#import "fileUtil.h"
-#include <cereal/types/unordered_map.hpp>
-#include <cereal/types/memory.hpp>
-#include <cereal/archives/binary.hpp>
+#include "QYPageParser.h"
+#include "fileUtil.h"
+#include <libxml/tree.h>
+#include <libxml/parser.h>
+#include <QYFileInfo/QYPageInfo.h>
 
 #define TOCHAR (char *)
 
@@ -74,12 +70,12 @@ std::shared_ptr<QYBaseNodeInfo> parseFileToNodeInfo(const char *htmlFile) {
 //}
 
 std::shared_ptr<QYPageInfo> parsePageInfo(std::string dir) {
+    printf("%s \n", dir.c_str());
     std::shared_ptr<QYPageInfo> pageInfo = std::make_shared<QYPageInfo>();
-    pageInfo->jsStr = readFile(dir + "/index.ts");
     std::vector<std::string> files;
     traverseDir(dir, ".html", files);
     for (std::vector<std::string>::iterator iter= files.begin(); iter != files.end(); iter++) {
-        pageInfo->componentsMap.insert(std::pair(filePathToCompName(*iter), parseFileToNodeInfo((*iter).c_str())));
+        pageInfo->componentsMap.insert(std::pair(filePathToCompName(*iter, dir), parseFileToNodeInfo((*iter).c_str())));
     }
     return pageInfo;
 }

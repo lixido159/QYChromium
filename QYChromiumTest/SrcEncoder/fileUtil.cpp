@@ -26,11 +26,11 @@ std::string readFile(std::string fileName) {
 void createOutputDirIfNeed(std::string name) {
     std::filesystem::path dir(name);
     if (std::filesystem::exists(dir)) {
-        std::cout << "Directory exists.\n";
+        std::cout << "Directory" << name << "  exists.\n";
     }
     else {
         if (std::filesystem::create_directory(dir))
-            std::cout << "Directory created successfully.\n";
+            std::cout << "Directory" << name << "  created successfully.\n";
         else
             std::cout << "Failed to create directory.\n";
     }
@@ -59,8 +59,8 @@ void replaceString(std::string &str, std::string replacedString, std::string rep
 }
 
 //./pages/qycomp/test.html -> qycomp-test
-std::string filePathToCompName(std::string path) {
-    replaceString(path, "./pages/", "");
+std::string filePathToCompName(std::string path, std::string prefix) {
+    replaceString(path, prefix + "/", "");
     replaceString(path, ".html", "");
     replaceString(path, "/", "-");
     return path;

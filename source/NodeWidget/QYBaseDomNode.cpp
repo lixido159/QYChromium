@@ -4,11 +4,11 @@
 #include "QYBaseWidget.h"
 #include "QYFactory.h"
 
-QYBaseDomNode::QYBaseDomNode(QYBaseNodeInfo *info): mNodeInfo(info) {
+QYBaseDomNode::QYBaseDomNode(std::shared_ptr<QYPageInfo> pageInfo, std::shared_ptr<QYBaseNodeInfo> info): mPageInfo(pageInfo), mNodeInfo(info){
     
 }
 
-QYBaseDomNode::QYBaseDomNode(QYBaseNodeInfo *info, std::shared_ptr<QYPageCompContext> context):QYBaseDomNode(info) {
+QYBaseDomNode::QYBaseDomNode(std::shared_ptr<QYPageInfo> pageInfo, std::shared_ptr<QYBaseNodeInfo> info, std::shared_ptr<QYPageCompContext> context):QYBaseDomNode(pageInfo, info) {
     mPageCompContext = context;
 }
 
@@ -19,7 +19,7 @@ void QYBaseDomNode::addChild(QYBaseDomNode * child) {
 
 void QYBaseDomNode::performExpandNodeTree() {
     for(std::shared_ptr<QYBaseNodeInfo> childInfo : mNodeInfo->childNodeInfoList) {
-        QYBaseDomNode *node = createDomNodeWithNodeInfo(childInfo, mPageCompContext);
+        QYBaseDomNode *node = createDomNode(mPageInfo, childInfo, mPageCompContext);
         addChild(node);
         node->performExpandNodeTree();
     }
