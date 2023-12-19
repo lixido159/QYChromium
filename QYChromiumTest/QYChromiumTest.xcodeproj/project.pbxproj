@@ -272,6 +272,9 @@
 		278F2CF92B2A1A9E00CBBD79 /* Node.h in Headers */ = {isa = PBXBuildFile; fileRef = 278F2CAF2B2A1A9E00CBBD79 /* Node.h */; };
 		278F2CFA2B2A1A9E00CBBD79 /* CachedMeasurement.h in Headers */ = {isa = PBXBuildFile; fileRef = 278F2CB02B2A1A9E00CBBD79 /* CachedMeasurement.h */; };
 		278F2CFB2B2A1A9E00CBBD79 /* YGNodeStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 278F2CB12B2A1A9E00CBBD79 /* YGNodeStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		278F2CFF2B2B488D00CBBD79 /* yoga.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 278F2C1E2B2A1A5300CBBD79 /* yoga.framework */; };
+		278F2D232B31F37C00CBBD79 /* QYYogaLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 278F2D212B31F37C00CBBD79 /* QYYogaLayout.cpp */; };
+		278F2D242B31F37C00CBBD79 /* QYYogaLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 278F2D222B31F37C00CBBD79 /* QYYogaLayout.h */; };
 		27FDB3652B18EC1300040AFF /* QYComponentDomNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27FDB3632B18EC1300040AFF /* QYComponentDomNode.cpp */; };
 		27FDB3662B18EC1300040AFF /* QYComponentDomNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 27FDB3642B18EC1300040AFF /* QYComponentDomNode.h */; };
 		27FDB3C12B1E260700040AFF /* QYContextJSValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27FDB3BF2B1E260700040AFF /* QYContextJSValue.cpp */; };
@@ -649,6 +652,8 @@
 		278F2CAF2B2A1A9E00CBBD79 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
 		278F2CB02B2A1A9E00CBBD79 /* CachedMeasurement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CachedMeasurement.h; sourceTree = "<group>"; };
 		278F2CB12B2A1A9E00CBBD79 /* YGNodeStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YGNodeStyle.h; sourceTree = "<group>"; };
+		278F2D212B31F37C00CBBD79 /* QYYogaLayout.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = QYYogaLayout.cpp; sourceTree = "<group>"; };
+		278F2D222B31F37C00CBBD79 /* QYYogaLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYYogaLayout.h; sourceTree = "<group>"; };
 		27FDB3632B18EC1300040AFF /* QYComponentDomNode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = QYComponentDomNode.cpp; sourceTree = "<group>"; };
 		27FDB3642B18EC1300040AFF /* QYComponentDomNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYComponentDomNode.h; sourceTree = "<group>"; };
 		27FDB3BF2B1E260700040AFF /* QYContextJSValue.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = QYContextJSValue.cpp; sourceTree = "<group>"; };
@@ -695,6 +700,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				278F2CFF2B2B488D00CBBD79 /* yoga.framework in Frameworks */,
 				271B93092A8CF826003A9D0A /* libc++.tbd in Frameworks */,
 				271B93072A8CF800003A9D0A /* AppKit.framework in Frameworks */,
 				271B93052A8CF798003A9D0A /* libxml2.tbd in Frameworks */,
@@ -723,6 +729,7 @@
 		271B91D22A8CF515003A9D0A /* source */ = {
 			isa = PBXGroup;
 			children = (
+				278F2D202B31F36700CBBD79 /* Yoga */,
 				27FDB3682B18F01A00040AFF /* Factory */,
 				27FDB3672B18EFFB00040AFF /* NodeWidget */,
 				277C23162B064987004DBA26 /* Mac */,
@@ -1255,6 +1262,15 @@
 			path = yoga;
 			sourceTree = "<group>";
 		};
+		278F2D202B31F36700CBBD79 /* Yoga */ = {
+			isa = PBXGroup;
+			children = (
+				278F2D212B31F37C00CBBD79 /* QYYogaLayout.cpp */,
+				278F2D222B31F37C00CBBD79 /* QYYogaLayout.h */,
+			);
+			path = Yoga;
+			sourceTree = "<group>";
+		};
 		27FDB3622B18EBE400040AFF /* Component */ = {
 			isa = PBXGroup;
 			children = (
@@ -1525,6 +1541,7 @@
 				2727E2E32B0529E600AD9584 /* QYMouseEvent.h in Headers */,
 				277C23192B0649A0004DBA26 /* QYRuntime.h in Headers */,
 				273679762B03D9E7007067EF /* QYExpressionContext.h in Headers */,
+				278F2D242B31F37C00CBBD79 /* QYYogaLayout.h in Headers */,
 				27FDB3662B18EC1300040AFF /* QYComponentDomNode.h in Headers */,
 				27744E9E2AC1DFE4000B3B29 /* QYNumberExpression.h in Headers */,
 				27744EAA2AC1E5C4000B3B29 /* QYFunctionExpression.h in Headers */,
@@ -1813,6 +1830,7 @@
 				27744E902AC1DCDD000B3B29 /* QYExpression.cpp in Sources */,
 				27744F202ADBEBD2000B3B29 /* QYTextView.cpp in Sources */,
 				271B93212A8E7B84003A9D0A /* QYJSValue.cpp in Sources */,
+				278F2D232B31F37C00CBBD79 /* QYYogaLayout.cpp in Sources */,
 				271B93332A9A1534003A9D0A /* QYModuleLoader.cpp in Sources */,
 				2736796D2AFD0529007067EF /* QYPageCompContext.cpp in Sources */,
 				271B91F52A8CF515003A9D0A /* QYBaseView.cpp in Sources */,
