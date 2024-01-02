@@ -12,10 +12,10 @@ void QYBaseWidget::addChildWidget(QYBaseWidget *child) {
     child->setParentWidget(this);
 }
 
-void QYBaseWidget::setProperty(std::shared_ptr<QYPropertyValue> value) {
+void QYBaseWidget::setProperty(std::shared_ptr<QYPropertyValue> value, bool noLayout) {
     static QYPropertySetter *setter = new QYPropertySetter;
     mProptyValueMap.insert(std::pair(value->getKey(), value));
-    setter->setProperty(mView, value.get());
+    setter->setProperty(mView, value.get(), noLayout);
 }
 
 QYPropertyValue* QYBaseWidget::getProperty(std::string key) {

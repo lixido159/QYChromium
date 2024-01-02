@@ -10,6 +10,8 @@
 
 #include <stdio.h>
 #include "IQYMouseEventObserver.h"
+#include "QYDefine.h"
+
 struct QY_Color {
     int r;
     int g;
@@ -23,9 +25,18 @@ public:
     virtual void setY(float y) = 0;
     virtual void setWidth(float width) = 0;
     virtual void setHeight(float height) = 0;
-    virtual void setSize(float width, float height) = 0;
-    virtual void setRect(float x, float y, float width, float height) = 0;
+    virtual void setSize(QYSize size) = 0;
+    virtual void setRect(QYRect rect) = 0;
     virtual void setBackgroundColor(QY_Color color) = 0;
+    
+    virtual float getX() = 0;
+    virtual float getY() = 0;
+    virtual float getWidth() = 0;
+    virtual float getHeight() = 0;
+    virtual QYSize getSize() = 0;
+    virtual QYRect getRect() = 0;
+
+    
     virtual void addChildView(IQYBaseCustomBaseView *view) = 0;
     virtual void *getNativeView() = 0;
     virtual void setMouseEventObserver(IQYMouseEventObserver *observer) = 0;

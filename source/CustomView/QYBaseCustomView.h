@@ -17,9 +17,16 @@ public:
     virtual void setY(float y) override;
     virtual void setWidth(float width) override;
     virtual void setHeight(float height) override;
-    virtual void setSize(float width, float height) override;
-    virtual void setRect(float x, float y, float width, float height) override;
+    virtual void setSize(QYSize size) override;
+    virtual void setRect(QYRect rect) override;
     virtual void setBackgroundColor(QY_Color color) override;
+    
+    virtual float getX() override;
+    virtual float getY() override;
+    virtual float getWidth() override;
+    virtual float getHeight() override;
+    virtual QYSize getSize() override;
+    virtual QYRect getRect() override;
     
     virtual void addChildView(IQYBaseCustomBaseView *view) override;
     virtual void *getNativeView() override;

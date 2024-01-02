@@ -32,6 +32,7 @@ void QYPage::init() {
     mRootNode->performApplyWidgetViewTreeProperties();
     mDom.reset(new QYDom(mRootNode->getWidget()));
     mPageContext->getContextJSValue()->getValue()->setValue("dom", mDom->getValue());
+    mRootNode->performEnd();
 }
 
 void QYPage::beforeExecuteJS() {

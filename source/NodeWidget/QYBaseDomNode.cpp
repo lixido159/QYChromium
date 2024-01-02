@@ -44,13 +44,16 @@ void QYBaseDomNode::performApplyWidgetViewTreeProperties() {
     for (iter = mNodeInfo->properties.begin(); iter != mNodeInfo->properties.end(); iter++) {
         std::shared_ptr<QYPropertyValue> proptyValue = std::make_shared<QYPropertyValue>(iter->first, iter->second, mPageCompContext);
         proptyValue->setObserver(this);
-        mWidget->setProperty(proptyValue);
+        mWidget->setProperty(proptyValue, true);
     }
     for(QYBaseDomNode *node : mChildNodeList) {
         node->performApplyWidgetViewTreeProperties();
     }
 }
 
+void QYBaseDomNode::performEnd() {
+    mWidget->getView()->requestLayout();
+}
 
 void *QYBaseDomNode::getNativeView() {
     return mWidget->getView()->getCustomView()->getNativeView();

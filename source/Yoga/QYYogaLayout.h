@@ -94,8 +94,10 @@
 
 #include <stdio.h>
 #include <yoga/Yoga.h>
-#include "QYBaseView.h"
-class QYYogaLayout{
+
+class QYBaseView;
+class QYYogaLayout {
+public:
     QYYogaLayout(QYBaseView *view);
     ~QYYogaLayout();
     YGNodeRef getNode();

@@ -19,8 +19,8 @@
 class QYPropertySetter {
 public:
     QYPropertySetter();
-    void setProperty(IQYBaseView *view, QYPropertyValue *proptyValue);
+    void setProperty(IQYBaseView *view, QYPropertyValue *proptyValue, bool noLayout = false);
 private:
-    std::map<std::string, void(*)(IQYBaseView *, QYPropertyValue *)> mPropFuncMap;
+    std::map<std::string, bool(*)(IQYBaseView *, QYPropertyValue *)> mPropFuncMap;
 };
 #endif /* QYPropertySetter_hpp */
