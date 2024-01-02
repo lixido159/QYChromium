@@ -2,6 +2,7 @@
 #include "QYBaseCustomView.h"
 QYBaseView::QYBaseView() {
     mCustomView = new QYBaseCustomView;
+    mNodeLayout = std::make_shared<QYYogaLayout>(this);
 }
 
 IQYBaseView* QYBaseView::getParentView(){
@@ -15,10 +16,18 @@ IQYBaseCustomBaseView* QYBaseView::getCustomView(){
     return mCustomView;
 }
 
+QYYogaLayout *QYBaseView::getNodeLayout() {
+    return mNodeLayout.get();
+}
+
 void QYBaseView::addChildView(IQYBaseView *child) {
+    YGNodeRef node = getNodeLayout()->getNode();
+    YGNodeRef childNode = child->getNodeLayout()->getNode();
+    YGNodeInsertChild(node, childNode, mChildViews.size());
     mChildViews.push_back(child);
     child->setParentView(this);
     mCustomView->addChildView(child->getCustomView());
+ 
 }
 
 
@@ -34,13 +43,53 @@ void QYBaseView::setWidth(float width){
 void QYBaseView::setHeight(float height){
     mCustomView->setHeight(height);
 }
-void QYBaseView::setSize(float width, float height){
-    mCustomView->setSize(width, height);
+void QYBaseView::setSize(QYSize size){
+    mCustomView->setSize(size);
 }
-void QYBaseView::setRect(float x, float y, float width, float height){
-    mCustomView->setRect(x, y, width, height);
+void QYBaseView::setRect(QYRect rect){
+    mCustomView->setRect(rect);
 }
 void QYBaseView::setBackgroundColor(QY_Color color){
     mCustomView->setBackgroundColor(color);
+}
+
+
+float QYBaseView::getX(){
+    return mCustomView->getX();
+}
+float QYBaseView::getY(){
+    return mCustomView->getY();
+}
+float QYBaseView::getWidth(){
+    return mCustomView->getWidth();
+}
+float QYBaseView::getHeight(){
+    return mCustomView->getHeight();
+}
+QYSize QYBaseView::getSize(){
+    return mCustomView->getSize();
+}
+QYRect QYBaseView::getRect(){
+    return mCustomView->getRect();
+}
+
+void QYBaseView::requestLayout() {
+    YGNodeRef node = getNodeLayout()->getNode();
+    if (getParentView()) {
+        QYSize size = getParentView()->getSize();
+        YGNodeCalculateLayout(node, size.width, size.height, YGDirectionInherit);
+    } else {
+        YGNodeCalculateLayout(node, YGUndefined, YGUndefined, YGDirectionInherit);
+    }
+    float top = YGNodeLayoutGetTop(node);
+    float left = YGNodeLayoutGetLeft(node);
+    float width = YGNodeLayoutGetWidth(node);
+    float height = YGNodeLayoutGetHeight(node);
+    setRect({top, left, width, height});
+    for (std::vector<IQYBaseView *>::iterator iter = mChildViews.begin(); iter != mChildViews.end(); iter++) {
+        (*iter)->requestLayout();
+    }
+    
+
 }
 

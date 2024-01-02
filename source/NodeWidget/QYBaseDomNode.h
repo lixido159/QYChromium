@@ -18,6 +18,8 @@ public:
     //对view赋值属性
     void performApplyWidgetViewTreeProperties();
     
+    void performEnd();
+    
     void *getNativeView();
 
     void setContext(std::shared_ptr<QYPageCompContext> context);

@@ -25,24 +25,41 @@ QY_Color strToColor(std::string str) {
     }
 }
 
-void proptyFunc_View_BackgroundColor(IQYBaseView *view, QYPropertyValue *propValue) {
+bool proptyFunc_View_BackgroundColor(IQYBaseView *view, QYPropertyValue *propValue) {
     view->setBackgroundColor(strToColor(propValue->getStringValue().c_str()));
+    return false;
 };
 
-void proptyFunc_View_Left(IQYBaseView *view, QYPropertyValue *propValue) {
-    view->setX(propValue->getNumberValue());
+bool proptyFunc_View_Left(IQYBaseView *view, QYPropertyValue *propValue) {
+    YGNodeRef node = view->getNodeLayout()->getNode();
+    YGValue value = YGNodeStyleGetPosition(node, YGEdgeLeft);
+    if (value.unit == YGUnitPoint && value.value == propValue->getNumberValue()) {
+        return false;
+    }
+    YGNodeStyleSetPosition(node, YGEdgeLeft, propValue->getNumberValue());
+    return true;
 };
 
-void proptyFunc_View_Top(IQYBaseView *view, QYPropertyValue *propValue) {
-    view->setY(propValue->getNumberValue());
+bool proptyFunc_View_Top(IQYBaseView *view, QYPropertyValue *propValue) {
+    YGNodeRef node = view->getNodeLayout()->getNode();
+    YGValue value = YGNodeStyleGetPosition(node, YGEdgeTop);
+    if (value.unit == YGUnitPoint && value.value == propValue->getNumberValue()) {
+        return false;
+    }
+    YGNodeStyleSetPosition(node, YGEdgeTop, propValue->getNumberValue());
+    return true;
 };
 
-void proptyFunc_View_Height(IQYBaseView *view, QYPropertyValue *propValue) {
-    view->setHeight(propValue->getNumberValue());
+bool proptyFunc_View_Height(IQYBaseView *view, QYPropertyValue *propValue) {
+    YGNodeRef node = view->getNodeLayout()->getNode();
+    YGNodeStyleSetHeight(node, propValue->getNumberValue());
+    return true;
 };
 
-void proptyFunc_View_Width(IQYBaseView *view, QYPropertyValue *propValue) {
-    view->setWidth(propValue->getNumberValue());
+bool proptyFunc_View_Width(IQYBaseView *view, QYPropertyValue *propValue) {
+    YGNodeRef node = view->getNodeLayout()->getNode();
+    YGNodeStyleSetWidth(node, propValue->getNumberValue());
+    return true;
 };
 
 
@@ -56,9 +73,13 @@ QYPropertySetter::QYPropertySetter() {
 }
 
 
-void QYPropertySetter::setProperty(IQYBaseView *view, QYPropertyValue *proptyValue) {
+void QYPropertySetter::setProperty(IQYBaseView *view, QYPropertyValue *proptyValue, bool noLayout) {
+    bool needLayout = false;
     if (mPropFuncMap.find(proptyValue->getKey()) != mPropFuncMap.end()) {
-        mPropFuncMap[proptyValue->getKey()](view, proptyValue);
+        needLayout = mPropFuncMap[proptyValue->getKey()](view, proptyValue);
+    }
+    if (needLayout && !noLayout) {
+        view->requestLayout();
     }
 }
 

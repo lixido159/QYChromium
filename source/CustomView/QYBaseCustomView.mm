@@ -31,16 +31,37 @@ void QYBaseCustomView::setWidth(float width){
 void QYBaseCustomView::setHeight(float height){
     [nativeView setFrameSize:CGSizeMake(nativeView.frame.size.width, height)];
 }
-void QYBaseCustomView::setSize(float width, float height){
-    [nativeView setFrameSize:CGSizeMake(width, height)];
+void QYBaseCustomView::setSize(QYSize size){
+    [nativeView setFrameSize:CGSizeMake(size.width, size.height)];
 }
-void QYBaseCustomView::setRect(float x, float y, float width, float height){
-    [nativeView setFrame:CGRectMake(x, y, width, height)];
+void QYBaseCustomView::setRect(QYRect rect){
+    [nativeView setFrame:CGRectMake(rect.x, rect.y, rect.width, rect.height)];
 }
 void QYBaseCustomView::setBackgroundColor(QY_Color color){
     nativeView.wantsLayer = YES;
     nativeView.layer.backgroundColor = [NSColor colorWithRed:color.r/255.0 green:color.g/255.0 blue:color.b/255.0 alpha:color.a/255.0].CGColor;
 }
+
+float QYBaseCustomView::getX(){
+    return NSMinX(nativeView.frame);
+}
+float QYBaseCustomView::getY(){
+    return NSMinY(nativeView.frame);
+}
+float QYBaseCustomView::getWidth(){
+    return NSWidth(nativeView.frame);
+}
+float QYBaseCustomView::getHeight(){
+    return NSHeight(nativeView.frame);
+}
+QYSize QYBaseCustomView::getSize(){
+    return {getWidth(), getHeight()};
+}
+QYRect QYBaseCustomView::getRect(){
+    return {getX(), getY(), getWidth(), getHeight()};
+}
+
+
 void QYBaseCustomView::addChildView(IQYBaseCustomBaseView *view){
     [nativeView addSubview:toNativeView(view->getNativeView())];
 }

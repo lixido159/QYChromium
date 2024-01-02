@@ -34,7 +34,7 @@
             mNode, lowercased_name.value);                              \
         break;                                                              \
       default:                                                              \
-        assert(false);                                   \
+        throw "QYYogaLayout error occur";                                   \
     }                                                                       \
   }
 
@@ -56,7 +56,7 @@
         YGNodeStyleSet##capitalized_name##Auto(mNode);                  \
         break;                                                              \
       default:                                                              \
-        assert(false);                                   \
+        throw "QYYogaLayout error occur";                                   \
     }                                                                       \
   }
 
@@ -92,7 +92,7 @@
             mNode, edge, objc_lowercased_name.value);                    \
         break;                                                               \
       default:                                                               \
-        assert(false);                                    \
+        throw "QYYogaLayout error occur";                                    \
     }                                                                        \
   }
 
