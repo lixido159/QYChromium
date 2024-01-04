@@ -6,7 +6,7 @@
 //
 
 #include "QYPropertySetter.h"
-
+#include "QYPropertyCssValueParser.h"
 QY_Color strToColor(std::string str) {
     if (str == "red") {
         return {255, 0, 0, 255};
@@ -63,6 +63,42 @@ bool proptyFunc_View_Width(IQYBaseView *view, QYPropertyValue *propValue) {
 };
 
 
+#pragma mark - FLEX
+
+
+
+bool proptyFunc_View_Flex_Direction(IQYBaseView *view, QYPropertyValue *propValue) {
+    YGNodeRef node = view->getNodeLayout()->getNode();
+    YGNodeStyleSetFlexDirection(node, (YGFlexDirection)parseFlexDirectionCssValue(propValue->getStringValue()));
+    return true;
+};
+
+bool proptyFunc_View_Flex_Wrap(IQYBaseView *view, QYPropertyValue *propValue) {
+    YGNodeRef node = view->getNodeLayout()->getNode();
+    return true;
+};
+
+bool proptyFunc_View_Flex_Flow(IQYBaseView *view, QYPropertyValue *propValue) {
+    YGNodeRef node = view->getNodeLayout()->getNode();
+    return true;
+};
+
+bool proptyFunc_View_Justify_Content(IQYBaseView *view, QYPropertyValue *propValue) {
+    YGNodeRef node = view->getNodeLayout()->getNode();
+    return true;
+};
+
+bool proptyFunc_View_Align_Items(IQYBaseView *view, QYPropertyValue *propValue) {
+    YGNodeRef node = view->getNodeLayout()->getNode();
+    YGNodeStyleSetAlignItems(node, (YGAlign)parseAlignItemsCssValue(propValue->getStringValue()));
+    return true;
+};
+
+bool proptyFunc_View_Align_Content(IQYBaseView *view, QYPropertyValue *propValue) {
+    YGNodeRef node = view->getNodeLayout()->getNode();
+    return true;
+};
+
 //在这里新增属性方法
 QYPropertySetter::QYPropertySetter() {
     mPropFuncMap.insert(std::pair("background-color", &proptyFunc_View_BackgroundColor));
@@ -70,6 +106,16 @@ QYPropertySetter::QYPropertySetter() {
     mPropFuncMap.insert(std::pair("height", &proptyFunc_View_Height));
     mPropFuncMap.insert(std::pair("top", &proptyFunc_View_Top));
     mPropFuncMap.insert(std::pair("left", &proptyFunc_View_Left));
+    
+    //flex
+    mPropFuncMap.insert(std::pair("flex-direction", &proptyFunc_View_Flex_Direction));
+    mPropFuncMap.insert(std::pair("flex-wrap", &proptyFunc_View_Flex_Wrap));
+    mPropFuncMap.insert(std::pair("flex-flow", &proptyFunc_View_Flex_Flow));
+    mPropFuncMap.insert(std::pair("justify-content", &proptyFunc_View_Justify_Content));
+    mPropFuncMap.insert(std::pair("align-items", &proptyFunc_View_Align_Items));
+    mPropFuncMap.insert(std::pair("align-content", &proptyFunc_View_Align_Content));
+
+    
 }
 
 

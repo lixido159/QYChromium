@@ -291,6 +291,10 @@
 		C64160D42A8C8FDC0089E110 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C64160D32A8C8FDC0089E110 /* Assets.xcassets */; };
 		C64160D72A8C8FDC0089E110 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C64160D52A8C8FDC0089E110 /* Main.storyboard */; };
 		C64160D92A8C8FDC0089E110 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C64160D82A8C8FDC0089E110 /* main.m */; };
+		C6D3C7822B46D20300F50401 /* QYPropertyFinalValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6D3C7802B46D20300F50401 /* QYPropertyFinalValue.cpp */; };
+		C6D3C7832B46D20300F50401 /* QYPropertyFinalValue.h in Headers */ = {isa = PBXBuildFile; fileRef = C6D3C7812B46D20300F50401 /* QYPropertyFinalValue.h */; };
+		C6D3C7862B46DD3500F50401 /* QYPropertyCssValueParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6D3C7842B46DD3500F50401 /* QYPropertyCssValueParser.cpp */; };
+		C6D3C7872B46DD3500F50401 /* QYPropertyCssValueParser.h in Headers */ = {isa = PBXBuildFile; fileRef = C6D3C7852B46DD3500F50401 /* QYPropertyCssValueParser.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -672,6 +676,10 @@
 		C64160D62A8C8FDC0089E110 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C64160D82A8C8FDC0089E110 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C64160DA2A8C8FDC0089E110 /* QYChromiumTest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QYChromiumTest.entitlements; sourceTree = "<group>"; };
+		C6D3C7802B46D20300F50401 /* QYPropertyFinalValue.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = QYPropertyFinalValue.cpp; sourceTree = "<group>"; };
+		C6D3C7812B46D20300F50401 /* QYPropertyFinalValue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYPropertyFinalValue.h; sourceTree = "<group>"; };
+		C6D3C7842B46DD3500F50401 /* QYPropertyCssValueParser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = QYPropertyCssValueParser.cpp; sourceTree = "<group>"; };
+		C6D3C7852B46DD3500F50401 /* QYPropertyCssValueParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYPropertyCssValueParser.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1045,9 +1053,13 @@
 		27744F0C2AD83BD6000B3B29 /* Property */ = {
 			isa = PBXGroup;
 			children = (
+				C6D3C7802B46D20300F50401 /* QYPropertyFinalValue.cpp */,
+				C6D3C7812B46D20300F50401 /* QYPropertyFinalValue.h */,
 				27744F082AD6FA8D000B3B29 /* QYPropertyValue.cpp */,
 				27744F092AD6FA8D000B3B29 /* QYPropertyValue.h */,
 				273679692AFBEE13007067EF /* IQYPropertyValueObserver.h */,
+				C6D3C7842B46DD3500F50401 /* QYPropertyCssValueParser.cpp */,
+				C6D3C7852B46DD3500F50401 /* QYPropertyCssValueParser.h */,
 				27744F0D2AD83C26000B3B29 /* QYPropertySetter.cpp */,
 				27744F0E2AD83C26000B3B29 /* QYPropertySetter.h */,
 				27744F112AD83D0E000B3B29 /* QYImageViewPropertySetter.cpp */,
@@ -1517,6 +1529,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6D3C7872B46DD3500F50401 /* QYPropertyCssValueParser.h in Headers */,
 				272360E62B2819FD0074D35F /* QYMacPage.h in Headers */,
 				277C22B62B0646BF004DBA26 /* QYMacNativeView.h in Headers */,
 				271B93172A8E662F003A9D0A /* QYPage.h in Headers */,
@@ -1548,6 +1561,7 @@
 				27FDB3C22B1E260700040AFF /* QYContextJSValue.h in Headers */,
 				C601446C2B21B71200AC4E2F /* QYDom.h in Headers */,
 				271B92042A8CF515003A9D0A /* QYFactory.h in Headers */,
+				C6D3C7832B46D20300F50401 /* QYPropertyFinalValue.h in Headers */,
 				27744EA62AC1E342000B3B29 /* QYIdentifierExpression.h in Headers */,
 				2727E2E32B0529E600AD9584 /* QYMouseEvent.h in Headers */,
 				277C23192B0649A0004DBA26 /* QYRuntime.h in Headers */,
@@ -1840,6 +1854,7 @@
 				271B93162A8E662F003A9D0A /* QYPage.cpp in Sources */,
 				27744F1C2ADBE9DE000B3B29 /* QYImageView.cpp in Sources */,
 				27744E902AC1DCDD000B3B29 /* QYExpression.cpp in Sources */,
+				C6D3C7862B46DD3500F50401 /* QYPropertyCssValueParser.cpp in Sources */,
 				27744F202ADBEBD2000B3B29 /* QYTextView.cpp in Sources */,
 				271B93212A8E7B84003A9D0A /* QYJSValue.cpp in Sources */,
 				278F2D232B31F37C00CBBD79 /* QYYogaLayout.cpp in Sources */,
@@ -1855,6 +1870,7 @@
 				273679752B03D9E7007067EF /* QYExpressionContext.cpp in Sources */,
 				27744EB12AC1E648000B3B29 /* QYCollectionAccessExpression.cpp in Sources */,
 				27744EA12AC1E2C1000B3B29 /* QYStringExpression.cpp in Sources */,
+				C6D3C7822B46D20300F50401 /* QYPropertyFinalValue.cpp in Sources */,
 				27744EA92AC1E5C4000B3B29 /* QYFunctionExpression.cpp in Sources */,
 				27744F0F2AD83C26000B3B29 /* QYPropertySetter.cpp in Sources */,
 				27FDB3C12B1E260700040AFF /* QYContextJSValue.cpp in Sources */,

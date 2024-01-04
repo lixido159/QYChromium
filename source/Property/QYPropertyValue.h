@@ -12,50 +12,8 @@
 #include "QYPageCompContext.h"
 #include <stdio.h>
 #include "QYExpressionContext.h"
+#include "QYPropertyFinalValue.h"
 
-class QYPropertyFinalValue {
-public:
-    enum Type {
-        Null,
-        Number,
-        String,
-        Bool
-    };
-    
-    ~QYPropertyFinalValue() {
-        
-    }
-
-    QYPropertyFinalValue(double value) {
-        mType = QYPropertyFinalValue::Number;
-        mNumber = value;
-    }
-    QYPropertyFinalValue(std::string value) {
-        mType = QYPropertyFinalValue::String;
-        mString = value;
-    }
-    QYPropertyFinalValue(bool value) {
-        mType = QYPropertyFinalValue::Bool;
-        mBool = value;
-    }
-    double getNumberValue() {
-        return mNumber;
-    }
-    std::string getStringValue() {
-        return mString;
-    }
-    bool getBoolValue() {
-        return mBool;
-    }
-
-private:
-    union {
-        double mNumber;
-        std::string mString;
-        bool mBool;
-    };
-    Type mType;
-};
 
 class QYPropertyValue : public IQYExpressionContextObserver, public std::enable_shared_from_this<QYPropertyValue>{
 public:
