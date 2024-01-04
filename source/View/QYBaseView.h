@@ -32,6 +32,7 @@ public:
     virtual QYRect getRect() override;
     
     virtual void requestLayout() override;
+    virtual void updateLayout() override;
 protected:
     IQYBaseView *mParentView = nullptr;
     std::vector<IQYBaseView *> mChildViews;

@@ -81,15 +81,18 @@ void QYBaseView::requestLayout() {
     } else {
         YGNodeCalculateLayout(node, YGUndefined, YGUndefined, YGDirectionInherit);
     }
+    updateLayout();
+}
+
+void QYBaseView::updateLayout() {
+    YGNodeRef node = getNodeLayout()->getNode();
     float top = YGNodeLayoutGetTop(node);
     float left = YGNodeLayoutGetLeft(node);
     float width = YGNodeLayoutGetWidth(node);
     float height = YGNodeLayoutGetHeight(node);
     setRect({top, left, width, height});
     for (std::vector<IQYBaseView *>::iterator iter = mChildViews.begin(); iter != mChildViews.end(); iter++) {
-        (*iter)->requestLayout();
+        (*iter)->updateLayout();
     }
-    
 
 }
-
