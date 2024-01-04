@@ -38,6 +38,8 @@ public:
     virtual QYYogaLayout *getNodeLayout() = 0;
 
     virtual void requestLayout() = 0;
+    
+    virtual void updateLayout() = 0;
 };
 
 #endif /* IQYBaseView_h */
