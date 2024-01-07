@@ -40,6 +40,7 @@ void QYBaseDomNode::performExpandWidgetViewTree() {
 }
 
 void QYBaseDomNode::performApplyWidgetViewTreeProperties() {
+    applyDefaultProperties();
     std::map<std::string, std::string>::iterator iter;
     for (iter = mNodeInfo->properties.begin(); iter != mNodeInfo->properties.end(); iter++) {
         std::shared_ptr<QYPropertyValue> proptyValue = std::make_shared<QYPropertyValue>(iter->first, iter->second, mPageCompContext);
@@ -51,9 +52,6 @@ void QYBaseDomNode::performApplyWidgetViewTreeProperties() {
     }
 }
 
-void QYBaseDomNode::performEnd() {
-    mWidget->getView()->requestLayout();
-}
 
 void *QYBaseDomNode::getNativeView() {
     return mWidget->getView()->getCustomView()->getNativeView();
@@ -70,6 +68,20 @@ std::shared_ptr<QYBaseWidget> QYBaseDomNode::getWidget() {
 #pragma mark - IQYPropertyValueObserver
 void QYBaseDomNode::onDataUpdate(std::shared_ptr<QYPropertyValue> value) {
     mWidget->setProperty(value);
+}
+
+#pragma mark - Private
+void QYBaseDomNode::applyDefaultProperties() {
+    std::map<std::string, std::string> defaultProperties = getDefaultProperties();
+    for (std::map<std::string, std::string>::iterator iter = defaultProperties.begin(); iter != defaultProperties.end(); iter++) {
+        std::shared_ptr<QYPropertyValue> proptyValue = std::make_shared<QYPropertyValue>(iter->first, iter->second, mPageCompContext);
+        mWidget->setProperty(proptyValue, true);
+    }
+}
+
+std::map<std::string, std::string> QYBaseDomNode::getDefaultProperties() {
+    return {
+    };
 }
 
 

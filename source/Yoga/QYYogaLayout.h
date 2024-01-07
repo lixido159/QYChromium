@@ -95,6 +95,10 @@
 #include <stdio.h>
 #include <yoga/Yoga.h>
 
+
+extern YGValue YGPointValue(float value);
+extern YGValue YGPercentValue(float value);
+
 class QYBaseView;
 class QYYogaLayout {
 public:

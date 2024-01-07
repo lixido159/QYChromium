@@ -26,12 +26,17 @@
         std::shared_ptr<QYPageInfo> pageInfo = deserializePageInfo([self.pagePath UTF8String]);
         page = std::make_unique<QYPage>(pageInfo);
         page->init();
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(frameDidChange:) name:NSViewFrameDidChangeNotification object:[self getView]];
     }
     return self;
-
 }
 
 -(NSView *)getView {
     return (__bridge NSView *)page->getNativeView();
 }
+
+- (void)frameDidChange:(NSNotification *)n {
+    page->onSizeChange();
+}
+
 @end

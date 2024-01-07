@@ -78,10 +78,15 @@ void QYBaseView::requestLayout() {
     if (getParentView()) {
         QYSize size = getParentView()->getSize();
         YGNodeCalculateLayout(node, size.width, size.height, YGDirectionInherit);
+        updateLayout();
     } else {
-        YGNodeCalculateLayout(node, YGUndefined, YGUndefined, YGDirectionInherit);
+        //最外层的view，不改变尺寸
+        YGNodeCalculateLayout(node, YGUndefined, YGUndefined, YGDirectionLTR);
+        for (std::vector<IQYBaseView *>::iterator iter = mChildViews.begin(); iter != mChildViews.end(); iter++) {
+            (*iter)->updateLayout();
+        }
+
     }
-    updateLayout();
 }
 
 void QYBaseView::updateLayout() {
@@ -90,9 +95,10 @@ void QYBaseView::updateLayout() {
     float left = YGNodeLayoutGetLeft(node);
     float width = YGNodeLayoutGetWidth(node);
     float height = YGNodeLayoutGetHeight(node);
-    setRect({top, left, width, height});
+    setRect({left, top, width, height});
     for (std::vector<IQYBaseView *>::iterator iter = mChildViews.begin(); iter != mChildViews.end(); iter++) {
         (*iter)->updateLayout();
     }
 
 }
+

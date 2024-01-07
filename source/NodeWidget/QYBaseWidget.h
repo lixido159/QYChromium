@@ -22,6 +22,8 @@ public:
     QYJSValue *getElementValue();
     void performExpandViewTree();
     void registerElementInterface();
+    void requestLayout();
+    void onSizeChange();
     //IQYMouseEventObserver
     virtual void onMouseUp(const QYMouseEvent& mouseEvent) override;
     virtual void onMouseDown(const QYMouseEvent& mouseEvent) override;

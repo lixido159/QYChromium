@@ -94,6 +94,14 @@ void QYBaseWidget::registerElementInterface() {
     });
 }
 
+void QYBaseWidget::requestLayout() {
+    mView->requestLayout();
+}
+
+void QYBaseWidget::onSizeChange() {
+    requestLayout();
+}
+
 QYJSValue * mouseEventToJSValue(std::shared_ptr<QYJSContext> jsContext, const QYMouseEvent& mouseEvent) {
     QYJSValue *obj = new QYJSValue(jsContext);
     obj->setValue("x", new QYJSValue(jsContext, mouseEvent.x));
