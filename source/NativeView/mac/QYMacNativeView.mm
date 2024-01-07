@@ -55,4 +55,7 @@
     }
 }
 
+- (BOOL)isFlipped {
+    return YES;
+}
 @end

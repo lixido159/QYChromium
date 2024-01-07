@@ -22,6 +22,7 @@ public:
     void executeJS();
     void afterExecuteJS();
     void *getNativeView();
+    void onSizeChange();
 private:
     void registerDataInterface();
     std::shared_ptr<QYPageCompContext> mPageContext;

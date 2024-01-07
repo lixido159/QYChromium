@@ -15,8 +15,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.page = [[QYMacPage alloc] initWithPageName:@"qytest.page"];
-//    NSView *view = (__bridge_transfer NSView *)parseHTML([[NSBundle mainBundle] pathForResource:@"index" ofType:@"html"].UTF8String, @"/Users/yinquan/Documents/library/Work/QYChromium/js/build/bundle.js".UTF8String);
-    [self.view addSubview:[self.page getView]];
+    NSView *view = [self.page getView];
+    view.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
+    view.frame = self.view.bounds;
+    [self.view addSubview:view];
 }
 
 

@@ -148,6 +148,13 @@
       lowercased_name, capitalized_name, capitalized_name, YGEdgeAll)
 
 
+YGValue YGPointValue(float value) {
+  return (YGValue){.value = value, .unit = YGUnitPoint};
+}
+
+YGValue YGPercentValue(float value) {
+  return (YGValue){.value = 1, .unit = YGUnitPercent};
+}
 
 YGConfigRef getConfig() {
     static YGConfigRef globalConfig = nullptr;
