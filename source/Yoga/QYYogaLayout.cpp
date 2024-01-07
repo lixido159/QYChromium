@@ -153,7 +153,7 @@ YGValue YGPointValue(float value) {
 }
 
 YGValue YGPercentValue(float value) {
-  return (YGValue){.value = 1, .unit = YGUnitPercent};
+  return (YGValue){.value = value, .unit = YGUnitPercent};
 }
 
 YGConfigRef getConfig() {

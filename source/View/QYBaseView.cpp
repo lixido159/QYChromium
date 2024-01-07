@@ -80,8 +80,8 @@ void QYBaseView::requestLayout() {
         YGNodeCalculateLayout(node, size.width, size.height, YGDirectionInherit);
         updateLayout();
     } else {
-        //最外层的view，不改变尺寸
-        YGNodeCalculateLayout(node, YGUndefined, YGUndefined, YGDirectionLTR);
+        //根节点的view，不改变尺寸
+        YGNodeCalculateLayout(node, getSize().width, getSize().height, YGDirectionLTR);
         for (std::vector<IQYBaseView *>::iterator iter = mChildViews.begin(); iter != mChildViews.end(); iter++) {
             (*iter)->updateLayout();
         }

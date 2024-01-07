@@ -111,6 +111,7 @@ bool proptyFunc_View_Align_Content(IQYBaseView *view, QYPropertyValue *propValue
 //A占比：1/(1+2+3)=1/6 A宽度：100+150*1/6=125
 //B占比：2/(1+2+3)=1/3 B宽度：150+150*1/3=200
 //C占比：3/(1+2+3)=1/2 C宽度：100+150*1/2=175
+//如果A有子元素宽度占了50，那么A、B、C只能从500-50=450里面分
 bool proptyFunc_View_Flex_Grow(IQYBaseView *view, QYPropertyValue *propValue) {
     view->getNodeLayout()->setFlexGrow(propValue->getNumberValue());
 
