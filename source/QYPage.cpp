@@ -32,6 +32,7 @@ void QYPage::init() {
     mRootNode->performApplyWidgetViewTreeProperties();
     mDom.reset(new QYDom(mRootNode->getWidget()));
     mPageContext->getContextJSValue()->getValue()->setValue("dom", mDom->getValue());
+    executePageEntryJS();
     
 }
 
@@ -41,11 +42,15 @@ void QYPage::beforeExecuteJS() {
 
 void QYPage::executeJS() {
     mJSContext->executeJS(mJSStr.c_str());
+    
+}
+
+void QYPage::executePageEntryJS() {
     QYJSValue *global = mJSContext->getGlobal();
     QYJSValue *qyValue = global->getValue(JSQYVar);
-    
     QYJSValue *pageValue = qyValue->getValue("entry")->call(mPageContext->getContextJSValue()->getValue());
     mPageContext->setPageCompValue(pageValue);
+
 }
 
 

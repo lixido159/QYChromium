@@ -16,6 +16,10 @@ IQYBaseCustomBaseView* QYBaseView::getCustomView(){
     return mCustomView;
 }
 
+std::vector<IQYBaseView *> QYBaseView::getChildViews() {
+    return mChildViews;
+}
+
 QYYogaLayout *QYBaseView::getNodeLayout() {
     return mNodeLayout.get();
 }
@@ -75,10 +79,11 @@ QYRect QYBaseView::getRect(){
 
 void QYBaseView::requestLayout() {
     YGNodeRef node = getNodeLayout()->getNode();
-    if (getParentView()) {
-        QYSize size = getParentView()->getSize();
-        YGNodeCalculateLayout(node, size.width, size.height, YGDirectionInherit);
-        updateLayout();
+    IQYBaseView *parentView = getParentView();
+    if (parentView) {
+        QYSize size = parentView->getSize();
+        YGNodeCalculateLayout(YGNodeGetParent(node), size.width, size.height, YGDirectionInherit);
+        parentView->updateLayout();
     } else {
         //根节点的view，不改变尺寸
         YGNodeCalculateLayout(node, getSize().width, getSize().height, YGDirectionLTR);

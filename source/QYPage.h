@@ -24,6 +24,7 @@ public:
     void *getNativeView();
     void onSizeChange();
 private:
+    void executePageEntryJS();
     void registerDataInterface();
     std::shared_ptr<QYPageCompContext> mPageContext;
     std::shared_ptr<QYBaseDomNode> mRootNode;

@@ -8,6 +8,7 @@ class QYBaseView : public IQYBaseView  {
 public:
     QYBaseView();
     void addChildView(IQYBaseView *child) override;
+    std::vector<IQYBaseView *> getChildViews() override;
     
     IQYBaseView *getParentView() override;
     void setParentView(IQYBaseView *parentView) override;
