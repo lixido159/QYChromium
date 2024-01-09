@@ -77,6 +77,9 @@ YGJustify parseJustifyContentCssValue(std::string value) {
 }
 
 YGValue parseNumberStringToYGValue(std::string value) {
+    if (value.size() == 0) {
+        return YGPointValue(0);;
+    }
     size_t index = value.find("%");
     if (index == std::string::npos) {
         return YGPointValue(std::stof(value));

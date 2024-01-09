@@ -4,11 +4,14 @@ import comp1 from "./qycomp/test"
 function qyEntry(page: QYPage){
     const colors = ["red", "green", "black", "white"];
     let index = 0;
+    let height = 80;
+    page.setData("height",  height);
+    page.render("qy", "name");
     page.on("qymouse", (event: QYMouseEvent)=> {
         if (index >= colors.length)
                 index = 0;
-        page.setData("color",  colors[index++]);
-        page.render("qy", "name");
+        height += 10;
+        page.setData("height",  height); 
     });
 };
 qyNative.entry = pageFunction(qyEntry);

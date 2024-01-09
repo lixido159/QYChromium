@@ -30,6 +30,7 @@ public:
     virtual QYRect getRect() = 0;
     
     virtual void addChildView(IQYBaseView *child) = 0;
+    virtual std::vector<IQYBaseView *> getChildViews() = 0;
     virtual IQYBaseView *getParentView() = 0;
     virtual void setParentView(IQYBaseView *parentView) = 0;
     
