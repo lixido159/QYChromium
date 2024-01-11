@@ -9,5 +9,10 @@
 #define QYIfDomNode_hpp
 
 #include <stdio.h>
+#include "QYBaseDomNode.h"
+class QYIfDomNode : public QYBaseDomNode {
+    
+};
+
 
 #endif /* QYIfDomNode_hpp */

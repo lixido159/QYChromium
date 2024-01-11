@@ -13,6 +13,14 @@
 #include "QYBaseCustomImageView.h"
 #include "QYBaseCustomTextView.h"
 #include "QYComponentDomNode.h"
+enum class NodeCreatorItemType {
+    COMMON,
+    IF,
+    ELIF,
+    ELSE,
+    FOR
+};
+
 
 extern QYBaseNodeInfo * parseFileToNodeInfo(const char *htmlFile);
 IQYBaseView *createViewWithType(std::string type) {
@@ -30,6 +38,7 @@ IQYBaseView *createViewWithType(std::string type) {
 }
 
 
+
 QYBaseDomNode *createDomNode(std::shared_ptr<QYPageInfo> pageInfo, std::shared_ptr<QYBaseNodeInfo> info, std::shared_ptr<QYPageCompContext> context) {
     QYBaseDomNode *domNode;
     if (info->name.compare("view") == 0 ||
@@ -43,3 +52,27 @@ QYBaseDomNode *createDomNode(std::shared_ptr<QYPageInfo> pageInfo, std::shared_p
     }
     return domNode;
 };
+
+NodeCreatorItemType getNodeCreatorItemType(std::shared_ptr<QYBaseNodeInfo> info) {
+    std::map<std::string, std::string>::iterator end;
+    if (info->properties.find("qy:if") != end) {
+        return NodeCreatorItemType::IF;
+    } else if (info->properties.find("qy:elif") != end) {
+        return NodeCreatorItemType::ELIF;
+    } else if (info->properties.find("qy:else") != end) {
+        return NodeCreatorItemType::ELSE;
+    } else if (info->properties.find("qy:for") != end) {
+        return NodeCreatorItemType::FOR;
+    } else {
+        return NodeCreatorItemType::COMMON;
+    }
+}
+
+
+std::vector<std::shared_ptr<IQYDomNodeCreatorItem>> createDomNodeCreatorItems(std::vector<std::shared_ptr<QYBaseNodeInfo>> childInfos) {
+    for (std::shared_ptr<QYBaseNodeInfo> nodeInfo : childInfos) {
+        NodeCreatorItemType itemType = getNodeCreatorItemType(nodeInfo);
+        if (itemType)
+    }
+}
+

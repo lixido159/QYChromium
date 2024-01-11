@@ -12,14 +12,17 @@ QYBaseDomNode::QYBaseDomNode(std::shared_ptr<QYPageInfo> pageInfo, std::shared_p
     mPageCompContext = context;
 }
 
-void QYBaseDomNode::addChild(QYBaseDomNode * child) {
+void QYBaseDomNode::addChild(std::shared_ptr<QYBaseDomNode> child) {
     this->mChildNodeList.push_back(child);
-    child->mParent = this;
+    child->mParent = weak_from_this();
 }
 
 void QYBaseDomNode::performExpandNodeTree() {
-    for(std::shared_ptr<QYBaseNodeInfo> childInfo : mNodeInfo->childNodeInfoList) {
-        QYBaseDomNode *node = createDomNode(mPageInfo, childInfo, mPageCompContext);
+    std::vector<std::shared_ptr<IQYDomNodeCreatorItem>> items = createDomNodeCreatorItem(mNodeInfo->childNodeInfoList);
+    
+    
+    for(std::shared_ptr<IQYDomNodeCreatorItem> item : items) {
+        std::shared_ptr<QYBaseDomNode> node = item->createNode();
         addChild(node);
         node->performExpandNodeTree();
     }
