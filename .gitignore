@@ -3,5 +3,5 @@ QYChromiumTest/QYChromiumTest.xcodeproj/xcuserdata/yinquan.xcuserdatad/xcdebugge
 js/build/**
 js/node_modules/**
 
-*.xcscmblueprint
-*.xccheckout
+QYChromiumTest/QYChromiumTest.xcodeproj/project.xcworkspace/xcuserdata/quanyin.xcuserdatad/UserInterfaceState.xcuserstate
+QYChromiumTest/QYChromiumTest.xcodeproj/xcuserdata/quanyin.xcuserdatad/xcschemes/xcschememanagement.plist
