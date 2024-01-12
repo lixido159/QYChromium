@@ -13,7 +13,10 @@
 #include "IQYDomNodeCreatorItem.h"
 class QYIfDomNodeCreatorItem : public IQYDomNodeCreatorItem {
 public:
-    virtual std::shared_ptr<QYBaseDomNode> createNode() override;
+    QYIfDomNodeCreatorItem(std::vector<std::shared_ptr<QYBaseNodeInfo>> nodeInfoList);
+    virtual std::shared_ptr<QYBaseDomNode> createNode(std::shared_ptr<QYPageInfo> pageInfo, std::shared_ptr<QYPageCompContext> context) override;
+private:
+    std::vector<std::shared_ptr<QYBaseNodeInfo>> mNodeInfoList;
 };
 
 #endif /* QYIfDomNodeCreatorItem_hpp */

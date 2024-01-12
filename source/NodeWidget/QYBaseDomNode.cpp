@@ -18,11 +18,11 @@ void QYBaseDomNode::addChild(std::shared_ptr<QYBaseDomNode> child) {
 }
 
 void QYBaseDomNode::performExpandNodeTree() {
-    std::vector<std::shared_ptr<IQYDomNodeCreatorItem>> items = createDomNodeCreatorItem(mNodeInfo->childNodeInfoList);
+    std::vector<std::shared_ptr<IQYDomNodeCreatorItem>> items = createDomNodeCreatorItems(mNodeInfo->childNodeInfoList);
     
     
     for(std::shared_ptr<IQYDomNodeCreatorItem> item : items) {
-        std::shared_ptr<QYBaseDomNode> node = item->createNode();
+        std::shared_ptr<QYBaseDomNode> node = item->createNode(mPageInfo, mPageCompContext);
         addChild(node);
         node->performExpandNodeTree();
     }
@@ -30,10 +30,11 @@ void QYBaseDomNode::performExpandNodeTree() {
 
 void QYBaseDomNode::performExpandWidgetTree() {
     mWidget = std::make_shared<QYBaseWidget>(mPageCompContext, mNodeInfo->name);
-    if (mParent) {
-        mParent->mWidget->addChildWidget(mWidget.get());
+    auto parent = mParent.lock();
+    if (parent) {
+        parent->mWidget->addChildWidget(mWidget.get());
     }
-    for(QYBaseDomNode *node : mChildNodeList) {
+    for(std::shared_ptr<QYBaseDomNode> node : mChildNodeList) {
         node->performExpandWidgetTree();
     }
 }
@@ -50,7 +51,7 @@ void QYBaseDomNode::performApplyWidgetViewTreeProperties() {
         proptyValue->setObserver(this);
         mWidget->setProperty(proptyValue, true);
     }
-    for(QYBaseDomNode *node : mChildNodeList) {
+    for(std::shared_ptr<QYBaseDomNode> node : mChildNodeList) {
         node->performApplyWidgetViewTreeProperties();
     }
 }
