@@ -25,7 +25,7 @@ QYComponentDomNode::QYComponentDomNode(std::shared_ptr<QYPageInfo> pageInfo, std
 
 void QYComponentDomNode::performExpandNodeTree() {
     for(std::shared_ptr<QYBaseNodeInfo> childInfo : mNodeInfo->childNodeInfoList) {
-        QYBaseDomNode *node = createDomNode(mPageInfo, childInfo, mPageCompContext);
+        std::shared_ptr<QYBaseDomNode> node = createDomNode(mPageInfo, childInfo, mPageCompContext);
         addChild(node);
         node->performExpandNodeTree();
     }
@@ -33,10 +33,11 @@ void QYComponentDomNode::performExpandNodeTree() {
 
 void QYComponentDomNode::performExpandWidgetTree() {
     mWidget = std::make_shared<QYBaseWidget>(mPageCompContext, mNodeInfo->name);
-    if (mParent) {
-        mParent->getWidget()->addChildWidget(mWidget.get());
+    auto parent = mParent.lock();
+    if (parent) {
+        parent->getWidget()->addChildWidget(mWidget.get());
     }
-    for(QYBaseDomNode *node : mChildNodeList) {
+    for(std::shared_ptr<QYBaseDomNode> node : mChildNodeList) {
         node->performExpandWidgetTree();
     }
     mDom.reset(new QYDom(mWidget));

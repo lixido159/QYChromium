@@ -14,7 +14,7 @@
 IQYBaseView *createViewWithType(std::string type);
 QYBaseWidget *createWidgetWithType(std::string type, std::shared_ptr<QYPageCompContext> context);
 
-QYBaseDomNode *createDomNode(std::shared_ptr<QYPageInfo> pageInfo, std::shared_ptr<QYBaseNodeInfo>, std::shared_ptr<QYPageCompContext> context);
+std::shared_ptr<QYBaseDomNode> createDomNode(std::shared_ptr<QYPageInfo> pageInfo, std::shared_ptr<QYBaseNodeInfo>, std::shared_ptr<QYPageCompContext> context);
 
 std::vector<std::shared_ptr<IQYDomNodeCreatorItem>> createDomNodeCreatorItems(std::vector<std::shared_ptr<QYBaseNodeInfo>> childInfos);
 #endif /* QYFactory_hpp */
