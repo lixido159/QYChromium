@@ -51,6 +51,10 @@ std::string QYPropertyValue::getKey() {
     return mKey;
 }
 
+std::string QYPropertyValue::getSrc() {
+    return mSrc;
+}
+
 void QYPropertyValue::setObserver(IQYPropertyValueObserver *observer) {
     mObserver = observer;
 }

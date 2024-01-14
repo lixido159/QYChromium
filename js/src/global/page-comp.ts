@@ -18,7 +18,11 @@ abstract class IComponent {
 
     render(id: string, props:{}) {
         const element = this.context.dom.getElementById(id);
+        if (!element) {
+            return;
+        }
         const comp = element.getComponent();
+        console.log("1111"+comp);
         comp.call("render", props);
     }
 

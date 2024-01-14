@@ -15,8 +15,6 @@ public:
     QYBaseDomNode(std::shared_ptr<QYPageInfo> pageInfo, std::shared_ptr<QYBaseNodeInfo> info);
     QYBaseDomNode(std::shared_ptr<QYPageInfo> pageInfo, std::shared_ptr<QYBaseNodeInfo> info, std::shared_ptr<QYPageCompContext> context);
     void addChild(std::shared_ptr<QYBaseDomNode> child);
-    //对view赋值属性
-    void performApplyWidgetViewTreeProperties();
         
     void *getNativeView();
 
@@ -31,8 +29,11 @@ public:
     virtual void performExpandWidgetTree();
     //从上往下展开view
     virtual void performExpandWidgetViewTree();
+    //对view赋值属性
+    virtual void performApplyWidgetViewTreeProperties();
+
 public:
-    void onDataUpdate(std::shared_ptr<QYPropertyValue> value) override;
+    virtual void onDataUpdate(std::shared_ptr<QYPropertyValue> value) override;
 private:
     void applyDefaultProperties();
     std::map<std::string, std::string> getDefaultProperties();

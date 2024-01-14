@@ -11,7 +11,8 @@ function qyEntry(page: QYPage){
         if (index >= colors.length)
                 index = 0;
         height += 10;
-        page.setData("height",  height); 
+        // page.setData("height",  height); 
+        page.setData("exit",  2);
     });
 };
 qyNative.entry = pageFunction(qyEntry);

@@ -57,7 +57,7 @@ std::shared_ptr<QYBaseDomNode> createDomNode(std::shared_ptr<QYPageInfo> pageInf
 };
 
 NodeCreatorItemType getNodeCreatorItemType(std::shared_ptr<QYBaseNodeInfo> info) {
-    std::map<std::string, std::string>::iterator end;
+    std::map<std::string, std::string>::iterator end = info->properties.end();
     if (info->properties.find("qy:if") != end) {
         return NodeCreatorItemType::IF;
     } else if (info->properties.find("qy:elif") != end) {
