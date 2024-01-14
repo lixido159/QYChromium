@@ -1,9 +1,10 @@
 <view background-color="red">
     <view  display="flex" width="100%" height="100%" flex-direction="row" align-items="center" justify-content="flex-end"  background-color="black">
         <view  flex-grow="1" align-self="flex-start" height="100" width="{{ height }}" background-color="yellow" bindmouseup="qymouse" bindmousedown="qymouse"/>
-        <view  flex-grow="1"  height="100" background-color="blue">
+        <view qy:if="true"  flex-grow="1"  height="100" background-color="blue">
             <qycomp-test id="qy" />
         </view>
-
+        <view qy:elif="{{ exit == 2 }}"  flex-grow="1"  height="100" background-color="green"/>
+        <view qy:else=""  flex-grow="1"  height="100" background-color="black"/>
     </view>
 </view>

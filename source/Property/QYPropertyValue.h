@@ -23,6 +23,7 @@ public:
     std::string getStringValue();
     bool getBoolValue();
     
+    std::string getSrc();
     std::string getKey();
     void setObserver(IQYPropertyValueObserver *observer);
     void onDataUpdate();
