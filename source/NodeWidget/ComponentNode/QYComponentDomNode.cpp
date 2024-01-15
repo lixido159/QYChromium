@@ -10,7 +10,7 @@
 #include "QYBaseWidget.h"
 #include "QYJSContext.h"
 #include "QYJSValue.h"
-QYComponentDomNode::QYComponentDomNode(std::shared_ptr<QYPageInfo> pageInfo, std::shared_ptr<QYBaseNodeInfo> info, std::shared_ptr<QYPageCompContext> context): QYBaseDomNode(pageInfo, info) {
+QYComponentDomNode::QYComponentDomNode(std::shared_ptr<QYBaseDomNode> parent, std::shared_ptr<QYBaseNodeInfo> info, std::shared_ptr<QYPageCompContext> context): QYBaseDomNode(parent, info) {
     std::shared_ptr<QYJSContext> jsContext = context->getJSContext();
     mPageCompContext.reset(new QYPageCompContext(jsContext));
     mPageCompContext->init();
@@ -25,7 +25,7 @@ QYComponentDomNode::QYComponentDomNode(std::shared_ptr<QYPageInfo> pageInfo, std
 
 void QYComponentDomNode::performExpandNodeTree() {
     for(std::shared_ptr<QYBaseNodeInfo> childInfo : mNodeInfo->childNodeInfoList) {
-        std::shared_ptr<QYBaseDomNode> node = createDomNode(mPageInfo, childInfo, mPageCompContext);
+        std::shared_ptr<QYBaseDomNode> node = createDomNode(shared_from_this(), childInfo, mPageCompContext);
         addChild(node);
         node->performExpandNodeTree();
     }

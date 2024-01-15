@@ -4,25 +4,33 @@
 #include "QYBaseWidget.h"
 #include "QYFactory.h"
 
-QYBaseDomNode::QYBaseDomNode(std::shared_ptr<QYPageInfo> pageInfo, std::shared_ptr<QYBaseNodeInfo> info): mPageInfo(pageInfo), mNodeInfo(info){
-    
+QYBaseDomNode::QYBaseDomNode(std::shared_ptr<QYBaseDomNode> parent, std::shared_ptr<QYBaseNodeInfo> info): mParent(parent), mNodeInfo(info){
+    if (parent) {
+        mPageInfo = parent->getPageInfo();
+    }
 }
 
-QYBaseDomNode::QYBaseDomNode(std::shared_ptr<QYPageInfo> pageInfo, std::shared_ptr<QYBaseNodeInfo> info, std::shared_ptr<QYPageCompContext> context):QYBaseDomNode(pageInfo, info) {
+QYBaseDomNode::QYBaseDomNode(std::shared_ptr<QYBaseDomNode> parent, std::shared_ptr<QYBaseNodeInfo> info, std::shared_ptr<QYPageCompContext> context): QYBaseDomNode(parent, info) {
+    if (parent) {
+        mPageInfo = parent->getPageInfo();
+    }
     mPageCompContext = context;
 }
 
 void QYBaseDomNode::addChild(std::shared_ptr<QYBaseDomNode> child) {
     this->mChildNodeList.push_back(child);
-    child->mParent = weak_from_this();
+    child->mParent = shared_from_this();
 }
 
 void QYBaseDomNode::performExpandNodeTree() {
+    auto parent = mParent.lock();
+    if (parent) {
+        parent->addChild(shared_from_this());
+    }
     std::vector<std::shared_ptr<IQYDomNodeCreatorItem>> items = createDomNodeCreatorItems(mNodeInfo->childNodeInfoList);
     
     for(std::shared_ptr<IQYDomNodeCreatorItem> item : items) {
-        std::shared_ptr<QYBaseDomNode> node = item->createNode(mPageInfo, mPageCompContext);
-        addChild(node);
+        std::shared_ptr<QYBaseDomNode> node = item->createNode(shared_from_this(), mPageCompContext);
         node->performExpandNodeTree();
     }
 }
@@ -66,6 +74,14 @@ void QYBaseDomNode::setContext(std::shared_ptr<QYPageCompContext> context) {
 
 std::shared_ptr<QYBaseWidget> QYBaseDomNode::getWidget() {
     return mWidget;
+}
+
+void QYBaseDomNode::setPageInfo(std::shared_ptr<QYPageInfo> pageInfo) {
+    mPageInfo = pageInfo;
+}
+
+std::shared_ptr<QYPageInfo> QYBaseDomNode::getPageInfo() {
+    return mPageInfo;
 }
 
 #pragma mark - IQYPropertyValueObserver

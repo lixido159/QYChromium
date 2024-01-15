@@ -12,7 +12,7 @@
 
 class IQYDomNodeCreatorItem {
 public:
-    virtual std::shared_ptr<QYBaseDomNode> createNode(std::shared_ptr<QYPageInfo> pageInfo, std::shared_ptr<QYPageCompContext> context) = 0;
+    virtual std::shared_ptr<QYBaseDomNode> createNode(std::shared_ptr<QYBaseDomNode> parent, std::shared_ptr<QYPageCompContext> context) = 0;
 };
 
 #endif /* IQYDomNodeCreatorItem_h */

@@ -9,7 +9,8 @@
 #include "QYContextJSValue.h"
 
 QYPage::QYPage(std::shared_ptr<QYPageInfo> pageInfo):mPageInfo(pageInfo) {
-    mRootNode = std::make_shared<QYBaseDomNode>(pageInfo, pageInfo->componentsMap["index"]);
+    mRootNode = std::make_shared<QYBaseDomNode>(nullptr, pageInfo->componentsMap["index"]);
+    mRootNode->setPageInfo(pageInfo);
     mJSStr = pageInfo->jsStr;
     mJSContext = std::make_shared<QYJSContext>();
     mJSContext->registerContextGlobalObject();
