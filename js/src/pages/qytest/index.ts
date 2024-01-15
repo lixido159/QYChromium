@@ -7,12 +7,14 @@ function qyEntry(page: QYPage){
     let height = 80;
     page.setData("height",  height);
     page.render("qy", "name");
+    page.setData("first",  true);
     page.on("qymouse", (event: QYMouseEvent)=> {
         if (index >= colors.length)
                 index = 0;
         height += 10;
         // page.setData("height",  height); 
-        page.setData("exit",  2);
+        page.setData("second",  true);
+        console.log("1111");
     });
 };
 qyNative.entry = pageFunction(qyEntry);

@@ -7,7 +7,7 @@
 ///负责事件响应，持有view
 class QYBaseWidget : public IQYMouseEventObserver {
 public:
-    QYBaseWidget(std::shared_ptr<QYPageCompContext> context, std::string type);
+    QYBaseWidget(std::shared_ptr<QYPageCompContext> context, std::shared_ptr<QYBaseNodeInfo> info);
     void addChildWidget(QYBaseWidget *child);
     void setProperty(std::shared_ptr<QYPropertyValue> value, bool noLayout = false);
     QYPropertyValue *getProperty(std::string key);
@@ -35,7 +35,7 @@ private:
     std::vector<QYBaseWidget *> mChildWidgets;
     IQYBaseView *mView = nullptr;
     std::shared_ptr<QYPageCompContext> mPageCompContext;
-    std::string mType = "";
+    std::shared_ptr<QYBaseNodeInfo> mNodeInfo;
     void callMouseEvent(std::string event, const QYMouseEvent& mouseEvent);
     std::unique_ptr<QYJSValue> mElementValue;
 };

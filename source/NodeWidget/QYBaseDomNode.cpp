@@ -20,7 +20,6 @@ void QYBaseDomNode::addChild(std::shared_ptr<QYBaseDomNode> child) {
 void QYBaseDomNode::performExpandNodeTree() {
     std::vector<std::shared_ptr<IQYDomNodeCreatorItem>> items = createDomNodeCreatorItems(mNodeInfo->childNodeInfoList);
     
-    
     for(std::shared_ptr<IQYDomNodeCreatorItem> item : items) {
         std::shared_ptr<QYBaseDomNode> node = item->createNode(mPageInfo, mPageCompContext);
         addChild(node);
@@ -29,7 +28,7 @@ void QYBaseDomNode::performExpandNodeTree() {
 }
 
 void QYBaseDomNode::performExpandWidgetTree() {
-    mWidget = std::make_shared<QYBaseWidget>(mPageCompContext, mNodeInfo->name);
+    mWidget = std::make_shared<QYBaseWidget>(mPageCompContext, mNodeInfo);
     auto parent = mParent.lock();
     if (parent) {
         parent->mWidget->addChildWidget(mWidget.get());

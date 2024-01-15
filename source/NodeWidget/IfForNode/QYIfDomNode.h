@@ -21,7 +21,9 @@ public:
     virtual void performApplyWidgetViewTreeProperties() override;
     virtual void onDataUpdate(std::shared_ptr<QYPropertyValue> value) override;
     
+private:
     int calculateValidIndex();
+    void updateValidNodeInfo();
 private:
     std::vector<std::shared_ptr<QYBaseNodeInfo>> mInfoList;
     std::vector<std::shared_ptr<QYPropertyValue>> mIfPropertyList;
