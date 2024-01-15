@@ -19,23 +19,7 @@ bool isIfProperty(std::map<std::string, std::string>::iterator iter) {
 }
 
 QYIfDomNode::QYIfDomNode(std::shared_ptr<QYPageInfo> pageInfo, std::vector<std::shared_ptr<QYBaseNodeInfo>> infoList, std::shared_ptr<QYPageCompContext> context): QYBaseDomNode(pageInfo, nullptr, context), mInfoList(infoList) {
-    std::vector<std::shared_ptr<QYBaseNodeInfo>>::iterator infoIter;
-    for (infoIter = mInfoList.begin(); infoIter != mInfoList.end(); infoIter++) {
-        std::map<std::string, std::string>::iterator kvIter;
-        for (kvIter = (*infoIter)->properties.begin(); kvIter != (*infoIter)->properties.end(); kvIter++) {
-            if (isIfProperty(kvIter)) {
-                std::shared_ptr<QYPropertyValue> proptyValue = std::make_shared<QYPropertyValue>(kvIter->first, kvIter->second, mPageCompContext);
-                proptyValue->setObserver(this);
-                mIfPropertyList.push_back(proptyValue);
-            }
-        }
-    }
-    int validIndex = calculateValidIndex();
-    if (validIndex == -1) {
-        return;
-    }
-    mNodeInfo = mInfoList[validIndex];
-
+    updateValidNodeInfo();
 }
 
 void QYIfDomNode::performExpandNodeTree() {
@@ -64,6 +48,15 @@ void QYIfDomNode::performApplyWidgetViewTreeProperties() {
     }
 }
 
+
+
+void QYIfDomNode::onDataUpdate(std::shared_ptr<QYPropertyValue> value) {
+    int index = calculateValidIndex();
+    
+}
+
+
+#pragma mark - Private
 int QYIfDomNode::calculateValidIndex() {
     for (int i=0; i<mIfPropertyList.size(); i++) {
         std::shared_ptr<QYPropertyValue> proptyValue = mIfPropertyList[i];
@@ -77,7 +70,22 @@ int QYIfDomNode::calculateValidIndex() {
     return -1;
 }
 
-void QYIfDomNode::onDataUpdate(std::shared_ptr<QYPropertyValue> value) {
-    int index = calculateValidIndex();
-    
+void QYIfDomNode::updateValidNodeInfo(){
+    std::vector<std::shared_ptr<QYBaseNodeInfo>>::iterator infoIter;
+    for (infoIter = mInfoList.begin(); infoIter != mInfoList.end(); infoIter++) {
+        std::map<std::string, std::string>::iterator kvIter;
+        for (kvIter = (*infoIter)->properties.begin(); kvIter != (*infoIter)->properties.end(); kvIter++) {
+            if (isIfProperty(kvIter)) {
+                std::shared_ptr<QYPropertyValue> proptyValue = std::make_shared<QYPropertyValue>(kvIter->first, kvIter->second, mPageCompContext);
+                proptyValue->setObserver(this);
+                mIfPropertyList.push_back(proptyValue);
+            }
+        }
+    }
+    int validIndex = calculateValidIndex();
+    if (validIndex == -1) {
+        return;
+    }
+    mNodeInfo = mInfoList[validIndex];
 }
+

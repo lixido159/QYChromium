@@ -59,32 +59,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F9F9B3B8-BC3C-44DB-A770-C53F6E5AA181"
+            uuid = "EA5F01A6-B8CD-445E-A802-38240129C1F2"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../source/NodeWidget/NodeCreator/QYCommonDomNodeCreatorItem.cpp"
+            filePath = "../source/NodeWidget/IfForNode/QYIfDomNode.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "15"
-            endingLineNumber = "15"
-            landmarkName = "QYCommonDomNodeCreatorItem::createNode(pageInfo, context)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "DBB446CE-D544-42D8-86E6-5FD093B86511"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../source/NodeWidget/QYBaseDomNode.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "QYBaseDomNode::performExpandNodeTree()"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "QYIfDomNode::onDataUpdate(value)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

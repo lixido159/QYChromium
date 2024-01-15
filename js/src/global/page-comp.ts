@@ -22,7 +22,6 @@ abstract class IComponent {
             return;
         }
         const comp = element.getComponent();
-        console.log("1111"+comp);
         comp.call("render", props);
     }
 
