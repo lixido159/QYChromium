@@ -13,7 +13,7 @@
 #include "QYDom.h"
 class QYComponentDomNode : public QYBaseDomNode{
 public:
-    QYComponentDomNode(std::shared_ptr<QYPageInfo> pageInfo, std::shared_ptr<QYBaseNodeInfo> info, std::shared_ptr<QYPageCompContext> context);
+    QYComponentDomNode(std::shared_ptr<QYBaseDomNode> parent, std::shared_ptr<QYBaseNodeInfo> info, std::shared_ptr<QYPageCompContext> context);
 
     virtual void performExpandNodeTree() override;
     virtual void performExpandWidgetTree() override;

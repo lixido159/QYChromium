@@ -18,7 +18,9 @@ bool isIfProperty(std::map<std::string, std::string>::iterator iter) {
     return false;
 }
 
-QYIfDomNode::QYIfDomNode(std::shared_ptr<QYPageInfo> pageInfo, std::vector<std::shared_ptr<QYBaseNodeInfo>> infoList, std::shared_ptr<QYPageCompContext> context): QYBaseDomNode(pageInfo, nullptr, context), mInfoList(infoList) {
+QYIfDomNode::QYIfDomNode(std::shared_ptr<QYBaseDomNode> parent,
+                         std::vector<std::shared_ptr<QYBaseNodeInfo>> infoList, std::shared_ptr<QYPageCompContext> context): QYBaseDomNode(parent, nullptr, context), mInfoList(infoList) {
+    mNodeInfo = std::make_shared<QYBaseNodeInfo>();
     updateValidNodeInfo();
 }
 
@@ -51,23 +53,39 @@ void QYIfDomNode::performApplyWidgetViewTreeProperties() {
 
 
 void QYIfDomNode::onDataUpdate(std::shared_ptr<QYPropertyValue> value) {
-    int index = calculateValidIndex();
+    std::shared_ptr<QYBaseNodeInfo> validNodeInfo = calculateValidNodeInfo();
+    if (validNodeInfo == mNodeInfo) {
+        return;
+    }
     
 }
 
 
 #pragma mark - Private
-int QYIfDomNode::calculateValidIndex() {
+void QYIfDomNode::performExpandAll() {
+    
+}
+
+void QYIfDomNode::removeDomNode() {
+    mChildNodeList.clear();
+}
+
+void QYIfDomNode::addDomNode() {
+    
+}
+
+
+std::shared_ptr<QYBaseNodeInfo> QYIfDomNode::calculateValidNodeInfo() {
     for (int i=0; i<mIfPropertyList.size(); i++) {
         std::shared_ptr<QYPropertyValue> proptyValue = mIfPropertyList[i];
         if (proptyValue->getKey().compare("qy:else") == 0) {
-            return i;
+            return mInfoList[i];
         }
         if (proptyValue->getBoolValue()) {
-            return i;
+            return mInfoList[i];
         }
     }
-    return -1;
+    return nullptr;
 }
 
 void QYIfDomNode::updateValidNodeInfo(){
@@ -82,10 +100,9 @@ void QYIfDomNode::updateValidNodeInfo(){
             }
         }
     }
-    int validIndex = calculateValidIndex();
-    if (validIndex == -1) {
+    std::shared_ptr<QYBaseNodeInfo> validNodeInfo = calculateValidNodeInfo();
+    if (!validNodeInfo) {
         return;
     }
-    mNodeInfo = mInfoList[validIndex];
 }
 

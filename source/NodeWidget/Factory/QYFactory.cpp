@@ -42,16 +42,16 @@ IQYBaseView *createViewWithType(std::string type) {
 
 
 
-std::shared_ptr<QYBaseDomNode> createDomNode(std::shared_ptr<QYPageInfo> pageInfo, std::shared_ptr<QYBaseNodeInfo> info, std::shared_ptr<QYPageCompContext> context) {
+std::shared_ptr<QYBaseDomNode> createDomNode(std::shared_ptr<QYBaseDomNode> parent, std::shared_ptr<QYBaseNodeInfo> info, std::shared_ptr<QYPageCompContext> context) {
     std::shared_ptr<QYBaseDomNode> domNode;
     if (info->name.compare("view") == 0 ||
         info->name.compare("image") == 0 ||
         info->name.compare("text") == 0) {
-        domNode = std::make_shared<QYBaseDomNode>(pageInfo, info, context);
+        domNode = std::make_shared<QYBaseDomNode>(parent, info, context);
     } else {
-        std::shared_ptr<QYBaseNodeInfo> compInfo = pageInfo->componentsMap[info->name];
+        std::shared_ptr<QYBaseNodeInfo> compInfo = parent->getPageInfo()->componentsMap[info->name];
         info->addChildNodeInfo(compInfo);
-        domNode = std::make_shared<QYComponentDomNode>(pageInfo, info, context);
+        domNode = std::make_shared<QYComponentDomNode>(parent, info, context);
     }
     return domNode;
 };

@@ -14,7 +14,7 @@
 class QYIfDomNodeCreatorItem : public IQYDomNodeCreatorItem {
 public:
     QYIfDomNodeCreatorItem(std::vector<std::shared_ptr<QYBaseNodeInfo>> nodeInfoList);
-    virtual std::shared_ptr<QYBaseDomNode> createNode(std::shared_ptr<QYPageInfo> pageInfo, std::shared_ptr<QYPageCompContext> context) override;
+    virtual std::shared_ptr<QYBaseDomNode> createNode(std::shared_ptr<QYBaseDomNode> parent, std::shared_ptr<QYPageCompContext> context) override;
 private:
     std::vector<std::shared_ptr<QYBaseNodeInfo>> mNodeInfoList;
 };

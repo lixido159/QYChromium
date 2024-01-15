@@ -13,7 +13,8 @@
 #include "QYPropertyValue.h"
 class QYIfDomNode : public QYBaseDomNode {
 public:
-    QYIfDomNode(std::shared_ptr<QYPageInfo> pageInfo, std::vector<std::shared_ptr<QYBaseNodeInfo>> infoList, std::shared_ptr<QYPageCompContext> context);
+    QYIfDomNode(std::shared_ptr<QYBaseDomNode> parent,
+                std::vector<std::shared_ptr<QYBaseNodeInfo>> infoList, std::shared_ptr<QYPageCompContext> context);
     
     virtual void performExpandNodeTree() override;
     virtual void performExpandWidgetTree() override;
@@ -22,8 +23,11 @@ public:
     virtual void onDataUpdate(std::shared_ptr<QYPropertyValue> value) override;
     
 private:
-    int calculateValidIndex();
+    std::shared_ptr<QYBaseNodeInfo> calculateValidNodeInfo();
     void updateValidNodeInfo();
+    void performExpandAll();
+    void removeDomNode();
+    void addDomNode();
 private:
     std::vector<std::shared_ptr<QYBaseNodeInfo>> mInfoList;
     std::vector<std::shared_ptr<QYPropertyValue>> mIfPropertyList;

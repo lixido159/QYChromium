@@ -12,6 +12,6 @@ QYIfDomNodeCreatorItem::QYIfDomNodeCreatorItem(std::vector<std::shared_ptr<QYBas
     
 }
 
-std::shared_ptr<QYBaseDomNode> QYIfDomNodeCreatorItem::createNode(std::shared_ptr<QYPageInfo> pageInfo, std::shared_ptr<QYPageCompContext> context)  {
-    return std::make_shared<QYIfDomNode>(pageInfo, mNodeInfoList, context);
+std::shared_ptr<QYBaseDomNode> QYIfDomNodeCreatorItem::createNode(std::shared_ptr<QYBaseDomNode> parent, std::shared_ptr<QYPageCompContext> context)  {
+    return std::make_shared<QYIfDomNode>(parent, mNodeInfoList, context);
 }

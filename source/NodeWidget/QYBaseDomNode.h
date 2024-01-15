@@ -12,8 +12,10 @@ class QYBaseWidget;
 ///抽象的DomTree节点
 class QYBaseDomNode : public IQYPropertyValueObserver, public std::enable_shared_from_this<QYBaseDomNode>  {
 public:
-    QYBaseDomNode(std::shared_ptr<QYPageInfo> pageInfo, std::shared_ptr<QYBaseNodeInfo> info);
-    QYBaseDomNode(std::shared_ptr<QYPageInfo> pageInfo, std::shared_ptr<QYBaseNodeInfo> info, std::shared_ptr<QYPageCompContext> context);
+    QYBaseDomNode(std::shared_ptr<QYBaseDomNode> parent,
+                  std::shared_ptr<QYBaseNodeInfo> info);
+    
+    QYBaseDomNode(std::shared_ptr<QYBaseDomNode> parent, std::shared_ptr<QYBaseNodeInfo> info, std::shared_ptr<QYPageCompContext> context);
     void addChild(std::shared_ptr<QYBaseDomNode> child);
         
     void *getNativeView();
@@ -21,6 +23,10 @@ public:
     void setContext(std::shared_ptr<QYPageCompContext> context);
     
     std::shared_ptr<QYBaseWidget> getWidget();
+    
+    void setPageInfo(std::shared_ptr<QYPageInfo> pageInfo);
+    std::shared_ptr<QYPageInfo> getPageInfo();
+
 public:
     //从上往下展开nodeTree，根据info->childNodeInfoList创建子QYBaseDomNode，添加到childNodeList
     //并且让其继续调用performExpandNodeTree，
