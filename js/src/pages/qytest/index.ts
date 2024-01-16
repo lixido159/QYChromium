@@ -13,6 +13,8 @@ function qyEntry(page: QYPage){
                 index = 0;
         height += 10;
         // page.setData("height",  height); 
+        page.setData("first",  false);
+
         page.setData("second",  true);
         console.log("1111");
     });

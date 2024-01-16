@@ -38,6 +38,13 @@ void QYBaseView::addChildView(std::shared_ptr<IQYBaseView> child) {
  
 }
 
+void QYBaseView::removeChildView(std::shared_ptr<IQYBaseView> child) {
+    mCustomView->removeChildView(child->getCustomView());
+    YGNodeRef node = getNodeLayout()->getNode();
+    YGNodeRef childNode = child->getNodeLayout()->getNode();
+    YGNodeRemoveChild(node, childNode);
+    mChildViews.erase(std::remove(mChildViews.begin(), mChildViews.end(), child), mChildViews.end());
+}
 
 void QYBaseView::setX(float x){
     mCustomView->setX(x);
