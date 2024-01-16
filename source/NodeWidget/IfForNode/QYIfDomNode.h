@@ -17,20 +17,20 @@ public:
                 std::vector<std::shared_ptr<QYBaseNodeInfo>> infoList, std::shared_ptr<QYPageCompContext> context);
     
     virtual void performExpandNodeTree() override;
-    virtual void performExpandWidgetTree() override;
     virtual void performExpandWidgetViewTree() override;
     virtual void performApplyWidgetViewTreeProperties() override;
     virtual void onDataUpdate(std::shared_ptr<QYPropertyValue> value) override;
     
 private:
-    std::shared_ptr<QYBaseNodeInfo> calculateValidNodeInfo();
-    void updateValidNodeInfo();
-    void performExpandAll();
+    int calculateValidNodeIndex();
+    void renderNode();
     void removeDomNode();
     void addDomNode();
+    void init();
 private:
     std::vector<std::shared_ptr<QYBaseNodeInfo>> mInfoList;
     std::vector<std::shared_ptr<QYPropertyValue>> mIfPropertyList;
+    int mValidIndex = -1;
 };
 
 

@@ -36,10 +36,10 @@ void QYBaseDomNode::performExpandNodeTree() {
 }
 
 void QYBaseDomNode::performExpandWidgetTree() {
-    mWidget = std::make_shared<QYBaseWidget>(mPageCompContext, mNodeInfo);
+    mWidget = std::make_shared<QYBaseWidget>(mPageCompContext, getNodeType());
     auto parent = mParent.lock();
     if (parent) {
-        parent->mWidget->addChildWidget(mWidget.get());
+        parent->getWidget()->addChildWidget(mWidget.get());
     }
     for(std::shared_ptr<QYBaseDomNode> node : mChildNodeList) {
         node->performExpandWidgetTree();
@@ -60,6 +60,14 @@ void QYBaseDomNode::performApplyWidgetViewTreeProperties() {
     }
     for(std::shared_ptr<QYBaseDomNode> node : mChildNodeList) {
         node->performApplyWidgetViewTreeProperties();
+    }
+}
+
+std::string QYBaseDomNode::getNodeType() {
+    if (mNodeInfo) {
+        return mNodeInfo->name;
+    } else {
+        return "";
     }
 }
 
