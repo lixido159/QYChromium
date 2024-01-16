@@ -17,6 +17,8 @@ public:
                 std::vector<std::shared_ptr<QYBaseNodeInfo>> infoList, std::shared_ptr<QYPageCompContext> context);
     
     virtual void performExpandNodeTree() override;
+    virtual void performExpandWidgetTree() override;
+    virtual void performAttachParentView(std::shared_ptr<IQYBaseView> parentView) override;
     virtual void performApplyWidgetViewTreeProperties() override;
     virtual void onDataUpdate(std::shared_ptr<QYPropertyValue> value) override;
     

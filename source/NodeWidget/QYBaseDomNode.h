@@ -27,6 +27,10 @@ public:
     void setPageInfo(std::shared_ptr<QYPageInfo> pageInfo);
     std::shared_ptr<QYPageInfo> getPageInfo();
 
+    std::shared_ptr<IQYBaseView> getParentView();
+    std::shared_ptr<IQYBaseView> getView();
+    
+    void removeChildNode(std::shared_ptr<QYBaseDomNode> childNode);
 public:
     //从上往下展开nodeTree，根据info->childNodeInfoList创建子QYBaseDomNode，添加到childNodeList
     //并且让其继续调用performExpandNodeTree，

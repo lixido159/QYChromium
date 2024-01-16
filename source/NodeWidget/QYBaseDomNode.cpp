@@ -97,6 +97,25 @@ std::shared_ptr<QYPageInfo> QYBaseDomNode::getPageInfo() {
     return mPageInfo;
 }
 
+std::shared_ptr<IQYBaseView> QYBaseDomNode::getParentView() {
+    auto parent = mParent.lock();
+    if (parent) {
+        return parent->getView();
+    }
+    return nullptr;
+}
+
+
+std::shared_ptr<IQYBaseView> QYBaseDomNode::getView() {
+    return mWidget->getView();
+}
+
+void QYBaseDomNode::removeChildNode(std::shared_ptr<QYBaseDomNode> childNode) {
+    mWidget->removeChildWidget(childNode->getWidget());
+    mChildNodeList.erase(std::remove(mChildNodeList.begin(), mChildNodeList.end(), childNode), mChildNodeList.end());
+}
+
+
 #pragma mark - IQYPropertyValueObserver
 void QYBaseDomNode::onDataUpdate(std::shared_ptr<QYPropertyValue> value) {
     mWidget->setProperty(value);

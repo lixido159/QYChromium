@@ -66,6 +66,10 @@ void QYBaseCustomView::addChildView(std::shared_ptr<IQYBaseCustomBaseView> view)
     [nativeView addSubview:toNativeView(view->getNativeView())];
 }
 
+void QYBaseCustomView::removeChildView(std::shared_ptr<IQYBaseCustomBaseView> view) {
+    [toNativeView(view->getNativeView()) removeFromSuperview];
+}
+
 void *QYBaseCustomView::getNativeView(){
     return mNativeView;
 }
