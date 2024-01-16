@@ -8,5 +8,5 @@
 #include "QYImageView.h"
 #include "QYBaseCustomImageView.h"
 QYImageView::QYImageView() {
-    mCustomView = new QYBaseCustomImageView;
+    mCustomView = std::make_shared<QYBaseCustomImageView>();
 }

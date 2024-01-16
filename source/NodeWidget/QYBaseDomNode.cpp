@@ -39,15 +39,20 @@ void QYBaseDomNode::performExpandWidgetTree() {
     mWidget = std::make_shared<QYBaseWidget>(mPageCompContext, getNodeType());
     auto parent = mParent.lock();
     if (parent) {
-        parent->getWidget()->addChildWidget(mWidget.get());
+        parent->getWidget()->addChildWidget(mWidget);
     }
     for(std::shared_ptr<QYBaseDomNode> node : mChildNodeList) {
         node->performExpandWidgetTree();
     }
 }
 
-void QYBaseDomNode::performExpandWidgetViewTree() {
-    mWidget->performExpandViewTree();
+void QYBaseDomNode::performAttachParentView(std::shared_ptr<IQYBaseView> parentView) {
+    if (parentView) {
+        parentView->addChildView(mWidget->getView());
+    }
+    for(std::shared_ptr<QYBaseDomNode> node : mChildNodeList) {
+        node->performAttachParentView(mWidget->getView());
+    }
 }
 
 void QYBaseDomNode::performApplyWidgetViewTreeProperties() {

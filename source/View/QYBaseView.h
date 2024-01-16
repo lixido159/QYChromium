@@ -4,16 +4,16 @@
 #include "IQYBaseCustomBaseView.h"
 #include <vector>
 ///只是个View容器，真的View是mView，因为具体的view实现视平台而定
-class QYBaseView : public IQYBaseView  {
+class QYBaseView : public IQYBaseView, public std::enable_shared_from_this<QYBaseView>{
 public:
     QYBaseView();
-    void addChildView(IQYBaseView *child) override;
-    std::vector<IQYBaseView *> getChildViews() override;
+    void addChildView(std::shared_ptr<IQYBaseView> child) override;
+    std::vector<std::shared_ptr<IQYBaseView>> getChildViews() override;
     
-    IQYBaseView *getParentView() override;
-    void setParentView(IQYBaseView *parentView) override;
+    std::shared_ptr<IQYBaseView> getParentView() override;
+    void setParentView(std::shared_ptr<IQYBaseView> parentView) override;
     
-    IQYBaseCustomBaseView *getCustomView() override;
+    std::shared_ptr<IQYBaseCustomBaseView> getCustomView() override;
     
 public:
     virtual void setX(float x) override;
@@ -35,9 +35,9 @@ public:
     virtual void requestLayout() override;
     virtual void updateLayout() override;
 protected:
-    IQYBaseView *mParentView = nullptr;
-    std::vector<IQYBaseView *> mChildViews;
-    IQYBaseCustomBaseView *mCustomView = nullptr;
+    std::weak_ptr<IQYBaseView> mParentView;
+    std::vector<std::shared_ptr<IQYBaseView>> mChildViews;
+    std::shared_ptr<IQYBaseCustomBaseView> mCustomView ;
     std::shared_ptr<QYYogaLayout> mNodeLayout;
 };
 #endif

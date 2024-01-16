@@ -26,18 +26,16 @@ enum class NodeCreatorItemType {
 
 
 extern QYBaseNodeInfo * parseFileToNodeInfo(const char *htmlFile);
-IQYBaseView *createViewWithType(std::string type) {
-    IQYBaseView *view;
+std::shared_ptr<IQYBaseView> createViewWithType(std::string type) {
     if (type.compare("view") == 0) {
-        view = new QYBaseView;
+        return std::make_shared<QYBaseView>();
     } else if(type.compare("image") == 0) {
-        view = new QYImageView;
+        return std::make_shared<QYImageView>();
     } else if (type.compare("text") == 0){//view
-        view = new QYTextView;
+        return std::make_shared<QYTextView>();
     } else {
-        view = new QYBaseView;
+        return std::make_shared<QYBaseView>();
     }
-    return view;
 }
 
 

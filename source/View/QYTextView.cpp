@@ -8,5 +8,5 @@
 #include "QYTextView.h"
 #include "QYBaseCustomTextView.h"
 QYTextView::QYTextView() {
-    mCustomView = new QYBaseCustomTextView;
+    mCustomView = std::make_shared<QYBaseCustomTextView>();
 }

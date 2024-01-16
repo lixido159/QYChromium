@@ -13,8 +13,8 @@
 #include "IQYDomNodeCreatorItem.h"
 
 
-IQYBaseView *createViewWithType(std::string type);
-QYBaseWidget *createWidgetWithType(std::string type, std::shared_ptr<QYPageCompContext> context);
+std::shared_ptr<IQYBaseView> createViewWithType(std::string type);
+//std::shared_ptr<QYBaseWidget> createWidgetWithType(std::string type, std::shared_ptr<QYPageCompContext> context);
 std::shared_ptr<QYBaseDomNode> createDomNode(std::shared_ptr<QYBaseDomNode> parent, std::shared_ptr<QYBaseNodeInfo>, std::shared_ptr<QYPageCompContext> context);
 std::vector<std::shared_ptr<IQYDomNodeCreatorItem>> createDomNodeCreatorItems(std::vector<std::shared_ptr<QYBaseNodeInfo>> childInfos);
 #endif /* QYFactory_hpp */

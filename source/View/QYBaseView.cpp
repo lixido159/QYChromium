@@ -1,22 +1,26 @@
 #include "QYBaseView.h"
 #include "QYBaseCustomView.h"
 QYBaseView::QYBaseView() {
-    mCustomView = new QYBaseCustomView;
+    mCustomView = std::make_shared<QYBaseCustomView>();
     mNodeLayout = std::make_shared<QYYogaLayout>(this);
 }
 
-IQYBaseView* QYBaseView::getParentView(){
-    return mParentView;
+std::shared_ptr<IQYBaseView> QYBaseView::getParentView(){
+    auto parent = mParentView.lock();
+    if (parent) {
+        return parent;
+    }
+    return nullptr;
 }
-void QYBaseView::setParentView(IQYBaseView *parentView){
+void QYBaseView::setParentView(std::shared_ptr<IQYBaseView> parentView){
     mParentView = parentView;
 }
 
-IQYBaseCustomBaseView* QYBaseView::getCustomView(){
+std::shared_ptr<IQYBaseCustomBaseView> QYBaseView::getCustomView(){
     return mCustomView;
 }
 
-std::vector<IQYBaseView *> QYBaseView::getChildViews() {
+std::vector<std::shared_ptr<IQYBaseView>> QYBaseView::getChildViews() {
     return mChildViews;
 }
 
@@ -24,12 +28,12 @@ QYYogaLayout *QYBaseView::getNodeLayout() {
     return mNodeLayout.get();
 }
 
-void QYBaseView::addChildView(IQYBaseView *child) {
+void QYBaseView::addChildView(std::shared_ptr<IQYBaseView> child) {
     YGNodeRef node = getNodeLayout()->getNode();
     YGNodeRef childNode = child->getNodeLayout()->getNode();
     YGNodeInsertChild(node, childNode, mChildViews.size());
     mChildViews.push_back(child);
-    child->setParentView(this);
+    child->setParentView(shared_from_this());
     mCustomView->addChildView(child->getCustomView());
  
 }
@@ -79,7 +83,7 @@ QYRect QYBaseView::getRect(){
 
 void QYBaseView::requestLayout() {
     YGNodeRef node = getNodeLayout()->getNode();
-    IQYBaseView *parentView = getParentView();
+    std::shared_ptr<IQYBaseView>  parentView = getParentView();
     if (parentView) {
         QYSize size = parentView->getSize();
         YGNodeCalculateLayout(YGNodeGetParent(node), size.width, size.height, YGDirectionInherit);
@@ -87,7 +91,7 @@ void QYBaseView::requestLayout() {
     } else {
         //根节点的view，不改变尺寸
         YGNodeCalculateLayout(node, getSize().width, getSize().height, YGDirectionLTR);
-        for (std::vector<IQYBaseView *>::iterator iter = mChildViews.begin(); iter != mChildViews.end(); iter++) {
+        for (std::vector<std::shared_ptr<IQYBaseView>>::iterator iter = mChildViews.begin(); iter != mChildViews.end(); iter++) {
             (*iter)->updateLayout();
         }
 
@@ -101,7 +105,7 @@ void QYBaseView::updateLayout() {
     float width = YGNodeLayoutGetWidth(node);
     float height = YGNodeLayoutGetHeight(node);
     setRect({left, top, width, height});
-    for (std::vector<IQYBaseView *>::iterator iter = mChildViews.begin(); iter != mChildViews.end(); iter++) {
+    for (std::vector<std::shared_ptr<IQYBaseView>>::iterator iter = mChildViews.begin(); iter != mChildViews.end(); iter++) {
         (*iter)->updateLayout();
     }
 

@@ -5,22 +5,21 @@
 #import "QYPropertyValue.h"
 
 ///负责事件响应，持有view
-class QYBaseWidget : public IQYMouseEventObserver {
+class QYBaseWidget : public IQYMouseEventObserver, public std::enable_shared_from_this<QYBaseWidget> {
 public:
     QYBaseWidget(std::shared_ptr<QYPageCompContext> context, std::string type);
-    void addChildWidget(QYBaseWidget *child);
+    void addChildWidget(std::shared_ptr<QYBaseWidget> child);
     void setProperty(std::shared_ptr<QYPropertyValue> value, bool noLayout = false);
     QYPropertyValue *getProperty(std::string key);
     
     std::map<std::string, std::shared_ptr<QYPropertyValue> > getProptyValueMap();
-    QYBaseWidget *getParentWidget();
-    void setParentWidget(QYBaseWidget *parentWidget);
-    void setView(IQYBaseView *view);
-    IQYBaseView* getView();
-    QYBaseWidget *getChildWidgetById(std::string childId);
+    std::shared_ptr<QYBaseWidget> getParentWidget();
+    void setParentWidget(std::shared_ptr<QYBaseWidget> parentWidget);
+    void setView(std::shared_ptr<IQYBaseView> view);
+    std::shared_ptr<IQYBaseView> getView();
+    std::shared_ptr<QYBaseWidget> getChildWidgetById(std::string childId);
     std::shared_ptr<QYPageCompContext> getPageCompContext();
     QYJSValue *getElementValue();
-    void performExpandViewTree();
     void registerElementInterface();
     void requestLayout();
     void onSizeChange();
@@ -31,9 +30,9 @@ public:
 
 private:
     std::map<std::string, std::shared_ptr<QYPropertyValue>> mProptyValueMap;
-    QYBaseWidget *mParentWidget = nullptr;
-    std::vector<QYBaseWidget *> mChildWidgets;
-    IQYBaseView *mView = nullptr;
+    std::weak_ptr<QYBaseWidget> mParentWidget ;
+    std::vector<std::shared_ptr<QYBaseWidget>> mChildWidgets;
+    std::shared_ptr<IQYBaseView> mView ;
     std::shared_ptr<QYPageCompContext> mPageCompContext;
     std::string mType;
     void callMouseEvent(std::string event, const QYMouseEvent& mouseEvent);
