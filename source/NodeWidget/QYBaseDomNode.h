@@ -38,6 +38,7 @@ public:
     //对view赋值属性
     virtual void performApplyWidgetViewTreeProperties();
 
+    virtual std::string getNodeType();
 public:
     virtual void onDataUpdate(std::shared_ptr<QYPropertyValue> value) override;
 private:

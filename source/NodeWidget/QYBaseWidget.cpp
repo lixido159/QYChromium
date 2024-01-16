@@ -3,7 +3,7 @@
 #include "QYFactory.h"
 #include "QYJSContext.h"
 
-QYBaseWidget::QYBaseWidget(std::shared_ptr<QYPageCompContext> context, std::shared_ptr<QYBaseNodeInfo> info):mPageCompContext(context), mNodeInfo(info) {
+QYBaseWidget::QYBaseWidget(std::shared_ptr<QYPageCompContext> context, std::string type):mPageCompContext(context), mType(type) {
 
 }
 
@@ -77,7 +77,7 @@ QYJSValue *QYBaseWidget::getElementValue() {
 }
 
 void QYBaseWidget::performExpandViewTree() {
-    IQYBaseView *view = createViewWithType(mNodeInfo->name);
+    IQYBaseView *view = createViewWithType(mType);
     setView(view);
     if (getParentWidget()) {
         getParentWidget()->getView()->addChildView(view);

@@ -32,7 +32,7 @@ void QYComponentDomNode::performExpandNodeTree() {
 }
 
 void QYComponentDomNode::performExpandWidgetTree() {
-    mWidget = std::make_shared<QYBaseWidget>(mPageCompContext, mNodeInfo);
+    mWidget = std::make_shared<QYBaseWidget>(mPageCompContext, mNodeInfo->name);
     auto parent = mParent.lock();
     if (parent) {
         parent->getWidget()->addChildWidget(mWidget.get());
