@@ -5,7 +5,7 @@
 #include <QYFileInfo/QYBaseNodeInfo.h>
 #include "IQYPropertyValueObserver.h"
 #include "QYPageCompContext.h"
-
+#include "IQYBaseView.h"
 #include <QYFileInfo/QYPageInfo.h>
 
 class QYBaseWidget;
@@ -33,8 +33,7 @@ public:
     virtual void performExpandNodeTree();
     //从上往下展开widgetTree
     virtual void performExpandWidgetTree();
-    //从上往下展开view
-    virtual void performExpandWidgetViewTree();
+    virtual void performAttachParentView(std::shared_ptr<IQYBaseView> parentView);
     //对view赋值属性
     virtual void performApplyWidgetViewTreeProperties();
 

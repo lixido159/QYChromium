@@ -25,7 +25,7 @@ QYJSValue *QYDom::getValue() {
 
 void QYDom::registerDomValueInterface() {
     mJSValue->setFunction("getElementById", [this](QYJSContext *context, QYJSValue *paramsValue)->QYJSValue *{
-        QYBaseWidget *widget = mWidget->getChildWidgetById(paramsValue->getValue(0)->toString());
+        std::shared_ptr<QYBaseWidget> widget = mWidget->getChildWidgetById(paramsValue->getValue(0)->toString());
         if (!widget) {
             return nullptr;
         }

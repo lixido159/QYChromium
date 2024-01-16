@@ -29,7 +29,7 @@ void QYPage::init() {
     afterExecuteJS();
     mRootNode->performExpandNodeTree();
     mRootNode->performExpandWidgetTree();
-    mRootNode->performExpandWidgetViewTree();
+    mRootNode->performAttachParentView(nullptr);
     mRootNode->performApplyWidgetViewTreeProperties();
     mDom.reset(new QYDom(mRootNode->getWidget()));
     mPageContext->getContextJSValue()->getValue()->setValue("dom", mDom->getValue());

@@ -29,12 +29,12 @@ public:
     virtual QYSize getSize() = 0;
     virtual QYRect getRect() = 0;
     
-    virtual void addChildView(IQYBaseView *child) = 0;
-    virtual std::vector<IQYBaseView *> getChildViews() = 0;
-    virtual IQYBaseView *getParentView() = 0;
-    virtual void setParentView(IQYBaseView *parentView) = 0;
+    virtual void addChildView(std::shared_ptr<IQYBaseView> child) = 0;
+    virtual std::vector<std::shared_ptr<IQYBaseView>> getChildViews() = 0;
+    virtual std::shared_ptr<IQYBaseView> getParentView() = 0;
+    virtual void setParentView(std::shared_ptr<IQYBaseView> parentView) = 0;
     
-    virtual IQYBaseCustomBaseView *getCustomView() = 0;
+    virtual std::shared_ptr<IQYBaseCustomBaseView> getCustomView() = 0;
     
     virtual QYYogaLayout *getNodeLayout() = 0;
 

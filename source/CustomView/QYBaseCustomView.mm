@@ -62,7 +62,7 @@ QYRect QYBaseCustomView::getRect(){
 }
 
 
-void QYBaseCustomView::addChildView(IQYBaseCustomBaseView *view){
+void QYBaseCustomView::addChildView(std::shared_ptr<IQYBaseCustomBaseView> view){
     [nativeView addSubview:toNativeView(view->getNativeView())];
 }
 

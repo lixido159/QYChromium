@@ -9,6 +9,7 @@
 #define QYBaseCustomBaseView_hpp
 
 #include <stdio.h>
+#include <memory>
 #include "IQYMouseEventObserver.h"
 #include "QYDefine.h"
 
@@ -37,7 +38,7 @@ public:
     virtual QYRect getRect() = 0;
 
     
-    virtual void addChildView(IQYBaseCustomBaseView *view) = 0;
+    virtual void addChildView(std::shared_ptr<IQYBaseCustomBaseView> view) = 0;
     virtual void *getNativeView() = 0;
     virtual void setMouseEventObserver(IQYMouseEventObserver *observer) = 0;
     void *mNativeView;

@@ -28,7 +28,7 @@ public:
     virtual QYSize getSize() override;
     virtual QYRect getRect() override;
     
-    virtual void addChildView(IQYBaseCustomBaseView *view) override;
+    virtual void addChildView(std::shared_ptr<IQYBaseCustomBaseView> view) override;
     virtual void *getNativeView() override;
     virtual void setMouseEventObserver(IQYMouseEventObserver *observer) override;
     QYBaseCustomView();

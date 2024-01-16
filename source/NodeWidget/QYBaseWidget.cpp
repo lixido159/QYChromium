@@ -4,18 +4,18 @@
 #include "QYJSContext.h"
 
 QYBaseWidget::QYBaseWidget(std::shared_ptr<QYPageCompContext> context, std::string type):mPageCompContext(context), mType(type) {
-
+    setView(createViewWithType(mType));
 }
 
-void QYBaseWidget::addChildWidget(QYBaseWidget *child) {
+void QYBaseWidget::addChildWidget(std::shared_ptr<QYBaseWidget> child) {
     mChildWidgets.push_back(child);
-    child->setParentWidget(this);
+    child->setParentWidget(shared_from_this());
 }
 
 void QYBaseWidget::setProperty(std::shared_ptr<QYPropertyValue> value, bool noLayout) {
     static QYPropertySetter *setter = new QYPropertySetter;
     mProptyValueMap.insert(std::pair(value->getKey(), value));
-    setter->setProperty(mView, value.get(), noLayout);
+    setter->setProperty(mView.get(), value.get(), noLayout);
 }
 
 QYPropertyValue* QYBaseWidget::getProperty(std::string key) {
@@ -30,33 +30,37 @@ std::map<std::string, std::shared_ptr<QYPropertyValue>> QYBaseWidget::getProptyV
     return mProptyValueMap;
 }
 
-QYBaseWidget * QYBaseWidget::getParentWidget() {
-    return mParentWidget;
+std::shared_ptr<QYBaseWidget> QYBaseWidget::getParentWidget() {
+    auto parent = mParentWidget.lock();
+    if (parent) {
+        return parent;
+    }
+    return nullptr;
 }
-void QYBaseWidget::setParentWidget(QYBaseWidget *parentWidget) {
+void QYBaseWidget::setParentWidget(std::shared_ptr<QYBaseWidget> parentWidget) {
     mParentWidget = parentWidget;
 }
 
-void QYBaseWidget::setView(IQYBaseView *view) {
+void QYBaseWidget::setView(std::shared_ptr<IQYBaseView> view) {
     mView = view;
     mView->getCustomView()->setMouseEventObserver(this);
 }
 
-IQYBaseView* QYBaseWidget::getView() {
+std::shared_ptr<IQYBaseView> QYBaseWidget::getView() {
     return mView;
 }
 
 
 
 
-QYBaseWidget *QYBaseWidget::getChildWidgetById(std::string childId) {
-    for (std::vector<QYBaseWidget *>::iterator iter = mChildWidgets.begin(); iter !=mChildWidgets.end(); iter++) {
-        QYBaseWidget *childWidget = *iter;
+std::shared_ptr<QYBaseWidget> QYBaseWidget::getChildWidgetById(std::string childId) {
+    for (std::vector<std::shared_ptr<QYBaseWidget>>::iterator iter = mChildWidgets.begin(); iter !=mChildWidgets.end(); iter++) {
+        std::shared_ptr<QYBaseWidget> childWidget = *iter;
         QYPropertyValue *propty = childWidget->getProperty("id");
         if (propty &&  childId.compare(propty->getStringValue()) == 0) {
             return childWidget;
         }
-        QYBaseWidget *result = childWidget->getChildWidgetById(childId);
+        std::shared_ptr<QYBaseWidget> result = childWidget->getChildWidgetById(childId);
         if (result) {
             return result;
         }
@@ -76,17 +80,6 @@ QYJSValue *QYBaseWidget::getElementValue() {
     return mElementValue.get();
 }
 
-void QYBaseWidget::performExpandViewTree() {
-    IQYBaseView *view = createViewWithType(mType);
-    setView(view);
-    if (getParentWidget()) {
-        getParentWidget()->getView()->addChildView(view);
-    }
-    for(QYBaseWidget *widget : mChildWidgets) {
-        widget->performExpandViewTree();
-    }
-
-}
 
 void QYBaseWidget::registerElementInterface() {
     mElementValue->setFunction("getComponent", [this](QYJSContext *context, QYJSValue *paramsValue)->QYJSValue * {
