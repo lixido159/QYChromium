@@ -41,9 +41,6 @@ int QYExpressionParser::getCurrentInt() {
     return mCurrentChar - '0';
 }
 
-int QYExpressionParser::getCurrentChar() {
-    return mLastToken.chr;
-}
 
 
 
@@ -97,6 +94,17 @@ QYToken QYExpressionParser::getNextString() {
         }
     }
     return {tok_string, "", 0};
+}
+
+QYToken QYExpressionParser::getNextOperator() {
+    char ope = mCurrentChar;
+    if (ope == '=' && getNextChar() == '=') {
+        return {tok_operator, "", 0, opt_eql};;
+    }
+    return {tok_other, "", 0, ope};;
+}
+
+bool isOperator() {
     
 }
 
@@ -117,8 +125,7 @@ QYToken QYExpressionParser::getNextToken() {
     }
     //各种符号 + - * / ()等
     else {
-        mLastToken = {tok_other, "", 0, mCurrentChar};
-        getNextChar();
+        mLastToken = getNextOperator();
     }
     passSpace();
     return mLastToken;
@@ -160,6 +167,9 @@ QYExpression* QYExpressionParser::parseExp() {
         getNextToken();
         QYExpression *falseExp = parsePrimary();
         retExp = new QYQuestionExpression(leftExp, trueExp, falseExp);
+    }
+    else if(mLastToken.identifier.compare("==") == 0) {
+        retExp = parseBinaryExpression(leftExp, opt_eql);
     }
     //加减乘除等
     else if (getOptPrec(OPERATOR(mLastToken.chr)) != 0){

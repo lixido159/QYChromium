@@ -66,12 +66,11 @@ void QYIfDomNode::onDataUpdate(std::shared_ptr<QYPropertyValue> value) {
     int validIndex = calculateValidNodeIndex();
     if (validIndex == mValidIndex || validIndex == -1) {
         return;
-    } else {
-//        std::shared_ptr<QYBaseDomNode> validDomNode = mInfo[mValidIndex];
     }
     removeDomNode();
     mValidIndex = validIndex;
     renderNode();
+    getParentView()->requestLayout();
 }
 
 
