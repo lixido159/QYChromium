@@ -28,9 +28,12 @@ private:
     void removeDomNode();
     void addDomNode();
     void init();
+    std::shared_ptr<QYBaseDomNode> getValidDomNode();
 private:
     std::vector<std::shared_ptr<QYBaseNodeInfo>> mInfoList;
     std::vector<std::shared_ptr<QYPropertyValue>> mIfPropertyList;
+    std::map<int, std::shared_ptr<QYBaseDomNode>> mCacheDomNodeMap;
+    std::shared_ptr<IQYBaseView> mRealParentView;
     int mValidIndex = -1;
 };
 

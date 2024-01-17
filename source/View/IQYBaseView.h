@@ -30,8 +30,8 @@ public:
     virtual QYRect getRect() = 0;
     
     virtual void addChildView(std::shared_ptr<IQYBaseView> child) = 0;
-    virtual void removeChildView(std::shared_ptr<IQYBaseView> child) = 0;
-    virtual std::vector<std::shared_ptr<IQYBaseView>> getChildViews() = 0;
+    virtual void removeFromParentView() = 0;
+    virtual std::vector<std::shared_ptr<IQYBaseView>>& getChildViews() = 0;
     virtual std::shared_ptr<IQYBaseView> getParentView() = 0;
     virtual void setParentView(std::shared_ptr<IQYBaseView> parentView) = 0;
     

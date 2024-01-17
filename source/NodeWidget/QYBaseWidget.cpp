@@ -12,9 +12,13 @@ void QYBaseWidget::addChildWidget(std::shared_ptr<QYBaseWidget> child) {
     child->setParentWidget(shared_from_this());
 }
 
-void QYBaseWidget::removeChildWidget(std::shared_ptr<QYBaseWidget> child) {
-    mView->removeChildView(child->getView());
-    mChildWidgets.erase(std::remove(mChildWidgets.begin(), mChildWidgets.end(), child), mChildWidgets.end());
+void QYBaseWidget::removeFromParentWidget() {
+    mView->removeFromParentView();
+    auto parent = mParentWidget.lock();
+    if (parent) {
+        std::vector<std::shared_ptr<QYBaseWidget>>& list = parent->getChildWidgets();
+        list.erase(std::remove(list.begin(), list.end(), shared_from_this()), list.end());
+    }
 
 }
 
@@ -30,6 +34,10 @@ QYPropertyValue* QYBaseWidget::getProperty(std::string key) {
     }
     return mProptyValueMap[key].get();
 
+}
+
+std::vector<std::shared_ptr<QYBaseWidget>>& QYBaseWidget::getChildWidgets() {
+    return mChildWidgets;
 }
 
 std::map<std::string, std::shared_ptr<QYPropertyValue>> QYBaseWidget::getProptyValueMap() {

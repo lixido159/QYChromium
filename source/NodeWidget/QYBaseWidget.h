@@ -9,9 +9,11 @@ class QYBaseWidget : public IQYMouseEventObserver, public std::enable_shared_fro
 public:
     QYBaseWidget(std::shared_ptr<QYPageCompContext> context, std::string type);
     void addChildWidget(std::shared_ptr<QYBaseWidget> child);
-    void removeChildWidget(std::shared_ptr<QYBaseWidget> child);
+    void removeFromParentWidget();
     void setProperty(std::shared_ptr<QYPropertyValue> value, bool noLayout = false);
     QYPropertyValue *getProperty(std::string key);
+    
+    std::vector<std::shared_ptr<QYBaseWidget>>& getChildWidgets();
     
     std::map<std::string, std::shared_ptr<QYPropertyValue> > getProptyValueMap();
     std::shared_ptr<QYBaseWidget> getParentWidget();

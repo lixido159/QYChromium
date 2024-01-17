@@ -39,7 +39,7 @@ public:
 
     
     virtual void addChildView(std::shared_ptr<IQYBaseCustomBaseView> view) = 0;
-    virtual void removeChildView(std::shared_ptr<IQYBaseCustomBaseView> view) = 0;
+    virtual void removeFromParentView() = 0;
 
     virtual void *getNativeView() = 0;
     virtual void setMouseEventObserver(IQYMouseEventObserver *observer) = 0;
