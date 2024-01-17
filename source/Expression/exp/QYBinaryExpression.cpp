@@ -7,7 +7,9 @@
 
 #include "QYBinaryExpression.h"
 
-QYBinaryExpression::QYBinaryExpression( QYExpression *leftExp, QYExpression *rightExp, OPERATOR opt):mLeftExp(leftExp), mRightExp(rightExp), mOpt(opt){};
+QYBinaryExpression::QYBinaryExpression( QYExpression *leftExp, QYExpression *rightExp, OPERATOR opt):mLeftExp(leftExp), mRightExp(rightExp), mOpt(opt){
+    
+};
 
 
 double QYBinaryExpression::getNumberValue(QYExpressionContext *expContext){
@@ -32,5 +34,8 @@ std::string QYBinaryExpression::getStringValue(QYExpressionContext *expContext) 
 }
 
 bool QYBinaryExpression::getBoolValue(QYExpressionContext *expContext) {
+    if (mOpt == opt_eql) {
+        return mLeftExp->getStringValue(expContext).compare(mRightExp->getStringValue(expContext));
+    }
     return getNumberValue(expContext) > 0;
 }

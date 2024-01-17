@@ -19,6 +19,8 @@ int getOptPrec(OPERATOR Opt) {
             return 20;
         case opt_div:
             return 20;
+        case opt_eql:
+            return 20;
     }
     
     return 0;

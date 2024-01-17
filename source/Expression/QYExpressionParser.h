@@ -31,11 +31,11 @@ private:
 private:
     int getNextChar();
     int getCurrentInt();
-    int getCurrentChar();
     void passSpace();
     QYToken getNextIdentifier();
     QYToken getNextNumber();
     QYToken getNextString();
+    QYToken getNextOperator();
     QYToken getNextToken();
     
     QYExpression* parsePrimary();

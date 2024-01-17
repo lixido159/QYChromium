@@ -16,6 +16,7 @@ enum TOKEN_TYPE {
     tok_identifier = 1,//标识符
     tok_number = 2,//数字
     tok_string = 3,//字符串 ""  ''
+    tok_operator = 4,//运算符
 };
 
 enum OPERATOR {
@@ -24,6 +25,7 @@ enum OPERATOR {
     opt_sub = '-',//减
     opt_mul = '*',//乘
     opt_div = '/',//除
+    opt_eql = 256,//比较
 };
 
 struct QYToken {
