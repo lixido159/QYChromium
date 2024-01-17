@@ -29,26 +29,35 @@ void QYIfDomNode::performExpandNodeTree() {
     if (parent) {
         parent->addChild(shared_from_this());
     }
-
-    std::vector<std::shared_ptr<IQYDomNodeCreatorItem>> items = createDomNodeCreatorItems(mInfoList);
-    
-    for(std::shared_ptr<QYBaseNodeInfo> info : mInfoList) {
-        std::shared_ptr<QYBaseDomNode> domNode = std::make_shared<QYBaseDomNode>(shared_from_this(), info, mPageCompContext);
-        domNode->performExpandNodeTree();
-    }
-
-}
+    if (mValidIndex != -1) {
+        std::shared_ptr<QYBaseDomNode> childDomNode = std::make_shared<QYBaseDomNode>(shared_from_this(), mInfoList[mValidIndex], mPageCompContext);
+        mCacheDomNodeMap[mValidIndex] = childDomNode;
+        childDomNode->performExpandNodeTree();
+    }}
 
 void QYIfDomNode::performExpandWidgetTree() {
-    QYBaseDomNode::performExpandWidgetTree();
+    mWidget = std::make_shared<QYBaseWidget>(mPageCompContext, getNodeType());
+    auto parent = mParent.lock();
+    if (parent) {
+        parent->getWidget()->addChildWidget(mWidget);
+    }
+    if (mChildNodeList[0]) {
+        mChildNodeList[0]->performExpandWidgetTree();
+    }
+    
 }
 
 void QYIfDomNode::performAttachParentView(std::shared_ptr<IQYBaseView> parentView) {
-    
+    mRealParentView = parentView;
+    if (mChildNodeList[0]) {
+        mChildNodeList[0]->performAttachParentView(parentView);
+    }
 }
 
 void QYIfDomNode::performApplyWidgetViewTreeProperties() {
-    
+    if (mChildNodeList[0]) {
+        mChildNodeList[0]->performApplyWidgetViewTreeProperties();
+    }
 }
 
 
@@ -58,7 +67,7 @@ void QYIfDomNode::onDataUpdate(std::shared_ptr<QYPropertyValue> value) {
     if (validIndex == mValidIndex || validIndex == -1) {
         return;
     } else {
-        std::shared_ptr<QYBaseDomNode> validDomNode = mChildNodeList[mValidIndex];
+//        std::shared_ptr<QYBaseDomNode> validDomNode = mInfo[mValidIndex];
     }
     removeDomNode();
     mValidIndex = validIndex;
@@ -68,20 +77,31 @@ void QYIfDomNode::onDataUpdate(std::shared_ptr<QYPropertyValue> value) {
 
 #pragma mark - Private
 void QYIfDomNode::renderNode() {
-    std::shared_ptr<QYBaseDomNode> validDomNode = mChildNodeList[mValidIndex];
-    validDomNode->performAttachParentView(getParentView());
-    validDomNode->performApplyWidgetViewTreeProperties();
+    std::shared_ptr<QYBaseDomNode> validDomNode = getValidDomNode();
+    //没有缓存，需要执行一遍performxxx
+    if (!validDomNode) {
+        validDomNode = std::make_shared<QYBaseDomNode>(shared_from_this(), mInfoList[mValidIndex], mPageCompContext);
+        mCacheDomNodeMap[mValidIndex] = validDomNode;
+        validDomNode->performExpandNodeTree();
+        validDomNode->performExpandWidgetTree();
+        validDomNode->performAttachParentView(mRealParentView);
+        validDomNode->performApplyWidgetViewTreeProperties();
+    }
+    //有缓存，只需要把domnode、widget、view添加上去就行
+    else {
+        addChild(validDomNode);
+        getWidget()->addChildWidget(validDomNode->getWidget());
+        mRealParentView->addChildView(validDomNode->getView());
+        validDomNode->performApplyWidgetViewTreeProperties();
+    }
 }
 
 void QYIfDomNode::removeDomNode() {
-    std::shared_ptr<QYBaseDomNode> validDomNode = mChildNodeList[mValidIndex];
-    removeChildNode(validDomNode);
+    std::shared_ptr<QYBaseDomNode> validDomNode = getValidDomNode();
+    if (validDomNode) {
+        validDomNode->removeFromParentDomNode();
+    }
 }
-
-void QYIfDomNode::addDomNode() {
-    
-}
-
 
 int QYIfDomNode::calculateValidNodeIndex() {
     for (int i=0; i<mIfPropertyList.size(); i++) {
@@ -109,5 +129,12 @@ void QYIfDomNode::init() {
         }
     }
     mValidIndex = calculateValidNodeIndex();
+}
+
+std::shared_ptr<QYBaseDomNode> QYIfDomNode::getValidDomNode() {
+    if (mCacheDomNodeMap.find(mValidIndex) == mCacheDomNodeMap.end()) {
+        return nullptr;
+    }
+    return mCacheDomNodeMap[mValidIndex];
 }
 

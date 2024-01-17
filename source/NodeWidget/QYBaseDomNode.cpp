@@ -110,9 +110,17 @@ std::shared_ptr<IQYBaseView> QYBaseDomNode::getView() {
     return mWidget->getView();
 }
 
-void QYBaseDomNode::removeChildNode(std::shared_ptr<QYBaseDomNode> childNode) {
-    mWidget->removeChildWidget(childNode->getWidget());
-    mChildNodeList.erase(std::remove(mChildNodeList.begin(), mChildNodeList.end(), childNode), mChildNodeList.end());
+std::vector<std::shared_ptr<QYBaseDomNode>>& QYBaseDomNode::getChildNodeList(){
+    return mChildNodeList;
+}
+
+void QYBaseDomNode::removeFromParentDomNode() {
+    mWidget->removeFromParentWidget();
+    auto parent = mParent.lock();
+    if (parent) {
+        std::vector<std::shared_ptr<QYBaseDomNode>>& list = parent->getChildNodeList();
+        list.erase(std::remove(list.begin(), list.end(), shared_from_this()), list.end());
+    }
 }
 
 

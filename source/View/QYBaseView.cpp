@@ -20,7 +20,7 @@ std::shared_ptr<IQYBaseCustomBaseView> QYBaseView::getCustomView(){
     return mCustomView;
 }
 
-std::vector<std::shared_ptr<IQYBaseView>> QYBaseView::getChildViews() {
+std::vector<std::shared_ptr<IQYBaseView>>& QYBaseView::getChildViews() {
     return mChildViews;
 }
 
@@ -38,12 +38,16 @@ void QYBaseView::addChildView(std::shared_ptr<IQYBaseView> child) {
  
 }
 
-void QYBaseView::removeChildView(std::shared_ptr<IQYBaseView> child) {
-    mCustomView->removeChildView(child->getCustomView());
+void QYBaseView::removeFromParentView() {
+    mCustomView->removeFromParentView();
     YGNodeRef node = getNodeLayout()->getNode();
-    YGNodeRef childNode = child->getNodeLayout()->getNode();
-    YGNodeRemoveChild(node, childNode);
-    mChildViews.erase(std::remove(mChildViews.begin(), mChildViews.end(), child), mChildViews.end());
+    YGNodeRef parentNode = YGNodeGetParent(node);
+    auto parentView = mParentView.lock();
+    if (parentNode && parentView) {
+        std::vector<std::shared_ptr<IQYBaseView>>& list = parentView->getChildViews();
+        YGNodeRemoveChild(parentNode, node);
+        list.erase(std::remove(list.begin(), list.end(), shared_from_this()), list.end());
+    }
 }
 
 void QYBaseView::setX(float x){

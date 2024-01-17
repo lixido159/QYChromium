@@ -8,8 +8,8 @@ class QYBaseView : public IQYBaseView, public std::enable_shared_from_this<QYBas
 public:
     QYBaseView();
     void addChildView(std::shared_ptr<IQYBaseView> child) override;
-    void removeChildView(std::shared_ptr<IQYBaseView> child) override;
-    std::vector<std::shared_ptr<IQYBaseView>> getChildViews() override;
+    void removeFromParentView() override;
+    std::vector<std::shared_ptr<IQYBaseView>>& getChildViews() override;
     
     std::shared_ptr<IQYBaseView> getParentView() override;
     void setParentView(std::shared_ptr<IQYBaseView> parentView) override;
