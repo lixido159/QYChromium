@@ -35,7 +35,7 @@ std::string QYBinaryExpression::getStringValue(QYExpressionContext *expContext) 
 
 bool QYBinaryExpression::getBoolValue(QYExpressionContext *expContext) {
     if (mOpt == opt_eql) {
-        return mLeftExp->getStringValue(expContext).compare(mRightExp->getStringValue(expContext));
+        return mLeftExp->getStringValue(expContext).compare(mRightExp->getStringValue(expContext)) == 0;
     }
     return getNumberValue(expContext) > 0;
 }

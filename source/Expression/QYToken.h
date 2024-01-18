@@ -21,11 +21,19 @@ enum TOKEN_TYPE {
 
 enum OPERATOR {
     opt_none = 0,
-    opt_add = '+',//加
-    opt_sub = '-',//减
-    opt_mul = '*',//乘
-    opt_div = '/',//除
-    opt_eql = 256,//比较
+    opt_add = 1,// +
+    opt_addEql = 2,// +=
+    opt_sub = 3,// -
+    opt_subEql = 4,// -=
+    opt_mul = 5,// *
+    opt_mulEql = 6,// *=
+    opt_div = 7,//除 /
+    opt_divEql = 8,//除 /
+    opt_eql = 9,//比较 ==
+    opt_not = 10, // !
+    opt_notEql = 11, // !=
+    opt_and = 12, // &&
+    opt_or = 13, // ||
 };
 
 struct QYToken {

@@ -22,5 +22,6 @@ public:
     bool isMustache = false;
 };
 
+std::string to_string_precise(double value);
 
 #endif /* QYExpression_hpp */
