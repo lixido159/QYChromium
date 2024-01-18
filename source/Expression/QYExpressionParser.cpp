@@ -14,7 +14,7 @@
 #include "QYCollectionAccessExpression.h"
 #include "QYQuestionExpression.h"
 #include "QYBinaryExpression.h"
-
+#include "QYUnaryExpression.h"
 const std::string MUSTACHE_START = "{{";
 const std::string MUSTACHE_END = "}}";
 
@@ -60,9 +60,9 @@ QYToken QYExpressionParser::getNextIdentifier() {
 }
 
 QYToken QYExpressionParser::getNextNumber() {
-    std::string numberStr = std::to_string(getCurrentInt());
+    std::string numberStr = to_string_precise(getCurrentInt());
     while(isnumber(getNextChar()) || mCurrentChar == '.') {
-        numberStr += std::to_string(getCurrentInt());
+        numberStr += to_string_precise(getCurrentInt());
     }
     return {tok_number, "", strtod(numberStr.c_str(), nullptr)};
 }
@@ -98,14 +98,49 @@ QYToken QYExpressionParser::getNextString() {
 
 QYToken QYExpressionParser::getNextOperator() {
     char ope = mCurrentChar;
-    if (ope == '=' && getNextChar() == '=') {
-        return {tok_operator, "", 0, opt_eql};;
+    char next = getNextChar();
+    QYToken token;
+    if (ope == '+') {
+        if (next == '=') {
+            token = {tok_operator, "", 0, opt_addEql};
+        } else {
+            token = {tok_operator, "", 0, opt_add};
+        }
+    } else if (ope == '-') {
+        if (next == '=') {
+            token = {tok_operator, "", 0, opt_subEql};
+        } else {
+            token = {tok_operator, "", 0, opt_sub};
+        }
+    } else if (ope == '*') {
+        if (next == '=') {
+            token = {tok_operator, "", 0, opt_mulEql};
+        } else {
+            token = {tok_operator, "", 0, opt_mul};
+        }
+    } else if (ope == '/') {
+        if (next == '=') {
+            token = {tok_operator, "", 0, opt_divEql};
+        } else {
+            token = {tok_operator, "", 0, opt_div};
+        }
+    } else if (ope == '!') {
+        if (next == '=') {
+            token = {tok_operator, "", 0, opt_notEql};
+        } else {
+            token = {tok_operator, "", 0, opt_not};
+        }
+    } else if (ope == '=' && next == '=') {
+        token = {tok_operator, "", 0, opt_eql};
+    } else if (ope == '&' && next == '&') {
+        token = {tok_operator, "", 0, opt_add};
+    } else if (ope == '|' && next == '|') {
+        token = {tok_operator, "", 0, opt_or};
+    } else {
+        token = {tok_other, "", 0, ope};
     }
-    return {tok_other, "", 0, ope};;
-}
-
-bool isOperator() {
-    
+    getNextChar();
+    return token;
 }
 
 QYToken QYExpressionParser::getNextToken() {
@@ -132,7 +167,8 @@ QYToken QYExpressionParser::getNextToken() {
 };
 
 //括号、标识符、数字、字符串
-//这里代表一个新的解析的开始
+//这里代表一个新的解析的开始，它只会解析完一种类型，然后不会继续解析
+//parseExp会一直解析
 QYExpression* QYExpressionParser::parsePrimary() {
     if (mLastToken.chr == '(') {
         return parseParentExp();
@@ -145,6 +181,9 @@ QYExpression* QYExpressionParser::parsePrimary() {
     }
     else if (mLastToken.type == tok_string) {
         return parseStringExp();
+    }
+    else if (mLastToken.type == tok_operator) {
+        return parseUnaryExp();
     }
     return nullptr;
 }
@@ -168,14 +207,10 @@ QYExpression* QYExpressionParser::parseExp() {
         QYExpression *falseExp = parsePrimary();
         retExp = new QYQuestionExpression(leftExp, trueExp, falseExp);
     }
-    else if(mLastToken.identifier.compare("==") == 0) {
-        retExp = parseBinaryExpression(leftExp, opt_eql);
-    }
     //加减乘除等
     else if (getOptPrec(OPERATOR(mLastToken.chr)) != 0){
         retExp = parseBinaryExpression(leftExp, (OPERATOR)mLastToken.chr);
     }
-    retExp->isMustache = mIsMustache;
     return retExp;
 }
 
@@ -219,6 +254,7 @@ QYExpression* QYExpressionParser::parseNumberExp() {
 
 QYExpression* QYExpressionParser::parseStringExp() {
     QYStringExpression *strExp = new QYStringExpression(mLastToken.identifier);
+    //略过string
     getNextToken();
     return strExp;
 }
@@ -280,7 +316,7 @@ QYExpression *QYExpressionParser::_parseIdentifierExp(QYExpression *callee) {
 
 
 QYExpression* QYExpressionParser::parseFunctionCallExp(QYExpression *val) {
-    //当前是(
+    //跳过(
     getNextToken();
     std::vector<QYExpression *> args;
     //如果有参数
@@ -330,4 +366,12 @@ QYExpression* QYExpressionParser::parseArrayAccessExp(QYExpression *callee) {
     getNextToken();
     return collectionExp;
 }
+
+QYExpression* QYExpressionParser::parseUnaryExp() {
+    int opt = mLastToken.chr;
+    getNextToken();
+    QYExpression *exp = parsePrimary();
+    return new QYUnaryExpression(exp, (OPERATOR)opt);
+}
+
 

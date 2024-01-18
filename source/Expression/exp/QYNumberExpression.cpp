@@ -15,7 +15,7 @@ double QYNumberExpression::getNumberValue(QYExpressionContext *expContext) {
 }
 
 std::string QYNumberExpression::getStringValue(QYExpressionContext *expContext) {
-    return std::to_string(mNumber);
+    return to_string_precise(mNumber);
 }
 
 bool QYNumberExpression::getBoolValue(QYExpressionContext *expContext) {

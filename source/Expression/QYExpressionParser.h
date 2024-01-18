@@ -22,7 +22,7 @@ private:
     std::string mSrc;
     bool mIsMustache = false;
     int mCurIndex = -1;
-    //只能在getNextToken时使用
+    //最新所指
     int mCurrentChar = ' ';
     //lastToken代表当前解析出来的token：字符串、数字、标识符、其他字符
     //currentChar代表token的下一个字符，最新位置的char
@@ -48,6 +48,7 @@ private:
     QYExpression* parseFunctionCallExp(QYExpression *val);
     QYExpression* parsePropertyCallExp(QYExpression *callee);
     QYExpression* parseArrayAccessExp(QYExpression *callee);
+    QYExpression* parseUnaryExp();
 };
 
 
