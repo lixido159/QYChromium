@@ -8,6 +8,7 @@
 #include "QYPageParser.h"
 #include "fileUtil.h"
 #include <libxml/tree.h>
+#include <regex>
 #include <libxml/parser.h>
 #include <QYFileInfo/QYPageInfo.h>
 
@@ -50,13 +51,22 @@ std::shared_ptr<QYBaseNodeInfo> toNodeInfo(xmlNodePtr xmlNode) {
     
 }
 
+std::string replaceAnd(const char *htmlFile) {
+    std::string content = readFile(htmlFile);
+    std::regex e("&");
+    std::string result = std::regex_replace(content,e,"&amp;");
+    return result;
+}
+
+
+
 std::shared_ptr<QYBaseNodeInfo> parseFileToNodeInfo(const char *htmlFile) {
-    xmlDocPtr xmlPtr = xmlReadFile(htmlFile, "UTF-8", XML_PARSE_RECOVER);
+    std::string content = replaceAnd(htmlFile);
+    xmlDocPtr xmlPtr = xmlReadMemory(content.c_str(), content.length(), htmlFile, "UTF-8", XML_PARSE_RECOVER);
     if (!xmlPtr) {
         printf("%s 文件打开失败\n", htmlFile);
         return nullptr;
     }
-    
     xmlNodePtr xmlRoot = xmlDocGetRootElement (xmlPtr);
     std::shared_ptr<QYBaseNodeInfo> info = toNodeInfo(xmlRoot);
     xmlFreeDoc(xmlPtr);
