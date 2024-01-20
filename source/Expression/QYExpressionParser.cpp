@@ -132,14 +132,20 @@ QYToken QYExpressionParser::getNextOperator() {
         }
     } else if (ope == '=' && next == '=') {
         token = {tok_operator, "", 0, opt_eql};
-    } else if (ope == '&' && next == '&') {
-        token = {tok_operator, "", 0, opt_add};
+    } else if (ope == '&') {
+        if (next == '&') {
+            token = {tok_operator, "", 0, opt_and};
+        } else {
+            token = {tok_operator, "", 0, opt_rem};
+        }
     } else if (ope == '|' && next == '|') {
         token = {tok_operator, "", 0, opt_or};
     } else {
         token = {tok_other, "", 0, ope};
     }
-    getNextChar();
+    if (token.type != tok_other) {
+        getNextChar();
+    }
     return token;
 }
 

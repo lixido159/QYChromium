@@ -62,7 +62,6 @@ QYJSValue *QYJSContext::createGlobalConsoleObject() {
     jsValue->setFunction("log", [](QYJSContext *context, QYJSValue *paramsValue)->QYJSValue *{
         ExecuteJS(context->ToLocal());
         std::string s = paramsValue->getValue(0)->toString();
-        printf("打印日志 %s\n", s.c_str());
         return nullptr;
     });
     return jsValue;

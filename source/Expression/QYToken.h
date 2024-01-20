@@ -33,7 +33,8 @@ enum OPERATOR {
     opt_not = 10, // !
     opt_notEql = 11, // !=
     opt_and = 12, // &&
-    opt_or = 13, // ||
+    opt_rem = 13, // &
+    opt_or = 14, // ||
 };
 
 struct QYToken {

@@ -30,12 +30,15 @@ double QYBinaryExpression::getNumberValue(QYExpressionContext *expContext){
 }
 
 std::string QYBinaryExpression::getStringValue(QYExpressionContext *expContext) {
+    
     return "";
 }
 
 bool QYBinaryExpression::getBoolValue(QYExpressionContext *expContext) {
     if (mOpt == opt_eql) {
         return mLeftExp->getStringValue(expContext).compare(mRightExp->getStringValue(expContext)) == 0;
+    } else if(mOpt == opt_and) {
+        return mLeftExp->getBoolValue(expContext) && mRightExp->getBoolValue(expContext);
     }
     return getNumberValue(expContext) > 0;
 }
