@@ -11,6 +11,7 @@ function qyEntry(page: QYPage){
     page.render("qy", "name");
     let show = true;
     page.setData("show",  show);
+    page.setData("number",  1);
     page.on("qymouse", (event: QYMouseEvent)=> {
         if (index >= colors.length)
                 index = 0;

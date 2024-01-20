@@ -1,7 +1,7 @@
 <view background-color="red">
     <view  display="flex" width="100%" height="100%" flex-direction="row" align-items="center" justify-content="flex-end"  background-color="black">
         <view  flex-grow="1" align-self="flex-start" height="100" width="{{ height }}" background-color="yellow" bindmouseup="qymouse"/>
-        <view qy:if="{{ show}}"  flex-grow="1"  height="100" background-color="blue">
+        <view qy:if="{{ show && (number & 2 == 1)   }}"  flex-grow="1"  height="100" background-color="blue">
             <qycomp-test id="qy" />
         </view>
         <view qy:elif="{{ !show }}"  flex-grow="1"  height="100" background-color="green"/>
