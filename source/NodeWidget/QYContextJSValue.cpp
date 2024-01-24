@@ -28,25 +28,40 @@ QYJSValue* QYContextJSValue::getDataValue() {
     return mContextObjectValue->getValue("data");
 }
 
-bool QYContextJSValue::getBoolForKey(std::string key) {
+
+QYExpResult QYContextJSValue::getResultForKey(std::string key) {
     if (mDataMap.find(key) != mDataMap.end()) {
-        return mDataMap[key]->toBoolean();
+        QYJSValue *value = mDataMap[key];
+        if (value->isNumber()) {
+            return {QYExpResultType::Number, .number = value->toNumber()};
+        } else if (value->isString()) {
+            return {QYExpResultType::Number, .string = value->toString()};
+        } else if (value->isBoolean()) {
+            return {QYExpResultType::Number, .boolean = value->toBoolean()};
+        }
     }
-    return false;
-}
-std::string QYContextJSValue::getStringForKey(std::string key) {
-    if (mDataMap.find(key) != mDataMap.end()) {
-        return mDataMap[key]->toString();
-    }
-    return "";
-}
-double QYContextJSValue::getNumberForKey(std::string key) {
-    if (mDataMap.find(key) != mDataMap.end()) {
-        return mDataMap[key]->toNumber();
-    }
-    return 0;
+    return {QYExpResultType::None};
 }
 
+QYExpResultType QYContextJSValue::getTypeForKey(std::string key) {
+    if (mDataMap.find(key) != mDataMap.end()) {
+        QYJSValue *value = mDataMap[key];
+        if (value->isNumber()) {
+            return QYExpResultType::Number;
+        } else if (value->isString()) {
+            return QYExpResultType::String;
+        } else if (value->isBoolean()) {
+            return QYExpResultType::Boolean;
+        } else if (value->isObject()) {
+            return QYExpResultType::Object;
+        }
+    }
+    return QYExpResultType::None;
+}
+
+bool QYContextJSValue::hasValueForKey(std::string key) {
+    return mDataMap.find(key) != mDataMap.end();
+}
 
 void QYContextJSValue::registerDataInterface() {
     getDataValue()->setFunction("update", [this](QYJSContext *context, QYJSValue *paramsValue)->QYJSValue * {

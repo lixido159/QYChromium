@@ -8,22 +8,10 @@
 #include "QYUnaryExpression.h"
 
 
-QYUnaryExpression::QYUnaryExpression(QYExpression *exp, OPERATOR opt): mExp(exp), mOpt(opt){
+QYUnaryExpression::QYUnaryExpression(std::shared_ptr<QYExpression> exp, OPERATOR opt): mExp(exp), mOpt(opt){
 };
 
 
-double QYUnaryExpression::getNumberValue(QYExpressionContext *expContext){
-    return 0;
+QYExpResult QYUnaryExpression::getExpResult() {
+    return {QYExpResultType::None};
 }
-
-std::string QYUnaryExpression::getStringValue(QYExpressionContext *expContext) {
-    return "";
-}
-
-bool QYUnaryExpression::getBoolValue(QYExpressionContext *expContext) {
-    if (mOpt == opt_not) {
-        return !mExp->getBoolValue(expContext);
-    }
-    return false;
-}
-

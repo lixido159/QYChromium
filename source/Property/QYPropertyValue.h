@@ -19,9 +19,7 @@ class QYPropertyValue : public IQYExpressionContextObserver, public std::enable_
 public:
     QYPropertyValue(std::string key, std::string src, std::shared_ptr<QYPageCompContext> dataContext);
     ~QYPropertyValue();
-    double getNumberValue();
-    std::string getStringValue();
-    bool getBoolValue();
+    QYExpResult *getResult();
     
     std::string getSrc();
     std::string getKey();
@@ -30,15 +28,20 @@ public:
 public://IQYExpressionContextObserver
     virtual void expContextQueryKey(std::string key) override;
 private:
-    QYExpression *parseSrc(std::string src);
+    std::shared_ptr<QYExpression> parseSrc(std::string src);
     void clear();
     //缓存计算的结果
-    std::unique_ptr<QYPropertyFinalValue> mFinalValue = nullptr;
+    QYExpResult mResult;
     std::string mSrc = "";
     std::string mKey = "";
-    QYExpression *mExp = nullptr;
-    std::shared_ptr<QYPageCompContext> mDataContext = nullptr;
+    std::shared_ptr<QYExpression> mExp;
+    std::shared_ptr<QYPageCompContext> mDataContext;
+    std::shared_ptr<QYExpressionContext> mExpContext;
     IQYPropertyValueObserver *mObserver;
+    
+    std::shared_ptr<QYExpressionContext> getExpContext();
+    std::shared_ptr<QYExpression> getExpression();
+
 };
 
 

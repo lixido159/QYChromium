@@ -9,14 +9,8 @@
 
 QYIdentifierExpression::QYIdentifierExpression(std::string var): mVar(var) {}
 
-double QYIdentifierExpression::getNumberValue(QYExpressionContext *expContext) {
-    return expContext->getNumberForKey(mVar);
+
+QYExpResult QYIdentifierExpression::getExpResult() {
+    return mExpContext->getResultForKey(mVar);
 }
 
-std::string QYIdentifierExpression::getStringValue(QYExpressionContext *expContext) {
-    return expContext->getStringForKey(mVar);
-}
-
-bool QYIdentifierExpression::getBoolValue(QYExpressionContext *expContext) {
-    return expContext->getBoolForKey(mVar);
-}

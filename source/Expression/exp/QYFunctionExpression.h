@@ -12,13 +12,10 @@
 #include "QYExpression.h"
 class QYFunctionExpression : public QYExpression{
 public:
-    QYFunctionExpression(QYExpression *val, std::vector<QYExpression *> args);
-    virtual double getNumberValue(QYExpressionContext *expContext) override;
-    virtual std::string getStringValue(QYExpressionContext *expContext) override;
-    virtual bool getBoolValue(QYExpressionContext *expContext) override;
-
+    QYFunctionExpression(std::shared_ptr<QYExpression> val, std::vector<std::shared_ptr<QYExpression> > args);
+    virtual QYExpResult getExpResult() override;
 private:
-    QYExpression *mVal;
-    std::vector<QYExpression *> mArgs;
+    std::shared_ptr<QYExpression> mVal;
+    std::vector<std::shared_ptr<QYExpression> > mArgs;
 };
 #endif /* QYFunctionExpression_hpp */

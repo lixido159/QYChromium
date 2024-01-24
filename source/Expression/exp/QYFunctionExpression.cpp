@@ -6,17 +6,8 @@
 //
 
 #include "QYFunctionExpression.h"
-QYFunctionExpression::QYFunctionExpression(QYExpression *val, std::vector<QYExpression *> args): mVal(val), mArgs(args){};
+QYFunctionExpression::QYFunctionExpression(std::shared_ptr<QYExpression> val, std::vector<std::shared_ptr<QYExpression> > args): mVal(val), mArgs(args){};
 
-double QYFunctionExpression::getNumberValue(QYExpressionContext *expContext) {
-    return 0;
+QYExpResult QYFunctionExpression::getExpResult() {
+    return {QYExpResultType::None};
 }
-
-std::string QYFunctionExpression::getStringValue(QYExpressionContext *expContext) {
-    return "";
-}
-
-bool QYFunctionExpression::getBoolValue(QYExpressionContext *expContext) {
-    return false;
-}
-

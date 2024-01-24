@@ -6,3 +6,7 @@
 //
 
 #include "QYCollectionAccessExpression.h"
+
+QYExpResult QYCollectionAccessExpression::getExpResult() {
+    return {QYExpResultType::None};
+}

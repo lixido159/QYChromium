@@ -13,13 +13,17 @@
 #include "QYToken.h"
 #include "QYExpressionContext.h"
 
+
+
 class QYExpression {
 public:
-    virtual double getNumberValue(QYExpressionContext *expContext) = 0;
-    virtual std::string getStringValue(QYExpressionContext *expContext) = 0;
-    virtual bool getBoolValue(QYExpressionContext *expContext) = 0;
+    virtual QYExpResult getExpResult() = 0;
     //区分identifierExp是表达式还是固定值 red和{{ red }}
     bool isMustache = false;
+public:
+    void setContext(std::shared_ptr<IQYExpDataContext> context);
+protected:
+    std::shared_ptr<IQYExpDataContext> mExpContext;
 };
 
 std::string to_string_precise(double value);

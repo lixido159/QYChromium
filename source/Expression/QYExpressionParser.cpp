@@ -18,7 +18,7 @@
 const std::string MUSTACHE_START = "{{";
 const std::string MUSTACHE_END = "}}";
 
-QYExpressionParser::QYExpressionParser(std::string str):mSrc(str) {
+QYExpressionParser::QYExpressionParser(std::shared_ptr<QYExpressionContext> context, std::string str):mContext(context), mSrc(str) {
     size_t startIndex = mSrc.find(MUSTACHE_START);
     size_t endIndex = mSrc.find(MUSTACHE_END);
     if (startIndex == std::string::npos || endIndex == std::string::npos) {
@@ -175,7 +175,7 @@ QYToken QYExpressionParser::getNextToken() {
 //括号、标识符、数字、字符串
 //这里代表一个新的解析的开始，它只会解析完一种类型，然后不会继续解析
 //parseExp会一直解析
-QYExpression* QYExpressionParser::parsePrimary() {
+std::shared_ptr<QYExpression> QYExpressionParser::parsePrimary() {
     if (mLastToken.chr == '(') {
         return parseParentExp();
     }
@@ -194,24 +194,24 @@ QYExpression* QYExpressionParser::parsePrimary() {
     return nullptr;
 }
 
-QYExpression* QYExpressionParser::parseExp() {
+std::shared_ptr<QYExpression> QYExpressionParser::parseExp() {
     //不是胡子语法，整个就是字符串
     if (!mIsMustache) {
-        return new QYStringExpression(mSrc);
+        return std::make_shared<QYStringExpression>(mSrc);
     }
-    QYExpression *leftExp = parsePrimary();
-    QYExpression *retExp = leftExp;
+    std::shared_ptr<QYExpression> leftExp = parsePrimary();
+    std::shared_ptr<QYExpression> retExp = leftExp;
     //三目运算符
     if (mLastToken.chr == '?') {
         getNextToken();
-        QYExpression *trueExp = parsePrimary();
+        std::shared_ptr<QYExpression> trueExp = parsePrimary();
         if (mLastToken.chr != ':') {
             throw "三目运算符错误";
         }
         //略过 :
         getNextToken();
-        QYExpression *falseExp = parsePrimary();
-        retExp = new QYQuestionExpression(leftExp, trueExp, falseExp);
+        std::shared_ptr<QYExpression> falseExp = parsePrimary();
+        retExp = std::make_shared<QYQuestionExpression>(leftExp, trueExp, falseExp);
     }
     //加减乘除等
     else if (getOptPrec(OPERATOR(mLastToken.chr)) != 0){
@@ -226,51 +226,51 @@ QYExpression* QYExpressionParser::parseExp() {
 /// - Parameters:
 ///   - leftExp: 左边的运算符，上面例子中的xx
 ///   - leftOpt: 左边表达式左边的运算符
-QYExpression* QYExpressionParser::parseBinaryExpression(QYExpression *leftExp, OPERATOR leftOpt) {
+std::shared_ptr<QYExpression> QYExpressionParser::parseBinaryExpression(std::shared_ptr<QYExpression> leftExp, OPERATOR leftOpt) {
     //进入后当前的是 leftOpt
     int leftPrec = getOptPrec(leftOpt);
     //略过左边运算符
     getNextToken();
     // curExp
-    QYExpression *curExp = parsePrimary();
+    std::shared_ptr<QYExpression> curExp = parsePrimary();
     //rightOpt
     OPERATOR rightOpt = (OPERATOR)mLastToken.chr;
     int rightPrec = getOptPrec(rightOpt);
     
     //右边没有运算符
     if (rightPrec <= 0) {
-        return new QYBinaryExpression(leftExp, curExp, leftOpt);
+        return std::make_shared<QYBinaryExpression>(leftExp, curExp, leftOpt);
     }
     //右边优先级小于左边
     else if (rightPrec <= leftPrec) {
-        return parseBinaryExpression(new QYBinaryExpression(leftExp, curExp, leftOpt), rightOpt);
+        return parseBinaryExpression(std::make_shared<QYBinaryExpression>(leftExp, curExp, leftOpt), rightOpt);
     }
     
     //右边优先级大于左边, 把cur [opt] right 作为rightExp返回
-    QYExpression *rightExp = parseBinaryExpression(curExp, rightOpt);
-    return new QYBinaryExpression(leftExp, rightExp, leftOpt);
+    std::shared_ptr<QYExpression> rightExp = parseBinaryExpression(curExp, rightOpt);
+    return std::make_shared<QYBinaryExpression>(leftExp, rightExp, leftOpt);
 }
 
-QYExpression* QYExpressionParser::parseNumberExp() {
+std::shared_ptr<QYExpression> QYExpressionParser::parseNumberExp() {
     //确定当前是数字了
-    QYNumberExpression *numExp = new QYNumberExpression(mLastToken.number);
+    std::shared_ptr<QYNumberExpression> numExp = std::make_shared<QYNumberExpression>(mLastToken.number);
     getNextToken();
     return numExp;
 }
 
-QYExpression* QYExpressionParser::parseStringExp() {
-    QYStringExpression *strExp = new QYStringExpression(mLastToken.identifier);
+std::shared_ptr<QYExpression> QYExpressionParser::parseStringExp() {
+    std::shared_ptr<QYStringExpression> strExp = std::make_shared<QYStringExpression>(mLastToken.identifier);
     //略过string
     getNextToken();
     return strExp;
 }
 
 //  ()的情况，当lastToken.chr确定是(时调用
-QYExpression* QYExpressionParser::parseParentExp() {
+std::shared_ptr<QYExpression> QYExpressionParser::parseParentExp() {
     //略过(
     getNextToken();
     //处理完()内的表达式
-    QYExpression *exp = parseExp();//TODO:返回个值
+    std::shared_ptr<QYExpression>exp = parseExp();//TODO:返回个值
     if (mLastToken.chr != ')') {
         throw "()表达式内错误";
     }
@@ -283,14 +283,14 @@ QYExpression* QYExpressionParser::parseParentExp() {
 //变量或者方法调用
 //比如 a.b()[3]().c，parseIdentifierExp代表开始解析第一个标识符，因为第一个是调用者，没有其他调用者
 //_parseIdentifierExp代表已经不是第一个标识符了
-QYExpression *QYExpressionParser::parseIdentifierExp() {
+std::shared_ptr<QYExpression> QYExpressionParser::parseIdentifierExp() {
     std::string identifier = mLastToken.identifier;
     getNextToken();
-    return _parseIdentifierExp(new QYIdentifierExpression(identifier));
+    return _parseIdentifierExp(std::make_shared<QYIdentifierExpression>(identifier));
 }
 
-QYExpression *QYExpressionParser::_parseIdentifierExp(QYExpression *callee) {
-    QYExpression *expression = nullptr;
+std::shared_ptr<QYExpression> QYExpressionParser::_parseIdentifierExp(std::shared_ptr<QYExpression> callee) {
+    std::shared_ptr<QYExpression> expression = nullptr;
     //确定是方法调用了
     if (mLastToken.chr == '(') {
         //TODO:返回个值
@@ -321,14 +321,14 @@ QYExpression *QYExpressionParser::_parseIdentifierExp(QYExpression *callee) {
 
 
 
-QYExpression* QYExpressionParser::parseFunctionCallExp(QYExpression *val) {
+std::shared_ptr<QYExpression> QYExpressionParser::parseFunctionCallExp(std::shared_ptr<QYExpression> val) {
     //跳过(
     getNextToken();
-    std::vector<QYExpression *> args;
+    std::vector<std::shared_ptr<QYExpression> > args;
     //如果有参数
     if(mLastToken.chr != ')') {
         while(true) {
-            QYExpression *arg = parseExp();
+            std::shared_ptr<QYExpression> arg = parseExp();
             if (!arg) {
                 throw "方法参数解析错误";
             }
@@ -345,39 +345,39 @@ QYExpression* QYExpressionParser::parseFunctionCallExp(QYExpression *val) {
             getNextToken();
         }
     }
-    QYFunctionExpression *funcExp = new QYFunctionExpression(val, args);
+    std::shared_ptr<QYFunctionExpression> funcExp = std::make_shared<QYFunctionExpression>(val, args);
     //略过)
     getNextToken();
     return funcExp;
 }
 
-QYExpression* QYExpressionParser::parsePropertyCallExp(QYExpression *callee) {
+std::shared_ptr<QYExpression> QYExpressionParser::parsePropertyCallExp(std::shared_ptr<QYExpression> callee) {
     //当前是.，获取下一个token
     getNextToken();
     if (mLastToken.type != tok_identifier) {
         throw ".调用错误，不是标识符";
     }
-    QYPropertyAccessExpression *propertyExp = new QYPropertyAccessExpression(callee, mLastToken.identifier);
+    std::shared_ptr<QYPropertyAccessExpression> propertyExp = std::make_shared< QYPropertyAccessExpression>(callee, mLastToken.identifier);
     getNextToken();
     return propertyExp;
 }
 
-QYExpression* QYExpressionParser::parseArrayAccessExp(QYExpression *callee) {
+std::shared_ptr<QYExpression> QYExpressionParser::parseArrayAccessExp(std::shared_ptr<QYExpression> callee) {
     //当前是[，略过
     getNextToken();
     //解析[]中的表达式
-    QYExpression *index = parseExp();
-    QYCollectionAccessExpression *collectionExp = new QYCollectionAccessExpression(callee, index);
+    std::shared_ptr<QYExpression> index = parseExp();
+    std::shared_ptr<QYCollectionAccessExpression> collectionExp = std::make_shared<QYCollectionAccessExpression>(callee, index);
     //略过]
     getNextToken();
     return collectionExp;
 }
 
-QYExpression* QYExpressionParser::parseUnaryExp() {
+std::shared_ptr<QYExpression> QYExpressionParser::parseUnaryExp() {
     int opt = mLastToken.chr;
     getNextToken();
-    QYExpression *exp = parsePrimary();
-    return new QYUnaryExpression(exp, (OPERATOR)opt);
+    std::shared_ptr<QYExpression> exp = parsePrimary();
+    return std::make_shared<QYUnaryExpression>(exp, (OPERATOR)opt);
 }
 
 

@@ -12,13 +12,10 @@
 #include "QYExpression.h"
 class QYPropertyAccessExpression : public QYExpression{
 public:
-    QYPropertyAccessExpression(QYExpression *callee, std::string property);
-    virtual double getNumberValue(QYExpressionContext *expContext) override;
-    virtual std::string getStringValue(QYExpressionContext *expContext) override;
-    virtual bool getBoolValue(QYExpressionContext *expContext) override;
-
+    QYPropertyAccessExpression(std::shared_ptr<QYExpression> callee, std::string property);
+    virtual QYExpResult getExpResult() override;
 private:
-    QYExpression *mCallee;
+    std::shared_ptr<QYExpression> mCallee;
     std::string mProperty;
 };
 #endif /* QYPropertyAccessExpression_hpp */
