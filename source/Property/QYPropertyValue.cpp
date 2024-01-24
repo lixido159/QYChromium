@@ -9,42 +9,25 @@
 #include <regex>
 #include "QYExpressionParser.h"
 QYPropertyValue::QYPropertyValue(std::string key, std::string src, std::shared_ptr<QYPageCompContext> dataContext):mKey(key), mSrc(src), mDataContext(dataContext) {
-    mExp = parseSrc(src);
 }
 
 QYPropertyValue::~QYPropertyValue() {
     
 }
 
-QYExpression *QYPropertyValue::parseSrc(std::string src) {
-    std::unique_ptr<QYExpressionParser> expParser = std::make_unique<QYExpressionParser>(src);
+std::shared_ptr<QYExpression> QYPropertyValue::parseSrc(std::string src) {
+    std::unique_ptr<QYExpressionParser> expParser = std::make_unique<QYExpressionParser>(getExpContext(), src);
+
     return expParser->parseExp();
 
 }
 
-
-double QYPropertyValue::getNumberValue() {
-    if (!mFinalValue) {
-        std::unique_ptr<QYExpressionContext> expContext = std::make_unique<QYExpressionContext>(mDataContext.get(), this);
-        mFinalValue = std::make_unique<QYPropertyFinalValue>(mExp->getNumberValue(expContext.get()));
+QYExpResult QYPropertyValue::getResult() {
+    if (!mResult) {
+        mResult = getExpression()->getExpResult();
     }
-    return mFinalValue->getNumberValue();
-}
+    return mResult;
 
-std::string QYPropertyValue::getStringValue() {
-    if (!mFinalValue) {
-        std::unique_ptr<QYExpressionContext> expContext = std::make_unique<QYExpressionContext>(mDataContext.get(), this);
-        mFinalValue = std::make_unique<QYPropertyFinalValue>(mExp->getStringValue(expContext.get()));
-    }
-    return mFinalValue->getStringValue();
-}
-
-bool QYPropertyValue::getBoolValue() {
-    if (!mFinalValue) {
-        std::unique_ptr<QYExpressionContext> expContext = std::make_unique<QYExpressionContext>(mDataContext.get(), this);
-        mFinalValue = std::make_unique<QYPropertyFinalValue>(mExp->getBoolValue(expContext.get()));
-    }
-    return mFinalValue->getBoolValue();
 }
 
 std::string QYPropertyValue::getKey() {
@@ -71,4 +54,19 @@ void QYPropertyValue::onDataUpdate() {
 
 void QYPropertyValue::expContextQueryKey(std::string key) {
     mDataContext->addJSKeyObserver(key, shared_from_this());
+}
+
+std::shared_ptr<QYExpressionContext> QYPropertyValue::getExpContext() {
+    if (!mExpContext) {
+        mExpContext = std::make_unique<QYExpressionContext>(mDataContext->getContextJSValue(), this);
+    }
+    return mExpContext;
+}
+
+std::shared_ptr<QYExpression> QYPropertyValue::getExpression() {
+    if (!mExp) {
+        mExp = parseSrc(src);
+
+    }
+    return mExp;
 }

@@ -12,21 +12,11 @@
 #include "QYExpression.h"
 class QYCollectionAccessExpression : public QYExpression{
 public:
-    QYCollectionAccessExpression(QYExpression *callee, QYExpression *index): mCallee(callee), mIndex(index){};
-    QYExpression *mCallee;
+    QYCollectionAccessExpression(std::shared_ptr<QYExpression> callee, std::shared_ptr<QYExpression> index): mCallee(callee), mIndex(index){};
+    std::shared_ptr<QYExpression> mCallee;
     //数组、字典都有可能
-    QYExpression *mIndex;
-    virtual double getNumberValue(QYExpressionContext *expContext) override {
-        return 0;
-    }
-    
-    virtual std::string getStringValue(QYExpressionContext *expContext) override {
-        return "";
-    }
-    
-    virtual bool getBoolValue(QYExpressionContext *expContext) override {
-        return false;
-    }
+    std::shared_ptr<QYExpression> mIndex;
+    virtual QYExpResult getExpResult() override;
 };
 
 #endif /* QYCollectionAccessExpression_hpp */

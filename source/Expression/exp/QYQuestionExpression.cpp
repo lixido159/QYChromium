@@ -6,32 +6,14 @@
 //
 
 #include "QYQuestionExpression.h"
-QYQuestionExpression::QYQuestionExpression(QYExpression *questionExp, QYExpression *trueExp, QYExpression *falseExp) : mQuestionExp(questionExp), mTrueExp(trueExp), mFalseExp(falseExp) {};
+QYQuestionExpression::QYQuestionExpression(std::shared_ptr<QYExpression> questionExp, std::shared_ptr<QYExpression> trueExp, std::shared_ptr<QYExpression> falseExp) : mQuestionExp(questionExp), mTrueExp(trueExp), mFalseExp(falseExp) {};
 
-double QYQuestionExpression::getNumberValue(QYExpressionContext *expContext) {
-    if (getQuestionBool(expContext)) {
-        return mTrueExp->getNumberValue(expContext);
-    } else {
-        return mFalseExp->getNumberValue(expContext);
-    }
+QYExpResult QYQuestionExpression::getExpResult() {
+    return {QYExpResultType::None};
 }
 
-std::string QYQuestionExpression::getStringValue(QYExpressionContext *expContext) {
-    if (getQuestionBool(expContext)) {
-        return mTrueExp->getStringValue(expContext);
-    } else {
-        return mFalseExp->getStringValue(expContext);
-    }
-}
 
-bool QYQuestionExpression::getBoolValue(QYExpressionContext *expContext) {
-    if (getQuestionBool(expContext)) {
-        return mTrueExp->getBoolValue(expContext);
-    } else {
-        return mFalseExp->getBoolValue(expContext);
-    }
-}
-
-bool QYQuestionExpression::getQuestionBool(QYExpressionContext *expContext) {
-    return mQuestionExp->getBoolValue(expContext);
+bool QYQuestionExpression::getQuestionBool() {
+//    return mQuestionExp->get();
+    return true;
 }

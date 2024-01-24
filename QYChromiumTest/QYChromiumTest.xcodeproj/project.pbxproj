@@ -285,6 +285,8 @@
 		27C284A92B504EED009F076D /* QYIfDomNodeCreatorItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 27C284A72B504EED009F076D /* QYIfDomNodeCreatorItem.h */; };
 		27DBEC062B5960A9000FD9E1 /* QYUnaryExpression.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27DBEC042B5960A9000FD9E1 /* QYUnaryExpression.cpp */; };
 		27DBEC072B5960A9000FD9E1 /* QYUnaryExpression.h in Headers */ = {isa = PBXBuildFile; fileRef = 27DBEC052B5960A9000FD9E1 /* QYUnaryExpression.h */; };
+		27DBEC0E2B5FF8F7000FD9E1 /* QYExpResult.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27DBEC0C2B5FF8F7000FD9E1 /* QYExpResult.cpp */; };
+		27DBEC0F2B5FF8F7000FD9E1 /* QYExpResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 27DBEC0D2B5FF8F7000FD9E1 /* QYExpResult.h */; };
 		27FDB3652B18EC1300040AFF /* QYComponentDomNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27FDB3632B18EC1300040AFF /* QYComponentDomNode.cpp */; };
 		27FDB3662B18EC1300040AFF /* QYComponentDomNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 27FDB3642B18EC1300040AFF /* QYComponentDomNode.h */; };
 		27FDB3C12B1E260700040AFF /* QYContextJSValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27FDB3BF2B1E260700040AFF /* QYContextJSValue.cpp */; };
@@ -678,6 +680,8 @@
 		27C284A72B504EED009F076D /* QYIfDomNodeCreatorItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYIfDomNodeCreatorItem.h; sourceTree = "<group>"; };
 		27DBEC042B5960A9000FD9E1 /* QYUnaryExpression.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = QYUnaryExpression.cpp; sourceTree = "<group>"; };
 		27DBEC052B5960A9000FD9E1 /* QYUnaryExpression.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYUnaryExpression.h; sourceTree = "<group>"; };
+		27DBEC0C2B5FF8F7000FD9E1 /* QYExpResult.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = QYExpResult.cpp; sourceTree = "<group>"; };
+		27DBEC0D2B5FF8F7000FD9E1 /* QYExpResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYExpResult.h; sourceTree = "<group>"; };
 		27FDB3632B18EC1300040AFF /* QYComponentDomNode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = QYComponentDomNode.cpp; sourceTree = "<group>"; };
 		27FDB3642B18EC1300040AFF /* QYComponentDomNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYComponentDomNode.h; sourceTree = "<group>"; };
 		27FDB3BF2B1E260700040AFF /* QYContextJSValue.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = QYContextJSValue.cpp; sourceTree = "<group>"; };
@@ -1039,6 +1043,8 @@
 				273679772B03DCCD007067EF /* IQYExpDataContext.h */,
 				273679732B03D9E7007067EF /* QYExpressionContext.cpp */,
 				273679742B03D9E7007067EF /* QYExpressionContext.h */,
+				27DBEC0C2B5FF8F7000FD9E1 /* QYExpResult.cpp */,
+				27DBEC0D2B5FF8F7000FD9E1 /* QYExpResult.h */,
 			);
 			path = Expression;
 			sourceTree = "<group>";
@@ -1601,6 +1607,7 @@
 				271B91F82A8CF515003A9D0A /* QYBaseWidget.h in Headers */,
 				27744EB22AC1E648000B3B29 /* QYCollectionAccessExpression.h in Headers */,
 				27C284A52B504ED7009F076D /* QYCommonDomNodeCreatorItem.h in Headers */,
+				27DBEC0F2B5FF8F7000FD9E1 /* QYExpResult.h in Headers */,
 				27744F102AD83C26000B3B29 /* QYPropertySetter.h in Headers */,
 				271B93222A8E7B84003A9D0A /* QYJSValue.h in Headers */,
 				271B91FE2A8CF515003A9D0A /* QYBaseCustomImageView.h in Headers */,
@@ -1931,6 +1938,7 @@
 				277C22BF2B0646E6004DBA26 /* QYMacNativeImageView.mm in Sources */,
 				27744E942AC1DD76000B3B29 /* QYExpressionParser.cpp in Sources */,
 				271B92012A8CF515003A9D0A /* QYBaseCustomView.mm in Sources */,
+				27DBEC0E2B5FF8F7000FD9E1 /* QYExpResult.cpp in Sources */,
 				27744EAD2AC1E63F000B3B29 /* QYPropertyAccessExpression.cpp in Sources */,
 				C601446B2B21B71200AC4E2F /* QYDom.cpp in Sources */,
 				277C22B72B0646BF004DBA26 /* QYMacNativeView.mm in Sources */,

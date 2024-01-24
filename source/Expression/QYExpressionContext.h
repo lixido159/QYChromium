@@ -19,13 +19,10 @@ public:
 
 class QYExpressionContext {
 public:
-    QYExpressionContext(IQYExpDataContext *dataContext, IQYExpressionContextObserver *observer);
+    QYExpressionContext(std::shared_ptr<IQYExpDataContext> dataContext, IQYExpressionContextObserver *observer);
     ~QYExpressionContext();
-    bool getBoolForKey(std::string key);
-    std::string getStringForKey(std::string key);
-    double getNumberForKey(std::string key);
 private:
-    IQYExpDataContext *mDataContext;
+    std::shared_ptr<IQYExpDataContext> mDataContext;
     IQYExpressionContextObserver *mObserver;
 };
 

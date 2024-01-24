@@ -15,10 +15,11 @@
 
 class QYExpressionParser {
 public:
-    QYExpressionParser(std::string str);
-    QYExpression* parseExp();
+    QYExpressionParser(std::shared_ptr<QYExpressionContext> context, std::string str);
+    std::shared_ptr<QYExpression> parseExp();
 
 private:
+    std::shared_ptr<QYExpressionContext> mContext;
     std::string mSrc;
     bool mIsMustache = false;
     int mCurIndex = -1;
@@ -38,17 +39,17 @@ private:
     QYToken getNextOperator();
     QYToken getNextToken();
     
-    QYExpression* parsePrimary();
-    QYExpression* parseBinaryExpression(QYExpression *leftExp, OPERATOR leftOpt);
-    QYExpression* parseNumberExp();
-    QYExpression* parseStringExp();
-    QYExpression* parseParentExp();
-    QYExpression *parseIdentifierExp();
-    QYExpression *_parseIdentifierExp(QYExpression *callee);
-    QYExpression* parseFunctionCallExp(QYExpression *val);
-    QYExpression* parsePropertyCallExp(QYExpression *callee);
-    QYExpression* parseArrayAccessExp(QYExpression *callee);
-    QYExpression* parseUnaryExp();
+    std::shared_ptr<QYExpression> parsePrimary();
+    std::shared_ptr<QYExpression> parseBinaryExpression(std::shared_ptr<QYExpression>leftExp, OPERATOR leftOpt);
+    std::shared_ptr<QYExpression> parseNumberExp();
+    std::shared_ptr<QYExpression> parseStringExp();
+    std::shared_ptr<QYExpression> parseParentExp();
+    std::shared_ptr<QYExpression> parseIdentifierExp();
+    std::shared_ptr<QYExpression> _parseIdentifierExp(std::shared_ptr<QYExpression>callee);
+    std::shared_ptr<QYExpression> parseFunctionCallExp(std::shared_ptr<QYExpression>val);
+    std::shared_ptr<QYExpression> parsePropertyCallExp(std::shared_ptr<QYExpression>callee);
+    std::shared_ptr<QYExpression> parseArrayAccessExp(std::shared_ptr<QYExpression>callee);
+    std::shared_ptr<QYExpression> parseUnaryExp();
 };
 
 

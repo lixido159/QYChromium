@@ -12,14 +12,11 @@
 #include "QYExpression.h"
 class QYBinaryExpression : public QYExpression {
 public:
-    QYBinaryExpression(QYExpression *leftExp, QYExpression *rightExp, OPERATOR opt);
-    virtual double getNumberValue(QYExpressionContext *expContext) override;
-    virtual std::string getStringValue(QYExpressionContext *expContext) override;
-    virtual bool getBoolValue(QYExpressionContext *expContext) override;
-
+    QYBinaryExpression(std::shared_ptr<QYExpression> leftExp, std::shared_ptr<QYExpression> rightExp, OPERATOR opt);
+    virtual QYExpResult getExpResult() override;
 private:
-    QYExpression *mLeftExp;
-    QYExpression *mRightExp;
+    std::shared_ptr<QYExpression> mLeftExp;
+    std::shared_ptr<QYExpression> mRightExp;
     OPERATOR mOpt;
 };
 

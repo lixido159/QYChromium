@@ -12,6 +12,7 @@
 #include "CommonHeader.h"
 #include "QYJSValue.h"
 #include "IQYExpDataContext.h"
+#include "QYToken.h"
 class QYPageCompContext;
 //这是js里的QYJSContext对象
 class QYContextJSValue: public IQYExpDataContext {
@@ -22,9 +23,9 @@ public:
     QYJSValue *getValue();
     QYJSValue *getDataValue();
 
-    virtual bool getBoolForKey(std::string key) override;
-    virtual std::string getStringForKey(std::string key) override;
-    virtual double getNumberForKey(std::string key) override;
+    virtual QYExpResult getResultForKey(std::string key) override;
+    virtual QYExpResultType getTypeForKey(std::string key) override;
+    virtual bool hasValueForKey(std::string key) override;
 
 private:
     std::weak_ptr<QYPageCompContext> mPageCompContext;

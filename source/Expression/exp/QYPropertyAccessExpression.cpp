@@ -7,17 +7,10 @@
 
 #include "QYPropertyAccessExpression.h"
 
-QYPropertyAccessExpression::QYPropertyAccessExpression(QYExpression *callee, std::string property) : mCallee(callee), mProperty(property){};
+QYPropertyAccessExpression::QYPropertyAccessExpression(std::shared_ptr<QYExpression> callee, std::string property) : mCallee(callee), mProperty(property){};
 
 
-double QYPropertyAccessExpression::getNumberValue(QYExpressionContext *expContext) {
-    return 0;
+QYExpResult QYPropertyAccessExpression::getExpResult() {
+    return {QYExpResultType::None};
 }
 
-std::string QYPropertyAccessExpression::getStringValue(QYExpressionContext *expContext) {
-    return "";
-}
-
-bool QYPropertyAccessExpression::getBoolValue(QYExpressionContext *expContext) {
-    return false;
-}

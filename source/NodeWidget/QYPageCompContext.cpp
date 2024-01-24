@@ -51,22 +51,4 @@ std::shared_ptr<QYContextJSValue> QYPageCompContext::getContextJSValue() {
     return mContextJSValue;
 }
 
-bool QYPageCompContext::getBoolForKey(std::string key) {
-    if (!mContextJSValue) {
-        return false;
-    }
-    return mContextJSValue->getBoolForKey(key);
-}
-std::string QYPageCompContext::getStringForKey(std::string key) {
-    if (!mContextJSValue) {
-        return "";
-    }
-    return mContextJSValue->getStringForKey(key);
-}
-double QYPageCompContext::getNumberForKey(std::string key) {
-    if (!mContextJSValue) {
-        return 0;
-    }
-    return mContextJSValue->getNumberForKey(key);
-}
 

@@ -12,16 +12,13 @@
 #include "QYExpression.h"
 class QYQuestionExpression : public QYExpression {
 public:
-    QYQuestionExpression(QYExpression *questionExp, QYExpression *trueExp, QYExpression *falseExp);
-    virtual double getNumberValue(QYExpressionContext *expContext) override;
-    virtual std::string getStringValue(QYExpressionContext *expContext) override;
-    virtual bool getBoolValue(QYExpressionContext *expContext) override;
-
+    QYQuestionExpression(std::shared_ptr<QYExpression> questionExp, std::shared_ptr<QYExpression> trueExp, std::shared_ptr<QYExpression> falseExp);
+    virtual QYExpResult getExpResult() override;
 private:
-    QYExpression *mQuestionExp;
-    QYExpression *mTrueExp;
-    QYExpression *mFalseExp;
-    bool getQuestionBool(QYExpressionContext *expContext);
+    std::shared_ptr<QYExpression> mQuestionExp;
+    std::shared_ptr<QYExpression> mTrueExp;
+    std::shared_ptr<QYExpression> mFalseExp;
+    bool getQuestionBool();
 };
 
 #endif /* QYQuestionExpression_hpp */

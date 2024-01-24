@@ -13,13 +13,11 @@
 
 class QYUnaryExpression : public QYExpression {
 public:
-    QYUnaryExpression(QYExpression *exp, OPERATOR opt);
-    virtual double getNumberValue(QYExpressionContext *expContext) override;
-    virtual std::string getStringValue(QYExpressionContext *expContext) override;
-    virtual bool getBoolValue(QYExpressionContext *expContext) override;
-
+    QYUnaryExpression(std::shared_ptr<QYExpression> exp, OPERATOR opt);
+    virtual QYExpResult getExpResult() override;
+    
 private:
-    QYExpression *mExp;
+    std::shared_ptr<QYExpression> mExp;
     OPERATOR mOpt;
 };
 
