@@ -8,6 +8,6 @@
 #include "QYFunctionExpression.h"
 QYFunctionExpression::QYFunctionExpression(std::shared_ptr<QYExpression> val, std::vector<std::shared_ptr<QYExpression> > args): mVal(val), mArgs(args){};
 
-QYExpResult QYFunctionExpression::getExpResult() {
-    return {QYExpResultType::None};
+std::shared_ptr<QYExpResult> QYFunctionExpression::getExpResult(std::shared_ptr<QYExpressionContext> expContext) {
+    return nullptr;
 }

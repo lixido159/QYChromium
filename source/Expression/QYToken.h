@@ -10,7 +10,6 @@
 
 #include <stdio.h>
 #include <string>
-#include "QYExpResultType.h"
 class QYExpression;
 enum TOKEN_TYPE {
     tok_other = -1,//其他
@@ -30,12 +29,12 @@ enum OPERATOR {
     opt_mul = 5,// *
     opt_mulEql = 6,// *=
     opt_div = 7,//除 /
-    opt_divEql = 8,//除 /
+    opt_divEql = 8,//除 /=
     opt_eql = 9,//比较 ==
     opt_not = 10, // !
     opt_notEql = 11, // !=
     opt_and = 12, // &&
-    opt_rem = 13, // &
+    opt_rem = 13, // %
     opt_or = 14, // ||
 };
 
@@ -48,15 +47,7 @@ struct QYToken {
 
 int getOptPrec(OPERATOR Opt);
 
-struct QYExpResult {
-    QYExpResultType type;
-    std::string string;
-    double number;
-    int chr;
-    bool boolean;
-};
 
-QYExpResult calculateBinaryExp(QYExpression *first, QYExpression *second, OPERATOR opt);
 
 
 #endif /* QYToken_hpp */

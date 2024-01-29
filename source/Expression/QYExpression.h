@@ -11,21 +11,19 @@
 #include <stdio.h>
 #include <string>
 #include "QYToken.h"
+#include "QYExpResult.h"
+#include "IQYExpDataContext.h"
 #include "QYExpressionContext.h"
-
 
 
 class QYExpression {
 public:
-    virtual QYExpResult getExpResult() = 0;
+    virtual std::shared_ptr<QYExpResult> getExpResult(std::shared_ptr<QYExpressionContext> expContext) = 0;
     //区分identifierExp是表达式还是固定值 red和{{ red }}
     bool isMustache = false;
-public:
-    void setContext(std::shared_ptr<IQYExpDataContext> context);
-protected:
-    std::shared_ptr<IQYExpDataContext> mExpContext;
 };
 
 std::string to_string_precise(double value);
+QYExpResult calculateBinaryExp(QYExpression *first, QYExpression *second, OPERATOR opt);
 
 #endif /* QYExpression_hpp */

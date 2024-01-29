@@ -15,7 +15,7 @@
 class QYIdentifierExpression : public QYExpression{
 public:
     QYIdentifierExpression(std::string var);
-    virtual QYExpResult getExpResult() override;
+    virtual std::shared_ptr<QYExpResult> getExpResult(std::shared_ptr<QYExpressionContext> expContext) override;
 private:
     std::string mVar;
 };

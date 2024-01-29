@@ -13,6 +13,13 @@
 #include "QYJSValue.h"
 #include "IQYExpDataContext.h"
 #include "QYToken.h"
+
+class IQYPageCompDataObserver {
+public:
+    virtual void onDataUpdate(std::string key) = 0;
+};
+
+
 class QYPageCompContext;
 //这是js里的QYJSContext对象
 class QYContextJSValue: public IQYExpDataContext {
@@ -23,7 +30,7 @@ public:
     QYJSValue *getValue();
     QYJSValue *getDataValue();
 
-    virtual QYExpResult getResultForKey(std::string key) override;
+    virtual std::shared_ptr<QYExpResult> getResultForKey(std::string key) override;
     virtual QYExpResultType getTypeForKey(std::string key) override;
     virtual bool hasValueForKey(std::string key) override;
 

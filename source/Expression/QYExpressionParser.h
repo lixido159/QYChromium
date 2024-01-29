@@ -11,15 +11,13 @@
 #include <stdio.h>
 #include "QYExpression.h"
 #include "QYToken.h"
-#include "QYExpressionContext.h"
 
 class QYExpressionParser {
 public:
-    QYExpressionParser(std::shared_ptr<QYExpressionContext> context, std::string str);
+    QYExpressionParser(std::string str);
     std::shared_ptr<QYExpression> parseExp();
 
 private:
-    std::shared_ptr<QYExpressionContext> mContext;
     std::string mSrc;
     bool mIsMustache = false;
     int mCurIndex = -1;

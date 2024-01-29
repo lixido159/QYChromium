@@ -14,7 +14,7 @@
 class QYNumberExpression : public QYExpression {
 public:
     QYNumberExpression(double number);
-    virtual QYExpResult getExpResult() override;
+    virtual std::shared_ptr<QYExpResult> getExpResult(std::shared_ptr<QYExpressionContext> expContext) override;
 private:
     double mNumber;
 };

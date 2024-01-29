@@ -18,7 +18,7 @@
 const std::string MUSTACHE_START = "{{";
 const std::string MUSTACHE_END = "}}";
 
-QYExpressionParser::QYExpressionParser(std::shared_ptr<QYExpressionContext> context, std::string str):mContext(context), mSrc(str) {
+QYExpressionParser::QYExpressionParser(std::string str):mSrc(str) {
     size_t startIndex = mSrc.find(MUSTACHE_START);
     size_t endIndex = mSrc.find(MUSTACHE_END);
     if (startIndex == std::string::npos || endIndex == std::string::npos) {

@@ -13,12 +13,11 @@
 class QYQuestionExpression : public QYExpression {
 public:
     QYQuestionExpression(std::shared_ptr<QYExpression> questionExp, std::shared_ptr<QYExpression> trueExp, std::shared_ptr<QYExpression> falseExp);
-    virtual QYExpResult getExpResult() override;
+    virtual std::shared_ptr<QYExpResult> getExpResult(std::shared_ptr<QYExpressionContext> expContext) override;
 private:
     std::shared_ptr<QYExpression> mQuestionExp;
     std::shared_ptr<QYExpression> mTrueExp;
     std::shared_ptr<QYExpression> mFalseExp;
-    bool getQuestionBool();
 };
 
 #endif /* QYQuestionExpression_hpp */

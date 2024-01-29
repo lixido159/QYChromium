@@ -10,7 +10,7 @@
 QYIdentifierExpression::QYIdentifierExpression(std::string var): mVar(var) {}
 
 
-QYExpResult QYIdentifierExpression::getExpResult() {
-    return mExpContext->getResultForKey(mVar);
+std::shared_ptr<QYExpResult> QYIdentifierExpression::getExpResult(std::shared_ptr<QYExpressionContext> expContext) {
+    return expContext->getResultForKey(mVar);
 }
 

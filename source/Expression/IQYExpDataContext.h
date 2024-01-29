@@ -7,13 +7,15 @@
 
 #ifndef IQYExpDataContext_h
 #define IQYExpDataContext_h
-#include "QYToken.h"
+#include "QYExpResult.h"
 
 class IQYExpDataContext {
 public:
-    virtual QYExpResult getResultForKey(std::string key) = 0;
+    virtual std::shared_ptr<QYExpResult> getResultForKey(std::string key) = 0;
     virtual QYExpResultType getTypeForKey(std::string key) = 0;
     virtual bool hasValueForKey(std::string key) = 0;
+    
+    
 };
 
 

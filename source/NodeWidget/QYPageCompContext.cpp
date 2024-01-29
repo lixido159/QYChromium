@@ -15,22 +15,22 @@ void QYPageCompContext::init() {
     mContextJSValue = std::make_shared<QYContextJSValue>(weak_from_this());
 }
 
-void QYPageCompContext::addJSKeyObserver(std::string key, std::shared_ptr<QYPropertyValue> observer) {
+void QYPageCompContext::addJSKeyObserver(std::string key, std::shared_ptr<IQYPageCompDataObserver> observer) {
     //说明该key还没有属性监听
-    if (mObserveProperties.find(key) == mObserveProperties.end()) {
-        std::vector<std::shared_ptr<QYPropertyValue>> obs = {observer};
-        mObserveProperties.insert(std::pair(key, obs));
+    if (mDataObservers.find(key) == mDataObservers.end()) {
+        std::vector<std::shared_ptr<IQYPageCompDataObserver>> obs = {observer};
+        mDataObservers.insert(std::pair(key, obs));
     } else {
-        std::vector<std::shared_ptr<QYPropertyValue>> obs = mObserveProperties[key];
+        std::vector<std::shared_ptr<IQYPageCompDataObserver>> obs = mDataObservers[key];
         obs.push_back(observer);
     }
 }
 
 void QYPageCompContext::notifyDataUpdate(std::string key) {
-    std::vector<std::shared_ptr<QYPropertyValue>> obs = mObserveProperties[key];
+    std::vector<std::shared_ptr<IQYPageCompDataObserver>> obs = mDataObservers[key];
     for (int i = 0; i < obs.size(); i++) {
-        std::shared_ptr<QYPropertyValue> proptyValue = obs[i];
-        proptyValue->onDataUpdate();
+        std::shared_ptr<IQYPageCompDataObserver> proptyValue = obs[i];
+        proptyValue->onDataUpdate(key);
         
     }
 }

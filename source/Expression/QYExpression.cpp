@@ -24,9 +24,6 @@ std::string to_string_precise(double value) {
     return str;
 }
 
-void QYExpression::setContext(std::shared_ptr<IQYExpDataContext> context) {
-    mExpContext = context;
-}
 
 
 

@@ -12,6 +12,10 @@ QYUnaryExpression::QYUnaryExpression(std::shared_ptr<QYExpression> exp, OPERATOR
 };
 
 
-QYExpResult QYUnaryExpression::getExpResult() {
-    return {QYExpResultType::None};
+std::shared_ptr<QYExpResult> QYUnaryExpression::getExpResult(std::shared_ptr<QYExpressionContext> expContext) {
+    if (mOpt == opt_not) {
+        std::shared_ptr<QYExpResult> result = mExp->getExpResult(expContext);
+        return std::make_shared<QYExpResult>(QYExpResultType::Boolean, !result->getBoolean());
+    }
+    return std::make_shared<QYExpResult>();
 }

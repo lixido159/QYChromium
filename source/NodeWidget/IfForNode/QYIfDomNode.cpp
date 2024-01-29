@@ -108,7 +108,7 @@ int QYIfDomNode::calculateValidNodeIndex() {
         if (proptyValue->getKey().compare("qy:else") == 0) {
             return i;
         }
-        if (proptyValue->getBoolValue()) {
+        if (proptyValue->getResult()->getBoolean()) {
             return i;
         }
     }
