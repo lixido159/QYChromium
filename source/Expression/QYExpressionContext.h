@@ -19,11 +19,12 @@ public:
 
 class QYExpressionContext {
 public:
-    QYExpressionContext(std::shared_ptr<IQYExpDataContext> dataContext, IQYExpressionContextObserver *observer);
+    QYExpressionContext(std::shared_ptr<IQYExpDataContext> dataContext, std::shared_ptr<IQYExpressionContextObserver> observer);
     ~QYExpressionContext();
+    std::shared_ptr<QYExpResult> getResultForKey(std::string key);
 private:
     std::shared_ptr<IQYExpDataContext> mDataContext;
-    IQYExpressionContextObserver *mObserver;
+    std::shared_ptr<IQYExpressionContextObserver> mObserver;
 };
 
 #endif /* QYExpressionContext_hpp */

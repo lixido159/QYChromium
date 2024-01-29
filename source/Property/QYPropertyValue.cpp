@@ -8,7 +8,7 @@
 #include "QYPropertyValue.h"
 #include <regex>
 #include "QYExpressionParser.h"
-QYPropertyValue::QYPropertyValue(std::string key, std::string src, std::shared_ptr<QYPageCompContext> dataContext):mKey(key), mSrc(src), mDataContext(dataContext) {
+QYPropertyValue::QYPropertyValue(std::string key, std::string src, std::shared_ptr<QYPageCompContext> pageCompContext):mKey(key), mSrc(src), mPageCompContext(pageCompContext) {
 }
 
 QYPropertyValue::~QYPropertyValue() {
@@ -16,15 +16,16 @@ QYPropertyValue::~QYPropertyValue() {
 }
 
 std::shared_ptr<QYExpression> QYPropertyValue::parseSrc(std::string src) {
-    std::unique_ptr<QYExpressionParser> expParser = std::make_unique<QYExpressionParser>(getExpContext(), src);
+    std::unique_ptr<QYExpressionParser> expParser = std::make_unique<QYExpressionParser>(src);
 
     return expParser->parseExp();
 
 }
 
-QYExpResult QYPropertyValue::getResult() {
+std::shared_ptr<QYExpResult> QYPropertyValue::getResult() {
     if (!mResult) {
-        mResult = getExpression()->getExpResult();
+        
+        mResult = getExpression()->getExpResult(std::make_shared<QYExpressionContext>(mPageCompContext->getContextJSValue(), shared_from_this()));
     }
     return mResult;
 
@@ -44,29 +45,21 @@ void QYPropertyValue::setObserver(IQYPropertyValueObserver *observer) {
 
 //当属性更新时
 void QYPropertyValue::clear() {
-    mFinalValue = nullptr;
+    mResult = nullptr;
 }
 
-void QYPropertyValue::onDataUpdate() {
+void QYPropertyValue::onDataUpdate(std::string key) {
     clear();
     mObserver->onDataUpdate(shared_from_this());
 }
 
 void QYPropertyValue::expContextQueryKey(std::string key) {
-    mDataContext->addJSKeyObserver(key, shared_from_this());
-}
-
-std::shared_ptr<QYExpressionContext> QYPropertyValue::getExpContext() {
-    if (!mExpContext) {
-        mExpContext = std::make_unique<QYExpressionContext>(mDataContext->getContextJSValue(), this);
-    }
-    return mExpContext;
+    mPageCompContext->addJSKeyObserver(key, shared_from_this());
 }
 
 std::shared_ptr<QYExpression> QYPropertyValue::getExpression() {
     if (!mExp) {
-        mExp = parseSrc(src);
-
+        mExp = parseSrc(mSrc);
     }
     return mExp;
 }

@@ -8,12 +8,8 @@
 #include "QYQuestionExpression.h"
 QYQuestionExpression::QYQuestionExpression(std::shared_ptr<QYExpression> questionExp, std::shared_ptr<QYExpression> trueExp, std::shared_ptr<QYExpression> falseExp) : mQuestionExp(questionExp), mTrueExp(trueExp), mFalseExp(falseExp) {};
 
-QYExpResult QYQuestionExpression::getExpResult() {
-    return {QYExpResultType::None};
-}
-
-
-bool QYQuestionExpression::getQuestionBool() {
-//    return mQuestionExp->get();
-    return true;
+std::shared_ptr<QYExpResult> QYQuestionExpression::getExpResult(std::shared_ptr<QYExpressionContext> expContext)
+{
+    bool isTrue = mQuestionExp->getExpResult(expContext)->getBoolean();
+    return isTrue ? mTrueExp->getExpResult(expContext) : mFalseExp->getExpResult(expContext);
 }

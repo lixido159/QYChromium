@@ -10,7 +10,6 @@
 
 #include <stdio.h>
 #include <string>
-
 enum class QYExpResultType {
     None,
     Number,
@@ -19,14 +18,28 @@ enum class QYExpResultType {
     Object,
 };
 class QYExpResult {
-    QYExpResultType type;
-    std::string string;
-    double number;
-    bool boolean;
+public:
+    
 
-    QYExpResult(QYExpResultType _type, std::string _string);
-    QYExpResult(QYExpResultType _type, double _number);
-    QYExpResult(QYExpResultType _type, bool _boolean);
+    QYExpResult();
+    QYExpResult(QYExpResultType type, std::string string);
+    QYExpResult(QYExpResultType type, double number);
+    QYExpResult(QYExpResultType type, bool boolean);
+    
+    
+    QYExpResultType getType();
+    std::string getString();
+    double getNumber();
+    bool getBoolean();
+    bool isString();
+    bool isNumber();
+    bool isBoolean();
+    bool isNone();
+private:
+    QYExpResultType mType = QYExpResultType::None;
+    std::string mString = "";
+    double mNumber = 0;
+    bool mBoolean = false;
 };
 
 

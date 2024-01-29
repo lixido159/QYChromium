@@ -29,18 +29,18 @@ QYJSValue* QYContextJSValue::getDataValue() {
 }
 
 
-QYExpResult QYContextJSValue::getResultForKey(std::string key) {
+std::shared_ptr<QYExpResult> QYContextJSValue::getResultForKey(std::string key) {
     if (mDataMap.find(key) != mDataMap.end()) {
         QYJSValue *value = mDataMap[key];
         if (value->isNumber()) {
-            return {QYExpResultType::Number, .number = value->toNumber()};
+            return std::make_shared<QYExpResult>(QYExpResultType::Number, value->toNumber());
         } else if (value->isString()) {
-            return {QYExpResultType::Number, .string = value->toString()};
+            return std::make_shared<QYExpResult>(QYExpResultType::String, value->toString());
         } else if (value->isBoolean()) {
-            return {QYExpResultType::Number, .boolean = value->toBoolean()};
+            return std::make_shared<QYExpResult>(QYExpResultType::Boolean, value->toBoolean());
         }
     }
-    return {QYExpResultType::None};
+    return std::make_shared<QYExpResult>();
 }
 
 QYExpResultType QYContextJSValue::getTypeForKey(std::string key) {

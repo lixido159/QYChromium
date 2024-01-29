@@ -14,7 +14,7 @@
 class QYStringExpression : public QYExpression {
 public:
     QYStringExpression(std::string str);
-    virtual QYExpResult getExpResult() override;
+    virtual std::shared_ptr<QYExpResult> getExpResult(std::shared_ptr<QYExpressionContext> expContext) override;
 private:
     std::string mStr;    
 };

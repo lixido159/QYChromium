@@ -71,7 +71,7 @@ std::shared_ptr<QYBaseWidget> QYBaseWidget::getChildWidgetById(std::string child
     for (std::vector<std::shared_ptr<QYBaseWidget>>::iterator iter = mChildWidgets.begin(); iter !=mChildWidgets.end(); iter++) {
         std::shared_ptr<QYBaseWidget> childWidget = *iter;
         QYPropertyValue *propty = childWidget->getProperty("id");
-        if (propty &&  childId.compare(propty->getStringValue()) == 0) {
+        if (propty && childId.compare(propty->getResult()->getString()) == 0) {
             return childWidget;
         }
         std::shared_ptr<QYBaseWidget> result = childWidget->getChildWidgetById(childId);
@@ -122,7 +122,7 @@ void QYBaseWidget::callMouseEvent(std::string event, const QYMouseEvent& mouseEv
     if (!value) {
         return;
     }
-    std::string funcName = value->getStringValue();
+    std::string funcName = value->getResult()->getString();
     QYJSValue *pageCompValue = mPageCompContext->getPageCompValue();
     std::shared_ptr<QYJSContext> jsContext = mPageCompContext->getJSContext();
     pageCompValue->call("call", {new QYJSValue(jsContext, funcName), mouseEventToJSValue(jsContext, mouseEvent)});

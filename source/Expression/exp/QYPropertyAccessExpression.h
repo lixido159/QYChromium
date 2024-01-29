@@ -13,7 +13,7 @@
 class QYPropertyAccessExpression : public QYExpression{
 public:
     QYPropertyAccessExpression(std::shared_ptr<QYExpression> callee, std::string property);
-    virtual QYExpResult getExpResult() override;
+    virtual std::shared_ptr<QYExpResult> getExpResult(std::shared_ptr<QYExpressionContext> expContext) override;
 private:
     std::shared_ptr<QYExpression> mCallee;
     std::string mProperty;

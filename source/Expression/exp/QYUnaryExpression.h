@@ -14,7 +14,7 @@
 class QYUnaryExpression : public QYExpression {
 public:
     QYUnaryExpression(std::shared_ptr<QYExpression> exp, OPERATOR opt);
-    virtual QYExpResult getExpResult() override;
+    virtual std::shared_ptr<QYExpResult> getExpResult(std::shared_ptr<QYExpressionContext> expContext) override;
     
 private:
     std::shared_ptr<QYExpression> mExp;

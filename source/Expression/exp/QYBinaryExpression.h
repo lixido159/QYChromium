@@ -13,7 +13,7 @@
 class QYBinaryExpression : public QYExpression {
 public:
     QYBinaryExpression(std::shared_ptr<QYExpression> leftExp, std::shared_ptr<QYExpression> rightExp, OPERATOR opt);
-    virtual QYExpResult getExpResult() override;
+    virtual std::shared_ptr<QYExpResult> getExpResult(std::shared_ptr<QYExpressionContext> expContext) override;
 private:
     std::shared_ptr<QYExpression> mLeftExp;
     std::shared_ptr<QYExpression> mRightExp;

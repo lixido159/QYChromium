@@ -7,11 +7,14 @@
 
 #include "QYExpressionContext.h"
 
-QYExpressionContext::QYExpressionContext(std::shared_ptr<IQYExpDataContext> dataContext, IQYExpressionContextObserver *observer): mDataContext(dataContext), mObserver(observer){}
+QYExpressionContext::QYExpressionContext(std::shared_ptr<IQYExpDataContext> dataContext, std::shared_ptr<IQYExpressionContextObserver> observer): mDataContext(dataContext), mObserver(observer){}
 
 QYExpressionContext::~QYExpressionContext() {
     
 }
 
-//    mObserver->expContextQueryKey(key);
-//    return mDataContext->getNumberForKey(key);
+std::shared_ptr<QYExpResult> QYExpressionContext::getResultForKey(std::string key) {
+    mObserver->expContextQueryKey(key);
+    return mDataContext->getResultForKey(key);
+
+}

@@ -19,7 +19,6 @@ function qyEntry(page: QYPage){
         
         show = !show;
         page.setData("show",  show);
-
     });
 
 

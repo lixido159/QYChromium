@@ -10,7 +10,7 @@
 QYPropertyAccessExpression::QYPropertyAccessExpression(std::shared_ptr<QYExpression> callee, std::string property) : mCallee(callee), mProperty(property){};
 
 
-QYExpResult QYPropertyAccessExpression::getExpResult() {
-    return {QYExpResultType::None};
+std::shared_ptr<QYExpResult> QYPropertyAccessExpression::getExpResult(std::shared_ptr<QYExpressionContext> expContext) {
+    return nullptr;
 }
 

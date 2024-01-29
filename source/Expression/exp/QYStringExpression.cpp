@@ -8,7 +8,7 @@
 #include "QYStringExpression.h"
 QYStringExpression::QYStringExpression(std::string str): mStr(str) {}
 
-QYExpResult QYStringExpression::getExpResult() {
-    return {QYExpResultType::String, .string = mStr};
+std::shared_ptr<QYExpResult> QYStringExpression::getExpResult(std::shared_ptr<QYExpressionContext> expContext) {
+    return std::make_shared<QYExpResult>(QYExpResultType::String, mStr);
 }
 
