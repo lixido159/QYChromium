@@ -20,15 +20,12 @@ bool isIfProperty(std::map<std::string, std::string>::iterator iter) {
 }
 
 QYIfDomNode::QYIfDomNode(std::shared_ptr<QYBaseDomNode> parent,
-                         std::vector<std::shared_ptr<QYBaseNodeInfo>> infoList, std::shared_ptr<QYPageCompContext> context): QYBaseDomNode(parent, nullptr, context), mInfoList(infoList) {
+                         std::vector<std::shared_ptr<QYBaseNodeInfo>> infoList, std::shared_ptr<QYPageCompContext> context): QYVirtualDomNode(parent, nullptr, context), mInfoList(infoList) {
     init();
 }
 
 void QYIfDomNode::performExpandNodeTree() {
-    auto parent = mParent.lock();
-    if (parent) {
-        parent->addChild(shared_from_this());
-    }
+    QYVirtualDomNode::performExpandNodeTree();
     if (mValidIndex != -1) {
         std::shared_ptr<QYBaseDomNode> childDomNode = std::make_shared<QYBaseDomNode>(shared_from_this(), mInfoList[mValidIndex], mPageCompContext);
         mCacheDomNodeMap[mValidIndex] = childDomNode;
@@ -36,11 +33,7 @@ void QYIfDomNode::performExpandNodeTree() {
     }}
 
 void QYIfDomNode::performExpandWidgetTree() {
-    mWidget = std::make_shared<QYBaseWidget>(mPageCompContext, getNodeType());
-    auto parent = mParent.lock();
-    if (parent) {
-        parent->getWidget()->addChildWidget(mWidget);
-    }
+    QYVirtualDomNode::performExpandWidgetTree();
     if (mChildNodeList[0]) {
         mChildNodeList[0]->performExpandWidgetTree();
     }
@@ -48,7 +41,7 @@ void QYIfDomNode::performExpandWidgetTree() {
 }
 
 void QYIfDomNode::performAttachParentView(std::shared_ptr<IQYBaseView> parentView) {
-    mRealParentView = parentView;
+    QYVirtualDomNode::performAttachParentView(parentView);
     if (mChildNodeList[0]) {
         mChildNodeList[0]->performAttachParentView(parentView);
     }

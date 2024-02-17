@@ -9,9 +9,9 @@
 #define QYIfDomNode_hpp
 
 #include <stdio.h>
-#include "QYBaseDomNode.h"
+#include "QYVirtualDomNode.h"
 #include "QYPropertyValue.h"
-class QYIfDomNode : public QYBaseDomNode {
+class QYIfDomNode : public QYVirtualDomNode {
 public:
     QYIfDomNode(std::shared_ptr<QYBaseDomNode> parent,
                 std::vector<std::shared_ptr<QYBaseNodeInfo>> infoList, std::shared_ptr<QYPageCompContext> context);
@@ -33,7 +33,6 @@ private:
     std::vector<std::shared_ptr<QYBaseNodeInfo>> mInfoList;
     std::vector<std::shared_ptr<QYPropertyValue>> mIfPropertyList;
     std::map<int, std::shared_ptr<QYBaseDomNode>> mCacheDomNodeMap;
-    std::shared_ptr<IQYBaseView> mRealParentView;
     int mValidIndex = -1;
 };
 

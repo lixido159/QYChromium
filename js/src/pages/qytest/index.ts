@@ -11,14 +11,14 @@ function qyEntry(page: QYPage){
     page.render("qy", "name");
     let show = true;
     page.setData("show",  show);
-    page.setData("number",  1);
+    let number = 1;
+    page.setData("number",  number);
     page.on("qymouse", (event: QYMouseEvent)=> {
         if (index >= colors.length)
                 index = 0;
         height += 10;
-        
-        show = !show;
-        page.setData("show",  show);
+        number++;
+        page.setData("number",  number);
     });
 
 
