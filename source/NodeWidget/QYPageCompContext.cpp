@@ -21,7 +21,7 @@ void QYPageCompContext::addJSKeyObserver(std::string key, std::shared_ptr<IQYPag
         std::vector<std::shared_ptr<IQYPageCompDataObserver>> obs = {observer};
         mDataObservers.insert(std::pair(key, obs));
     } else {
-        std::vector<std::shared_ptr<IQYPageCompDataObserver>> obs = mDataObservers[key];
+        std::vector<std::shared_ptr<IQYPageCompDataObserver>> &obs = mDataObservers[key];
         obs.push_back(observer);
     }
 }

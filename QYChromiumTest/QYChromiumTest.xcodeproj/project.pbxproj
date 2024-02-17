@@ -276,6 +276,10 @@
 		278F2D232B31F37C00CBBD79 /* QYYogaLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 278F2D212B31F37C00CBBD79 /* QYYogaLayout.cpp */; };
 		278F2D242B31F37C00CBBD79 /* QYYogaLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 278F2D222B31F37C00CBBD79 /* QYYogaLayout.h */; };
 		278F2D7E2B39D5BE00CBBD79 /* QYDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 278F2D7D2B39D5BE00CBBD79 /* QYDefine.h */; };
+		279C4A222B6F6A5E00BA256C /* QYForDomNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 279C4A202B6F6A5E00BA256C /* QYForDomNode.cpp */; };
+		279C4A232B6F6A5E00BA256C /* QYForDomNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 279C4A212B6F6A5E00BA256C /* QYForDomNode.h */; };
+		279C4A262B6F6B1800BA256C /* QYVirtualDomNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 279C4A242B6F6B1800BA256C /* QYVirtualDomNode.cpp */; };
+		279C4A272B6F6B1800BA256C /* QYVirtualDomNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 279C4A252B6F6B1800BA256C /* QYVirtualDomNode.h */; };
 		27C2849D2B4DAF78009F076D /* QYIfDomNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27C2849B2B4DAF78009F076D /* QYIfDomNode.cpp */; };
 		27C2849E2B4DAF78009F076D /* QYIfDomNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 27C2849C2B4DAF78009F076D /* QYIfDomNode.h */; };
 		27C284A12B504E5D009F076D /* IQYDomNodeCreatorItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 27C284A02B504E5D009F076D /* IQYDomNodeCreatorItem.h */; };
@@ -671,6 +675,10 @@
 		278F2D212B31F37C00CBBD79 /* QYYogaLayout.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = QYYogaLayout.cpp; sourceTree = "<group>"; };
 		278F2D222B31F37C00CBBD79 /* QYYogaLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYYogaLayout.h; sourceTree = "<group>"; };
 		278F2D7D2B39D5BE00CBBD79 /* QYDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYDefine.h; sourceTree = "<group>"; };
+		279C4A202B6F6A5E00BA256C /* QYForDomNode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = QYForDomNode.cpp; sourceTree = "<group>"; };
+		279C4A212B6F6A5E00BA256C /* QYForDomNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYForDomNode.h; sourceTree = "<group>"; };
+		279C4A242B6F6B1800BA256C /* QYVirtualDomNode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = QYVirtualDomNode.cpp; sourceTree = "<group>"; };
+		279C4A252B6F6B1800BA256C /* QYVirtualDomNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYVirtualDomNode.h; sourceTree = "<group>"; };
 		27C2849B2B4DAF78009F076D /* QYIfDomNode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = QYIfDomNode.cpp; sourceTree = "<group>"; };
 		27C2849C2B4DAF78009F076D /* QYIfDomNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYIfDomNode.h; sourceTree = "<group>"; };
 		27C284A02B504E5D009F076D /* IQYDomNodeCreatorItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IQYDomNodeCreatorItem.h; sourceTree = "<group>"; };
@@ -1323,6 +1331,10 @@
 			children = (
 				27C2849B2B4DAF78009F076D /* QYIfDomNode.cpp */,
 				27C2849C2B4DAF78009F076D /* QYIfDomNode.h */,
+				279C4A202B6F6A5E00BA256C /* QYForDomNode.cpp */,
+				279C4A212B6F6A5E00BA256C /* QYForDomNode.h */,
+				279C4A242B6F6B1800BA256C /* QYVirtualDomNode.cpp */,
+				279C4A252B6F6B1800BA256C /* QYVirtualDomNode.h */,
 			);
 			path = IfForNode;
 			sourceTree = "<group>";
@@ -1601,6 +1613,7 @@
 				271B91FC2A8CF515003A9D0A /* QYBaseCustomView.h in Headers */,
 				27744E952AC1DD76000B3B29 /* QYExpressionParser.h in Headers */,
 				271B92052A8CF515003A9D0A /* QYBaseView.h in Headers */,
+				279C4A232B6F6A5E00BA256C /* QYForDomNode.h in Headers */,
 				271B91FF2A8CF515003A9D0A /* IQYBaseCustomBaseView.h in Headers */,
 				2736796A2AFBEE13007067EF /* IQYPropertyValueObserver.h in Headers */,
 				27744E912AC1DCDD000B3B29 /* QYExpression.h in Headers */,
@@ -1630,6 +1643,7 @@
 				271B91FD2A8CF515003A9D0A /* QYBaseCustomTextView.h in Headers */,
 				273679782B03DCCD007067EF /* IQYExpDataContext.h in Headers */,
 				27744E992AC1DE69000B3B29 /* QYToken.h in Headers */,
+				279C4A272B6F6B1800BA256C /* QYVirtualDomNode.h in Headers */,
 				271B93282A90EE5A003A9D0A /* QYJSRuntime.h in Headers */,
 				271B92072A8CF515003A9D0A /* CommonHeader.h in Headers */,
 				27744EAE2AC1E63F000B3B29 /* QYPropertyAccessExpression.h in Headers */,
@@ -1913,6 +1927,7 @@
 				27744F202ADBEBD2000B3B29 /* QYTextView.cpp in Sources */,
 				271B93212A8E7B84003A9D0A /* QYJSValue.cpp in Sources */,
 				278F2D232B31F37C00CBBD79 /* QYYogaLayout.cpp in Sources */,
+				279C4A262B6F6B1800BA256C /* QYVirtualDomNode.cpp in Sources */,
 				271B93332A9A1534003A9D0A /* QYModuleLoader.cpp in Sources */,
 				2736796D2AFD0529007067EF /* QYPageCompContext.cpp in Sources */,
 				27C284A42B504ED7009F076D /* QYCommonDomNodeCreatorItem.cpp in Sources */,
@@ -1926,6 +1941,7 @@
 				27744F172AD83D1B000B3B29 /* QYTextViewPropertySetter.cpp in Sources */,
 				273679752B03D9E7007067EF /* QYExpressionContext.cpp in Sources */,
 				27744EB12AC1E648000B3B29 /* QYCollectionAccessExpression.cpp in Sources */,
+				279C4A222B6F6A5E00BA256C /* QYForDomNode.cpp in Sources */,
 				27744EA12AC1E2C1000B3B29 /* QYStringExpression.cpp in Sources */,
 				C6D3C7822B46D20300F50401 /* QYPropertyFinalValue.cpp in Sources */,
 				27744EA92AC1E5C4000B3B29 /* QYFunctionExpression.cpp in Sources */,

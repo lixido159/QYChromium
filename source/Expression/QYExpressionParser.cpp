@@ -135,12 +135,14 @@ QYToken QYExpressionParser::getNextOperator() {
     } else if (ope == '&') {
         if (next == '&') {
             token = {tok_operator, "", 0, opt_and};
-        } else {
-            token = {tok_operator, "", 0, opt_rem};
         }
     } else if (ope == '|' && next == '|') {
         token = {tok_operator, "", 0, opt_or};
-    } else {
+    }
+    else if (ope == '%'){
+       token = {tok_operator, "", 0, opt_rem};
+    }
+    else {
         token = {tok_other, "", 0, ope};
     }
     if (token.type != tok_other) {
