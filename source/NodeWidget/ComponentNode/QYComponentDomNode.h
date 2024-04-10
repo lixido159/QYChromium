@@ -15,7 +15,7 @@ class QYComponentDomNode : public QYBaseDomNode{
 public:
     QYComponentDomNode(std::shared_ptr<QYBaseDomNode> parent, std::shared_ptr<QYBaseNodeInfo> info, std::shared_ptr<QYPageCompContext> context);
 
-    virtual void performExpandNodeTree() override;
+//    virtual void performExpandNodeTree() override;
     virtual void performExpandWidgetTree() override;
 private:
     std::unique_ptr<QYDom> mDom;

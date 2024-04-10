@@ -23,13 +23,13 @@ QYComponentDomNode::QYComponentDomNode(std::shared_ptr<QYBaseDomNode> parent, st
 
 }
 
-void QYComponentDomNode::performExpandNodeTree() {
-    for(std::shared_ptr<QYBaseNodeInfo> childInfo : mNodeInfo->childNodeInfoList) {
-        std::shared_ptr<QYBaseDomNode> node = createDomNode(shared_from_this(), childInfo, mPageCompContext);
-        addChild(node);
-        node->performExpandNodeTree();
-    }
-}
+//void QYComponentDomNode::performExpandNodeTree() {
+//    for(std::shared_ptr<QYBaseNodeInfo> childInfo : mNodeInfo->childNodeInfoList) {
+//        std::shared_ptr<QYBaseDomNode> node = createDomNode(shared_from_this(), childInfo, mPageCompContext);
+//        addChild(node);
+//        node->performExpandNodeTree();
+//    }
+//}
 
 void QYComponentDomNode::performExpandWidgetTree() {
     mWidget = std::make_shared<QYBaseWidget>(mPageCompContext, mNodeInfo->name);
