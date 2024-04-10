@@ -37,3 +37,7 @@
 10. 支持console.log方法；
 
  
+## 修改代码
+- `js/src/pages/qytest`里的index.html是主页面，qycomp里的是子页面。
+- 这里实现了点击响应事件，主页面是点击后隐藏view，子页面是点击后更改颜色。
+- 可以尝试修改下代码。
